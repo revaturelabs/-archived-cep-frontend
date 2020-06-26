@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../App.css";
-import axios from "axios";
 
 import {
   Inject,
@@ -20,14 +19,6 @@ export default function EventHandler() {
       setEvent({ ...event, [e.target.name]: e.target.value });
     }
   }
-
-  /*  axios.post('https:localhost:5432/event', {
-    Name: 'Fred',
-    Age: '23'
-  })
-  .then(function (response) {
-    console.log(response);
-  }) */
 
   console.log(event);
 

@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import AddEvent from "./components/testAddingEvent"; */
 import { Route, Switch } from "react-router-dom";
 import Calander from "./components/CalanderEvent";
+import Form from "./components/InterventionForm";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <Switch>
         <Route path="/batch">
           <Calander />
+        </Route>
+        <Route path="/intervention">
+          <Form />
         </Route>
       </Switch>
     </div>
