@@ -29,16 +29,20 @@ function Form() {
     e.preventDefault();
     setTrigger({ ...trigger, [e.target.name]: e.target.value });
   }
-  console.log(trigger);
+
   function handleSubmit() {
     axios
       .post("http://localhost:8080/intervention", {
-        interventionid: "1",
+        // interventionid: "1",
+        clientName: trigger.clientName,
+        clientCompany: trigger.clientCompany,
+        clientContactMethod: trigger.clientContactMethod,
+        skillCategory: trigger.skillCategory,
+        numberOfEngineers: trigger.numberOfEngineers,
         subject: trigger.subject,
-        body: trigger.body,
       })
       .then(function (response) {
-        console.log(response);
+        alert(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -51,31 +55,65 @@ function Form() {
         <TextField
           id="outlined-simple-start-adornment"
           variant="outlined"
-          label="With outlined TextField"
+          label="Subject"
           onChange={handleChange}
           name="subject"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">Subject</InputAdornment>
-            ),
-          }}
         />
-
+        <br />
+        <br />
         <TextField
           id="outlined-simple-start-adornment"
           variant="outlined"
-          label="With outlined TextField"
           onChange={handleChange}
-          name="body"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">Body</InputAdornment>
-            ),
-          }}
+          name="clientName"
+          label="Client Name"
+          fullWidth="true"
+        />
+        <br />
+        <br />
+        <TextField
+          id="outlined-simple-start-adornment"
+          variant="outlined"
+          onChange={handleChange}
+          name="clientCompany"
+          label="Client Company"
+          fullWidth="true"
+        />
+        <br />
+        <br />
+        <TextField
+          id="outlined-simple-start-adornment"
+          onChange={handleChange}
+          name="clientContactMethod"
+          label="Client Contact"
+          variant="outlined"
+          fullWidth="true"
+        />
+        <br />
+        <br />
+        <TextField
+          id="outlined-simple-start-adornment"
+          onChange={handleChange}
+          name="skillCategory"
+          label="Skill Category of Concern"
+          variant="outlined"
+          fullWidth="true"
+        />
+        <br />
+        <br />
+        <TextField
+          id="outlined-simple-start-adornment"
+          onChange={handleChange}
+          name="numberOfEngineers"
+          label="Number of Engineers Needed"
+          variant="outlined"
+          fullWidth="true"
         />
       </form>
+      <br />
+      <br />
       <Button variant="contained" color="primary" onClick={handleSubmit}>
-        Primary
+        Submit
       </Button>
     </>
   );

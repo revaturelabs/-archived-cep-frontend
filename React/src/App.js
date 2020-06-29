@@ -5,6 +5,7 @@ import AddEvent from "./components/testAddingEvent"; */
 import { Route, Switch } from "react-router-dom";
 import Calander from "./components/CalanderEvent";
 import Form from "./components/InterventionForm";
+import BatchProgress from "./components/GetBatchProgress";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route path="/intervention">
           <Form />
+        </Route>
+        <Route path="/batch details">
+          <BatchProgress />
         </Route>
       </Switch>
     </div>

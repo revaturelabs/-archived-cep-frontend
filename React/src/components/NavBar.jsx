@@ -19,6 +19,16 @@ export default function NavBar() {
               Batches
             </Button>
           </Link>
+          <Link to="/intervention">
+            <Button variant="contained" color="primary">
+              Request Talent
+            </Button>
+          </Link>
+          <Link to="/batchDetails">
+            <Button variant="contained" color="primary">
+              Batch Progress
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </>
