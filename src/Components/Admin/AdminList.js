@@ -1,65 +1,75 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, makeStyles, Card, CardContent, CardHeader, Button } from '@material-ui/core'
+import { Container, makeStyles } from '@material-ui/core'
+import AdminItem from './AdminItem'
 
-const useStyles = makeStyles(() => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    left: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start'
-    },
-    right: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    color: {
-        backgroundColor: '#F26925'
-    },
-    spacing: {
-        marginTop: '15px',
-        marginBottom: '15px'
-    }
-}));
+export default function AdminList(){
+    
+    const [testData, setTestData] = useState([
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            descrip: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            status: "Pending"
+        },
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            status: "Complete"
+        },
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            descrip: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            status: "Complete"
+        },
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            descrip: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            status: "Complete"
+        },
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            descrip: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            status: "Complete"
+        },
+        {
+            companyName: "Test",
+            firstName: "Johnny",
+            lastName: "Test",
+            technology: "Java-React",
+            date: "Jan 11, 2020",
+            descrip: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            status: "Complete"
+        },
+    ])
 
-export default function AdminList(props){
-    const styles = useStyles();
-    const [statusColor, setStatusColor] = useState(props.data.status);
-
-
+    //Make an axios call to display the list of requests
     useEffect(() => {
         
-    })
-
-    function changeStatus(){
-        setStatusColor()
-    }
-
+    },[])
+    
     return(
-        <Card className={styles.spacing}>
-            <CardHeader className={styles.color}></CardHeader>
-            <CardContent>
-                <Grid container spacing={3}>
-                    <Grid item xs={3} className={styles.left}>
-                        <Typography variant="overline">{props.data.companyName}</Typography>
-                        <Typography variant="h4">{props.data.firstName}{" "}{props.data.lastName}</Typography>
-                        <Typography variant="body1">{props.data.technology}</Typography>
-                    </Grid>
-                    <Grid item xs={7}>
-                        <Typography variant="body2">{props.data.descrip}</Typography>
-                    </Grid>
-                    <Grid item xs={2} className={styles.right}>
-                        <Typography variant="body2">{props.data.date}</Typography>
-                        <Button variant="outlined" color="primary" onClick={changeStatus}>Completed</Button>
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
+        <div>
+            {testData.map((data) =>{
+                return(<AdminItem data={data}/>)
+            })}
+        </div>
     )
 }
