@@ -71,7 +71,7 @@ export default function AdminItem(props){
         updateToComplete()
     }
 
-    //There needs to be an axios call to update the status on the database
+    //Persists Complete of request to database
     const updateToComplete = () => {
         //Get JWT
 
@@ -94,6 +94,7 @@ export default function AdminItem(props){
         .catch((err) => console.log('Failure'))
     }
 
+    //These props need to change to match the data that is given
     return(
         <Card className={styles.spacing}>
             <CardHeader style={{backgroundColor: statusColor}}></CardHeader>

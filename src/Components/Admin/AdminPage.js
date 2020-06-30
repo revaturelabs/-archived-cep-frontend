@@ -9,6 +9,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 //Displays components for Admin
+//Might might not even need this component
 export default function AdminPage(){
     const styles = useStyles();
     
