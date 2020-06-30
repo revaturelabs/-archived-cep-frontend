@@ -31,17 +31,18 @@ export default function AdminList(){
     useEffect(() => {
         axios.get("http://localhost:8080/admin/request")
         .then((response) => {
-            setRealData(response)
-            console.log(realData)
+            //Console.log used to check the fields to set up the adminItem for later
+            console.log(response.data)
+            setRealData(response.data)
         })
         .catch((err) => console.log())
-    })
+    }, [])
     
     //Render the list of requests
     return(
         <div>
-            {testData.map((data) =>{
-                return(<AdminItem data={data}/>)
+            {realData.map((data) =>{
+                return(<AdminItem data={data} key={data.requestId}/>)
             })}
         </div>
     )

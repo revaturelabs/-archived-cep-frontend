@@ -19,7 +19,11 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    rightButton: {
+        marginTop: '5px',
+        marginBottom: '5px',
     },
     spacing: {
         marginTop: '15px',
@@ -59,38 +63,31 @@ export default function AdminItem(props){
     //There needs to be an axios call to update the status on the database
     const updateToComplete = () => {
         //Get JWT
-        const updateData = {
-            requestId: props.data.requestId,
-            batchId: props.data.batchId,
-            userId: props.data.userId,
-            startTime: props.data.startTime,
-            endTime: props.data.endTime,
-            isAllDay: props.data.isAllDay,
-            status: 'Complete',
-            requestType: props.data.requestType,
-            desciption: props.data.desciption,
-        }
 
         //axios call
-        Axios.put()
-        .then((response) => console.log())
-        .catch((err) => console.log())
+        Axios.put(`http://localhost:8080/admin/request/${props.data.requestId}`,{
+            status: 'Complete'
+        })
+        .then((response) => console.log('Success'))
+        .catch((err) => console.log('Failure'))
     }
 
     //Handle onClick delete
     const handleDelete = () => {
-
+        Axios.delete(`http://localhost:8080/admin/request/delete/${props.data.requestId}`)
+        .then((response) => console.log('Success'))
+        .catch((err) => console.log('Failure'))
     }
     
     //Simply return the button component for conditional rendering
     const ButtonComplete = () => {
         return(
-            <Button variant="outlined" color="primary" onClick={handleToComplete}>Completed</Button>
+            <Button className={styles.rightButton} variant="outlined" color="primary" onClick={handleToComplete}>Completed</Button>
         )
     }
     const ButtonDelete = () => {
         return(
-            <Button variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
+            <Button className={styles.rightButton} variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
         )
     }
 
@@ -108,7 +105,7 @@ export default function AdminItem(props){
                         <Typography variant="body2">{props.data.descrip}</Typography>
                     </Grid>
                     <Grid item xs={3} className={styles.right}>
-                        <Typography variant="body2">{props.data.date}</Typography>
+                        <Typography variant="body2">{props.data.endTime}</Typography>
                         {buttonDeleteVisi ? <ButtonDelete/> : null}
                         {buttonCompleteVisi ? <ButtonComplete/> : null}
                     </Grid>
