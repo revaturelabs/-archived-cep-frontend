@@ -27,28 +27,37 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+//Display individual requests
 export default function AdminItem(props){
     const styles = useStyles();
-    //Set the initial state based on the the status given by the data in useEffect
-    //Status=Pending Orange, Status=Completed Blue
+    //Status=Pending color is Orange, Status=Completed color is Blue
+    //Initial color is Orange
     const [statusColor, setStatusColor] = useState('#F26925'); 
-    //Get initial status from props
     const [status, setStatus] = useState(props.data.status)
 
-    
+    //States used for conditional rendering
+    const [buttonCompleteVisi, setButtonCompleteVisi] = useState(true)
+    const [buttonDeleteVisi, setButtonDeleteVisi] = useState(true)
 
+    //On first render check if the status is complete and render the correct color and buttons
     useEffect(() => {
-        
+        if(status === 'Complete'){
+            setStatusColor('#72A4C2')
+            setButtonCompleteVisi(false)
+        }
+              
     },[status])
 
-    const changeStatus = () => {
+    //handle complete button to change to the color, status, 
+    //and call a function to persist the complete status of the request
+    const handleToComplete = () => {
         setStatusColor('#72A4C2')
         setStatus('Complete')
-        updateStatus()
+        updateToComplete()
     }
 
     //There needs to be an axios call to update the status on the database
-    const updateStatus = () => {
+    const updateToComplete = () => {
         //Get JWT
         const updateData = {
             requestId: props.data.requestId,
@@ -57,7 +66,7 @@ export default function AdminItem(props){
             startTime: props.data.startTime,
             endTime: props.data.endTime,
             isAllDay: props.data.isAllDay,
-            status: "Complete",
+            status: 'Complete',
             requestType: props.data.requestType,
             desciption: props.data.desciption,
         }
@@ -67,7 +76,24 @@ export default function AdminItem(props){
         .then((response) => console.log())
         .catch((err) => console.log())
     }
+
+    //Handle onClick delete
+    const handleDelete = () => {
+
+    }
     
+    //Simply return the button component for conditional rendering
+    const ButtonComplete = () => {
+        return(
+            <Button variant="outlined" color="primary" onClick={handleToComplete}>Completed</Button>
+        )
+    }
+    const ButtonDelete = () => {
+        return(
+            <Button variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
+        )
+    }
+
     return(
         <Card className={styles.spacing}>
             <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
@@ -78,12 +104,13 @@ export default function AdminItem(props){
                         <Typography variant="h4">{props.data.firstName}{" "}{props.data.lastName}</Typography>
                         <Typography variant="body1">{props.data.technology}</Typography>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <Typography variant="body2">{props.data.descrip}</Typography>
                     </Grid>
-                    <Grid item xs={2} className={styles.right}>
+                    <Grid item xs={3} className={styles.right}>
                         <Typography variant="body2">{props.data.date}</Typography>
-                        <Button variant="outlined" color="primary" onClick={changeStatus}>Completed</Button>
+                        {buttonDeleteVisi ? <ButtonDelete/> : null}
+                        {buttonCompleteVisi ? <ButtonComplete/> : null}
                     </Grid>
                 </Grid>
             </CardContent>

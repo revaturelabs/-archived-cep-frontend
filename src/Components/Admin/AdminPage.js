@@ -8,6 +8,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+//Displays components for Admin
 export default function AdminPage(){
     const styles = useStyles();
 
