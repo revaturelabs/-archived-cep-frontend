@@ -18,7 +18,7 @@ function App() {
         <Route path="/intervention">
           <Form />
         </Route>
-        <Route path="/batch details">
+        <Route path="/batchDetails">
           <BatchProgress />
         </Route>
       </Switch>

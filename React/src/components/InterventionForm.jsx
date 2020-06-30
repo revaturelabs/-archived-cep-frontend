@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 
@@ -58,6 +57,7 @@ function Form() {
           label="Subject"
           onChange={handleChange}
           name="subject"
+          fullWidth="true"
         />
         <br />
         <br />
