@@ -39,6 +39,7 @@ export default function AdminList(){
     }, [])
     
     //Render the list of requests
+    //Change "realData" to "testData" if you want to mock test with the ideal/test look of the request
     return(
         <div>
             {realData.map((data) =>{

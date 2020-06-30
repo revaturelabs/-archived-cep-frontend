@@ -95,6 +95,7 @@ export default function AdminItem(props){
     }
 
     //These props need to change to match the data that is given
+    //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request
     return(
         <Card className={styles.spacing}>
             <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
