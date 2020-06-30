@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Grid, Typography, makeStyles, Card, CardContent, CardHeader, Button } from '@material-ui/core'
 import Axios from 'axios';
 
@@ -34,6 +34,7 @@ const useStyles = makeStyles(() => ({
 //Display individual requests
 export default function AdminItem(props){
     const styles = useStyles();
+
     //Status=Pending color is Orange, Status=Completed color is Blue
     //Initial color is Orange
     const [statusColor, setStatusColor] = useState('#F26925'); 
@@ -43,19 +44,29 @@ export default function AdminItem(props){
     const [buttonCompleteVisi, setButtonCompleteVisi] = useState(true)
     const [buttonDeleteVisi, setButtonDeleteVisi] = useState(true)
 
+    //Simply return the button component for conditional rendering
+    const ButtonComplete = () => {
+        return(
+            <Button className={styles.rightButton} variant="outlined" color="primary" onClick={handleToComplete}>Completed</Button>
+        )
+    }
+    const ButtonDelete = () => {
+        return(
+            <Button className={styles.rightButton} variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
+        )
+    }
+
     //On first render check if the status is complete and render the correct color and buttons
     useEffect(() => {
         if(status === 'Complete'){
             setStatusColor('#72A4C2')
             setButtonCompleteVisi(false)
         }
-              
     },[status])
 
     //handle complete button to change to the color, status, 
     //and call a function to persist the complete status of the request
     const handleToComplete = () => {
-        setStatusColor('#72A4C2')
         setStatus('Complete')
         updateToComplete()
     }
@@ -75,20 +86,12 @@ export default function AdminItem(props){
     //Handle onClick delete
     const handleDelete = () => {
         Axios.delete(`http://localhost:8080/admin/request/delete/${props.data.requestId}`)
-        .then((response) => console.log('Success'))
+        .then((response) => {
+            /*After delete we reload the webpage so it can show "real time" that the request has been deleted
+            May want to just hide the card to not lose potential filtering and sorting options later on*/
+            window.location.reload();
+        })
         .catch((err) => console.log('Failure'))
-    }
-    
-    //Simply return the button component for conditional rendering
-    const ButtonComplete = () => {
-        return(
-            <Button className={styles.rightButton} variant="outlined" color="primary" onClick={handleToComplete}>Completed</Button>
-        )
-    }
-    const ButtonDelete = () => {
-        return(
-            <Button className={styles.rightButton} variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
-        )
     }
 
     return(
@@ -99,7 +102,7 @@ export default function AdminItem(props){
                     <Grid item xs={3} className={styles.left}>
                         <Typography variant="overline">{props.data.companyName}</Typography>
                         <Typography variant="h4">{props.data.firstName}{" "}{props.data.lastName}</Typography>
-                        <Typography variant="body1">{props.data.technology}</Typography>
+                        <Typography variant="body1">{props.data.requestType}</Typography>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="body2">{props.data.descrip}</Typography>
