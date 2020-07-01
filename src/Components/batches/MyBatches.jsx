@@ -14,6 +14,8 @@ export default function MyBatches(props) {
       skills: "Java and React",
       location: "Arlington, Texas",
       avgStats: 80,
+      progress: "",
+      week: 0
     },
     {
       id: 2,
