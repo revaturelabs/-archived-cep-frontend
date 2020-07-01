@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { dispatchToken } from "../../redux/actions/batchAction";
+import { dispatchToken } from "../../redux/actions/userAction";
 import JWTD from "jwt-decode";
 import Axios from "axios";
 import {
