@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import AssociateList from './AssociateList/AssociateList';
+
 function BatchPage() {
   const [batch, setBatch] = useState({/*TODO: Set up default data*/});
 
@@ -7,7 +9,7 @@ function BatchPage() {
 
   return (
     <div>
-      
+      <AssociateList />
     </div>
   );
 }
