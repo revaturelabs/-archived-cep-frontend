@@ -1,0 +1,13 @@
+/* Used as the background-color of the appBar */
+#appBar {
+    background-color: orange;
+  }
+  
+  /* Shrinks the Revature logo a little bit to fit inside the appBar*/
+  #image {
+    width:150px;
+    height:auto;
+    margin-top:6px;
+  }
+
+  

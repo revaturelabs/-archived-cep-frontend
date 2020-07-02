@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import {useStyles} from './drawerStyle';
+import './drawer.css';
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -39,7 +40,7 @@ export default function MiniDrawer() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        id='header'
+        id='appBar'
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -91,12 +92,12 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
-            <h2>Theresa's group Associates' information</h2>
+        <Typography paragraph style={{textAlign:'left'}}>
+            <h2 style={{textAlign:'left'}}>Theresa's group Associates' information</h2>
           This area will have information about the different associates in a specific batch
         </Typography>
-        <Typography paragraph>
-            <h2>Request Talent</h2>
+        <Typography paragraph style={{textAlign:'left'}}>
+            <h2 style={{textAlign:'left'}}>Request Talent</h2>
           A form requesting talent will be here. Followed by the batches progress. 
         </Typography>
       </main>

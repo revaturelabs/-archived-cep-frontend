@@ -8,10 +8,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        
         <Switch>
           <Route path ="/admin" exact component={AdminPage}/> 
           <Route path="/drawer" component={drawer} />
         </Switch>
+      
       </BrowserRouter>
     </div>
   );
