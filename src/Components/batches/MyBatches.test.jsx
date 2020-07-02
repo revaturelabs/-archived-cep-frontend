@@ -42,24 +42,28 @@ describe("MyBatches Component", () => {
   };
   let batchSpy = spy();
   //const wrapper = shallow(ShallowMock(<MyBatches />, store));
-  const wrapper = shallow(<Provider store={store}><MyBatches /></Provider>);
+  const wrapper = mount(<Provider store={store}><MyBatches /></Provider>);
   const wrapper2 = shallow(
     <MyBatchesList key={id} batch={batch} handleClick={batchSpy} />
   );
 
-  it("should contain parent div", () => {
-    const parentDiv = wrapper.find("div");
-    expect(parentDiv.length).toBe(1);
+  it("should titles/names of each batch", () => {
+    const titles = wrapper.find('h4');
+    expect(titles.length).toBe(8);
   });
-//   it("checking checkBatches function", () => {
-//     const h3 = wrapper.find("h3");
-//     expect(h3.text()).toBe("Delete a Task Below");
-//   });
-  it("calls MyBatchesList when clicked", () => {
-    wrapper2.find("button").simulate("click");
-    //chai.expect(batchSpy).to.have.been.called();
-    //batchSpy.should.have.been.called();
-    chai.expect(batchSpy).to.have.been.called.once();
+
+  it('click button', () => {
+    const mockCallBack = jest.fn();
+    const wrapper3 = shallow((<MyBatchesList key={id} batch={batch} handleClick={mockCallBack} />));
+    const submitButton = wrapper3.find('button');
+    expect(submitButton.length).toBe(1);
+    submitButton.simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
+
+    //Can also use this
+    //expect(mockCallBack).toHaveBeenCalled();
+
+
   });
 });
 
