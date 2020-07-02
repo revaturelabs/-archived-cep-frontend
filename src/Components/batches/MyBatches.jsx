@@ -63,6 +63,7 @@ export default function MyBatches(props) {
       avgStats: 85,
     },
     {
+      id: 7,
       name: "Network Systems Engineering",
       startDate: "2019-12-03",
       endDate: "2020-03-15",
@@ -71,6 +72,7 @@ export default function MyBatches(props) {
       avgStats: 81,
     },
     {
+      id: 8,
       name: "Hadoop - Big Data",
       startDate: "2019-12-03",
       endDate: "2020-03-15",
