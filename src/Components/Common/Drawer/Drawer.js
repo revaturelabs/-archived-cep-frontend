@@ -98,6 +98,16 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <a href="/my_batches">
+                {/* TODO: Make it a nice icon */}
+                <HomeIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>My Batches</ListItemText>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
