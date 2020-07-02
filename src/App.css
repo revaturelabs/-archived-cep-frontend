@@ -1,4 +1,5 @@
-.App {
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +36,16 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* Used as the background-color of the appBar */
+#header {
+  background-color: orange;
+}
+
+/* Shrinks the Revature logo a little bit to fit inside the appBar*/
+#image {
+  width:150px;
+  height:auto;
+  margin-top:6px;
 }
