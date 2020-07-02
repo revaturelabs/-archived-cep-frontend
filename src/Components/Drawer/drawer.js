@@ -83,7 +83,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           <ListItem>
-            <ListItemIcon><a href='/'><HomeIcon/></a></ListItemIcon>
+            <ListItemIcon><a href='/drawer'><HomeIcon/></a></ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
         </List>
