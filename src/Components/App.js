@@ -1,16 +1,24 @@
-import React from 'react';
-import '../App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AdminPage from './Admin/AdminPage';
+import React from "react";
+import "../App.css";
+import { Switch, Route } from "react-router-dom";
+import AdminPage from "./Admin/AdminPage";
+import BlankPage from "./Common/BlankPage";
+import Drawer from "./Drawer/Drawer";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <div>
+      <div className="Drawer">
+        <Drawer />
+      </div>
+
+      <div className="App">
         <Switch>
-          <Route path ="/admin" exact component={AdminPage}/>
+          <Route path="/" exact component={BlankPage} />
+
+          <Route path="/admin" exact component={AdminPage} />
         </Switch>
-      </BrowserRouter>
+      </div>
     </div>
   );
 }
