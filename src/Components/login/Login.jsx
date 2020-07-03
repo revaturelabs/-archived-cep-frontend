@@ -91,82 +91,50 @@ export default function Login(props) {
   }
 
   //Form using MaterialUI
-  function MaterialUIForm(){
-    return(
-      <div className={styles.paper}>
-        <Typography component="h1" variant="h5">
-          Log In
-        </Typography>
-        <form className={styles.form} noValidate onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={handleChange}
-            value={userCredentials.email}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={handleChange}
-            value={userCredentials.password}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={styles.submit}
-          >
-            Log In
-          </Button>
-        </form>
-      </div>
-    )
-  }
+
 
   //if you want to switch between the original and the material UI version then just copy and paste the code above into the return statement below
   return (
-    <div>
-      <form onSubmit={handleSubmit}> 
-        <br />
-          <label htmlFor="username">Email:
-          <input
-            type="text"
-            placeholder="Enter email"
-            name="email"
-            required
-            onChange={handleChange}
-            value={userCredentials.email}
-          />
-          </label>
-
-          <label htmlFor="password">Password:
-          <input
-            type="password"
-            placeholder="Enter password"
-            name="password"
-            required
-            onChange={handleChange}
-            value={userCredentials.password}
-          />
-          </label>
-        <button type="submit">
+    <div className={styles.paper}>
+      <Typography component="h1" variant="h5">
+        Log In
+      </Typography>
+      <form className={styles.form} noValidate onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          onChange={handleChange}
+          value={userCredentials.email}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          onChange={handleChange}
+          value={userCredentials.password}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={styles.submit}
+        >
           Log In
-        </button>
+        </Button>
       </form>
     </div>
   );
