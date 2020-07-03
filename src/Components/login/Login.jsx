@@ -91,7 +91,39 @@ export default function Login(props) {
   }
 
   //Form using MaterialUI
+  function OriginalForm(){
+    return(
+      <div>
+        <form onSubmit={handleSubmit}> 
+          <br />
+            <label htmlFor="username">Email:
+            <input
+              type="text"
+              placeholder="Enter email"
+              name="email"
+              required
+              onChange={handleChange}
+              value={userCredentials.email}
+            />
+            </label>
 
+            <label htmlFor="password">Password:
+            <input
+              type="password"
+              placeholder="Enter password"
+              name="password"
+              required
+              onChange={handleChange}
+              value={userCredentials.password}
+            />
+            </label>
+          <button type="submit">
+            Log In
+          </button>
+        </form>
+      </div>
+    )
+  }
 
   //if you want to switch between the original and the material UI version then just copy and paste the code above into the return statement below
   return (
