@@ -3,14 +3,18 @@ import { useDispatch } from "react-redux";
 import { dispatchToken } from "../../redux/actions/userAction";
 //import JWTD from "jwt-decode";
 import Axios from "axios";
-import { makeStyles, CssBaseline, Grid, Button, Typography, TextField } from "@material-ui/core";
+import { makeStyles, Button, Typography, TextField} from "@material-ui/core";
 
+//Used for styling Material UI
 const useStyles = makeStyles((theme) => ({
-  left: {
-      backgroundColor: 'Aqua'
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -18,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//Used render the login component
 export default function Login(props) {
   const styles = useStyles();
 
@@ -25,6 +30,17 @@ export default function Login(props) {
     email: "",
     password: "",
   });
+
+  console.log(userCredentials.email)
+  console.log(userCredentials.password)
+
+  //Change the state of email and password
+  function handleChange(event) {
+    setCredentials({
+      ...userCredentials,
+      [event.target.name]: event.target.value,
+    });
+  }
 
   const [role, setRole] = useState("");
   const dispatch = useDispatch();
@@ -43,13 +59,6 @@ export default function Login(props) {
   //     })
   //     .catch((err) => console.log("error username:" + err));
   // }
-
-  function handleChange(event) {
-    setCredentials({
-      ...userCredentials,
-      [event.target.name]: event.target.value,
-    });
-  }
 
   function handleSubmit(event) {
     // event.preventDefault();
@@ -81,13 +90,14 @@ export default function Login(props) {
     //   });
   }
 
-  return (
-    <div>
-      <div>
+  //Form using MaterialUI
+  function MaterialUIForm(){
+    return(
+      <div className={styles.paper}>
         <Typography component="h1" variant="h5">
-          Sign in
+          Log In
         </Typography>
-        <form className={styles.form} noValidate>
+        <form className={styles.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,6 +108,8 @@ export default function Login(props) {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
+            value={userCredentials.email}
           />
           <TextField
             variant="outlined"
@@ -109,6 +121,8 @@ export default function Login(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
+            value={userCredentials.password}
           />
           <Button
             type="submit"
@@ -117,28 +131,37 @@ export default function Login(props) {
             color="primary"
             className={styles.submit}
           >
-            Sign In
+            Log In
           </Button>
         </form>
       </div>
+    )
+  }
 
-       <form onSubmit={handleSubmit}> 
+  //if you want to switch between the original and the material UI version then just copy and paste the code above into the return statement below
+  return (
+    <div>
+      <form onSubmit={handleSubmit}> 
         <br />
-          <label htmlFor="username" onChange={handleChange}>User Name:
+          <label htmlFor="username">Email:
           <input
             type="text"
-            placeholder="Enter user name"
-            name="username"
+            placeholder="Enter email"
+            name="email"
             required
+            onChange={handleChange}
+            value={userCredentials.email}
           />
           </label>
 
-          <label htmlFor="password" onChange={handleChange}>Password:
+          <label htmlFor="password">Password:
           <input
             type="password"
             placeholder="Enter password"
             name="password"
             required
+            onChange={handleChange}
+            value={userCredentials.password}
           />
           </label>
         <button type="submit">
