@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import LoginPage from "./LoginPage";
+import Login from "./Login";
 import store from "../../redux/store/index.js";
 import { Provider } from "react-redux";
 
@@ -10,7 +10,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("renders input", () => {
   const wrapper = mount(
     <Provider store={store}>
-      <LoginPage />
+      <Login />
     </Provider>
   );
   it("should have input fields", () => {
