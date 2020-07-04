@@ -33,7 +33,7 @@ export default function GetInterventions() {
           <br />
           <li>Batch ID: {detail.batchId}</li>
           <li>User ID: {detail.userId}</li>
-          <li>Start Time: {detail.startTime}</li>
+          <li>Start Time: {new Date(detail.startTime).toUTCString()}</li>
           <br />
         </div>
       ))}
