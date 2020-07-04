@@ -89,7 +89,7 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List id='drawer'>
           <ListItem>
             <ListItemIcon>
               <a href="/">

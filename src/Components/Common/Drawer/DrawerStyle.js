@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { orange } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
-      whiteSpace: 'nowrap',
+      whiteSpace: 'nowrap'
     },
     drawerOpen: {
       width: drawerWidth,

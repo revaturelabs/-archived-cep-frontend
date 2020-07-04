@@ -1,5 +1,9 @@
 /* Used as the background-color of the appBar */
 #appBar {
+  background-color: #B9B9BA;
+}
+/*#F26925 Orange, #474C55 Dark Grey, #B9B9BA Light Grey */
+#drawer {
   background-color: #f26925;
 }
 
