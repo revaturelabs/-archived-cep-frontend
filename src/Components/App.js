@@ -9,6 +9,7 @@ import AdminPage from "./Admin/AdminPage";
 //import BlankPage from "./Common/BlankPage";
 import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
+import GetInterventions from "./Common/Intervention/GetInterventions";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/my_batches" component={MyBatches} exact />
             <Route path="/admin" component={AdminPage} exact/>
             <Route path="/intervention" component={RequestForm} />
+            <Route path="/getinterventions" component={GetInterventions}/>
           </div>
         </Switch>
     </div>
