@@ -1,7 +1,0 @@
-organization=revaturelabs-screenforce
-projectKey=revaturelabs_cep-frontend
-serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.9179
-dashboardUrl=https://sonarcloud.io/dashboard?id=revaturelabs_cep-frontend
-ceTaskId=AXMH_0e-6HrQjZPIH24U
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXMH_0e-6HrQjZPIH24U
