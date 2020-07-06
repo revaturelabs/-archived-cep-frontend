@@ -7,7 +7,7 @@ import MyBatches from "./batches/MyBatches";
 import LoginPage from "./login/LoginPage";
 import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
-
+import MySpiderGraphPage from "./spidergraph/MySpiderGraphPage"
 import BatchPage from './Batch/BatchPage';
 
 function App() {
@@ -19,13 +19,14 @@ function App() {
 
   return (
     <div>
-        {token ? <Drawer /> : history.push("/")}
+        {/* {token ? <Drawer /> : history.push("/")} */}
         <Switch>
-          <Route path="/" component={LoginPage} exact />          
+          {/* <Route path="/" component={LoginPage} exact />           */}
           <div className="App">
             <Route path="/my_batches" component={MyBatches} exact />
             <Route path="/admin" component={AdminPage} exact/>
             <Route path="/batch" component={BatchPage} />
+            <Route path="/spider" component={MySpiderGraphPage} />
           </div>
         </Switch>
     </div>
