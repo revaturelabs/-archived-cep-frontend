@@ -8,6 +8,8 @@ import MyBatches from "./batches/MyBatches";
 import LoginPage from "./login/LoginPage";
 import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
+import RequestForm from "./Common/Intervention/Intervention";
+import GetInterventions from "./Common/Intervention/GetInterventions";
 
 //For Testing
 import BlankPage from "./Common/BlankPage";
@@ -33,6 +35,8 @@ function App() {
           <div className="App">
             <Route path="/my_batches" component={MyBatches} />
             <Route path="/admin" component={AdminPage} />
+            <Route path="/intervention" component={RequestForm} />
+            <Route path="/getinterventions" component={GetInterventions}/>
           </div>
         </Switch>
     </div>
