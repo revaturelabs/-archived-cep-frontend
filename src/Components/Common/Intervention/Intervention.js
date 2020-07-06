@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
 import {withStyles} from "@material-ui/core/styles";
-import {Button} from "@material-ui/core";
+import {Button, makeStyles} from "@material-ui/core";
 import axios from "axios";
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,8 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -25,10 +24,11 @@ const styles = (theme) => ({
   menu: {
     width: 200,
   },
-});
+}));
 
-function RequestForm(){
+export default function RequestForm(){
   const [trigger, setTrigger] = useState();
+  const styles = useStyles();
 
   function handleChange(event) {
     event.preventDefault();
@@ -56,57 +56,55 @@ function RequestForm(){
 
   return (
     <div>
-        <br />
-        <h1>Request Intervention</h1>
-        <form>
+      <br />
+      <h1>Request Intervention</h1>
+      <form>
         <h4>Requested Start and End Time</h4>
-            <TextField
-              // id="outlined-simple-start-adornment"
-              
-              variant="filled"
-              //label="Start Time"
-              onChange={handleChange}
-              type="datetime-local"
-              name="startTime"
-                />
-            <TextField
-              id="outlined-simple-start-adornment"
-              variant="filled"
-              // label="End Time"
-              onChange={handleChange}
-              type="datetime-local"
-              name="endTime"
-                />
-              <br/>
-            <TextField
-              // id="outlined-simple-start-adornment"
-              variant="filled"
-              label="Batch ID"
-              onChange={handleChange}
-              type="number"
-              name="batchId"
-              fullWidth="true"
-                />
-              <br/>
-            <TextField
-              // id="outlined-simple-start-adornment"
-              variant="filled"
-              label="User ID"
-              onChange={handleChange}
-              type="number"
-              name="userId"
-              fullWidth="true"
-                />
-              <br/>
-              
-            {/* <TextField
-              id="outlined-simple-start-adornment"
-              variant="outlined"
-              label="isAllDay"
-              onChange={handleChange}
-              type="text"
-              name="isAllDay"
-                /> */}
+          <TextField
+            // id="outlined-simple-start-adornment"
+            variant="filled"
+            //label="Start Time"
+            onChange={handleChange}
+            type="datetime-local"
+            name="startTime"
+          />
+          <TextField
+            id="outlined-simple-start-adornment"
+            variant="filled"
+            // label="End Time"
+            onChange={handleChange}
+            type="datetime-local"
+            name="endTime"
+          />
+          <br/>
+          <TextField
+            // id="outlined-simple-start-adornment"
+            variant="filled"
+            label="Batch ID"
+            onChange={handleChange}
+            type="number"
+            name="batchId"
+            fullWidth="true"
+          />
+          <br/>
+          <TextField
+            // id="outlined-simple-start-adornment"
+            variant="filled"
+            label="User ID"
+            onChange={handleChange}
+            type="number"
+            name="userId"
+            fullWidth="true"
+          />
+          <br/>
+          {/* <TextField
+            id="outlined-simple-start-adornment"
+            variant="outlined"
+            label="isAllDay"
+            onChange={handleChange}
+            type="text"
+            name="isAllDay"
+          /> */}
           <FormControl fullWidth="true" variant="filled">
           <InputLabel >isAllDay</InputLabel>
             <Select
@@ -121,65 +119,59 @@ function RequestForm(){
             <MenuItem value={false}>No</MenuItem>
               </Select>
           </FormControl>
-              <br/>
-              <FormControl fullWidth="true" variant="filled">
-                  <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
-                  <Select
-                    labelId="demo-controlled-open-select-label"
-                    id="demo-controlled-open-select"
-                    name="status"
-                    onChange={handleChange}
-                  >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value="Pending">Pending</MenuItem>
-                <MenuItem value="Done">Done</MenuItem>
-                </Select>
-            </FormControl>
-              <br/>
-              <FormControl fullWidth="true" variant="filled">
-                  <InputLabel>Request Type</InputLabel>
-                <Select
-                  //  labelId="demo-controlled-open-select-label"
-                  // id="demo-controlled-open-select"
-                  name="requestType"
-                  onChange={handleChange}
-                
-                  >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="Intervention">Intervention</MenuItem>
-                <MenuItem value="Talent">Talent</MenuItem>
-                <MenuItem value="Help">Help</MenuItem>
-                </Select>
-                </FormControl>
-              <br/>
-            <TextField
-              id="outlined-simple-start-adornment"
-              variant="filled"
-              label="Description"
+          <br/>
+          <FormControl fullWidth="true" variant="filled">
+            <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-controlled-open-select-label"
+              id="demo-controlled-open-select"
+              name="status"
               onChange={handleChange}
-              name="description"
-              fullWidth="true" />
-              
-              {/* fullWidth="true" /> */}
-              {/* <fieldset>
-                  <legend>Selecting an item</legend>
-                  <select id="myList">
-                      <option value="1">one</option>
-                      <option value='2'>two</option>
-                  </select>
-              </fieldset> */}
-        </form>
-        <br/><br/>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
-        </Button>
+            >
+            <MenuItem value=""><em>None</em></MenuItem>
+            <MenuItem value="Pending">Pending</MenuItem>
+            <MenuItem value="Done">Done</MenuItem>
+            </Select>
+          </FormControl>
+          <br/>
+          <FormControl fullWidth="true" variant="filled">
+            <InputLabel>Request Type</InputLabel>
+            <Select
+              //  labelId="demo-controlled-open-select-label"
+              // id="demo-controlled-open-select"
+              name="requestType"
+              onChange={handleChange}
+            
+            >
+            <MenuItem value=""><em>None</em></MenuItem>
+            <MenuItem value="Intervention">Intervention</MenuItem>
+            <MenuItem value="Talent">Talent</MenuItem>
+            <MenuItem value="Help">Help</MenuItem>
+            </Select>
+          </FormControl>
+          <br/>
+          <TextField
+            id="outlined-simple-start-adornment"
+            variant="filled"
+            label="Description"
+            onChange={handleChange}
+            name="description"
+            fullWidth="true" />
+            
+            {/* fullWidth="true" /> */}
+            {/* <fieldset>
+                <legend>Selecting an item</legend>
+                <select id="myList">
+                    <option value="1">one</option>
+                    <option value='2'>two</option>
+                </select>
+            </fieldset> */}
+      </form>
+      <br/>
+      <br/>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Submit
+      </Button>
     </div>
   )
-
 }
-
-export default withStyles(styles)(RequestForm)

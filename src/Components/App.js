@@ -23,7 +23,7 @@ import { Forbbiden, NotFound } from "./Common/ErrorPages"
 function App() {
 
   //Conditionally render the drawer if logged in
-  const token = null;
+  const token = "null";
   
   return (
     <div>
