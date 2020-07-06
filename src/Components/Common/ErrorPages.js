@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles, Typography, Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -15,7 +15,8 @@ const useStyles = makeStyles(() => ({
 export function Forbbiden(){
     const styles = useStyles();
     const history = useHistory();
-    const prevLink = useSelector(state => state.link);
+    const prevLink = useSelector(state => state.redirectReducer);
+    console.log(prevLink)
 
     const Redirect = () => history.push(prevLink)
 
@@ -23,7 +24,7 @@ export function Forbbiden(){
         <div className={styles.root}>
             <Typography variant='h1'>403</Typography>
             <Typography variant='caption'>This page is not for you</Typography>
-            <Button type='submit' variant='outline' color='primary' onClick={Redirect}>Go Back</Button>
+            <Button variant="outlined" color='primary' onClick={Redirect}>Go Back</Button>
         </div>
     )
 }
@@ -39,7 +40,7 @@ export function NotFound(){
         <div className={styles.root}>
             <Typography variant='h1'>404</Typography>
             <Typography variant='caption'>Page Not Found</Typography>
-            <Button type='submit' variant='outline' color='primary' onClick={Redirect}>Go Back</Button>
+            <Button variant="outlined" color='primary' onClick={Redirect}>Go Back</Button>
         </div>
     )
 }
