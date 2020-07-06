@@ -4,6 +4,12 @@ import {withStyles} from "@material-ui/core/styles";
 import {Button} from "@material-ui/core";
 import axios from "axios";
 
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+
 const styles = (theme) => ({
     container: {
       display: "flex",
@@ -33,8 +39,8 @@ const styles = (theme) => ({
           axios.post("http://localhost:8080/interventions",{
               batchId: trigger.batchId,
               userId: trigger.userId,
-              startTime: trigger.startTime,
-              endTime: trigger.endTime,
+              startTime: new Date(trigger.startTime).toUTCString(),
+              endTime: new Date(trigger.endTime).toUTCString(),
               isAllDay: trigger.isAllDay,
               status: trigger.status,
               requestType: trigger.requestType,
@@ -55,9 +61,9 @@ const styles = (theme) => ({
               <form>
               <h3>Requested Start and End Time</h3>
                   <TextField
-                    id="outlined-simple-start-adornment"
+                    // id="outlined-simple-start-adornment"
                     variant="outlined"
-                    // label="Start Time"
+                    //label="Start Time"
                     onChange={handleChange}
                     type="datetime-local"
                     name="startTime"
@@ -90,30 +96,62 @@ const styles = (theme) => ({
                      />
                     <br/>
                     
-                  <TextField
+                  {/* <TextField
                     id="outlined-simple-start-adornment"
                     variant="outlined"
                     label="isAllDay"
                     onChange={handleChange}
                     type="text"
                     name="isAllDay"
-                     />
+                     /> */}
+               <FormControl >
+        <InputLabel id="demo-controlled-open-select-label">isAllDay</InputLabel>
+        <Select
+          // labelId="demo-controlled-open-select-label"
+          // id="demo-controlled-open-select"
+          name="isAllDay"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
+        </Select>
+      </FormControl>
                     <br/>
-                  <TextField
-                    id="outlined-simple-start-adornment"
-                    variant="outlined"
-                    label="Status"
-                    onChange={handleChange}
-                    name="status"
-                     />
+                    <FormControl >
+        <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          name="status"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Pending">Pending</MenuItem>
+          <MenuItem value="Done">Done</MenuItem>
+        </Select>
+      </FormControl>
                     <br/>
-                  <TextField
-                    id="outlined-simple-start-adornment"
-                    variant="outlined"
-                    label="Request Type"
-                    onChange={handleChange}
-                    name="requestType"
-                     />
+                    <FormControl >
+        <InputLabel id="demo-controlled-open-select-label">Request Type</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          name="requestType"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Intervention">Intervention</MenuItem>
+          <MenuItem value="Talent">Talent</MenuItem>
+          <MenuItem value="Help">Help</MenuItem>
+        </Select>
+      </FormControl>
                     <br/>
                   <TextField
                     id="outlined-simple-start-adornment"
@@ -122,13 +160,13 @@ const styles = (theme) => ({
                     onChange={handleChange}
                     name="description" />
                     {/* fullWidth="true" /> */}
-                    <fieldset>
+                    {/* <fieldset>
                         <legend>Selecting an item</legend>
                         <select id="myList">
                             <option value="1">one</option>
                             <option value='2'>two</option>
                         </select>
-                    </fieldset>
+                    </fieldset> */}
               </form>
               <br/><br/>
               <Button variant="contained" color="primary" onClick={handleSubmit}>
