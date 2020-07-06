@@ -1,13 +1,12 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import logger from 'redux-logger';
-//import { rootReducer } from '../ducks/index.js';
 import mainReducer from "../reducers/index";
 
-const initialState = {};
+const intialState = {}
 
 const store = createStore(
   mainReducer, 
-  initialState,
+  intialState,
   compose(
     applyMiddleware(logger), window.__REDUX_DEVTOOLS_EXTENSION__
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -16,5 +15,3 @@ const store = createStore(
 );
 
 export default store;
-
-

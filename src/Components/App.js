@@ -21,7 +21,7 @@ import { Forbbiden, NotFound } from "./Common/ErrorPages"
 function App() {
 
   //Conditionally render the drawer if logged in
-  const token = useSelector(state => state.token);
+  const token = null;
   
   return (
     <div>
@@ -31,8 +31,8 @@ function App() {
           <Route path="/403" component={Forbbiden} exact />
           <Route path="/404" component={NotFound} exact />
           <div className="App">
-            <ClientProtectedRoute path="/my_batches" component={MyBatches} />
-            <AdminProtectedRoute path="/admin" component={AdminPage} />
+            <Route path="/my_batches" component={MyBatches} />
+            <Route path="/admin" component={AdminPage} />
           </div>
         </Switch>
     </div>
