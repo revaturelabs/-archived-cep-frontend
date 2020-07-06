@@ -3,6 +3,7 @@ import MyBatchesList from "./MyBatchesList";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { dispatchLink } from '../../redux/actions/redirectAction'
 
 export default function MyBatches(props) {
   const [batches, setBatches] = useState([]);
@@ -88,7 +89,7 @@ export default function MyBatches(props) {
 
   //Get information about batches mapped to the client
   useEffect(() => {
-    Axios.get("http://localhost:8080/UB/all/DTO", {
+    Axios.get("http://localhost:8080/UB/all", {
       params: {
         userId: 1
       },
@@ -102,6 +103,10 @@ export default function MyBatches(props) {
         //console.log("set Batches", batches);
       })
       .catch((err) => console.log("error batches:" + err));
+  }, []);
+  //On first render dispatch the current url
+  useEffect(() => {
+    dispatch(dispatchLink('/my_batches'));
   }, []);
 
   function checkBatch(batch) {

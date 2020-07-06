@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import MyBatches from "./MyBatches";
+import MyBatches from "../Components/batches/MyBatches";
 import { spy } from "sinon";
 import MyBatchesList from "./MyBatchesList";
 import { Provider } from 'react-redux';
