@@ -16,8 +16,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
-import { useStyles } from "./DrawerStyle";
-import "./Drawer.css";
+import { useStyles } from "./drawerStyle";
+import "./drawer.css";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>

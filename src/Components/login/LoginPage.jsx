@@ -54,7 +54,7 @@ export default function LoginPage(props) {
     //     dispatch(dispatchToken(res.jwt)); //send jwt to store
     //     getRole(res.jwt);
     //     //If statement to redirect based on user and admin
-    //     if (role !== "admin"){
+    //     if (role !== "ADMIN"){
     //         props.history.push("/my_batches");
     //     }
     //     props.history.push("/admin");
@@ -92,3 +92,4 @@ export default function LoginPage(props) {
     </div>
   );
 }
+

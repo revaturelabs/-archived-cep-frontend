@@ -7,8 +7,8 @@ export default function MyBatchesList(props) {
       <p>{props.batch.location}</p>
       <p>Start Date: {props.batch.startDate}</p>
       <p>End Date: {props.batch.endDate}</p>
-      <p>{props.batch.skills}</p>
-      <p>{props.batch.avgStats}</p>
+      <p>Skill: {props.batch.skill}</p>
+      <p>Current Week: {props.batch.currentWeek}</p>
       <button onClick={() => props.handleClick(props.batch)}>Learn More</button>
     </div>
   );
