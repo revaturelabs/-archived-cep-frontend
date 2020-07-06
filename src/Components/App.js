@@ -1,32 +1,40 @@
 import React from "react";
 import "../App.css";
-import { Switch, Route, useHistory} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { useSelector } from 'react-redux'
 
+//Page Components
 import MyBatches from "./batches/MyBatches";
 import LoginPage from "./login/LoginPage";
 import AdminPage from "./Admin/AdminPage";
-//import BlankPage from "./Common/BlankPage";
 import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 
+//For Testing
+import BlankPage from "./Common/BlankPage";
+
+//Route Components
+import {AdminProtectedRoute, ClientProtectedRoute} from "./Auth/ProtectedRoute"
+
+//Error Page Components
+import { Forbbiden, NotFound } from "./Common/ErrorPages"
+
 function App() {
 
   //Conditionally render the drawer if logged in
-  const token = useSelector(state => state.token);
-
-  const history = useHistory()
-
+  const token = "null";
+  
   return (
     <div>
-        {/* {token ? <Drawer /> : history.push("/")} */}
-        <Drawer/>
+        {token ? <Drawer /> : null}
         <Switch>
           <Route path="/" component={LoginPage} exact />
+          <Route path="/403" component={Forbbiden} exact />
+          <Route path="/404" component={NotFound} exact />
           <div className="App">
-            <Route path="/my_batches" component={MyBatches} exact />
-            <Route path="/admin" component={AdminPage} exact/>
+            <Route path="/my_batches" component={MyBatches} />
+            <Route path="/admin" component={AdminPage} />
             <Route path="/intervention" component={RequestForm} />
             <Route path="/getinterventions" component={GetInterventions}/>
           </div>

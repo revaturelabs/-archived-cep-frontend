@@ -1,13 +1,13 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import MyBatches from "./MyBatches";
+import MyBatches from "../Components/batches/MyBatches";
 import { spy } from "sinon";
-import MyBatchesList from "./MyBatchesList";
+import MyBatchesList from "../Components/batches/MyBatchesList";
 //import { renderHook, act } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react-hooks';
-import store from '../../redux/store/index.js';
+import store from '../redux/store/index.js';
 //import { expect } from 'chai';
 import * as chai from 'chai';
 

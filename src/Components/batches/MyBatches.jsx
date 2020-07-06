@@ -3,6 +3,7 @@ import MyBatchesList from "./MyBatchesList";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { dispatchLink } from '../../redux/actions/redirectAction'
 
 export default function MyBatches(props) {
   const [batches, setBatches] = useState([
@@ -85,6 +86,11 @@ export default function MyBatches(props) {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
 
+  //On first render dispatch the current url
+  useEffect(() => {
+    dispatch(dispatchLink('/my_batches'));
+  }, [])
+
   // Get information about batches mapped to the client
   //   useEffect(() => {
   //     Axios.get("http://13.58.157.19:8081/users/userByname/" + username, {
@@ -105,7 +111,6 @@ export default function MyBatches(props) {
     dispatch(selectBatch(batch))
     props.history.push("/associates");
   }
-
 
   return (
     <div>
