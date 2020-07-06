@@ -16,8 +16,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
-import { useStyles } from "./drawerStyle";
-import "./drawer.css";
+import ViewListIcon from '@material-ui/icons/ViewList';
+import SchoolIcon from '@material-ui/icons/School';
+import ListIcon from '@material-ui/icons/List';
+import { useStyles } from "./DrawerStyle";
+import "./Drawer.css";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -89,7 +92,7 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List id='drawer'>
           <ListItem>
             <ListItemIcon>
               <a href="/">
@@ -98,6 +101,65 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <a href="/my_batches">
+                {/* TODO: Make it a nice icon */}
+                <SchoolIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>My Batches</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <a href="/intervention">
+                <ListIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>Make Request</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <a href="/getinterventions">
+                <ViewListIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>Requests</ListItemText>
+          </ListItem>
+
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+
+
         </List>
         <Divider />
       </Drawer>
