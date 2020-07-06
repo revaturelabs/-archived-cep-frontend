@@ -35,10 +35,10 @@ export default function GetInterventions() {
           <li>User ID: {detail.userId}</li>
           <li>Start Time: {new Date(detail.startTime).toString()}</li>
           <li>End Time: {new Date(detail.endTime).toString()}</li>
-          <li>isAllDay: {detail.isAllDay}</li>
-          <li>Status: {details.status}</li>
-          <li>Request Type: {details.requestType}</li>
-          <li>Description: {details.description}</li>
+          <li>isAllDay: {detail.isAllDay.toString()}</li>
+          <li>Status: {detail.status}</li>
+          <li>Request Type: {detail.requestType}</li>
+          <li>Description: {detail.description}</li>
           <br />
         </div>
       ))}

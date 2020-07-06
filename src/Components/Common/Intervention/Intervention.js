@@ -59,10 +59,11 @@ const styles = (theme) => ({
               <br />
               <h1>Request Intervention</h1>
               <form>
-              <h3>Requested Start and End Time</h3>
+              <h4>Requested Start and End Time</h4>
                   <TextField
                     // id="outlined-simple-start-adornment"
-                    variant="outlined"
+                    
+                    variant="filled"
                     //label="Start Time"
                     onChange={handleChange}
                     type="datetime-local"
@@ -70,7 +71,7 @@ const styles = (theme) => ({
                      />
                   <TextField
                     id="outlined-simple-start-adornment"
-                    variant="outlined"
+                    variant="filled"
                     // label="End Time"
                     onChange={handleChange}
                     type="datetime-local"
@@ -78,21 +79,23 @@ const styles = (theme) => ({
                      />
                     <br/>
                   <TextField
-                    id="outlined-simple-start-adornment"
-                    variant="outlined"
+                    // id="outlined-simple-start-adornment"
+                    variant="filled"
                     label="Batch ID"
                     onChange={handleChange}
                     type="number"
                     name="batchId"
+                    fullWidth="true"
                      />
                     <br/>
                   <TextField
-                    id="outlined-simple-start-adornment"
-                    variant="outlined"
+                    // id="outlined-simple-start-adornment"
+                    variant="filled"
                     label="User ID"
                     onChange={handleChange}
                     type="number"
                     name="userId"
+                    fullWidth="true"
                      />
                     <br/>
                     
@@ -104,61 +107,63 @@ const styles = (theme) => ({
                     type="text"
                     name="isAllDay"
                      /> */}
-               <FormControl >
-        <InputLabel id="demo-controlled-open-select-label">isAllDay</InputLabel>
-        <Select
-          // labelId="demo-controlled-open-select-label"
-          // id="demo-controlled-open-select"
-          name="isAllDay"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
+               <FormControl fullWidth="true" variant="filled">
+                <InputLabel >isAllDay</InputLabel>
+                  <Select
+                   // labelId="demo-controlled-open-select-label"
+                  // id="demo-controlled-open-select"
+                  name="isAllDay"
+                  onChange={handleChange}>
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                   </Select>
+               </FormControl>
                     <br/>
-                    <FormControl >
-        <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          name="status"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Pending">Pending</MenuItem>
-          <MenuItem value="Done">Done</MenuItem>
-        </Select>
-      </FormControl>
+                    <FormControl fullWidth="true" variant="filled">
+                       <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
+                        <Select
+                          labelId="demo-controlled-open-select-label"
+                          id="demo-controlled-open-select"
+                          name="status"
+                          onChange={handleChange}
+                        >
+                      <MenuItem value="">
+                         <em>None</em>
+                     </MenuItem>
+                      <MenuItem value="Pending">Pending</MenuItem>
+                     <MenuItem value="Done">Done</MenuItem>
+                     </Select>
+                  </FormControl>
                     <br/>
-                    <FormControl >
-        <InputLabel id="demo-controlled-open-select-label">Request Type</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          name="requestType"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Intervention">Intervention</MenuItem>
-          <MenuItem value="Talent">Talent</MenuItem>
-          <MenuItem value="Help">Help</MenuItem>
-        </Select>
-      </FormControl>
+                    <FormControl fullWidth="true" variant="filled">
+                       <InputLabel>Request Type</InputLabel>
+                      <Select
+                        //  labelId="demo-controlled-open-select-label"
+                        // id="demo-controlled-open-select"
+                        name="requestType"
+                        onChange={handleChange}
+                      
+                        >
+                     <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="Intervention">Intervention</MenuItem>
+                      <MenuItem value="Talent">Talent</MenuItem>
+                      <MenuItem value="Help">Help</MenuItem>
+                      </Select>
+                      </FormControl>
                     <br/>
                   <TextField
                     id="outlined-simple-start-adornment"
-                    variant="outlined"
+                    variant="filled"
                     label="Description"
                     onChange={handleChange}
-                    name="description" />
+                    name="description"
+                    fullWidth="true" />
+                    
                     {/* fullWidth="true" /> */}
                     {/* <fieldset>
                         <legend>Selecting an item</legend>
