@@ -31,9 +31,6 @@ export default function Login(props) {
     password: "",
   });
 
-  console.log(userCredentials.email)
-  console.log(userCredentials.password)
-
   //Change the state of email and password
   function handleChange(event) {
     setCredentials({
