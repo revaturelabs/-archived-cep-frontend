@@ -21,6 +21,7 @@ import SchoolIcon from '@material-ui/icons/School';
 import ListIcon from '@material-ui/icons/List';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
+import { Link } from "react-router-dom";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -95,46 +96,46 @@ export default function MiniDrawer() {
         <List id='drawer'>
           <ListItem>
             <ListItemIcon>
-              <a href="/">
+              <Link to="/">
                 <HomeIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <a href="/my_batches">
+              <Link to="/my_batches">
                 {/* TODO: Make it a nice icon */}
                 <SchoolIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>My Batches</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <a href="/intervention">
+              <Link to="/intervention">
                 <ListIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>Make Request</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <a href="/getinterventions">
+              <Link to="/getinterventions">
                 <ViewListIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>Requests</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <a href="/associates">
+              <Link to="/associates">
                 <ViewListIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>Associates</ListItemText>
           </ListItem> 
