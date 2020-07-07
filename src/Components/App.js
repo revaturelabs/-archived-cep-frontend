@@ -12,14 +12,8 @@ import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import SimpleModal from "./Common/Modal";
 
-<<<<<<< HEAD
-import BatchPage from './Batch/BatchPage';
-
-function App() {
-=======
 //For Testing
 import BlankPage from "./Common/BlankPage";
->>>>>>> dev
 
 //Route Components
 import {AdminProtectedRoute, ClientProtectedRoute} from "./Auth/ProtectedRoute"
@@ -36,13 +30,6 @@ function App() {
     <div>
         {token ? <Drawer /> : null}
         <Switch>
-<<<<<<< HEAD
-          <Route path="/" component={LoginPage} exact />          
-          <div className="App">
-            <Route path="/my_batches" component={MyBatches} exact />
-            <Route path="/admin" component={AdminPage} exact/>
-            <Route path="/batch" component={BatchPage} />
-=======
           <Route path="/" component={LoginPage} exact />
           <Route path="/403" component={Forbbiden} exact />
           <Route path="/404" component={NotFound} exact />
@@ -52,7 +39,6 @@ function App() {
             <Route path="/intervention" component={RequestForm} />
             <Route path="/getinterventions" component={GetInterventions}/>
             <Route path="/associates" component={SimpleModal}/>
->>>>>>> dev
           </div>
         </Switch>
     </div>
