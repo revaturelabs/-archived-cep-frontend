@@ -118,7 +118,7 @@ export default function MyBatches(props) {
   }
 
   return (
-    <div>
+    <div style={{padding: "5em"}}>
       <Grid container direction="row" spacing={3}>
         {batches.map((batch) => {
           return (
