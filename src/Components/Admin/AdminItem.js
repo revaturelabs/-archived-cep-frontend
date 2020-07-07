@@ -76,7 +76,7 @@ export default function AdminItem(props){
         //Get JWT
 
         //axios call
-        Axios.put(`http://localhost:8080/admin/request/${props.data.requestId}`,{
+        Axios.put(`http://localhost:8080/users/admin/request/${props.data.requestId}`,{
             status: 'Complete'
         })
         .then((response) => console.log('Success'))
@@ -85,7 +85,7 @@ export default function AdminItem(props){
 
     //Handle onClick delete
     const handleDelete = () => {
-        Axios.delete(`http://localhost:8080/admin/request/delete/${props.data.requestId}`)
+        Axios.delete(`http://localhost:8080/users/admin/request/delete/${props.data.requestId}`)
         .then((response) => {
             /*After delete we reload the webpage so it can show "real time" that the request has been deleted
             May want to just hide the card to not lose potential filtering and sorting options later on*/
@@ -102,12 +102,12 @@ export default function AdminItem(props){
             <CardContent>
                 <Grid container spacing={3}>
                     <Grid item xs={3} className={styles.left}>
-                        <Typography variant="overline">{props.data.companyName}</Typography>
-                        <Typography variant="h4">{props.data.firstName}{" "}{props.data.lastName}</Typography>
+                        <Typography variant="overline">{props.data.userId.company}</Typography>
+                        <Typography variant="h4">{props.data.userId.firstName}{" "}{props.data.userId.lastName}</Typography>
                         <Typography variant="body1">{props.data.requestType}</Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant="body2">{props.data.descrip}</Typography>
+                        <Typography variant="body2">{props.data.description}</Typography>
                     </Grid>
                     <Grid item xs={3} className={styles.right}>
                         <Typography variant="body2">{props.data.endTime}</Typography>
