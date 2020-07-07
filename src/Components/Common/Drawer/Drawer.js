@@ -16,9 +16,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
-import ViewListIcon from '@material-ui/icons/ViewList';
-import SchoolIcon from '@material-ui/icons/School';
-import ListIcon from '@material-ui/icons/List';
+import ViewListIcon from "@material-ui/icons/ViewList";
+import SchoolIcon from "@material-ui/icons/School";
+import ListIcon from "@material-ui/icons/List";
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 
@@ -92,7 +92,7 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id='drawer'>
+        <List id="drawer">
           <ListItem>
             <ListItemIcon>
               <a href="/">
@@ -146,31 +146,37 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText>Batch Page</ListItemText>
           </ListItem>
-           {/* TODO: Remove this for production */}
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <a href="/Logout">
+                <ViewListIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>Log Out</ListItemText>
+          </ListItem>
 
-
+          {/* TODO: Remove this for production */}
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
         </List>
         <Divider />
       </Drawer>
