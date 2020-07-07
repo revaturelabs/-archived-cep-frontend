@@ -9,6 +9,7 @@ import {
   CardHeader,
   Button,
 } from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -48,7 +49,7 @@ export default function MyBatchesList(props) {
   return (
     
     <Card className={styles.spacing}>
-      <a onClick={() => props.handleClick(props.batch)}>
+      <Link onClick={() => props.handleClick(props.batch)} style={{textDecoration: 'none', color: "inherit"}}>
         <CardHeader style={{ backgroundColor: statusColor }} title={title} />
         <Button>
         <CardContent>
@@ -71,7 +72,7 @@ export default function MyBatchesList(props) {
           </Grid>
         </CardContent>
         </Button>
-      </a>
+      </Link>
     </Card>
     
   );

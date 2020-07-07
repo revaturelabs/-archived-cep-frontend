@@ -1,10 +1,11 @@
-import { STORE_CREDENTIALS, ADD_USERID, ADD_ROLE, ADD_USER_OBJECT } from '../actions/actionTypes';
+import { STORE_CREDENTIALS, ADD_USERID, ADD_ROLE, ADD_USER_OBJECT, LOGGED_IN, LOGGED_OUT } from '../actions/actionTypes';
 
 const initialState = {
     token: null,
     userId: null,
     role: null,
-    userObject: null
+    userObject: null,
+    isLoggedIn: false
 }
 
 export default function (state = initialState, action) {
@@ -21,6 +22,12 @@ export default function (state = initialState, action) {
             return state;
         case ADD_USER_OBJECT:
             state.userObject = action.payload
+            return state;
+        case LOGGED_IN:
+            state.isLoggedIn = true;
+            return state;
+        case LOGGED_OUT:
+            state.isLoggedIn = false;
             return state;
         default:
             return state;

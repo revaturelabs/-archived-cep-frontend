@@ -6,3 +6,5 @@ export const ADD_USERID = "STORE_USERID";
 export const ADD_ROLE = "STORE_ROLE";
 export const ADD_LINK = "STORE_LINK";
 export const ADD_USER_OBJECT = "ADD_USER_OBJECT";
+export const LOGGED_IN = "LOGGED_IN";
+export const LOGGED_OUT = "LOGGED_OUT";
