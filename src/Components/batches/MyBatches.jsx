@@ -89,7 +89,7 @@ export default function MyBatches(props) {
 
   //Get information about batches mapped to the client
   useEffect(() => {
-    Axios.get("http://localhost:8080/UB/all", {
+    Axios.get("http://localhost:8080/UB/batchesbyuser", {
       params: {
         userId: 1
       },
