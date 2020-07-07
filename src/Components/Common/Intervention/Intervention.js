@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
-import {withStyles} from "@material-ui/core/styles";
+//import {withStyles} from "@material-ui/core/styles";
 import {Button, makeStyles} from "@material-ui/core";
 import axios from "axios";
 
@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RequestForm(){
+ 
   const [trigger, setTrigger] = useState();
-  const styles = useStyles();
+  //const styles = useStyles();
 
   function handleChange(event) {
     event.preventDefault();
@@ -82,7 +83,7 @@ export default function RequestForm(){
             variant="filled"
             label="Batch ID"
             onChange={handleChange}
-            type="number"
+            type="text"
             name="batchId"
             fullWidth="true"
           />
@@ -97,19 +98,9 @@ export default function RequestForm(){
             fullWidth="true"
           />
           <br/>
-          {/* <TextField
-            id="outlined-simple-start-adornment"
-            variant="outlined"
-            label="isAllDay"
-            onChange={handleChange}
-            type="text"
-            name="isAllDay"
-          /> */}
           <FormControl fullWidth="true" variant="filled">
           <InputLabel >isAllDay</InputLabel>
             <Select
-              // labelId="demo-controlled-open-select-label"
-            // id="demo-controlled-open-select"
             name="isAllDay"
             onChange={handleChange}>
             <MenuItem value="">
@@ -137,11 +128,8 @@ export default function RequestForm(){
           <FormControl fullWidth="true" variant="filled">
             <InputLabel>Request Type</InputLabel>
             <Select
-              //  labelId="demo-controlled-open-select-label"
-              // id="demo-controlled-open-select"
               name="requestType"
               onChange={handleChange}
-            
             >
             <MenuItem value=""><em>None</em></MenuItem>
             <MenuItem value="Intervention">Intervention</MenuItem>
@@ -157,15 +145,6 @@ export default function RequestForm(){
             onChange={handleChange}
             name="description"
             fullWidth="true" />
-            
-            {/* fullWidth="true" /> */}
-            {/* <fieldset>
-                <legend>Selecting an item</legend>
-                <select id="myList">
-                    <option value="1">one</option>
-                    <option value='2'>two</option>
-                </select>
-            </fieldset> */}
       </form>
       <br/>
       <br/>
@@ -174,4 +153,6 @@ export default function RequestForm(){
       </Button>
     </div>
   )
+  
+
 }

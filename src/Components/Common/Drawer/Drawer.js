@@ -130,9 +130,16 @@ export default function MiniDrawer() {
             <ListItemText>Requests</ListItemText>
           </ListItem>
 
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <a href="/associates">
+                <ViewListIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>Associates</ListItemText>
+          </ListItem> 
+          
+           {/* TODO: Remove this for production */}
           <ListItem></ListItem>
           <ListItem></ListItem>
           <ListItem></ListItem>

@@ -32,7 +32,10 @@ export default function GetInterventions() {
         <div key={detail.batchId}>
           <br />
           <li>Batch ID: {detail.batchId}</li>
-          <li>User ID: {detail.userId}</li>
+          <li>Name: {detail.userId.lastName}, {detail.userId.firstName}</li>
+          <li>Email: {detail.userId.email}</li>
+          <li>Company: {detail.userId.company}</li>
+          <li>Phone Number: {detail.userId.phone}</li>
           <li>Start Time: {new Date(detail.startTime).toString()}</li>
           <li>End Time: {new Date(detail.endTime).toString()}</li>
           <li>isAllDay: {detail.isAllDay.toString()}</li>
