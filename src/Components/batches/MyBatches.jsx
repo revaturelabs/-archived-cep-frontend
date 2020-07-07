@@ -3,10 +3,11 @@ import MyBatchesList from "./MyBatchesList";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { makeStyles, Grid } from "@material-ui/core";
 
 export default function MyBatches(props) {
-  const [batches, setBatches] = useState([]);
-  const [batchess, setBatchess] = useState([
+  const [batchess, setBatches] = useState([]);
+  const [batches, setBatchess] = useState([
     {
       batchId: 1,
       name: "Java/React",
@@ -90,7 +91,7 @@ export default function MyBatches(props) {
   useEffect(() => {
     Axios.get("http://localhost:8080/UB/all/DTO", {
       params: {
-        userId: 1
+        userId: 1,
       },
       // headers: {
       //   Authorization: `Bearer ${token}`,
@@ -113,16 +114,26 @@ export default function MyBatches(props) {
 
   return (
     <div>
-      {batches.map((batch) => {
-        return (
-          <MyBatchesList
-            key={batch.batchId}
-            batch={batch}
+      <Grid container direction="row" spacing={3}>
+        {batches.map((batch) => {
+          return (
+            <Grid item xs={3}>
+              <MyBatchesList
+                key={batch.batchId}
+                batch={batch}
+                handleClick={checkBatch}
+              />
+            </Grid>
+          );
+        })}
+        {/* </Grid>
+        <Grid item xs>
+         <MyBatchesList
+            key={batches[1].id}
+            batch={batches[1]}
             handleClick={checkBatch}
-          />
-        );
-      })}
+      />*/}
+      </Grid>
     </div>
   );
 }
-
