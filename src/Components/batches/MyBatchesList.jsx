@@ -46,9 +46,11 @@ export default function MyBatchesList(props) {
   //${props.batch.batchId}
 
   return (
+    
     <Card className={styles.spacing}>
       <a onClick={() => props.handleClick(props.batch)}>
         <CardHeader style={{ backgroundColor: statusColor }} title={title} />
+        <Button>
         <CardContent>
           <Grid container>
             <Grid item className={styles.left}>
@@ -63,12 +65,14 @@ export default function MyBatchesList(props) {
                 <p></p>
                 Skill: {props.batch.skill}
                 <p></p>
-                Progress: Week {props.batch.week}
+                Progress: Week {props.batch.currentWeek}
               </Typography>
             </Grid>
           </Grid>
         </CardContent>
+        </Button>
       </a>
     </Card>
+    
   );
 }
