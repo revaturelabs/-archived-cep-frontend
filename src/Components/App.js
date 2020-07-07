@@ -7,7 +7,7 @@ import MyBatches from "./batches/MyBatches";
 import LoginPage from "./login/LoginPage";
 import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
-import MySpiderGraphPage from "./spidergraph/MySpiderGraphPage"
+import Spider from './Batch/AssociateList/spidergraph/MySpiderGraphPage'
 import BatchPage from './Batch/BatchPage';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/my_batches" component={MyBatches} exact />
             <Route path="/admin" component={AdminPage} exact/>
             <Route path="/batch" component={BatchPage} />
-            <Route path="/spider" component={MySpiderGraphPage} />
+            <Route path="/spider" component={Spider} />
           </div>
         </Switch>
     </div>
