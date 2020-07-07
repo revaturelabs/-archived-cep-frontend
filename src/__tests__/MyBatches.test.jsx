@@ -3,10 +3,10 @@ import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MyBatches from "../Components/batches/MyBatches";
 import { spy } from "sinon";
-import MyBatchesList from "./MyBatchesList";
+import MyBatchesList from "../Components/batches/MyBatchesList";
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react-hooks';
-import store from '../../redux/store/index.js';
+import store from '../redux/store/index';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,14 +30,14 @@ describe("MyBatches Component", () => {
   );
 
   it("should titles/names of each batch", () => {
-    const titles = wrapper.find('h4');
-    expect(titles.length).toBe(8);
+    const titles = wrapper.find('div');
+    expect(titles.length).toBe(2);
   });
 
-  it('click button', () => {
+  it('click batch', () => {
     const mockCallBack = jest.fn();
     const wrapper3 = shallow((<MyBatchesList key={id} batch={batch} handleClick={mockCallBack} />));
-    const submitButton = wrapper3.find('button');
+    const submitButton = wrapper3.find('a');
     expect(submitButton.length).toBe(1);
     submitButton.simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(1);
