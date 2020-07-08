@@ -4,8 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import Admin from "../Components/Admin/AdminList";
 import store from "../redux/store/index.js";
 import { Provider } from "react-redux";
-
-
+ 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("renders inputs",()=>{

@@ -21,7 +21,7 @@ export default function MyBatches(props) {
 
   //Get information about batches mapped to the client
   useEffect(() => {
-    Axios.get("http://localhost:8080/UB/batchesbyuser", {
+    Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/UB/batchesbyuser", {
       params: {
         userId: userId,
       },
@@ -39,7 +39,7 @@ export default function MyBatches(props) {
   useEffect(() => {
     dispatch(dispatchLink("/my_batches"));
   }, []);
-
+ 
   function checkBatch(batch) {
     // Send information about batch to store, so associates can be
     // displayed on a different page
