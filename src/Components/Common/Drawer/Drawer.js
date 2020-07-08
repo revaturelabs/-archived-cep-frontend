@@ -148,15 +148,6 @@ export default function MiniDrawer(props) {
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/associates">
-                <ViewListIcon style={{color:'#474C55'}} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{color:'#474C55'}}>Associates</ListItemText>
-          </ListItem>
-
-          <ListItem>
-            <ListItemIcon>
               <a href="/">
                 <ExitToAppIcon style={{color:'#474C55'}} onClick={logOut}/>
               </a>
