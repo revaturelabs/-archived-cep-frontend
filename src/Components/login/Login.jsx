@@ -5,9 +5,10 @@ import {
   dispatchUserObject,
   dispatchLoggedIn,
 } from "../../redux/actions/userAction";
-//import JWTD from "jwt-decode";
+import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField } from "@material-ui/core";
+import { getRoles } from "@testing-library/react";
 
 //Used for styling Material UI
 const useStyles = makeStyles((theme) => ({
@@ -45,67 +46,55 @@ export default function Login(props) {
     });
   }
 
-  // function getRole(token) {
-  //   //Getting the role of the user to conditionally re-route to either
-  //   // admin page or my_batches page
-  //   const username = JWTD(token).sub;
-  //   Axios.get("http://13.58.157.19:8081/role/" + username, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((result) => {
-  //       setRole(result.data);
-  //     })
-  //     .catch((err) => console.log("error username:" + err));
-  // }
+  function getUser(token) {
+    // Getting user object from Caliber by decoding jwt
+    const email = JWTD(token).sub;
+    Axios.get("http://localhost:8080/users/email/", {
+      params: {
+        email: email,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((result) => {
+        dispatch(dispatchUserObject(result.data));
+      })
+      .catch((err) => console.log("error username:" + err));
+  }
 
   function handleSubmit(event) {
+    //Requesting for the token to authenticate user
     event.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    // Authorize the user
-    // fetch("http://13.58.157.19:8081/authenticate", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     username: userCredentials.username,
-    //     password: userCredentials.password,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res);
-    //     dispatch(dispatchToken(res.jwt)); //send jwt to store
-    //     getRole(res.jwt);
-    //     //If statement to redirect based on user and admin
-    //     if (role !== "admin"){
-    //         props.history.push("/my_batches");
-    //     }
-    //     props.history.push("/admin");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    if (!(userCredentials.email === "" || userCredentials.password === "")) {
-      Axios.get("http://localhost:8080/users/email/", {
-        params: {
-          email: userCredentials.email,
-        },
+    var raw = JSON.stringify({
+      email: userCredentials.email,
+      password: userCredentials.password,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/authenticate", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        dispatch(dispatchToken(result.token));
+        getUser(result.token);
+        dispatch(dispatchLoggedIn());
       })
-        .then((result) => {
-          dispatch(dispatchUserObject(result.data));
-          if (result.data !== "") {
-            dispatch(dispatchLoggedIn());
-          }
-        })
-        .catch((err) => console.log("error user:" + err));
-    }
-    setCredentials({...userCredentials, email: "", password: ""});
+      .catch((error) => console.log("error", error));
   }
 
   function conditionalRender() {
+    //Conditionally render login or welcome page based on whether 
+    // user is logged in. Get "isLoggedIn" from redux store
     if (isLoggedIn) {
       return (
         <div

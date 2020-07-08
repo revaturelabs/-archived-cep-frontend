@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -29,7 +30,8 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
-export default function MiniDrawer() {
+
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -45,7 +47,9 @@ export default function MiniDrawer() {
 
   function logOut(){
     dispatch(dispatchLoggedOut());
+    window.location.reload();
   }
+
 
   return (
     <div className={classes.root}>
@@ -60,13 +64,13 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
+            style={{color:"#474C55"}}
           >
             <MenuIcon />
           </IconButton>
@@ -103,101 +107,75 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id="drawer" >
+        <List>
+
           <ListItem>
             <ListItemIcon>
-              <Link to="/" >
-                <HomeIcon/>
+              <Link to="/">
+                <HomeIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Home</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Home</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/my_batches">
                 {/* TODO: Make it a nice icon */}
-                <SchoolIcon />
+                <SchoolIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>My Batches</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>My Batches</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/intervention">
-                <ListIcon />
+                <ListIcon style={{color:'#474C55'}}/>
               </Link>
             </ListItemIcon>
-            <ListItemText>Make Request</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Make Request</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/getinterventions">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Requests</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Requests</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/associates">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Associates</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Associates</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/" onClick={logOut}>
-                <ExitToAppIcon />
+              <Link to="/admin">
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Log Out</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Admin</ListItemText>
           </ListItem>
 
-          {/* TODO: Remove this for production */}
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/">
+                <ExitToAppIcon style={{color:'#474C55'}} onClick={logOut}/>
+              </Link>
+            </ListItemIcon>
+            <ListItemText style={{color:'#474C55'}}>Log Out</ListItemText>
+          </ListItem>
+        
         </List>
         <Divider />
       </Drawer>
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>
-            Theresa's group Associates' information
-          </h2>
-          This area will have information about the different associates in a
-          specific batch
-        </Typography>
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>Request Talent</h2>A form requesting
-          talent will be here. Followed by the batches progress.
-        </Typography>
-      </main> */}
     </div>
   );
 }

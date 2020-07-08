@@ -8,86 +8,16 @@ import { dispatchLink } from "../../redux/actions/redirectAction";
 
 export default function MyBatches(props) {
   const [batches, setBatches] = useState([]);
-  const [batchess, setBatchess] = useState([
-    {
-      batchId: 1,
-      name: "Java/React",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 80,
-      progress: "",
-      week: 0,
-    },
-    {
-      batchId: 2,
-      name: ".NET",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 87,
-    },
-    {
-      batchId: 3,
-      name: "Full Stack Java",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 90,
-    },
-    {
-      batchId: 4,
-      name: "Java/Pega",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 94,
-    },
-    {
-      batchId: 5,
-      name: "AWS",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 89,
-    },
-    {
-      batchId: 6,
-      name: "CyberSecurity",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 85,
-    },
-    {
-      batchId: 7,
-      name: "Network Systems Engineering",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 81,
-    },
-    {
-      batchId: 8,
-      name: "Hadoop - Big Data",
-      startDate: "2019-12-03",
-      endDate: "2020-03-15",
-      skill: "Java and React",
-      location: "Arlington, Texas",
-      avgStats: 99,
-    },
-  ]);
-
   const dispatch = useDispatch();
   const token = useSelector((state) => state.credReducer.token);
-  const userId = useSelector((state) => state.credReducer.userObject.userId);
+  const userObject = useSelector((state) => state.credReducer.userObject);
+  let userId = null;
+
+  // Checking if there was data mapped to this store property
+  // Then checking for userId within the property
+  if (userObject) {
+    userId = userObject.userId;
+  }
 
   //Get information about batches mapped to the client
   useEffect(() => {
@@ -95,17 +25,16 @@ export default function MyBatches(props) {
       params: {
         userId: userId,
       },
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((result) => {
         setBatches(result.data);
-        console.log("Checking results", result);
-        //console.log("set Batches", batches);
       })
       .catch((err) => console.log("error batches:" + err));
   }, []);
+
   //On first render dispatch the current url
   useEffect(() => {
     dispatch(dispatchLink("/my_batches"));
@@ -115,11 +44,10 @@ export default function MyBatches(props) {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));
-    //props.history.push("/associates");
   }
 
   return (
-    <div style={{padding: "5em"}}>
+    <div style={{ padding: "5em" }}>
       <Grid container direction="row" spacing={3}>
         {batches.map((batch) => {
           return (
