@@ -30,7 +30,7 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //under <Drawer><List>
 
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -61,7 +61,7 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="primary"
+            color="#474C55"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -108,57 +108,57 @@ export default function MiniDrawer() {
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/" >
-                <HomeIcon/>
+              <Link to="/">
+                <HomeIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Home</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Home</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/my_batches">
                 {/* TODO: Make it a nice icon */}
-                <SchoolIcon />
+                <SchoolIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>My Batches</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>My Batches</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/intervention">
-                <ListIcon />
+                <ListIcon style={{color:'#474C55'}}/>
               </Link>
             </ListItemIcon>
-            <ListItemText>Make Request</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Make Request</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/getinterventions">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Requests</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Requests</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/associates">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Associates</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Associates</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/" onClick={logOut}>
-                <ExitToAppIcon />
-              </Link>
+              <a href="/Logout">
+                <ViewListIcon style={{color:'#474C55'}}/>
+              </a>
             </ListItemIcon>
-            <ListItemText>Log Out</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Log Out</ListItemText>
           </ListItem>
         
         </List>
