@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MySpiderGraph from "./MySpiderGraph";
 import { Container } from "@material-ui/core";
 import axios from "axios";
+import { useSelector } from "react-redux";
 // import { createLogger } from "redux-logger";
 // import { red } from "@material-ui/core/colors";
 
@@ -45,16 +46,18 @@ function averageDuplicates(res) {
 }
 
 export default function MySpiderGraphPage({ batchId, associateEmail }) {
+  const token = useSelector(state => state.credReducer.token);
 
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     };
 
     // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
-    const requestUrl = `http://localhost:8080/graph/associate/${batchId}/${associateEmail}`;
+    const requestUrl = `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/graph/associate/${batchId}/${associateEmail}`;
     console.log(requestUrl);
 
     // let temp = [];

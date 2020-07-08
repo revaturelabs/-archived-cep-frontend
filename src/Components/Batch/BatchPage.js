@@ -11,13 +11,18 @@ function BatchPage() {
   const [batches, setBatches] = useState([]);
   const [batchToShow, setBatchToShow] = useState({});
   
+  const token = useSelector((state) => state.credReducer.token);
   const batch = useSelector(state => state.batchReducer);
+  const userId = useSelector(state => state.credReducer.userObject.userId);
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {
-    Axios.get("http://localhost:8080/UB/batchesbyuser", {
+    Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/UB/batchesbyuser", {
       params: {
-        userId: 1,
+        userId: userId,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((result) => {
@@ -26,7 +31,7 @@ function BatchPage() {
       .catch((err) => console.log("error batch:" + err));
     
     setBatchToShow(batch);
-  }, []);
+  }, [batch, userId]);
 
   return (
     <Grid container>
