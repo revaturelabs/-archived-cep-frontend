@@ -23,7 +23,7 @@ import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
-import { Link, Redirect} from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 
@@ -64,13 +64,13 @@ export default function MiniDrawer(props) {
       >
         <Toolbar>
           <IconButton
-            color="#474C55"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
+            style={{color:"#474C55"}}
           >
             <MenuIcon />
           </IconButton>

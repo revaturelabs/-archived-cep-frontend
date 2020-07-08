@@ -26,7 +26,7 @@ import { Forbbiden, NotFound } from "./Common/ErrorPages";
 
 function App() {
   //Conditionally render the drawer if logged in
-  const token = "null";
+  const token = useSelector((state) => state.credReducer.token);
   const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
 
   return (

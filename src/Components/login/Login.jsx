@@ -37,7 +37,6 @@ export default function Login(props) {
     email: "",
     password: "",
   });
-  //const [token, setToken] = useState("");
 
   //Change the state of email and password
   function handleChange(event) {
@@ -47,11 +46,9 @@ export default function Login(props) {
     });
   }
 
-  function getRole(token) {
-    //Getting the role of the user to conditionally re-route to either
-    // admin page or my_batches page
+  function getUser(token) {
+    // Getting user object from Caliber by decoding jwt
     const email = JWTD(token).sub;
-    console.log("Decoded email", email);
     Axios.get("http://localhost:8080/users/email/", {
       params: {
         email: email,
@@ -67,35 +64,8 @@ export default function Login(props) {
   }
 
   function handleSubmit(event) {
+    //Requesting for the token to authenticate user
     event.preventDefault();
-
-    //Authorize the user
-    // fetch("http://localhost:8080/authenticate", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     username: userCredentials.username,
-    //     password: userCredentials.password,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log("Testing Login:", res);
-    //     //dispatch(dispatchToken(res.jwt)); //send jwt to store
-    //     //getRole(res.jwt);
-    //     //If statement to redirect based on user and admin
-    //     // if (role !== "admin"){
-    //     //     props.history.push("/my_batches");
-    //     // }
-    //     // props.history.push("/admin");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    //Calling for the token
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -116,31 +86,15 @@ export default function Login(props) {
       .then((result) => {
         console.log(result);
         dispatch(dispatchToken(result.token));
-        getRole(result.token);
+        getUser(result.token);
         dispatch(dispatchLoggedIn());
       })
       .catch((error) => console.log("error", error));
-
-    // If something is inputted in both email and password
-    // if (!(userCredentials.email === "" || userCredentials.password === "")) {
-    //   Axios.get("http://localhost:8080/users/email/", {
-    //     params: {
-    //       email: userCredentials.email,
-    //     },
-    //   })
-    //     .then((result) => {
-    //       dispatch(dispatchUserObject(result.data));
-
-    //       if (result.data !== "") {
-    //         dispatch(dispatchLoggedIn());
-    //         setCredentials({...userCredentials, email: "", password: ""});
-    //       }
-    //     })
-    //     .catch((err) => console.log("error user:" + err));
-    // }
   }
 
   function conditionalRender() {
+    //Conditionally render login or welcome page based on whether 
+    // user is logged in. Get "isLoggedIn" from redux store
     if (isLoggedIn) {
       return (
         <div
