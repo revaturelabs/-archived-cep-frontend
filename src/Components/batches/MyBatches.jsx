@@ -86,17 +86,18 @@ export default function MyBatches(props) {
   ]);
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.credReducer.token);
+  const userId = useSelector((state) => state.credReducer.userObject.userId);
 
   //Get information about batches mapped to the client
   useEffect(() => {
     Axios.get("http://localhost:8080/UB/batchesbyuser", {
       params: {
-        userId: 1,
+        userId: userId,
       },
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((result) => {
         setBatches(result.data);
@@ -114,7 +115,7 @@ export default function MyBatches(props) {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));
-    props.history.push("/associates");
+    //props.history.push("/associates");
   }
 
   return (

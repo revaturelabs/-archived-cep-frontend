@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,17 +20,22 @@ import HomeIcon from "@material-ui/icons/Home";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import SchoolIcon from "@material-ui/icons/School";
 import ListIcon from "@material-ui/icons/List";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
-export default function MiniDrawer() {
+
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -39,6 +45,12 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  function logOut(){
+    dispatch(dispatchLoggedOut());
+    window.location.reload();
+  }
+
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -47,11 +59,12 @@ export default function MiniDrawer() {
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
-        })}
+        })} 
+        
       >
         <Toolbar>
           <IconButton
-            color="primary"
+            color="#474C55"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -82,6 +95,7 @@ export default function MiniDrawer() {
             [classes.drawerClose]: !open,
           }),
         }}
+        
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
@@ -93,100 +107,65 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id="drawer">
+        <List>
+
           <ListItem>
             <ListItemIcon>
               <Link to="/">
-                <HomeIcon />
+                <HomeIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Home</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Home</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/my_batches">
                 {/* TODO: Make it a nice icon */}
-                <SchoolIcon />
+                <SchoolIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>My Batches</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>My Batches</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/intervention">
-                <ListIcon />
+                <ListIcon style={{color:'#474C55'}}/>
               </Link>
             </ListItemIcon>
-            <ListItemText>Make Request</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Make Request</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/getinterventions">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Requests</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Requests</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
               <Link to="/associates">
-                <ViewListIcon />
+                <ViewListIcon style={{color:'#474C55'}} />
               </Link>
             </ListItemIcon>
-            <ListItemText>Associates</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Associates</ListItemText>
           </ListItem>
           <ListItem>
             <ListItemIcon>
-              <a href="/Logout">
-                <ViewListIcon />
-              </a>
+              <Link to="/">
+                <ExitToAppIcon style={{color:'#474C55'}} onClick={logOut}/>
+              </Link>
             </ListItemIcon>
-            <ListItemText>Log Out</ListItemText>
+            <ListItemText style={{color:'#474C55'}}>Log Out</ListItemText>
           </ListItem>
-
-          {/* TODO: Remove this for production */}
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+        
         </List>
         <Divider />
       </Drawer>
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>
-            Theresa's group Associates' information
-          </h2>
-          This area will have information about the different associates in a
-          specific batch
-        </Typography>
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>Request Talent</h2>A form requesting
-          talent will be here. Followed by the batches progress.
-        </Typography>
-      </main> */}
     </div>
   );
 }
