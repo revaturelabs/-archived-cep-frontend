@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
+import {Button} from "@material-ui/core";
 
 function getModalStyle() {
   const top = 60
@@ -48,9 +49,14 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+   {/*    <button type="button" onClick={handleOpen}>
         Open Modal
-      </button>
+      </button> */}
+      <br />
+      <Button variant="contained" style={{color:"#f26925"}} onClick={handleOpen}>
+       Make a Request
+      </Button>
+
       <Modal
         open={open}
         onClose={handleClose}
