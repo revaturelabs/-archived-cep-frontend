@@ -29,6 +29,7 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
+
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
@@ -103,7 +104,8 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id="drawer" >
+        <List>
+
           <ListItem>
             <ListItemIcon>
               <Link to="/" >
@@ -158,46 +160,10 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText>Log Out</ListItemText>
           </ListItem>
-
-          {/* TODO: Remove this for production */}
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+        
         </List>
         <Divider />
       </Drawer>
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>
-            Theresa's group Associates' information
-          </h2>
-          This area will have information about the different associates in a
-          specific batch
-        </Typography>
-        <Typography paragraph style={{ textAlign: "left" }}>
-          <h2 style={{ textAlign: "left" }}>Request Talent</h2>A form requesting
-          talent will be here. Followed by the batches progress.
-        </Typography>
-      </main> */}
     </div>
   );
 }
