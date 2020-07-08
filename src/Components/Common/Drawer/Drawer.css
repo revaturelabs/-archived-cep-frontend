@@ -1,0 +1,15 @@
+/* Used as the background-color of the appBar */
+#appBar {
+  background-color: #b9b9ba;
+}
+/*#F26925 Orange, #474C55 Dark Grey, #B9B9BA Light Grey */
+#drawer {
+  background-color: #f26925;
+}
+
+/* Shrinks the Revature logo a little bit to fit inside the appBar*/
+#image {
+  width: 150px;
+  height: auto;
+  margin-top: 6px;
+}
