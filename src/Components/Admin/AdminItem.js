@@ -40,7 +40,7 @@ export default function AdminItem(props){
     //Userstate
     const [userData, setUserData]=useState({});
 
-    //Status=Pending color is Orange, Status=Completed color is Blue
+    //Status=Pending color is Orange, Status=Done color is Blue
     //Initial color is Orange
     const [statusColor, setStatusColor] = useState('#F26925'); 
     const [status, setStatus] = useState(props.data.status)
@@ -71,7 +71,6 @@ export default function AdminItem(props){
             setButtonCompleteVisi(false)
         }*/
         Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
-  //      .then(res=>res.json())
         .then((response)=>{
             console.log(response.data);
             changeUserData(response.data);
