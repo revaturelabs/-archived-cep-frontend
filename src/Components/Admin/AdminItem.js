@@ -42,7 +42,7 @@ export default function AdminItem(props){
 
     //States used for conditional rendering
     const [buttonCompleteVisi, setButtonCompleteVisi] = useState(true)
-    const [buttonDeleteVisi, setButtonDeleteVisi] = useState(true)
+    const [buttonDeleteVisi] = useState(true)
 
     //Simply return the button component for conditional rendering
     const ButtonComplete = () => {

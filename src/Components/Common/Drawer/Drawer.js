@@ -16,8 +16,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
+import ViewListIcon from "@material-ui/icons/ViewList";
+import SchoolIcon from "@material-ui/icons/School";
+import ListIcon from "@material-ui/icons/List";
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
+import { Link } from "react-router-dom";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -89,25 +93,83 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List id="drawer">
           <ListItem>
             <ListItemIcon>
-              <a href="/">
+              <Link to="/">
                 <HomeIcon />
-              </a>
+              </Link>
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <a href="/my_batches">
+              <Link to="/my_batches">
                 {/* TODO: Make it a nice icon */}
-                <HomeIcon />
-              </a>
+                <SchoolIcon />
+              </Link>
             </ListItemIcon>
             <ListItemText>My Batches</ListItemText>
           </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/intervention">
+                <ListIcon />
+              </Link>
+            </ListItemIcon>
+            <ListItemText>Make Request</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/getinterventions">
+                <ViewListIcon />
+              </Link>
+            </ListItemIcon>
+            <ListItemText>Requests</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/associates">
+                <ViewListIcon />
+              </Link>
+            </ListItemIcon>
+            <ListItemText>Associates</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <a href="/Logout">
+                <ViewListIcon />
+              </a>
+            </ListItemIcon>
+            <ListItemText>Log Out</ListItemText>
+          </ListItem>
+
+          {/* TODO: Remove this for production */}
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
+          <ListItem></ListItem>
         </List>
         <Divider />
       </Drawer>

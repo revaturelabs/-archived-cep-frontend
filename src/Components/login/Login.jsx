@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { dispatchToken } from "../../redux/actions/userAction";
+import { dispatchToken, dispatchUserObject } from "../../redux/actions/userAction";
 //import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField} from "@material-ui/core";
@@ -27,12 +27,10 @@ export default function Login(props) {
   const styles = useStyles();
 
   const [userCredentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    userId: 1,
+    email: "stubEmail_1@gmail.com",
+    password: "pass1word",
   });
-
-  console.log(userCredentials.email)
-  console.log(userCredentials.password)
 
   //Change the state of email and password
   function handleChange(event) {
@@ -61,7 +59,7 @@ export default function Login(props) {
   // }
 
   function handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
     // Authorize the user
     // fetch("http://13.58.157.19:8081/authenticate", {
@@ -88,6 +86,8 @@ export default function Login(props) {
     //   .catch((error) => {
     //     console.log(error);
     //   });
+
+    dispatch(dispatchUserObject(userCredentials));
   }
 
   //Form using MaterialUI
