@@ -49,7 +49,7 @@ export default function Login(props) {
   function getUser(token) {
     // Getting user object from Caliber by decoding jwt
     const email = JWTD(token).sub;
-    Axios.get("http://localhost:8080/users/email/", {
+    Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/email/", {
       params: {
         email: email,
       },
@@ -81,7 +81,7 @@ export default function Login(props) {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/authenticate", requestOptions)
+    fetch("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

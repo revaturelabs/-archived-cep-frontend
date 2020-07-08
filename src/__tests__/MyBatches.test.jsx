@@ -26,7 +26,7 @@ describe("MyBatches Component", () => {
   it("should titles/names of each batch", () => {
     const titles = wrapper.find('div');
     expect(titles.length).toBe(2);
-  });
+  }); 
 
   it('click batch', () => {
     const mockCallBack = jest.fn();
