@@ -44,15 +44,11 @@ function averageDuplicates(res) {
   return aveRes;
 }
 
-export default function MySpiderGraphPage() {
+export default function MySpiderGraphPage({ batchId, associateEmail }) {
 
   const [scores, setScores] = useState([]);
 
-  useEffect(async () => {
-    const batchId = "TR-1000";
-    const associateEmail =
-      "mock0.associate26bd69f4-0e52-4fac-a4e9-c5c69ee0691f@mock.com";
-
+  useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
     };
@@ -63,7 +59,7 @@ export default function MySpiderGraphPage() {
 
     // let temp = [];
 
-    await axios({
+    axios({
       method: "get",
       headers: headers,
       url: requestUrl,

@@ -1,11 +1,15 @@
 import React from 'react';
 
 import AssociateListItem from './AssociateListItem';
+import { useSelector } from 'react-redux';
 
 function AssociateList() {
+  const batchId = useSelector(state => state.batchReducer.batchId);
+  const associates = useSelector(state => state.batchReducer.associateAssignments);
+
   return (
     <div>
-      {/*Map array of associates and return an AssociateListItem for each*/}
+      {associates.map(associate => <AssociateListItem batch={batchId} associate={associate} />)}
     </div>
   );
 }
