@@ -138,14 +138,6 @@ export default function MiniDrawer() {
               </Link>
             </ListItemIcon>
             <ListItemText>Associates</ListItemText>
-          </ListItem> 
-          <ListItem>
-            <ListItemIcon>
-              <a href="/batchpage">
-                <SchoolIcon/>
-              </a>
-            </ListItemIcon>
-            <ListItemText>Batch Page</ListItemText>
           </ListItem>
           <ListItem>
             <ListItemIcon>
