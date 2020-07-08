@@ -1,4 +1,4 @@
-import { STORE_CREDENTIALS, ADD_USERID, ADD_ROLE, ADD_USER_OBJECT } from './actionTypes';
+import { STORE_CREDENTIALS, ADD_USERID, ADD_ROLE, ADD_USER_OBJECT, LOGGED_IN, LOGGED_OUT } from './actionTypes';
 
 export const dispatchToken = (token) => {
     console.log("You stored the token: ", token);
@@ -27,4 +27,12 @@ export const dispatchUserObject = (user) => {
         type: ADD_USER_OBJECT,
         payload: user
     }
+}
+
+export const dispatchLoggedIn= ()=>{
+    return {type: LOGGED_IN}
+}
+
+export const dispatchLoggedOut= ()=>{
+    return {type: LOGGED_OUT}
 }

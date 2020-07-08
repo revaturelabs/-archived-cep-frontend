@@ -19,9 +19,12 @@ import HomeIcon from "@material-ui/icons/Home";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import SchoolIcon from "@material-ui/icons/School";
 import ListIcon from "@material-ui/icons/List";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -31,6 +34,7 @@ export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -40,6 +44,10 @@ export default function MiniDrawer(props) {
     setOpen(false);
   };
 
+  function logOut(){
+    dispatch(dispatchLoggedOut());
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -48,7 +56,8 @@ export default function MiniDrawer(props) {
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
-        })}
+        })} 
+        
       >
         <Toolbar>
           <IconButton
@@ -83,6 +92,7 @@ export default function MiniDrawer(props) {
             [classes.drawerClose]: !open,
           }),
         }}
+        
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
@@ -95,6 +105,7 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
+
           <ListItem>
             <ListItemIcon>
               <Link to="/">
