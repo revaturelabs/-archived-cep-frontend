@@ -11,7 +11,6 @@ import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import BatchPage from "./Batch/BatchPage";
-import HomePage from "./Common/HomePage";
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
