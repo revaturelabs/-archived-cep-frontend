@@ -9,6 +9,7 @@ import {
   CardHeader,
   Button,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -41,38 +42,40 @@ const useStyles = makeStyles(() => ({
 export default function MyBatchesList(props) {
   const styles = useStyles();
   const [statusColor, setStatusColor] = useState("#F26925");
-  let title = `${props.batch.name}
+  let title = `${props.batch.name} 
     (${props.batch.startDate})`;
   //${props.batch.batchId}
 
   return (
-    
     <Card className={styles.spacing}>
-      <a onClick={() => props.handleClick(props.batch)}>
+      <Link
+        to="/associates"
+        onClick={() => props.handleClick(props.batch)}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <CardHeader style={{ backgroundColor: statusColor }} title={title} />
         <Button>
-        <CardContent>
-          <Grid container>
-            <Grid item className={styles.left}>
-              <Typography variant="overline">
-                Name: {props.batch.name}
-                <p></p>
-                Location: {props.batch.location}
-                <p></p>
-                Dates: {props.batch.startDate}
-                {" to "}
-                {props.batch.endDate}
-                <p></p>
-                Skill: {props.batch.skill}
-                <p></p>
-                Progress: Week {props.batch.currentWeek}
-              </Typography>
+          <CardContent>
+            <Grid container>
+              <Grid item className={styles.left}>
+                <Typography variant="overline">
+                  Name: {props.batch.name}
+                  <p></p>
+                  Location: {props.batch.location}
+                  <p></p>
+                  Dates: {props.batch.startDate}
+                  {" to "}
+                  {props.batch.endDate}
+                  <p></p>
+                  Skill: {props.batch.skill}
+                  <p></p>
+                  Progress: Week {props.batch.currentWeek}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        </CardContent>
+          </CardContent>
         </Button>
-      </a>
+      </Link>
     </Card>
-    
   );
 }

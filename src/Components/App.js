@@ -6,13 +6,11 @@ import { useSelector } from "react-redux";
 //Page Components
 import MyBatches from "./batches/MyBatches";
 import LoginPage from "./login/LoginPage";
-import LogoutPage from "./login/LogoutPage";
 import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import SimpleModal from "./Common/Modal";
-import HomePage from "./Common/HomePage";
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
@@ -28,17 +26,14 @@ import { Forbbiden, NotFound } from "./Common/ErrorPages";
 function App() {
   //Conditionally render the drawer if logged in
   const token = "null";
+  const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
 
   return (
     <div>
-      {token ? <Drawer /> : null}
+      {/* {token ? <Drawer /> : null} */}
+      {isLoggedIn ? <Drawer /> : null}
       <Switch>
-        {/* conditional render the home page if they're logged in or login page if not */}
-        {token ? (
-          <Route path="/Home" component={HomePage} exact />
-        ) : (
-          <Route path="/login" component={LoginPage} exact />
-        )}
+        <Route path="/" component={LoginPage} exact />
         <Route path="/403" component={Forbbiden} exact />
         <Route path="/404" component={NotFound} exact />
         <div className="App">
@@ -47,7 +42,6 @@ function App() {
           <Route path="/intervention" component={RequestForm} />
           <Route path="/getinterventions" component={GetInterventions} />
           <Route path="/associates" component={SimpleModal} />
-          <Route path="/logout" component={LogoutPage} />
         </div>
       </Switch>
     </div>
