@@ -55,7 +55,8 @@ export default function MiniDrawer() {
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
-        })}
+        })} 
+        
       >
         <Toolbar>
           <IconButton
@@ -90,6 +91,7 @@ export default function MiniDrawer() {
             [classes.drawerClose]: !open,
           }),
         }}
+        
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
@@ -101,11 +103,11 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id="drawer">
+        <List id="drawer" >
           <ListItem>
             <ListItemIcon>
-              <Link to="/">
-                <HomeIcon />
+              <Link to="/" >
+                <HomeIcon/>
               </Link>
             </ListItemIcon>
             <ListItemText>Home</ListItemText>

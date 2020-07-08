@@ -115,7 +115,7 @@ export default function MyBatches(props) {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));
-    props.history.push("/associates");
+    //props.history.push("/associates");
   }
 
   return (

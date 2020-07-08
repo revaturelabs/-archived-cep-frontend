@@ -30,11 +30,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
   const styles = useStyles();
   const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
+  const dispatch = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
-    userId: 1,
-    // email: "stubEmail_1@gmail.com",
-    // password: "pass1word",
     email: "",
     password: "",
   });
@@ -46,8 +44,6 @@ export default function Login(props) {
       [event.target.name]: event.target.value,
     });
   }
-
-  const dispatch = useDispatch();
 
   // function getRole(token) {
   //   //Getting the role of the user to conditionally re-route to either
@@ -92,54 +88,22 @@ export default function Login(props) {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-
-    Axios.get("http://localhost:8080/users/email/", {
-      params: {
-        email: userCredentials.email,
-      },
-    })
-      .then((result) => {
-        dispatch(dispatchUserObject(result.data));
-        console.log("Checking results", result);
-        dispatch(dispatchLoggedIn());
+    if (!(userCredentials.email === "" || userCredentials.password === "")) {
+      Axios.get("http://localhost:8080/users/email/", {
+        params: {
+          email: userCredentials.email,
+        },
       })
-      .catch((err) => console.log("error user:" + err));
+        .then((result) => {
+          dispatch(dispatchUserObject(result.data));
+          if (result.data !== "") {
+            dispatch(dispatchLoggedIn());
+          }
+        })
+        .catch((err) => console.log("error user:" + err));
+    }
+    setCredentials({...userCredentials, email: "", password: ""});
   }
-
-  //Form using MaterialUI
-  // function OriginalForm(){
-  //   return(
-  //     <div>
-  //       <form onSubmit={handleSubmit}>
-  //         <br />
-  //           <label htmlFor="username">Email:
-  //           <input
-  //             type="text"
-  //             placeholder="Enter email"
-  //             name="email"
-  //             required
-  //             onChange={handleChange}
-  //             value={userCredentials.email}
-  //           />
-  //           </label>
-
-  //           <label htmlFor="password">Password:
-  //           <input
-  //             type="password"
-  //             placeholder="Enter password"
-  //             name="password"
-  //             required
-  //             onChange={handleChange}
-  //             value={userCredentials.password}
-  //           />
-  //           </label>
-  //         <button type="submit">
-  //           Log In
-  //         </button>
-  //       </form>
-  //     </div>
-  //   )
-  // }
 
   function conditionalRender() {
     if (isLoggedIn) {
@@ -191,7 +155,7 @@ export default function Login(props) {
               variant="contained"
               color="primary"
               className={styles.submit}
-              style={{backgroundColor: "#F26925"}}
+              style={{ backgroundColor: "#F26925" }}
             >
               Log In
             </Button>
@@ -201,51 +165,5 @@ export default function Login(props) {
     }
   }
 
-  //if you want to switch between the original and the material UI version then just copy and paste the code above into the return statement below
-  return (
-    // <div className={styles.paper}>
-    //   <Typography component="h1" variant="h5">
-    //     Log In
-    //   </Typography>
-    //   <form className={styles.form} noValidate onSubmit={handleSubmit}>
-    //     <TextField
-    //       variant="outlined"
-    //       margin="normal"
-    //       required
-    //       fullWidth
-    //       id="email"
-    //       label="Email Address"
-    //       name="email"
-    //       autoComplete="email"
-    //       autoFocus
-    //       onChange={handleChange}
-    //       value={userCredentials.email}
-    //     />
-    //     <TextField
-    //       variant="outlined"
-    //       margin="normal"
-    //       required
-    //       fullWidth
-    //       name="password"
-    //       label="Password"
-    //       type="password"
-    //       id="password"
-    //       autoComplete="current-password"
-    //       onChange={handleChange}
-    //       value={userCredentials.password}
-    //     />
-    //     <Button
-    //       type="submit"
-    //       fullWidth
-    //       variant="contained"
-    //       color="primary"
-    //       className={styles.submit}
-    //     >
-    //       Log In
-    //     </Button>
-    //   </form>
-    // </div>
-
-    <div>{conditionalRender()}</div>
-  );
+  return <div>{conditionalRender()}</div>;
 }
