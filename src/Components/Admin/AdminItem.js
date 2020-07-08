@@ -65,13 +65,16 @@ export default function AdminItem(props){
     const CardInfo = () => {
         return(
             <Card className={styles.spacing}>
-                <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
+                <CardHeader style={{backgroundColor: statusColor}}>
+                    <Typography variant="h4">{props.data.requestType}</Typography>
+                </CardHeader>
                 <CardContent>
                     <Grid container spacing={3}>
                         <Grid item xs={3} className={styles.left}>
                             <Typography variant="overline">{userData.company}</Typography>
                             <Typography variant="h4">{userData.firstName}{" "}{userData.lastName}</Typography>
-                            <Typography variant="body1">{props.data.requestType}</Typography> 
+                            <Typography variant="h5">{userData.email}</Typography>
+                            <Typography variant="h5">{userData.phone}</Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <Typography variant="body2">{props.data.description}</Typography>
