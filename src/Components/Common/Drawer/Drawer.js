@@ -47,7 +47,7 @@ export default function MiniDrawer(props) {
 
   function logOut(){
     dispatch(dispatchLoggedOut());
-    window.location.reload();
+    //window.location.reload();
   }
 
 
@@ -157,9 +157,9 @@ export default function MiniDrawer(props) {
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/">
+              <a href="/">
                 <ExitToAppIcon style={{color:'#474C55'}} onClick={logOut}/>
-              </Link>
+              </a>
             </ListItemIcon>
             <ListItemText style={{color:'#474C55'}}>Log Out</ListItemText>
           </ListItem>
