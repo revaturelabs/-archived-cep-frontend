@@ -65,13 +65,17 @@ export default function AdminItem(props){
     const CardInfo = () => {
         return(
             <Card className={styles.spacing}>
-                <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
+                <CardHeader style={{backgroundColor: statusColor}}>
+                    <Typography variant="h4">{props.data.requestType}</Typography>
+                </CardHeader>
                 <CardContent>
                     <Grid container spacing={3}>
                         <Grid item xs={3} className={styles.left}>
                             <Typography variant="overline">{userData.company}</Typography>
                             <Typography variant="h4">{userData.firstName}{" "}{userData.lastName}</Typography>
-                            <Typography variant="body1">{props.data.requestType}</Typography> 
+                            
+                            <Typography variant="h5">{userData.email}</Typography>
+                            <Typography variant="h5">{userData.phone}</Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <Typography variant="body2">{props.data.description}</Typography>
@@ -96,7 +100,11 @@ export default function AdminItem(props){
             setStatusColor('#72A4C2')
             setButtonCompleteVisi(false)
         }
-        Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
+        Axios.get(`http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/user/?id=${props.data.userId}`,{
+            headers:{
+                Authorization: `Bearer ${token}`,
+              },
+            })
         .then((response)=>{
             console.log(response.data);
             changeUserData(response.data);
@@ -120,7 +128,7 @@ export default function AdminItem(props){
         //axios call
         Axios({
                 method: 'put',
-                url: `http://localhost:8080/users/admin/request/update/${props.data.requestId}`,
+                url: `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/update/${props.data.requestId}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
@@ -134,7 +142,7 @@ export default function AdminItem(props){
 
     //Handle onClick delete
     const handleDelete = () => {
-        Axios.delete(`http://localhost:8080/users/admin/request/delete/${props.data.requestId}`,{
+        Axios.delete(`http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/delete/${props.data.requestId}`,{
             headers:{
                 Authorization: `Bearer ${token}`,
               },

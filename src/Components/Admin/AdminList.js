@@ -15,7 +15,7 @@ export default function AdminList() {
   //Make an axios call to display the list of requests
   useEffect(() => {
     axios
-      .get("http://localhost:8080/interventions",{
+      .get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",{
         headers:{
           Authorization: `Bearer ${token}`,
         },
