@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("renders input", () => {
+  const mockEvent = { preventDefault: jest.fn() };
   const wrapper = mount(
     <Provider store={store}>
       <Login />
@@ -23,6 +24,6 @@ describe("renders input", () => {
     expect(submitButton.length).toBe(1);
     const form = wrapper.find("form");
     expect(form.length).toBe(1);
-    expect(form.prop("onSubmit")()).toBe();
+    expect(form.prop("onSubmit")(mockEvent)).toBe();
   });
 });
