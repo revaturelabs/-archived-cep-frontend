@@ -31,7 +31,7 @@ export default function AdminList() {
   //Make an axios call to display the list of requests
   useEffect(() => {
     axios
-      .get("http://localhost:8080/admin/request")
+      .get("http://localhost:8080/users/admin/request")
       .then((response) => {
         //Console.log used to check the fields to set up the adminItem for later
         console.log(response.data);
@@ -44,7 +44,7 @@ export default function AdminList() {
   //Change "realData" to "testData" if you want to mock test with the ideal/test look of the request
   return (
     <div>
-      {testData.map((data) => {
+      {realData.map((data) => {
         return <AdminItem data={data} key={data.requestId} />;
       })}
     </div>
