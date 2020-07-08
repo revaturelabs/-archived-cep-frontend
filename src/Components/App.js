@@ -10,7 +10,7 @@ import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
-import SimpleModal from "./Common/Modal";
+import BatchPage from "./Batch/BatchPage";
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
@@ -28,7 +28,7 @@ function App() {
   const token = useSelector((state) => state.credReducer.token);
   const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
 
-  return (
+  return ( 
     <div>
       {/* {token ? <Drawer /> : null} */}
       {isLoggedIn ? <Drawer /> : null}
@@ -41,7 +41,7 @@ function App() {
           <Route path="/admin" component={AdminPage} />
           <Route path="/intervention" component={RequestForm} />
           <Route path="/getinterventions" component={GetInterventions} />
-          <Route path="/associates" component={SimpleModal} />
+          <Route path="/associates" component={BatchPage} />
         </div>
       </Switch>
     </div>

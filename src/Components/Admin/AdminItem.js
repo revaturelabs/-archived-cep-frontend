@@ -62,6 +62,7 @@ export default function AdminItem(props){
         )
     }
 
+    //Card render that is placed in a function for conditional rendering
     const CardInfo = () => {
         return(
             <Card className={styles.spacing}>
@@ -73,6 +74,7 @@ export default function AdminItem(props){
                         <Grid item xs={3} className={styles.left}>
                             <Typography variant="overline">{userData.company}</Typography>
                             <Typography variant="h4">{userData.firstName}{" "}{userData.lastName}</Typography>
+                            
                             <Typography variant="h5">{userData.email}</Typography>
                             <Typography variant="h5">{userData.phone}</Typography>
                         </Grid>
@@ -93,13 +95,19 @@ export default function AdminItem(props){
     function changeUserData(data){
         setUserData(data);
     }
+
     //On first render check if the status is complete and render the correct color and buttons
+    //In addition to making axios callto get user data that is mapped to this certain request
     useEffect(() => {
         if(status === 'Done'){
             setStatusColor('#72A4C2')
             setButtonCompleteVisi(false)
         }
-        Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
+        Axios.get(`http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/user/?id=${props.data.userId}`,{
+            headers:{
+                Authorization: `Bearer ${token}`,
+              },
+            })
         .then((response)=>{
             console.log(response.data);
             changeUserData(response.data);
@@ -118,12 +126,11 @@ export default function AdminItem(props){
 
     //Persists Complete of request to database
     const updateToComplete = () => {
-        //Get JWT
 
         //axios call
         Axios({
                 method: 'put',
-                url: `http://localhost:8080/users/admin/request/update/${props.data.requestId}`,
+                url: `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/update/${props.data.requestId}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
@@ -137,23 +144,17 @@ export default function AdminItem(props){
 
     //Handle onClick delete
     const handleDelete = () => {
-        Axios.delete(`http://localhost:8080/users/admin/request/delete/${props.data.requestId}`,{
+        Axios.delete(`http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/delete/${props.data.requestId}`,{
             headers:{
                 Authorization: `Bearer ${token}`,
               },
             })
         .then((response) => {
-            /*After delete we reload the webpage so it can show "real time" that the request has been deleted
-            May want to just hide the card to not lose potential filtering and sorting options later on*/
-            //window.location.reload();
             setCardVisi(false);
-
         })
         .catch((err) => console.log('Failure'))
     }
 
-    //These props need to change to match the data that is given
-    //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request
     return(
         <div>
             {cardVisi ? <CardInfo /> : null}
