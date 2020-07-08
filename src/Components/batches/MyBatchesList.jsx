@@ -45,7 +45,7 @@ export default function MyBatchesList(props) {
   let title = `${props.batch.name} 
     (${props.batch.startDate})`;
   //${props.batch.batchId}
-
+ 
   return (
     <Card className={styles.spacing}>
       <Link
