@@ -70,7 +70,7 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
       setScores(res.data);
       // setScores([{'hello':"world"}, {'hello':"goodbye"}, {'hello':"hi"}, {'hello':"telephone"}, {'hello':"africa"}, {'hello':"there"}])
     });
-  }, []);
+  }, [associateEmail, batchId]);
 
 
   if (scores.length !== 0) {

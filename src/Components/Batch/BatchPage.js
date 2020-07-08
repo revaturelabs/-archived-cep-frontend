@@ -4,11 +4,14 @@ import SimpleModal from '../Common/Modal';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Axios from 'axios';
-
 import AssociateList from './AssociateList/AssociateList';
+import { useSelector } from 'react-redux';
 
 function BatchPage() {
   const [batches, setBatches] = useState([]);
+  const [batchToShow, setBatchToShow] = useState({});
+  
+  const batch = useSelector(state => state.batchReducer);
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {
@@ -21,6 +24,8 @@ function BatchPage() {
         setBatches(result.data);
       })
       .catch((err) => console.log("error batch:" + err));
+    
+    setBatchToShow(batch);
   }, []);
 
   return (
@@ -34,7 +39,7 @@ function BatchPage() {
       </Grid>
       <Grid item sm={10}>
         <SimpleModal />
-        <AssociateList />
+        <AssociateList batch={batchToShow} />
       </Grid>
     </Grid>
   );
