@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
+
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
@@ -93,7 +94,7 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List id="drawer">
+        <List>
           <ListItem>
             <ListItemIcon>
               <Link to="/">
@@ -150,6 +151,7 @@ export default function MiniDrawer() {
           </ListItem>
 
           {/* TODO: Remove this for production */}
+          {/* <ListItem></ListItem>
           <ListItem></ListItem>
           <ListItem></ListItem>
           <ListItem></ListItem>
@@ -169,8 +171,7 @@ export default function MiniDrawer() {
           <ListItem></ListItem>
           <ListItem></ListItem>
           <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem></ListItem> */}
         </List>
         <Divider />
       </Drawer>
