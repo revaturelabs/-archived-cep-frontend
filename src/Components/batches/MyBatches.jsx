@@ -95,9 +95,9 @@ export default function MyBatches(props) {
       params: {
         userId: userId,
       },
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((result) => {
         setBatches(result.data);

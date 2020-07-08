@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,7 +23,7 @@ import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
-import { Link} from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 
@@ -46,7 +47,9 @@ export default function MiniDrawer() {
 
   function logOut(){
     dispatch(dispatchLoggedOut());
+    window.location.reload();
   }
+
 
   return (
     <div className={classes.root}>
