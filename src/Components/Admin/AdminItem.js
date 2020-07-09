@@ -30,6 +30,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  middle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   rightButton: {
     marginTop: "5px",
     marginBottom: "5px",
@@ -95,13 +101,16 @@ export default function AdminItem(props) {
               <Typography variant="h4">
                 {userData.firstName} {userData.lastName}
               </Typography>
-              <Typography variant="body1">{props.data.requestType}</Typography>
+              <Typography variant="h6">{userData.email}</Typography>
+              <Typography variant="h6">{userData.phone}</Typography>
+              <Typography variant="h6">{props.data.requestType}</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} className={styles.middle}>
+            <Typography variant="h4">{props.data.batchId}</Typography>
               <Typography variant="body2">{props.data.description}</Typography>
             </Grid>
             <Grid item xs={3} className={styles.right}>
-              <Typography variant="body2">{props.data.endTime}</Typography>
+              <Typography variant="body2">{props.data.startTime}</Typography>
               {buttonDeleteVisi ? <ButtonDelete /> : null}
               {buttonCompleteVisi ? <ButtonComplete /> : null}
             </Grid>
