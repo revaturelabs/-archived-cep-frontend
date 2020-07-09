@@ -2,6 +2,7 @@ import Radar from "react-d3-radar";
 import React from "react";
 
 export default function MySpiderGraph(props) {
+  // Generates assessment types for the graph
   function loadVariables() {
     let tempArr = [];
     props.scores.map((obj) => {
@@ -13,6 +14,7 @@ export default function MySpiderGraph(props) {
     return tempArr;
   }
 
+  // Generates the values of assessment types for the graph
   function loadValues() {
     let tempObj = {};
     props.scores.map((obj) => {

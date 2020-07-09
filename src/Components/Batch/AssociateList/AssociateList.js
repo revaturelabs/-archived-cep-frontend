@@ -9,6 +9,7 @@ function AssociateList({ batch }) {
 
   return (
     <Grid container direction="row" spacing={3}>
+      {/* Renders all associate cards */}
       {associates.map(associate => <AssociateListItem key={batch.batchId} batch={batch.batchId} associate={associate} />)}
     </Grid>
   );
