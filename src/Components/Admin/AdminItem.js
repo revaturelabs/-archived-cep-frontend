@@ -51,7 +51,7 @@ export default function AdminItem(props) {
   const token = useSelector((state) => state.credReducer.token);
   const styles = useStyles();
 
-  //Userstate
+  //state to hold user object
   const [userData, setUserData] = useState({});
 
   //Status=Pending color is Orange, Status=Completed color is Blue
@@ -90,6 +90,7 @@ export default function AdminItem(props) {
     );
   };
 
+  //Card that will display the user info and request info
   const CardInfo = () => {
     return (
       <Card className={styles.spacing}>
@@ -123,7 +124,9 @@ export default function AdminItem(props) {
   function changeUserData(data) {
     setUserData(data);
   }
+
   //On first render check if the status is complete and render the correct color and buttons
+  //Make a axios call to get the user data that is mapped to a particular request by finding it by userId
   useEffect(() => {
     if (status === "Done") {
       setStatusColor("#72A4C2");
@@ -141,23 +144,22 @@ export default function AdminItem(props) {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         changeUserData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    // Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
+    //This does the same thing as the code from lines 135-151, but that code was simply imported from postman
+    // Axios.get(`http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/user/?id=${props.data.userId}`)
     // .then((response)=>{
-    //     console.log(response.data);
     //     changeUserData(response.data);
     // })
     // .catch((err) => console.log());
   }, []);
 
-  //handle complete button to change to the color, status,
-  //and call a function to persist the complete status of the request
+  /* handle complete button to change to the color, status,
+  and call a function to persist the complete status of the request */
   const handleToComplete = () => {
     setStatus("Done");
     setStatusColor("#72A4C2");
@@ -167,8 +169,6 @@ export default function AdminItem(props) {
 
   //Persists Complete of request to database
   const updateToComplete = () => {
-    //Get JWT
-
     //axios call
     Axios({
       method: "put",
@@ -185,6 +185,8 @@ export default function AdminItem(props) {
   };
 
   //Handle onClick delete
+  /*TODO: Do not delete the actual records. This was super early on to clean up before "Status" existed in the request table. 
+  Now just update the status to "Archive" and have the back-end get all records that do not have the "Archieve" status */
   const handleDelete = () => {
     Axios.delete(
       `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/delete/${props.data.requestId}`,
@@ -195,15 +197,11 @@ export default function AdminItem(props) {
       },
     )
       .then((response) => {
-        /*After delete we reload the webpage so it can show "real time" that the request has been deleted
-            May want to just hide the card to not lose potential filtering and sorting options later on*/
-        //window.location.reload();
+        //Simply conditionally hide the card to simulate archive
         setCardVisi(false);
       })
       .catch((err) => console.log("Failure"));
   };
 
-  //These props need to change to match the data that is given
-  //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request
   return <div>{cardVisi ? <CardInfo /> : null}</div>;
 }
