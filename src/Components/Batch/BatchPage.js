@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import Progress from './BatchProgress/progress'
 import { Card, CardContent, CardHeader } from '@material-ui/core';
 
+// TODO: Debug - When clicking on a batch to display batch information, the graph will sometimes glitch out
+
 function BatchPage() {
   const [batches, setBatches] = useState([]);
   const [batchToShow, setBatchToShow] = useState({});
