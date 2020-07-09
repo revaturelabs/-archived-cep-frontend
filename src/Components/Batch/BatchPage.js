@@ -35,24 +35,23 @@ function BatchPage() {
   }, [batch, userId]);
 
   return (
-    <Grid container>
-      
-      <Grid item sm={2}>
-        <Paper>
-          <h2>Batches Available</h2>
-          <GetBatchDetails batches={batches}/>
-        </Paper>
-
+    <div style={{ padding: "5em" }}>
+      <Grid container spacing={3}>
+        <Grid item sm={3}>
+          <Paper>
+            <h2>Batches Available</h2>
+            <GetBatchDetails batches={batches}/>
+          </Paper>
+        </Grid>
+        <Grid item sm={9}>
+          <Paper>
+            <Progress batches={batches}/>
+          </Paper>
+          <SimpleModal />
+          <AssociateList batch={batchToShow} />
+        </Grid>
       </Grid>
-
-      <Grid item sm={10}>
-        <Paper>
-          <Progress batches={batches}/>
-        </Paper>
-        <SimpleModal />
-        <AssociateList batch={batchToShow} />
-      </Grid>
-    </Grid>
+    </div>
   );
 }
 
