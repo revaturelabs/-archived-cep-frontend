@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 //import {withStyles} from "@material-ui/core/styles";
 import {Button, makeStyles} from "@material-ui/core";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -36,8 +37,12 @@ export default function RequestForm(){
     setTrigger({...trigger, [event.target.name]: event.target.value});
   }
 
+  const token = useSelector((state) => state.credReducer.token);
+
   function handleSubmit(){
-    axios.post("http://localhost:8080/interventions",{
+    
+
+    axios.post("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),
@@ -46,6 +51,10 @@ export default function RequestForm(){
       status: trigger.status,
       requestType: trigger.requestType,
       description: trigger.description
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
     })
     .then(function(response){
       alert(response.data);
@@ -98,20 +107,20 @@ export default function RequestForm(){
             fullWidth="true"
           />
           <br/>
-          <FormControl fullWidth="true" variant="filled">
+          <FormControl style={{textAlign:"left"}} fullWidth="true" variant="filled">
           <InputLabel >isAllDay</InputLabel>
             <Select
             name="isAllDay"
             onChange={handleChange}>
-            <MenuItem value="">
+         {/*    <MenuItem value="">
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem value={true}>Yes</MenuItem>
             <MenuItem value={false}>No</MenuItem>
               </Select>
           </FormControl>
           <br/>
-          <FormControl fullWidth="true" variant="filled">
+          <FormControl fullWidth={true} style={{textAlign:"left"}} variant="filled">
             <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
             <Select
               labelId="demo-controlled-open-select-label"
@@ -119,19 +128,19 @@ export default function RequestForm(){
               name="status"
               onChange={handleChange}
             >
-            <MenuItem value=""><em>None</em></MenuItem>
+            {/* <MenuItem value=""><em>None</em></MenuItem> */}
             <MenuItem value="Pending">Pending</MenuItem>
-            <MenuItem value="Done">Done</MenuItem>
+            {/* <MenuItem value="Done">Done</MenuItem> */}
             </Select>
           </FormControl>
           <br/>
-          <FormControl fullWidth="true" variant="filled">
+          <FormControl style={{textAlign:"left"}} fullWidth="true" variant="filled">
             <InputLabel>Request Type</InputLabel>
             <Select
               name="requestType"
               onChange={handleChange}
             >
-            <MenuItem value=""><em>None</em></MenuItem>
+      {/*       <MenuItem value=""><em>None</em></MenuItem> */}
             <MenuItem value="Intervention">Intervention</MenuItem>
             <MenuItem value="Talent">Talent</MenuItem>
             <MenuItem value="Help">Help</MenuItem>
