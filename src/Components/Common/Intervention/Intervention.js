@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
-//import {withStyles} from "@material-ui/core/styles";
 import {Button, makeStyles} from "@material-ui/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RequestForm(){
  
   const [trigger, setTrigger] = useState();
-  //const styles = useStyles();
+
 
   function handleChange(event) {
     event.preventDefault();
@@ -71,9 +69,7 @@ export default function RequestForm(){
       <form>
         <h4>Requested Start and End Time</h4>
           <TextField
-            // id="outlined-simple-start-adornment"
             variant="filled"
-            //label="Start Time"
             onChange={handleChange}
             type="datetime-local"
             name="startTime"
@@ -81,14 +77,12 @@ export default function RequestForm(){
           <TextField
             id="outlined-simple-start-adornment"
             variant="filled"
-            // label="End Time"
             onChange={handleChange}
             type="datetime-local"
             name="endTime"
           />
           <br/>
           <TextField
-            // id="outlined-simple-start-adornment"
             variant="filled"
             label="Batch ID"
             onChange={handleChange}
@@ -98,7 +92,6 @@ export default function RequestForm(){
           />
           <br/>
           <TextField
-            // id="outlined-simple-start-adornment"
             variant="filled"
             label="User ID"
             onChange={handleChange}
@@ -112,9 +105,6 @@ export default function RequestForm(){
             <Select
             name="isAllDay"
             onChange={handleChange}>
-         {/*    <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
             <MenuItem value={true}>Yes</MenuItem>
             <MenuItem value={false}>No</MenuItem>
               </Select>
@@ -128,9 +118,9 @@ export default function RequestForm(){
               name="status"
               onChange={handleChange}
             >
-            {/* <MenuItem value=""><em>None</em></MenuItem> */}
+
             <MenuItem value="Pending">Pending</MenuItem>
-            {/* <MenuItem value="Done">Done</MenuItem> */}
+
             </Select>
           </FormControl>
           <br/>
@@ -140,7 +130,7 @@ export default function RequestForm(){
               name="requestType"
               onChange={handleChange}
             >
-      {/*       <MenuItem value=""><em>None</em></MenuItem> */}
+
             <MenuItem value="Intervention">Intervention</MenuItem>
             <MenuItem value="Talent">Talent</MenuItem>
             <MenuItem value="Help">Help</MenuItem>

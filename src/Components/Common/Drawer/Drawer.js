@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
