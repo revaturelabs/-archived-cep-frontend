@@ -53,7 +53,7 @@ export default function SimpleModal() {
         Open Modal
       </button> */}
       <br />
-      <Button variant="contained" style={{color:"#f26925"}} onClick={handleOpen}>
+      <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
        Make a Request
       </Button>
 
