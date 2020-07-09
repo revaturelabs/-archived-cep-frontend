@@ -11,10 +11,11 @@ import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import BatchPage from "./Batch/BatchPage";
+
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
-//Route Components
+//Route Components. To use these simply replace "Route" with this component. If it's an admin only path then replace it with "AdminProtectedRoute" 
 import {
   AdminProtectedRoute,
   ClientProtectedRoute,
@@ -23,14 +24,14 @@ import {
 //Error Page Components
 import { Forbbiden, NotFound } from "./Common/ErrorPages";
 
+//paths within the inner <div> are paths that will have additional spacing on the top and left to prevent elements from being overlapped by the drawer and Navbar
 function App() {
-  //Conditionally render the drawer if logged in
-  const token = useSelector((state) => state.credReducer.token);
+  
+  //Conditionally render the drawer based on login
   const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
 
   return ( 
     <div>
-      {/* {token ? <Drawer /> : null} */}
       {isLoggedIn ? <Drawer /> : null}
       <Switch>
         <Route path="/" component={LoginPage} exact />

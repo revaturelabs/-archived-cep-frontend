@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 //Show a list of requests
 export default function AdminList() {
+
+  //Get token from redux store. Probably want to store JWT in https cookies
   const token = useSelector((state) => state.credReducer.token);
   const [realData, setRealData] = useState([]);
 
@@ -12,7 +14,7 @@ export default function AdminList() {
     setRealData(data);
   }
 
-  //Make an axios call to display the list of requests
+  //Make an axios call on first render to get all the records of requests that will have all the request info
   useEffect(() => {
     axios
       .get(
@@ -23,17 +25,14 @@ export default function AdminList() {
           },
         },
       )
-      //  .then(res=>res.json())
       .then((response) => {
-        //Console.log used to check the fields to set up the adminItem for later
-        console.log(response.data);
+        //call a function to set the state with the array of objects we will recieve
         changeRealData(response.data);
       })
       .catch((err) => console.log());
   }, []);
 
   //Render the list of requests
-  //Change "realData" to "testData" if you want to mock test with the ideal/test look of the request
   return (
     <div>
       {realData.map((data) => {
