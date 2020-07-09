@@ -26,5 +26,4 @@ describe("renders input", () => {
     expect(form.length).toBe(1);
     expect(form.prop("onSubmit")(mockEvent)).toBe();
   });
-});
- 
+}); 

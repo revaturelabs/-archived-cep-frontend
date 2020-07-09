@@ -4,12 +4,13 @@ import Adapter from "enzyme-adapter-react-16";
 import Admin from "../Components/Admin/AdminList";
 import store from "../redux/store/index.js";
 import { Provider } from "react-redux";
- 
+
+//Doesn't work properly. Do not use. 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("renders inputs",()=>{
 
-    const wrapper=mount(
+    const wrapper=mount( 
     <Provider store={store}>
         <Admin />
     </Provider>
