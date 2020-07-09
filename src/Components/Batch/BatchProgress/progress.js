@@ -60,11 +60,13 @@ export default function Progress() {
 
   return (
 
-    <card className={styles.divPosition}>
-        <h2>Overall Batch Progress</h2>
-      <CircularProgressbar className={styles.progressPosition} value={percentage} text={`${percentage}%`} />
-      <h3>The Batch still has {`${100-percentage}% `} of Training Left.  </h3>
+    <Card className={styles.divPosition}>
+      <CardHeader style={{ backgroundColor: "#474C55", color: "#FFF" }} title="Overall Batch Progress" />
+      <CardContent>
+        <CircularProgressbar className={styles.progressPosition} value={percentage} text={`${percentage}%`} />
+        <h3>The Batch still has {`${100-percentage}% `} of Training Left.  </h3>
+      </CardContent>
      
-    </card>
+    </Card>
   );
 }

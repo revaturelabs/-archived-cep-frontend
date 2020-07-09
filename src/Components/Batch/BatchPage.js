@@ -7,6 +7,7 @@ import Axios from 'axios';
 import AssociateList from './AssociateList/AssociateList';
 import { useSelector } from 'react-redux';
 import Progress from './BatchProgress/progress'
+import { Card, CardContent, CardHeader } from '@material-ui/core';
 
 function BatchPage() {
   const [batches, setBatches] = useState([]);
@@ -38,16 +39,17 @@ function BatchPage() {
     <div style={{ padding: "5em" }}>
       <Grid container spacing={3}>
         <Grid item sm={3}>
-          <Paper>
-            <h2>Batches Available</h2>
-            <GetBatchDetails batches={batches}/>
-          </Paper>
+          <Card>
+            <CardHeader style={{ backgroundColor: "#474C55", color: "#FFF" }} title="Batches Available" />
+            <CardContent>
+              <GetBatchDetails batches={batches}/>
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item sm={9}>
-          <Paper>
-            <Progress batches={batches}/>
-          </Paper>
+          <Progress batches={batches}/>
           <SimpleModal />
+          <br />
           <AssociateList batch={batchToShow} />
         </Grid>
       </Grid>
