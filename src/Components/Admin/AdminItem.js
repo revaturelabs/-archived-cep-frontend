@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { Grid, Typography, makeStyles, Card, CardContent, CardHeader, Button } from '@material-ui/core'
 import Axios from 'axios';
+import {useSelector} from "react-redux";
 
 //used solely for styling 
 const useStyles = makeStyles(() => ({
@@ -33,7 +34,11 @@ const useStyles = makeStyles(() => ({
 
 //Display individual requests
 export default function AdminItem(props){
+    const token = useSelector(state=>state.credReducer.token);
     const styles = useStyles();
+
+    //Userstate
+    const [userData, setUserData]=useState({});
 
     //Status=Pending color is Orange, Status=Completed color is Blue
     //Initial color is Orange
@@ -43,6 +48,7 @@ export default function AdminItem(props){
     //States used for conditional rendering
     const [buttonCompleteVisi, setButtonCompleteVisi] = useState(true)
     const [buttonDeleteVisi] = useState(true)
+    const [cardVisi, setCardVisi] = useState(true)
 
     //Simply return the button component for conditional rendering
     const ButtonComplete = () => {
@@ -56,18 +62,54 @@ export default function AdminItem(props){
         )
     }
 
+    const CardInfo = () => {
+        return(
+            <Card className={styles.spacing}>
+                <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
+                <CardContent>
+                    <Grid container spacing={3}>
+                        <Grid item xs={3} className={styles.left}>
+                            <Typography variant="overline">{userData.company}</Typography>
+                            <Typography variant="h4">{userData.firstName}{" "}{userData.lastName}</Typography>
+                            <Typography variant="body1">{props.data.requestType}</Typography> 
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="body2">{props.data.description}</Typography>
+                        </Grid>
+                        <Grid item xs={3} className={styles.right}>
+                            <Typography variant="body2">{props.data.endTime}</Typography>
+                            {buttonDeleteVisi ? <ButtonDelete/> : null}
+                            {buttonCompleteVisi ? <ButtonComplete/> : null}
+                        </Grid>
+                    </Grid>
+                </CardContent>
+            </Card>
+        )
+    }
+
+    function changeUserData(data){
+        setUserData(data);
+    }
     //On first render check if the status is complete and render the correct color and buttons
     useEffect(() => {
-        if(status === 'Complete'){
+        if(status === 'Done'){
             setStatusColor('#72A4C2')
             setButtonCompleteVisi(false)
         }
-    },[status])
+        Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
+        .then((response)=>{
+            console.log(response.data);
+            changeUserData(response.data);
+        })
+        .catch((err) => console.log());
+    },[])
 
     //handle complete button to change to the color, status, 
     //and call a function to persist the complete status of the request
     const handleToComplete = () => {
-        setStatus('Complete')
+        setStatus('Done')
+        setStatusColor('#72A4C2')
+        setButtonCompleteVisi(false)
         updateToComplete()
     }
 
@@ -76,20 +118,33 @@ export default function AdminItem(props){
         //Get JWT
 
         //axios call
-        Axios.put(`http://localhost:8080/admin/request/${props.data.requestId}`,{
-            status: 'Complete'
-        })
+        Axios({
+                method: 'put',
+                url: `http://localhost:8080/users/admin/request/update/${props.data.requestId}`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+                data: {
+                  status:"Done"
+                },
+            })
         .then((response) => console.log('Success'))
         .catch((err) => console.log('Failure'))
     }
 
     //Handle onClick delete
     const handleDelete = () => {
-        Axios.delete(`http://localhost:8080/admin/request/delete/${props.data.requestId}`)
+        Axios.delete(`http://localhost:8080/users/admin/request/delete/${props.data.requestId}`,{
+            headers:{
+                Authorization: `Bearer ${token}`,
+              },
+            })
         .then((response) => {
             /*After delete we reload the webpage so it can show "real time" that the request has been deleted
             May want to just hide the card to not lose potential filtering and sorting options later on*/
-            window.location.reload();
+            //window.location.reload();
+            setCardVisi(false);
+
         })
         .catch((err) => console.log('Failure'))
     }
@@ -97,25 +152,8 @@ export default function AdminItem(props){
     //These props need to change to match the data that is given
     //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request
     return(
-        <Card className={styles.spacing}>
-            <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
-            <CardContent>
-                <Grid container spacing={3}>
-                    <Grid item xs={3} className={styles.left}>
-                        <Typography variant="overline">{props.data.companyName}</Typography>
-                        <Typography variant="h4">{props.data.firstName}{" "}{props.data.lastName}</Typography>
-                        <Typography variant="body1">{props.data.requestType}</Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Typography variant="body2">{props.data.descrip}</Typography>
-                    </Grid>
-                    <Grid item xs={3} className={styles.right}>
-                        <Typography variant="body2">{props.data.endTime}</Typography>
-                        {buttonDeleteVisi ? <ButtonDelete/> : null}
-                        {buttonCompleteVisi ? <ButtonComplete/> : null}
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
+        <div>
+            {cardVisi ? <CardInfo /> : null}
+        </div>
     )
 }
