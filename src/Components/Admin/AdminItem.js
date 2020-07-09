@@ -22,6 +22,12 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    middle: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     rightButton: {
         marginTop: '5px',
         marginBottom: '5px',
@@ -66,19 +72,18 @@ export default function AdminItem(props){
     const CardInfo = () => {
         return(
             <Card className={styles.spacing}>
-                <CardHeader style={{backgroundColor: statusColor}}>
-                    <Typography variant="h4">{props.data.requestType}</Typography>
-                </CardHeader>
+                <CardHeader style={{backgroundColor: statusColor}}></CardHeader>
                 <CardContent>
                     <Grid container spacing={3}>
                         <Grid item xs={3} className={styles.left}>
                             <Typography variant="overline">{userData.company}</Typography>
                             <Typography variant="h4">{userData.firstName}{" "}{userData.lastName}</Typography>
-                            
-                            <Typography variant="h5">{userData.email}</Typography>
-                            <Typography variant="h5">{userData.phone}</Typography>
+                            <Typography variant="h6">{userData.email}</Typography>
+                            <Typography variant="h6">{userData.phone}</Typography>
+                            <Typography variant="h6">{props.data.requestType}</Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} className={styles.middle}>
+                            <Typography variant="h4">{props.data.batchId}</Typography>
                             <Typography variant="body2">{props.data.description}</Typography>
                         </Grid>
                         <Grid item xs={3} className={styles.right}>

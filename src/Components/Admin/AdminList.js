@@ -15,18 +15,12 @@ export default function AdminList() {
   //Make an axios call to display the list of requests
   useEffect(() => {
     axios
-<<<<<<< HEAD
-      .get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",{
-        headers:{
-          Authorization: `Bearer ${token}`,
-=======
       .get(
         "http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
->>>>>>> 9aba11b59660bceed01a83c4f36b343abc2ce310
         },
       )
       //  .then(res=>res.json())
