@@ -106,7 +106,7 @@ export default function AdminItem(props) {
               <Typography variant="h6">{props.data.requestType}</Typography>
             </Grid>
             <Grid item xs={6} className={styles.middle}>
-            <Typography variant="h4">{props.data.batchId}</Typography>
+              <Typography variant="h4">{props.data.batchId}</Typography>
               <Typography variant="body2">{props.data.description}</Typography>
             </Grid>
             <Grid item xs={3} className={styles.right}>
@@ -172,7 +172,7 @@ export default function AdminItem(props) {
     //axios call
     Axios({
       method: "put",
-      url: `http://localhost:8080/users/admin/request/update/${props.data.requestId}`,
+      url: `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/update/${props.data.requestId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -187,7 +187,7 @@ export default function AdminItem(props) {
   //Handle onClick delete
   const handleDelete = () => {
     Axios.delete(
-      `http://localhost:8080/users/admin/request/delete/${props.data.requestId}`,
+      `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/delete/${props.data.requestId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
