@@ -1,21 +1,14 @@
 import React, { useEffect } from 'react'
 import AdminList from './AdminList'
-import { makeStyles, Container } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import { useDispatch } from 'react-redux';
 import { dispatchLink } from '../../redux/actions/redirectAction'
 
-const useStyles = makeStyles(() => ({
-    root: {
-        backgroundColor: 'Aqua'
-    },
-}));
-
-//Displays components for Admin
-//Might might not even need this component
+//Displays a page of components for the admin view
 export default function AdminPage(){
-    const styles = useStyles();
     const dispatch = useDispatch();
 
+    //Used for redirection back to this page from an error page
     useEffect(() => {
         dispatch(dispatchLink('/admin'));
     }, [])

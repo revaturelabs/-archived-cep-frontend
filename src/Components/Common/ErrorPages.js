@@ -24,11 +24,14 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
+//403 page
 export function Forbbiden(){
     const styles = useStyles();
     const history = useHistory();
     const prevLink = useSelector(state => state.redirectReducer);
 
+    /*TODO: There's probably a better way to redirect the user back to the previous page, but currently we get the path from redux store which updates 
+    everytime a user goes to a new path. An example of this dispatch is in AdminPage component line 13. This is not done on all paths as of the end of sprint 1*/
     const Redirect = () => history.push(prevLink)
 
     return(
@@ -42,6 +45,7 @@ export function Forbbiden(){
     )
 }
 
+//404 page
 export function NotFound(){
     const styles = useStyles();
     const history = useHistory();
