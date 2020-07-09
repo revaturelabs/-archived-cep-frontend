@@ -136,15 +136,6 @@ export default function MiniDrawer(props) {
 
           <ListItem>
             <ListItemIcon>
-              <Link to="/getinterventions">
-                <ViewListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Requests</ListItemText>
-          </ListItem>
-
-          <ListItem>
-            <ListItemIcon>
               <Link to="/admin">
                 <ViewListIcon style={{ color: "#474C55" }} />
               </Link>

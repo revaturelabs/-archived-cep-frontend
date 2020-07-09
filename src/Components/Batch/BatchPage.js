@@ -36,7 +36,6 @@ function BatchPage() {
 
   return (
     <Grid container>
-
       
       <Grid item sm={2}>
         <Paper>
@@ -46,15 +45,10 @@ function BatchPage() {
 
       </Grid>
 
-      <Grid item sm={5}>
+      <Grid item sm={10}>
         <Paper>
           <Progress batches={batches}/>
         </Paper>
-
-      </Grid>
-
-
-      <Grid item sm={10}>
         <SimpleModal />
         <AssociateList batch={batchToShow} />
       </Grid>
