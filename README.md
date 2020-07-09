@@ -2,6 +2,10 @@
 
 react/redux frontend for the client engagement portal
 
+# ALL DOCUMENTATION
+
+https://drive.google.com/drive/folders/10wCBNKw3K1fegAQU771U0MYrsIdPa_fC?usp=sharing
+
 ## Available Scripts
 
 In the project directory, you can run:
