@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import Button from "@material-ui/core/Button";
 import { useSelector } from 'react-redux';
 import {
-    Grid,
-    Typography,
     makeStyles,
     Card,
     CardContent,
@@ -53,9 +50,8 @@ import {
 export default function Progress() {
   let batch = useSelector(state => state.batchReducer.currentWeek);
   
-    const styles = useStyles();
-  // The first commit of Material-UI
-  let [progress, setProgress] = useState(batch);
+  const styles = useStyles();
+
   let [percentage, setPercentage] = useState(Math.floor((batch/12)*100));
 
   return (

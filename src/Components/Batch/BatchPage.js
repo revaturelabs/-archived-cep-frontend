@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import GetBatchDetails from "./GetBatches";
 import SimpleModal from '../Common/Modal';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Axios from 'axios';
 import AssociateList from './AssociateList/AssociateList';
 import { useSelector } from 'react-redux';
@@ -17,8 +16,8 @@ function BatchPage() {
   const batch = useSelector(state => state.batchReducer);
   const userId = useSelector(state => state.credReducer.userObject.userId);
 
-  //TODO: Get request for batch information and setBatch
   useEffect(() => {
+    // Grab a user's batches
     Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/UB/batchesbyuser", {
       params: {
         userId: userId,

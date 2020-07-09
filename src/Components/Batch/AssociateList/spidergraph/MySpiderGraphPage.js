@@ -3,9 +3,8 @@ import MySpiderGraph from "./MySpiderGraph";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 import { useSelector } from "react-redux";
-// import { createLogger } from "redux-logger";
-// import { red } from "@material-ui/core/colors";
 
+// Combines and averages values of duplicate assessment topics
 function averageDuplicates(res) {
   let aveRes = [];
   let resInput = {};
@@ -41,7 +40,6 @@ function averageDuplicates(res) {
       aveRes[i].score = aveRes[i].score / counters[aveRes[i].assessmentType];
     }
   }
-  console.log(aveRes)
   return aveRes;
 }
 
@@ -56,22 +54,15 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
       Authorization: `Bearer ${token}`,
     };
 
-    // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
     const requestUrl = `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/graph/associate/${batchId}/${associateEmail}`;
-    console.log(requestUrl);
 
-    // let temp = [];
-
+    // Grabs scores of associates of a single batch
     axios({
       method: "get",
       headers: headers,
       url: requestUrl,
     }).then((res) => {
-      console.log("inside axios");
-      console.log(res.data);
-
       setScores(res.data);
-      // setScores([{'hello':"world"}, {'hello':"goodbye"}, {'hello':"hi"}, {'hello':"telephone"}, {'hello':"africa"}, {'hello':"there"}])
     });
   }, [associateEmail, batchId]);
 

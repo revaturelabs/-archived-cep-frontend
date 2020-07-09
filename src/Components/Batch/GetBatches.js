@@ -1,6 +1,4 @@
 import React from "react";
-import axios from "axios";
-import { useState } from "react";
 import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { selectBatch } from "../../redux/actions/batchAction";
@@ -10,11 +8,9 @@ export default function GetBatchDetails({ batches }) {
 
   return (
     <>
-      {/* <Button variant="contained" color="primary" onClick={handleSubmit}>
-        Display
-      </Button> */}
-
+      {/* Renders a button for every batch */}
       {batches.map((detail) => {
+        // When a button is clicked, set the batch to display on the associate page
         const handleClick = () => {
           dispatch(selectBatch(detail));
         }
