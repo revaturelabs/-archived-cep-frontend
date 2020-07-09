@@ -9,9 +9,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 Enzyme.configure({adapter:new Adapter()})
 
 describe("Home Component", ()=>{
-    it('should contain 17 div elements',()=> {
+    it('should contain 15 div elements',()=> {
         const wrapper = mount(<Provider store={store}><Router><Drawer/></Router></Provider>);
         const divider= wrapper.find('div');
-        expect(divider.length).toBe(17);
+        expect(divider.length).toBe(15);
     }) 
-})  
+})    

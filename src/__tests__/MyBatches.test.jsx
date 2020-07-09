@@ -19,7 +19,7 @@ describe("MyBatches Component", () => {
     location: "Arlington, Texas",
     avgStats: 80,
     progress: "",
-    week: 0,
+    week: 0, 
   };
   const wrapper = mount(<Provider store={store}><MyBatches /></Provider>);
 
@@ -27,7 +27,7 @@ describe("MyBatches Component", () => {
     const titles = wrapper.find('div');
     expect(titles.length).toBe(2);
   }); 
-
+ 
   it('click batch', () => {
     const mockCallBack = jest.fn();
     const wrapper2 = shallow((<MyBatchesList key={id} batch={batch} handleClick={mockCallBack} />));
