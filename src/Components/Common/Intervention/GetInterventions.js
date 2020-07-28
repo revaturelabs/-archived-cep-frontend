@@ -2,13 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
+import apiBasePath from "../../../apiBasePath";
 
 export default function GetInterventions() {
   const [details, setDetails] = useState([]);
 
   function handleSubmit() {
     axios
-      .get("http://localhost:8080/interventions", {
+      .get(apiBasePath + "/interventions", {
         headers: {
           "Content-Type": "application/json",
         },

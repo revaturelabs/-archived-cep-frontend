@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminItem from "./AdminItem";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import apiBasePath from "../../apiBasePath";
 
 //Show a list of requests
 export default function AdminList() {
@@ -16,7 +17,7 @@ export default function AdminList() {
   useEffect(() => {
     axios
       .get(
-        "http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",
+        apiBasePath + "/interventions",
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -8,6 +8,7 @@ import AssociateList from './AssociateList/AssociateList';
 import { useSelector } from 'react-redux';
 import Progress from './BatchProgress/progress'
 import { Card, CardContent, CardHeader } from '@material-ui/core';
+import apiBasePath from '../../apiBasePath';
 
 function BatchPage() {
   const [batches, setBatches] = useState([]);
@@ -19,7 +20,7 @@ function BatchPage() {
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {
-    Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/UB/batchesbyuser", {
+    Axios.get(apiBasePath + "/UB/batchesbyuser", {
       params: {
         userId: userId,
       },

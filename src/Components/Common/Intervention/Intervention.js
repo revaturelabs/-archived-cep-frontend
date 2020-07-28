@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import apiBasePath from '../../../apiBasePath';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,7 +43,7 @@ export default function RequestForm(){
   function handleSubmit(){
     
 
-    axios.post("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/interventions",{
+    axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),
