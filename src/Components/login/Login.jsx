@@ -82,7 +82,7 @@ export default function Login(props) {
       redirect: "follow",
     };
 
-    fetch(apiBasePath + "authenticate", requestOptions)
+    fetch(apiBasePath + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
