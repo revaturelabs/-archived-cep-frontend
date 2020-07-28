@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
+import apiBasePath from "../../apiBasePath";
 
 //used solely for styling
 const useStyles = makeStyles(() => ({
@@ -133,7 +134,7 @@ export default function AdminItem(props) {
 
     var config = {
       method: "get",
-      url: `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/user/?id=${props.data.userId}`,
+      url: `${apiBasePath}users/user/?id=${props.data.userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -172,7 +173,7 @@ export default function AdminItem(props) {
     //axios call
     Axios({
       method: "put",
-      url: `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/update/${props.data.requestId}`,
+      url: `${apiBasePath}users/admin/request/update/${props.data.requestId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -187,7 +188,7 @@ export default function AdminItem(props) {
   //Handle onClick delete
   const handleDelete = () => {
     Axios.delete(
-      `http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/admin/request/delete/${props.data.requestId}`,
+      `${apiBasePath}users/admin/request/delete/${props.data.requestId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

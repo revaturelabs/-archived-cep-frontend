@@ -9,6 +9,7 @@ import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
+import apiBasePath from "../../apiBasePath";
 
 //Used for styling Material UI
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +50,7 @@ export default function Login(props) {
   function getUser(token) {
     // Getting user object from Caliber by decoding jwt
     const email = JWTD(token).sub;
-    Axios.get("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/users/email/", {
+    Axios.get(apiBasePath + "users/email/", {
       params: {
         email: email,
       },
@@ -81,7 +82,7 @@ export default function Login(props) {
       redirect: "follow",
     };
 
-    fetch("http://ec2-18-232-171-89.compute-1.amazonaws.com:8081/authenticate", requestOptions)
+    fetch(apiBasePath + "authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
