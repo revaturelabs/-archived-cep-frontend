@@ -58,7 +58,7 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
     };
 
     // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
-    const requestUrl = `${apiBasePath}graph/associate/${batchId}/${associateEmail}`;
+    const requestUrl = `${apiBasePath}/graph/associate/${batchId}/${associateEmail}`;
     console.log(requestUrl);
 
     // let temp = [];

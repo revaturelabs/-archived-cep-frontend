@@ -134,7 +134,7 @@ export default function AdminItem(props) {
 
     var config = {
       method: "get",
-      url: `${apiBasePath}users/user/?id=${props.data.userId}`,
+      url: `${apiBasePath}/users/user/?id=${props.data.userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -173,7 +173,7 @@ export default function AdminItem(props) {
     //axios call
     Axios({
       method: "put",
-      url: `${apiBasePath}users/admin/request/update/${props.data.requestId}`,
+      url: `${apiBasePath}/users/admin/request/update/${props.data.requestId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -188,7 +188,7 @@ export default function AdminItem(props) {
   //Handle onClick delete
   const handleDelete = () => {
     Axios.delete(
-      `${apiBasePath}users/admin/request/delete/${props.data.requestId}`,
+      `${apiBasePath}/users/admin/request/delete/${props.data.requestId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

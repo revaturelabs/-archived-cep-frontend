@@ -43,7 +43,7 @@ export default function RequestForm(){
   function handleSubmit(){
     
 
-    axios.post(apiBasePath + "interventions",{
+    axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),

@@ -20,7 +20,7 @@ function BatchPage() {
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {
-    Axios.get(apiBasePath + "UB/batchesbyuser", {
+    Axios.get(apiBasePath + "/UB/batchesbyuser", {
       params: {
         userId: userId,
       },

@@ -17,7 +17,7 @@ export default function AdminList() {
   useEffect(() => {
     axios
       .get(
-        apiBasePath + "interventions",
+        apiBasePath + "/interventions",
         {
           headers: {
             Authorization: `Bearer ${token}`,

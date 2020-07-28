@@ -4,7 +4,7 @@
  * LocalHost path: http://localhost:8081/
  */
 
-const apiBasePath = 'http://localhost:8081/';
+const apiBasePath = 'http://localhost:8081';
 
 
 export default apiBasePath;

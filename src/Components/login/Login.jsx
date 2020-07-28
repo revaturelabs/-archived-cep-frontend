@@ -50,7 +50,7 @@ export default function Login(props) {
   function getUser(token) {
     // Getting user object from Caliber by decoding jwt
     const email = JWTD(token).sub;
-    Axios.get(apiBasePath + "users/email/", {
+    Axios.get(apiBasePath + "/users/email/", {
       params: {
         email: email,
       },
