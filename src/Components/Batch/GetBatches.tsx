@@ -7,8 +7,11 @@ import { selectBatch } from "../../redux/actions/batchAction";
 
 /* We create a type for our properties, and tell Typescript that the 
 parameters of our functional component are of that type.*/
+type props = {
+  batches: object[]
+}
 
-export default function GetBatchDetails(props: any) {
+export default function GetBatchDetails(props) {
 
   const {batches} = props;
 
