@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from "redux";
-const logger = require('redux-logger');
+import logger from 'redux-logger';
 import mainReducer from "../reducers/index";
 
 const intialState = {}
@@ -10,7 +10,7 @@ const store = createStore(
   compose(
     applyMiddleware(logger), window['__REDUX_DEVTOOLS_EXTENSION__']
     ? window['__REDUX_DEVTOOLS_EXTENSION__']()
-    : f => f
+    : (f: any) => f
   )
 );
 
