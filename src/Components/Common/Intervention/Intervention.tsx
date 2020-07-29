@@ -10,8 +10,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import apiBasePath from '../../../apiBasePath';
+import { StaticRouter } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -29,19 +30,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RequestForm(){
- 
-  const [trigger, setTrigger] = useState();
+
+  const [trigger, setTrigger] = useState({
+    batchId: null,
+    userId: null,
+    startTime: new Date,
+    endTime: new Date,
+    isAllDay: null,
+    status: null,
+    requestType: null,
+    description: null
+  });
   //const styles = useStyles();
 
-  function handleChange(event) {
+  function handleChange(event: any) {
     event.preventDefault();
     setTrigger({...trigger, [event.target.name]: event.target.value});
   }
 
-  const token = useSelector((state) => state.credReducer.token);
+  const token = useSelector((state: any) => state.credReducer.token);
 
   function handleSubmit(){
-    
 
     axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
@@ -95,7 +104,7 @@ export default function RequestForm(){
             onChange={handleChange}
             type="text"
             name="batchId"
-            fullWidth="true"
+            fullWidth={true}
           />
           <br/>
           <TextField
@@ -105,10 +114,10 @@ export default function RequestForm(){
             onChange={handleChange}
             type="number"
             name="userId"
-            fullWidth="true"
+            fullWidth={true}
           />
           <br/>
-          <FormControl style={{textAlign:"left"}} fullWidth="true" variant="filled">
+          <FormControl style={{textAlign:"left"}} fullWidth={true} variant="filled">
           <InputLabel >isAllDay</InputLabel>
             <Select
             name="isAllDay"
@@ -116,8 +125,9 @@ export default function RequestForm(){
          {/*    <MenuItem value="">
               <em>None</em>
             </MenuItem> */}
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
+            {/* Check later ~~~~~~~~~~` */}
+            <MenuItem value="true">Yes</MenuItem>
+            <MenuItem value="false">No</MenuItem>
               </Select>
           </FormControl>
           <br/>
@@ -135,7 +145,7 @@ export default function RequestForm(){
             </Select>
           </FormControl>
           <br/>
-          <FormControl style={{textAlign:"left"}} fullWidth="true" variant="filled">
+          <FormControl style={{textAlign:"left"}} fullWidth={true} variant="filled">
             <InputLabel>Request Type</InputLabel>
             <Select
               name="requestType"
@@ -154,7 +164,7 @@ export default function RequestForm(){
             label="Description"
             onChange={handleChange}
             name="description"
-            fullWidth="true" />
+            fullWidth={true} />
       </form>
       <br/>
       <br/>

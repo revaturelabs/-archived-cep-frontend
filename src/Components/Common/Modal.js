@@ -4,6 +4,12 @@ import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
 
+/**
+ * Modal doesn't work in TS, so we use JS.
+ * 
+ */
+
+
 function getModalStyle() {
   const top = 60
   const left = 60
@@ -56,7 +62,7 @@ export default function SimpleModal() {
       <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
        Make a Request
       </Button>
-
+      {/* Was originally Modal */}
       <Modal
         open={open}
         onClose={handleClose}

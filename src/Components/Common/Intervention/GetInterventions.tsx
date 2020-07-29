@@ -29,7 +29,7 @@ export default function GetInterventions() {
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Submit
       </Button>
-      {details.map((detail) => (
+      {details.map((detail: any) => (
         <div key={detail.batchId}>
           <br />
           <li>Batch ID: {detail.batchId}</li>

@@ -48,12 +48,18 @@ const useStyles = makeStyles(() => ({
 }));
 
 //Display individual requests
-export default function AdminItem(props) {
-  const token = useSelector((state) => state.credReducer.token);
+export default function AdminItem(props: any) {
+  const token = useSelector((state: any) => state.credReducer.token);
   const styles = useStyles();
 
   //Userstate
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    company: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    phone: String
+  });
 
   //Status=Pending color is Orange, Status=Completed color is Blue
   //Initial color is Orange
@@ -121,7 +127,7 @@ export default function AdminItem(props) {
     );
   };
 
-  function changeUserData(data) {
+  function changeUserData(data: any) {
     setUserData(data);
   }
   //On first render check if the status is complete and render the correct color and buttons
@@ -141,11 +147,11 @@ export default function AdminItem(props) {
     };
 
     axios(config)
-      .then(function (response) {
+      .then(function (response: any) {
         console.log(JSON.stringify(response.data));
         changeUserData(response.data);
       })
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.log(error);
       });
 

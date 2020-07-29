@@ -6,10 +6,10 @@ import apiBasePath from "../../apiBasePath";
 
 //Show a list of requests
 export default function AdminList() {
-  const token = useSelector((state) => state.credReducer.token);
+  const token = useSelector((state: any) => state.credReducer.token);
   const [realData, setRealData] = useState([]);
 
-  function changeRealData(data) {
+  function changeRealData(data: any) {
     setRealData(data);
   }
 
@@ -37,7 +37,7 @@ export default function AdminList() {
   //Change "realData" to "testData" if you want to mock test with the ideal/test look of the request
   return (
     <div>
-      {realData.map((data) => {
+      {realData.map((data: any) => {
         return <AdminItem data={data} key={data.requestId} />;
       })}
     </div>

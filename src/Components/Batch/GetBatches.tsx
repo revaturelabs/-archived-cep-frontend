@@ -5,7 +5,16 @@ import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { selectBatch } from "../../redux/actions/batchAction";
 
-export default function GetBatchDetails({ batches }) {
+/* We create a type for our properties, and tell Typescript that the 
+parameters of our functional component are of that type.*/
+type props = {
+  batches: object[]
+}
+
+export default function GetBatchDetails(props) {
+
+  const {batches} = props;
+
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +23,7 @@ export default function GetBatchDetails({ batches }) {
         Display
       </Button> */}
 
-      {batches.map((detail) => {
+      {batches.map((detail: any) => {
         const handleClick = () => {
           dispatch(selectBatch(detail));
         }

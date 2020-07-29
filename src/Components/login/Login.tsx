@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Used render the login component
-export default function Login(props) {
+export default function Login(props: any) {
   const styles = useStyles();
-  const isLoggedIn = useSelector((state) => state.credReducer.isLoggedIn);
+  const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);
   const dispatch = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
@@ -40,16 +40,17 @@ export default function Login(props) {
   });
 
   //Change the state of email and password
-  function handleChange(event) {
+  function handleChange(event: any) {
     setCredentials({
       ...userCredentials,
       [event.target.name]: event.target.value,
     });
   }
 
-  function getUser(token) {
+  function getUser(token: any) {
     // Getting user object from Caliber by decoding jwt
-    const email = JWTD(token).sub;
+    const {sub} = JWTD(token);
+    const email = sub;
     Axios.get(apiBasePath + "/users/email/", {
       params: {
         email: email,
@@ -64,7 +65,7 @@ export default function Login(props) {
       .catch((err) => console.log("error username:" + err));
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: any) {
     //Requesting for the token to authenticate user
     event.preventDefault();
     var myHeaders = new Headers();
@@ -75,7 +76,7 @@ export default function Login(props) {
       password: userCredentials.password,
     });
 
-    var requestOptions = {
+    var requestOptions: any = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -85,7 +86,7 @@ export default function Login(props) {
     fetch(apiBasePath + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         dispatch(dispatchToken(result.token));
         getUser(result.token);
         dispatch(dispatchLoggedIn());
@@ -100,7 +101,7 @@ export default function Login(props) {
       return (
         <div
           className={styles.paper}
-          style={{ textAlignVertical: "center", textAlign: "center" }}
+          style={{ /* textAlignVertical: "center", */ textAlign: "center" }}
         >
           <h1>Welcome To Revature's Client Engagement Portal</h1>
           <h2>Please select from the options on the left</h2>

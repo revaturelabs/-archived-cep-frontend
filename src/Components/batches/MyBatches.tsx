@@ -7,12 +7,12 @@ import { makeStyles, Grid } from "@material-ui/core";
 import { dispatchLink } from "../../redux/actions/redirectAction";
 import apiBasePath from "../../apiBasePath";
 
-export default function MyBatches(props) {
+export default function MyBatches(props: any) {
   const [batches, setBatches] = useState([]);
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.credReducer.token);
-  const userObject = useSelector((state) => state.credReducer.userObject);
-  let userId = null;
+  const token = useSelector((state: any) => state.credReducer.token);
+  const userObject = useSelector((state: any) => state.credReducer.userObject);
+  let userId: any = null;
 
   // Checking if there was data mapped to this store property
   // Then checking for userId within the property
@@ -41,7 +41,7 @@ export default function MyBatches(props) {
     dispatch(dispatchLink("/my_batches"));
   }, []);
  
-  function checkBatch(batch) {
+  function checkBatch(batch: any) {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));
@@ -50,7 +50,7 @@ export default function MyBatches(props) {
   return (
     <div style={{ padding: "5em" }}>
       <Grid container direction="row" spacing={3}>
-        {batches.map((batch) => {
+        {batches.map((batch: any) => {
           return (
             <Grid item xs={3}>
               <MyBatchesList
