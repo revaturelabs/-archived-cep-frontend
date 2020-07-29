@@ -30,7 +30,7 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
-export default function MiniDrawer(props) {
+export default function MiniDrawer(props: any) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

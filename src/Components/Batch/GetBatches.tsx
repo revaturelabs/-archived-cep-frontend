@@ -5,7 +5,10 @@ import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { selectBatch } from "../../redux/actions/batchAction";
 
-export default function GetBatchDetails({ batches }) {
+export default function GetBatchDetails(props: any) {
+
+  const {batches} = props;
+
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +17,7 @@ export default function GetBatchDetails({ batches }) {
         Display
       </Button> */}
 
-      {batches.map((detail) => {
+      {batches.map((detail: any) => {
         const handleClick = () => {
           dispatch(selectBatch(detail));
         }
