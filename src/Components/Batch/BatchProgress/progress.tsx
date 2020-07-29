@@ -50,7 +50,10 @@ import {
     }
   }));
 
-export default function Progress(props: any) {
+type props = {
+  batch: object
+}
+export default function Progress(props) {
   let batch: any = useSelector((state: any) => state.batchReducer.currentWeek);
   
     const styles = useStyles();
