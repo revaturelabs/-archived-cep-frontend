@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 export function Forbbiden(){
     const styles = useStyles();
     const history = useHistory();
-    const prevLink = useSelector(state => state.redirectReducer);
+    const prevLink = useSelector((state: any) => state.redirectReducer);
 
     const Redirect = () => history.push(prevLink)
 
@@ -45,7 +45,7 @@ export function Forbbiden(){
 export function NotFound(){
     const styles = useStyles();
     const history = useHistory();
-    const prevLink = useSelector(state => state.redirectReducer);
+    const prevLink = useSelector((state: any) => state.redirectReducer);
 
     const Redirect = () => history.push(prevLink)
 

@@ -54,11 +54,11 @@ export default function AdminItem(props: any) {
 
   //Userstate
   const [userData, setUserData] = useState({
-    company: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    phone: null
+    company: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    phone: String
   });
 
   //Status=Pending color is Orange, Status=Completed color is Blue
