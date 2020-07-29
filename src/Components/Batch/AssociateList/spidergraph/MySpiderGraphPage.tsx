@@ -7,10 +7,10 @@ import apiBasePath from "../../../../apiBasePath";
 // import { createLogger } from "redux-logger";
 // import { red } from "@material-ui/core/colors";
 
-function averageDuplicates(res) {
-  let aveRes = [];
-  let resInput = {};
-  let counters = {};
+function averageDuplicates(res: any) {
+  let aveRes: any = [];
+  let resInput: any = {};
+  let counters: any = {};
   for (let i = 0; i < res.length; i++) {
     if (aveRes.length === 0) {
       aveRes.push(res[i]);
@@ -47,7 +47,7 @@ function averageDuplicates(res) {
 }
 
 export default function MySpiderGraphPage({ batchId, associateEmail }) {
-  const token = useSelector(state => state.credReducer.token);
+  const token = useSelector((state: any) => state.credReducer.token);
 
   const [scores, setScores] = useState([]);
 

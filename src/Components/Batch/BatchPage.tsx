@@ -14,9 +14,9 @@ function BatchPage() {
   const [batches, setBatches] = useState([]);
   const [batchToShow, setBatchToShow] = useState({});
   
-  const token = useSelector((state) => state.credReducer.token);
-  const batch = useSelector(state => state.batchReducer);
-  const userId = useSelector(state => state.credReducer.userObject.userId);
+  const token = useSelector((state: any) => state.credReducer.token);
+  const batch = useSelector((state: any) => state.batchReducer);
+  const userId = useSelector((state: any) => state.credReducer.userObject.userId);
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {

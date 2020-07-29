@@ -2,7 +2,9 @@ import React from 'react';
 import Spider from './spidergraph/MySpiderGraphPage'
 import { Card, CardHeader, CardContent, Grid } from '@material-ui/core';
 
-function AssociateListItem({ batch, associate }) {
+function AssociateListItem(props: any) {
+
+  const {batch, associate} = props;
   return (
     <Grid item sm={6}>
       <Card>

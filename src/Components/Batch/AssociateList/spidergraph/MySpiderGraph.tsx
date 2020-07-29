@@ -1,11 +1,11 @@
 import Radar from "react-d3-radar";
 import React from "react";
 
-export default function MySpiderGraph(props) {
+export default function MySpiderGraph(props: any) {
   function loadVariables() {
-    let tempArr = [];
-    props.scores.map((obj) => {
-      let tempObj = {};
+    let tempArr: object[] = [];
+    props.scores.map((obj: any) => {
+      let tempObj: any = {};
       tempObj.key = obj.assessmentType;
       tempObj.label = obj.assessmentType;
       tempArr.push(tempObj);
@@ -14,8 +14,8 @@ export default function MySpiderGraph(props) {
   }
 
   function loadValues() {
-    let tempObj = {};
-    props.scores.map((obj) => {
+    let tempObj: any = {};
+    props.scores.map((obj: any) => {
       tempObj[obj.assessmentType] = obj.score;
     });
     return tempObj;
@@ -29,7 +29,7 @@ export default function MySpiderGraph(props) {
         padding={70}
         domainMax={100}
         highlighted={null}
-        onHover={(point) => {
+        onHover={(point: any) => {
           if (point) {
             //   console.log('hovered over a data point');
           } else {

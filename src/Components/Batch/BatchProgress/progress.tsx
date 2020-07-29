@@ -50,8 +50,8 @@ import {
     }
   }));
 
-export default function Progress() {
-  let batch = useSelector(state => state.batchReducer.currentWeek);
+export default function Progress(props: any) {
+  let batch: any = useSelector((state: any) => state.batchReducer.currentWeek);
   
     const styles = useStyles();
   // The first commit of Material-UI

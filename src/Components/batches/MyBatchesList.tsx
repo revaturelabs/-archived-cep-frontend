@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MyBatchesList(props) {
+export default function MyBatchesList(props: any) {
   const styles = useStyles();
   const [statusColor, setStatusColor] = useState("#F26925");
   let title = `${props.batch.name} 
