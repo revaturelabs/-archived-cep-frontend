@@ -8,7 +8,7 @@ const initialState = {
     isLoggedIn: false
 }
 
-export default function (state = initialState, action) {
+export default function (state = initialState, action: { type: any; payload: any; }) {
     switch (action.type) {
         case STORE_CREDENTIALS:
             //state.token = action.payload
