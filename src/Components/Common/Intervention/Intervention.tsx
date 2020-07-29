@@ -30,16 +30,16 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 export default function RequestForm(){
- 
+
   const [trigger, setTrigger] = useState({
-    batchId: Number,
-    userId: Number,
-    startTime: String,
-    endTime: String,
-    isAllDay: Boolean,
-    status: String,
-    requestType: String,
-    description: String
+    batchId: null,
+    userId: null,
+    startTime: new Date,
+    endTime: new Date,
+    isAllDay: null,
+    status: null,
+    requestType: null,
+    description: null
   });
   //const styles = useStyles();
 
@@ -55,8 +55,8 @@ export default function RequestForm(){
     axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
-      startTime: trigger.startTime,
-      endTime: trigger.endTime,
+      startTime: new Date(trigger.startTime).toUTCString(),
+      endTime: new Date(trigger.endTime).toUTCString(),
       isAllDay: trigger.isAllDay,
       status: trigger.status,
       requestType: trigger.requestType,

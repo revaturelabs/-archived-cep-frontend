@@ -1,8 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
+import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
+
+/**
+ * Modal doesn't work in TS, so we use JS.
+ * 
+ */
+
 
 function getModalStyle() {
   const top = 60
@@ -57,14 +63,14 @@ export default function SimpleModal() {
        Make a Request
       </Button>
       {/* Was originally Modal */}
-      <Dialog
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {/* <RequestForm  /> */}{body}
-      </Dialog>
+      </Modal>
     </div>
   );
 }
