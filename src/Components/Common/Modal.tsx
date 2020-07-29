@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
 
@@ -57,14 +57,14 @@ export default function SimpleModal() {
        Make a Request
       </Button>
 
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {/* <RequestForm  /> */}{body}
-      </Modal>
+      </Dialog>
     </div>
   );
 }
