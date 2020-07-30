@@ -4,7 +4,7 @@ import Login from "./Login";
 import pic from "../../assets/GmapsRevature.png";
 
 //used solely for styling
-const useStyles:any = makeStyles((theme):StyleRules => ({
+const useStyles:Function = makeStyles((theme):StyleRules => ({
   root: {
     height: "100vh",
   },
@@ -22,7 +22,12 @@ const useStyles:any = makeStyles((theme):StyleRules => ({
 
 //Renders the login page and its components
 export default function LoginPage():ReactElement {
-  const styles:any = useStyles();
+  interface styleINF {
+    root: string,
+    image: string
+  }
+
+  const styles: styleINF = useStyles();
 
   return (
     <Grid container component="main" className={styles.root}>
