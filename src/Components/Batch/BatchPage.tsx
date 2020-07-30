@@ -13,7 +13,7 @@ import apiBasePath from '../../apiBasePath';
 function BatchPage() {
   const [batches, setBatches] = useState([]);
   const [batchToShow, setBatchToShow] = useState({});
-  
+
   const token = useSelector((state: any) => state.credReducer.token);
   const batch = useSelector((state: any) => state.batchReducer);
   const userId = useSelector((state: any) => state.credReducer.userObject.userId);
