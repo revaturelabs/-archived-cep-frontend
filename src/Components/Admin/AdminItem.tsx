@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import {
   Grid,
   Typography,
@@ -7,13 +7,14 @@ import {
   CardContent,
   CardHeader,
   Button,
+  StyleRules,
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 import apiBasePath from "../../apiBasePath";
 
 //used solely for styling
-const useStyles = makeStyles(() => ({
+const useStyles:any = makeStyles(():StyleRules => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -48,9 +49,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 //Display individual requests
-export default function AdminItem(props: any) {
-  const token = useSelector((state: any) => state.credReducer.token);
-  const styles = useStyles();
+export default function AdminItem(props: any):ReactElement {
+  const token:any = useSelector((state: any) => state.credReducer.token);
+  const styles:any = useStyles();
 
   //Userstate
   const [userData, setUserData] = useState({
@@ -72,7 +73,7 @@ export default function AdminItem(props: any) {
   const [cardVisi, setCardVisi] = useState(true);
 
   //Simply return the button component for conditional rendering
-  const ButtonComplete = () => {
+  const ButtonComplete:React.FC = ():ReactElement => {
     return (
       <Button
         className={styles.rightButton}
@@ -84,7 +85,7 @@ export default function AdminItem(props: any) {
       </Button>
     );
   };
-  const ButtonDelete = () => {
+  const ButtonDelete:React.FC = ():ReactElement => {
     return (
       <Button
         className={styles.rightButton}
@@ -97,7 +98,7 @@ export default function AdminItem(props: any) {
     );
   };
 
-  const CardInfo = () => {
+  const CardInfo:React.FC = ():ReactElement => {
     return (
       <Card className={styles.spacing}>
         <CardHeader style={{ backgroundColor: statusColor }}></CardHeader>
@@ -127,18 +128,18 @@ export default function AdminItem(props: any) {
     );
   };
 
-  function changeUserData(data: any) {
+  function changeUserData(data: any):void {
     setUserData(data);
   }
   //On first render check if the status is complete and render the correct color and buttons
-  useEffect(() => {
+  useEffect(():any => {
     if (status === "Done") {
       setStatusColor("#72A4C2");
       setButtonCompleteVisi(false);
     }
-    var axios = require("axios");
+    var axios:any = require("axios");
 
-    var config = {
+    var config:any = {
       method: "get",
       url: `${apiBasePath}/users/user/?id=${props.data.userId}`,
       headers: {
@@ -165,7 +166,7 @@ export default function AdminItem(props: any) {
 
   //handle complete button to change to the color, status,
   //and call a function to persist the complete status of the request
-  const handleToComplete = () => {
+  const handleToComplete = ():void => {
     setStatus("Done");
     setStatusColor("#72A4C2");
     setButtonCompleteVisi(false);
@@ -173,7 +174,7 @@ export default function AdminItem(props: any) {
   };
 
   //Persists Complete of request to database
-  const updateToComplete = () => {
+  const updateToComplete = ():void => {
     //Get JWT
 
     //axios call
@@ -192,7 +193,7 @@ export default function AdminItem(props: any) {
   };
 
   //Handle onClick delete
-  const handleDelete = () => {
+  const handleDelete:any = ():void => {
     Axios.delete(
       `${apiBasePath}/users/admin/request/delete/${props.data.requestId}`,
       {

@@ -4,6 +4,7 @@ import { ADD_LINK } from "../actions/actionTypes"
 export default function (state = '/', action: { type: any; payload: string; }) {
 =======
 
+
 export default function (state = '/', action: any) {
 >>>>>>> TSX-Conversion:src/redux/reducers/redirectReducer.jsx
     switch (action.type) {
