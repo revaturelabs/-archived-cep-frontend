@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 //In addition to checking whether or not your admin or client preventing redirection to pages of the other's
 
 //{component: Component, ...rest}
+//This method has not been called
 export const AdminProtectedRoute:React.FC = (component: any, ...rest: any ):ReactElement => {
 
     const {Component}:any = component;
