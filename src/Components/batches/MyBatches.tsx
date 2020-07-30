@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import MyBatchesList from "./MyBatchesList";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
@@ -7,7 +7,7 @@ import { makeStyles, Grid } from "@material-ui/core";
 import { dispatchLink } from "../../redux/actions/redirectAction";
 import apiBasePath from "../../apiBasePath";
 
-export default function MyBatches(props: any) {
+export default function MyBatches(props: any): ReactElement {
   const [batches, setBatches] = useState([]);
   const dispatch = useDispatch();
   const token = useSelector((state: any) => state.credReducer.token);
@@ -21,7 +21,7 @@ export default function MyBatches(props: any) {
   }
 
   //Get information about batches mapped to the client
-  useEffect(() => {
+  useEffect(() :any => {
     Axios.get(apiBasePath + "/UB/batchesbyuser", {
       params: {
         userId: userId,
@@ -37,11 +37,11 @@ export default function MyBatches(props: any) {
   }, []);
 
   //On first render dispatch the current url
-  useEffect(() => {
+  useEffect(() :void => {
     dispatch(dispatchLink("/my_batches"));
   }, []);
  
-  function checkBatch(batch: any) {
+  function checkBatch(batch: any):void {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));

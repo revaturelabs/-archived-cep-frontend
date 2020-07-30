@@ -9,8 +9,13 @@ const store = createStore(
   intialState,
   compose(
     applyMiddleware(logger), window['__REDUX_DEVTOOLS_EXTENSION__']
+<<<<<<< HEAD:src/redux/store/index.ts
+    ? window['__REDUX_DEVTOOLS_EXTENSION__']()
+    : (f: any) => f
+=======
     ? window['__REDUX_DEVTOOLS_EXTENSION__()']
     : f => f
+>>>>>>> TSX-Conversion:src/redux/store/index.js
   )
 );
 

@@ -7,7 +7,7 @@ import apiBasePath from "../../../../apiBasePath";
 // import { createLogger } from "redux-logger";
 // import { red } from "@material-ui/core/colors";
 
-function averageDuplicates(res: any) {
+function averageDuplicates(res: any): void {
   let aveRes: any = [];
   let resInput: any = {};
   let counters: any = {};

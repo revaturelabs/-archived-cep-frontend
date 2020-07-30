@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 //In addition to checking whether or not your admin or client preventing redirection to pages of the other's
 
 //{component: Component, ...rest}
-export const AdminProtectedRoute = (component: any, ...rest: any ) => {
+export const AdminProtectedRoute = (component: any, ...rest: any ) :ReactElement => {
 
     const {Component} = component;
 
@@ -35,7 +35,7 @@ export const AdminProtectedRoute = (component: any, ...rest: any ) => {
 };
 
 //Same as the code above but protects the client routes
-export const ClientProtectedRoute = (component: any, ...rest: any ) => {
+export const ClientProtectedRoute = (component: any, ...rest: any ) :ReactElement => {
 
     const {Component} = component;
     

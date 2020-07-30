@@ -8,7 +8,11 @@ const initialState = {
     isLoggedIn: false
 }
 
+<<<<<<< HEAD:src/redux/reducers/credReducer.tsx
+export default function (state = initialState, action: { type: any; payload: any; }) {
+=======
 export default function (state = initialState, action: any) {
+>>>>>>> TSX-Conversion:src/redux/reducers/credReducer.jsx
     switch (action.type) {
         case STORE_CREDENTIALS:
             //state.token = action.payload
