@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, StyleRules } from '@material-ui/core/styles';
 // import { orange } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles: any = makeStyles((theme):StyleRules => ({
     root: {
       display: 'flex',
     },

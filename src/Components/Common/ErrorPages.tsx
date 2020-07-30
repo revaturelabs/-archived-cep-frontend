@@ -1,9 +1,10 @@
-import React from 'react'
-import { makeStyles, Typography, Button, Card } from '@material-ui/core'
+import React, {ReactElement} from 'react'
+import { makeStyles, Typography, Button, Card, StyleRules } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles(() => ({
+
+const useStyles:any = makeStyles(():StyleRules => ({
     root: {
         height: '100vh',
         display: 'flex',
@@ -29,8 +30,7 @@ export function Forbbiden(){
     const history = useHistory();
     const prevLink = useSelector((state: any) => state.redirectReducer);
 
-    const Redirect = () => history.push(prevLink)
-
+    const Redirect = (): any => history.push(prevLink)
     return(
         <div className={styles.root}>
             <Card className={styles.card}>
@@ -42,7 +42,7 @@ export function Forbbiden(){
     )
 }
 
-export function NotFound(){
+export function NotFound(): ReactElement{
     const styles = useStyles();
     const history = useHistory();
     const prevLink = useSelector((state: any) => state.redirectReducer);
