@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from "react";
+import React, { useState, ReactElement, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   dispatchToken,
@@ -12,7 +12,7 @@ import { getRoles } from "@testing-library/react";
 import apiBasePath from "../../apiBasePath";
 
 //Used for styling Material UI
-const useStyles:any = makeStyles((theme):StyleRules => ({
+const useStyles: Function = makeStyles((theme): StyleRules => ({
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -29,10 +29,18 @@ const useStyles:any = makeStyles((theme):StyleRules => ({
 }));
 
 //Used render the login component
-export default function Login(props: any):ReactElement {
-  const styles:any = useStyles();
-  const isLoggedIn:any = useSelector((state: any) => state.credReducer.isLoggedIn);
-  const dispatch:any = useDispatch();
+export default function Login(props: any): ReactElement {
+
+  interface styleINF {
+    paper: string,
+    form: string,
+    submit: string
+  }
+
+  const styles: styleINF = useStyles();
+
+  const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+  const dispatch: any = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
     email: "",
@@ -40,17 +48,19 @@ export default function Login(props: any):ReactElement {
   });
 
   //Change the state of email and password
-  function handleChange(event: any):void {
+  function handleChange(event: any): void {
+    
     setCredentials({
       ...userCredentials,
       [event.target.name]: event.target.value,
     });
   }
 
-  function getUser(token: any):void {
+  function getUser(token: string): void {
     // Getting user object from Caliber by decoding jwt
-    const {sub}:any = JWTD(token);
-    const email:any = sub;
+    const sub: string = JWTD(token).sub;
+    const email: string = sub;
+    
     Axios.get(apiBasePath + "/users/email/", {
       params: {
         email: email,
@@ -65,18 +75,20 @@ export default function Login(props: any):ReactElement {
       .catch((err) => console.log("error username:" + err));
   }
 
-  function handleSubmit(event: any):void {
+  function handleSubmit(event: SyntheticEvent): void {
     //Requesting for the token to authenticate user
     event.preventDefault();
-    var myHeaders:any = new Headers();
+    const myHeaders: any = new Headers();
+
     myHeaders.append("Content-Type", "application/json");
 
-    var raw:any = JSON.stringify({
+
+    const raw: string = JSON.stringify({
       email: userCredentials.email,
       password: userCredentials.password,
     });
 
-    var requestOptions:any = {
+    const requestOptions: Object = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -86,7 +98,6 @@ export default function Login(props: any):ReactElement {
     fetch(apiBasePath + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        //console.log(result);
         dispatch(dispatchToken(result.token));
         getUser(result.token);
         dispatch(dispatchLoggedIn());
@@ -94,7 +105,7 @@ export default function Login(props: any):ReactElement {
       .catch((error) => console.log("error", error));
   }
 
-  function conditionalRender():ReactElement {
+  function conditionalRender(): ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
     if (isLoggedIn) {
