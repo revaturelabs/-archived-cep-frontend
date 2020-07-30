@@ -9,7 +9,7 @@ export default function GetInterventions() {
 
   function handleSubmit() {
     axios
-      .get(apiBasePath + "/interventions", {
+      .get(process.env.REACT_APP_BASEPATH + "/interventions", {
         headers: {
           "Content-Type": "application/json",
         },

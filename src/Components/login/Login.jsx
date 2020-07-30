@@ -50,7 +50,7 @@ export default function Login(props) {
   function getUser(token) {
     // Getting user object from Caliber by decoding jwt
     const email = JWTD(token).sub;
-    Axios.get(apiBasePath + "/users/email/", {
+    Axios.get(process.env.REACT_APP_BASEPATH + "/users/email/", {
       params: {
         email: email,
       },
@@ -82,7 +82,7 @@ export default function Login(props) {
       redirect: "follow",
     };
 
-    fetch(apiBasePath + "/authenticate", requestOptions)
+    fetch(process.env.REACT_APP_BASEPATH + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -126,6 +126,7 @@ export default function Login(props) {
               onChange={handleChange}
               value={userCredentials.email}
             />
+            {process.env.REACT_APP_BASEPATH}
             <TextField
               variant="outlined"
               margin="normal"

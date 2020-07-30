@@ -22,7 +22,7 @@ export default function MyBatches(props) {
 
   //Get information about batches mapped to the client
   useEffect(() => {
-    Axios.get(apiBasePath + "/UB/batchesbyuser", {
+    Axios.get(process.env.REACT_APP_BASEPATH + "/UB/batchesbyuser", {
       params: {
         userId: userId,
       },
