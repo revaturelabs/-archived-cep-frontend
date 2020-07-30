@@ -10,6 +10,7 @@ import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
 import apiBasePath from "../../apiBasePath";
+import { AnyAction } from "redux";
 
 //Used for styling Material UI
 const useStyles: Function = makeStyles((theme): StyleRules => ({
@@ -56,9 +57,10 @@ export default function Login(props: any): ReactElement {
     });
   }
 
-  function getUser(token: string): void {
-    // Getting user object from Caliber by decoding jwt
-    const sub: string = JWTD(token).sub;
+  function getUser(token: any): void {
+    // Getting user object from Caliber by decoding jw
+    const {sub} = JWTD(token);
+    //const sub: any = JWTD(token).sub;
     const email: string = sub;
     
     Axios.get(apiBasePath + "/users/email/", {
