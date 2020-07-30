@@ -7,10 +7,26 @@ import apiBasePath from "../../../../apiBasePath";
 // import { createLogger } from "redux-logger";
 // import { red } from "@material-ui/core/colors";
 
-function averageDuplicates(res: any): void {
-  let aveRes: any = [];
-  let resInput: any = {};
-  let counters: any = {};
+function averageDuplicates(res: any): any {
+
+  interface aveResINF{
+  assessmentType: string,
+  score:number
+}
+  interface resInputINF{
+    assessmentType: string,
+    traineeId: number,
+    score: number,
+    week: number,
+    weight: number,
+    length: number
+  }
+  let aveRes: aveResINF[] = [];
+ 
+  let resInput:  resInputINF, {} = {};
+
+  let counters: object = {};
+  
   for (let i = 0; i < res.length; i++) {
     if (aveRes.length === 0) {
       aveRes.push(res[i]);
@@ -18,6 +34,7 @@ function averageDuplicates(res: any): void {
       resInput = res[i];
       for (let j = 0; j < aveRes.length; j++) {
         if (res[i].assessmentType === aveRes[j].assessmentType) {
+          
           resInput.traineeId = res[i].traineeId;
           resInput.assessmentType = res[i].assessmentType;
           resInput.score = res[i].score + aveRes[j].score;
