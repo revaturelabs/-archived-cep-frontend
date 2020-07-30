@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-const useStyles:any = makeStyles(():StyleRules => ({
+const useStyles: Function = makeStyles(():StyleRules => ({
     root: {
         height: '100vh',
         display: 'flex',
@@ -25,7 +25,7 @@ const useStyles:any = makeStyles(():StyleRules => ({
     }
 }));
 
-export function Forbbiden(){
+export function Forbbiden(): ReactElement{
     const styles = useStyles();
     const history = useHistory();
     const prevLink = useSelector((state: any) => state.redirectReducer);

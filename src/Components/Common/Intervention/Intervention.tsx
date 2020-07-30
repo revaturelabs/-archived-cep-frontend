@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState, ReactElement, SyntheticEvent, ChangeEvent } from 'react';
 import TextField from "@material-ui/core/TextField";
 //import {withStyles} from "@material-ui/core/styles";
 import {Button, makeStyles, StyleRules} from "@material-ui/core";
@@ -12,7 +12,7 @@ import Select from '@material-ui/core/Select';
 import apiBasePath from '../../../apiBasePath';
 import { StaticRouter } from 'react-router-dom';
 
-const useStyles: any = makeStyles((theme: any):StyleRules => ({
+const useStyles: Function = makeStyles((theme: any):StyleRules => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -45,13 +45,13 @@ export default function RequestForm(): ReactElement{
 
   function handleChange(event: any): void {
     event.preventDefault();
+    console.log(typeof(event));
     setTrigger({...trigger, [event.target.name]: event.target.value});
   }
 
   const token = useSelector((state: any):void => state.credReducer.token);
 
   function handleSubmit():void{
-
     axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,

@@ -31,7 +31,19 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //under <Drawer><List>
 
 export default function MiniDrawer(props: any): ReactElement {
-  const classes = useStyles();
+  interface useStylesINF {
+    root: string,
+    appBar: string,
+    appBarShift: string,
+    menuButton: string,
+    hide: string,
+    drawer: string,
+    drawerOpen: string,
+    drawerClose: string,
+    toolbar: string,
+    content: string
+  }
+  const classes: useStylesINF = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();

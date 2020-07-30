@@ -3,7 +3,8 @@ import { makeStyles, StyleRules } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-const useStyles: any = makeStyles((theme):StyleRules => ({
+
+const useStyles: Function = makeStyles((theme):StyleRules => ({
     root: {
       display: 'flex',
     },
