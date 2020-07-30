@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   dispatchToken,
@@ -29,7 +29,7 @@ const useStyles:any = makeStyles((theme):StyleRules => ({
 }));
 
 //Used render the login component
-export default function Login(props: any):void {
+export default function Login(props: any):ReactElement {
   const styles:any = useStyles();
   const isLoggedIn:any = useSelector((state: any) => state.credReducer.isLoggedIn);
   const dispatch:any = useDispatch();
@@ -71,12 +71,12 @@ export default function Login(props: any):void {
     var myHeaders:any = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    var raw:any = JSON.stringify({
       email: userCredentials.email,
       password: userCredentials.password,
     });
 
-    var requestOptions: any = {
+    var requestOptions:any = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -94,7 +94,7 @@ export default function Login(props: any):void {
       .catch((error) => console.log("error", error));
   }
 
-  function conditionalRender() {
+  function conditionalRender():ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
     if (isLoggedIn) {

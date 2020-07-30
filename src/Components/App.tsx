@@ -23,7 +23,7 @@ import {
 //Error Page Components
 import { Forbbiden, NotFound } from "./Common/ErrorPages";
 
-function App() :ReactElement{
+function App():ReactElement{
   //Conditionally render the drawer if logged in
   const token = useSelector((state: any) => state.credReducer.token);
   const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);
