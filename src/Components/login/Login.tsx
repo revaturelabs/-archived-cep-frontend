@@ -7,12 +7,12 @@ import {
 } from "../../redux/actions/userAction";
 import JWTD from "jwt-decode";
 import Axios from "axios";
-import { makeStyles, Button, Typography, TextField } from "@material-ui/core";
+import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
 import apiBasePath from "../../apiBasePath";
 
 //Used for styling Material UI
-const useStyles = makeStyles((theme) => ({
+const useStyles:any = makeStyles((theme):StyleRules => ({
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Used render the login component
-export default function Login(props: any) {
-  const styles = useStyles();
-  const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);
-  const dispatch = useDispatch();
+export default function Login(props: any):void {
+  const styles:any = useStyles();
+  const isLoggedIn:any = useSelector((state: any) => state.credReducer.isLoggedIn);
+  const dispatch:any = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
     email: "",
@@ -40,17 +40,17 @@ export default function Login(props: any) {
   });
 
   //Change the state of email and password
-  function handleChange(event: any) {
+  function handleChange(event: any):void {
     setCredentials({
       ...userCredentials,
       [event.target.name]: event.target.value,
     });
   }
 
-  function getUser(token: any) {
+  function getUser(token: any):void {
     // Getting user object from Caliber by decoding jwt
-    const {sub} = JWTD(token);
-    const email = sub;
+    const {sub}:any = JWTD(token);
+    const email:any = sub;
     Axios.get(apiBasePath + "/users/email/", {
       params: {
         email: email,
@@ -65,10 +65,10 @@ export default function Login(props: any) {
       .catch((err) => console.log("error username:" + err));
   }
 
-  function handleSubmit(event: any) {
+  function handleSubmit(event: any):void {
     //Requesting for the token to authenticate user
     event.preventDefault();
-    var myHeaders = new Headers();
+    var myHeaders:any = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
