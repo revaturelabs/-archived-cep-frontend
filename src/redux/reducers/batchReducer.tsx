@@ -1,6 +1,11 @@
 import { LOAD_ASSOCIATES } from '../actions/actionTypes';
 
-export default function (state = null, action: any){
+interface action {
+    type: string,
+    payload: object
+}
+
+export default function (state = null, action: action){
     switch (action.type) {
         case LOAD_ASSOCIATES:
             return action.payload;

@@ -4,7 +4,7 @@ import mainReducer from "../reducers/index";
 
 const intialState = {}
 
-const store = createStore(
+const store: object = createStore(
   mainReducer, 
   intialState,
   compose(

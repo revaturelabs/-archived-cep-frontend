@@ -1,13 +1,13 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
 import apiBasePath from "../../../apiBasePath";
 
-export default function GetInterventions() {
+export default function GetInterventions(): ReactElement {
   const [details, setDetails] = useState([]);
 
-  function handleSubmit() {
+  function handleSubmit(): void {
     axios
       .get(apiBasePath + "/interventions", {
         headers: {
@@ -29,7 +29,7 @@ export default function GetInterventions() {
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Submit
       </Button>
-      {details.map((detail: any) => (
+      {details.map((detail: any):ReactElement => (
         <div key={detail.batchId}>
           <br />
           <li>Batch ID: {detail.batchId}</li>
