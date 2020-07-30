@@ -10,6 +10,10 @@ import Progress from './BatchProgress/progress'
 import { Card, CardContent, CardHeader } from '@material-ui/core';
 import apiBasePath from '../../apiBasePath';
 
+interface batchINF
+{
+  batchId: String;
+}
 function BatchPage() {
   const [batches, setBatches] = useState([]);
   const [batchToShow, setBatchToShow] = useState({});
