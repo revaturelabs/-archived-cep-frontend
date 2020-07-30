@@ -4,17 +4,16 @@ import { makeStyles, Container } from '@material-ui/core'
 import { useDispatch } from 'react-redux';
 import { dispatchLink } from '../../redux/actions/redirectAction'
 
-const useStyles = makeStyles(():any => ({
+const useStyles:Function = makeStyles(():any => ({
     root: {
         backgroundColor: 'Aqua'
     },
 }));
-
 //Displays components for Admin
 //Might might not even need this component
 export default function AdminPage():ReactElement{
-    const styles:any = useStyles();
-    const dispatch:any = useDispatch();
+    const styles:Object = useStyles();
+    const dispatch:Function = useDispatch();
 
     useEffect(():void => {
         dispatch(dispatchLink('/admin'));

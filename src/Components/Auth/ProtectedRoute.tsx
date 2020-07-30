@@ -11,8 +11,8 @@ export const AdminProtectedRoute:React.FC = (component: any, ...rest: any ):Reac
     const {Component}:any = component;
 
     //Get login status and role from redux storage
-    const loggedIn:any = useSelector((state: any) => state.credReducer.isLoggedIn)
-    const role:any = useSelector((state: any) => state.credReducer.role)
+    const loggedIn:Boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+    const role:String = useSelector((state: any) => state.credReducer.role);
 
     //Return a route
     return (
@@ -37,11 +37,10 @@ export const AdminProtectedRoute:React.FC = (component: any, ...rest: any ):Reac
 //Same as the code above but protects the client routes
 export const ClientProtectedRoute:React.FC = (component: any, ...rest: any ):ReactElement => {
 
-    const {Component}:any = component;
-    
+    const {Component}:any = component;    
     //Get login status and role from redux storage
-    const loggedIn:any = useSelector((state: any) => state.credReducer.isLoggedIn)
-    const role:any = useSelector((state: any) => state.credReducer.role)
+    const loggedIn:Boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+    const role:String = useSelector((state: any) => state.credReducer.role);
 
     //Return a route
     return (

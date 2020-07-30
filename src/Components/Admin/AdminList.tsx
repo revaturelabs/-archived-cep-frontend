@@ -6,7 +6,7 @@ import apiBasePath from "../../apiBasePath";
 
 //Show a list of requests
 export default function AdminList():ReactElement {
-  const token = useSelector((state: any) => state.credReducer.token);
+  const token:String = useSelector((state: any) => state.credReducer.token);
   const [realData, setRealData] = useState([]);
 
   function changeRealData(data: any):void {
