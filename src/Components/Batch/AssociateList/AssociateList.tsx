@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import AssociateListItem from './AssociateListItem';
 import { useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
-function AssociateList(props: any) {
+function AssociateList(props: any): ReactElement {
 
   const {batch} = props;
 

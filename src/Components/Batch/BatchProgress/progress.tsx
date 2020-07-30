@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Button from "@material-ui/core/Button";
@@ -53,7 +53,8 @@ import {
 type props = {
   batch: object
 }
-export default function Progress(props) {
+
+export default function Progress(props): ReactElement {
   let batch: any = useSelector((state: any) => state.batchReducer.currentWeek);
   
     const styles = useStyles();

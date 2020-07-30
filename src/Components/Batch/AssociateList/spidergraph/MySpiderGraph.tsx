@@ -1,8 +1,8 @@
 import Radar from "react-d3-radar";
-import React from "react";
+import React, { ReactElement } from "react";
 
-export default function MySpiderGraph(props: any) {
-  function loadVariables() {
+export default function MySpiderGraph(props: any): ReactElement {
+  function loadVariables(): object[] {
     let tempArr: object[] = [];
     props.scores.map((obj: any) => {
       let tempObj: any = {};
@@ -13,7 +13,7 @@ export default function MySpiderGraph(props: any) {
     return tempArr;
   }
 
-  function loadValues() {
+  function loadValues(): object {
     let tempObj: any = {};
     props.scores.map((obj: any) => {
       tempObj[obj.assessmentType] = obj.score;
