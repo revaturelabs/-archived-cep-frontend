@@ -21,13 +21,8 @@ export default function MyBatches(): ReactElement {
   }
 
   //Get information about batches mapped to the client
-<<<<<<< HEAD:src/Components/batches/MyBatches.jsx
-  useEffect(() => {
+  useEffect((): void => {
     Axios.get(process.env.REACT_APP_BASEPATH + "/UB/batchesbyuser", {
-=======
-  useEffect(() :void => {
-    Axios.get(apiBasePath + "/UB/batchesbyuser", {
->>>>>>> dev-trev:src/Components/batches/MyBatches.tsx
       params: {
         userId: userId,
       },
@@ -42,11 +37,11 @@ export default function MyBatches(): ReactElement {
   }, []);
 
   //On first render dispatch the current url
-  useEffect(() :void => {
+  useEffect((): void => {
     dispatch(dispatchLink("/my_batches"));
   }, []);
- 
-  function checkBatch(batch: object):void {
+
+  function checkBatch(batch: object): void {
     // Send information about batch to store, so associates can be
     // displayed on a different page
     dispatch(selectBatch(batch));

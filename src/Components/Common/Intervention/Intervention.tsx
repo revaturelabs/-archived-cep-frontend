@@ -50,13 +50,8 @@ export default function RequestForm(): ReactElement{
   }
 
   const token = useSelector((state: any):void => state.credReducer.token);
-
-<<<<<<< HEAD:src/Components/Common/Intervention/Intervention.js
-    axios.post(process.env.REACT_APP_BASEPATH + "/interventions",{
-=======
   function handleSubmit():void{
-    axios.post(apiBasePath + "/interventions",{
->>>>>>> dev-trev:src/Components/Common/Intervention/Intervention.tsx
+    axios.post(process.env.REACT_APP_BASEPATH + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),
