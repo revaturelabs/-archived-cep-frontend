@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Props } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
@@ -11,9 +11,8 @@ type props = {
   batches: object[]
 }
 
-export default function GetBatchDetails(props) {
+export default function GetBatchDetails({batches}: props) {
 
-  const {batches} = props;
 
   const dispatch = useDispatch();
 
