@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement, SyntheticEvent, ChangeEvent } from 'react';
 import TextField from "@material-ui/core/TextField";
 //import {withStyles} from "@material-ui/core/styles";
-import {Button, makeStyles} from "@material-ui/core";
+import {Button, makeStyles, StyleRules} from "@material-ui/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -12,7 +12,7 @@ import Select from '@material-ui/core/Select';
 import apiBasePath from '../../../apiBasePath';
 import { StaticRouter } from 'react-router-dom';
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles: Function = makeStyles((theme: any):StyleRules => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-export default function RequestForm(){
+export default function RequestForm(): ReactElement{
 
   const [trigger, setTrigger] = useState({
     batchId: null,
@@ -43,15 +43,15 @@ export default function RequestForm(){
   });
   //const styles = useStyles();
 
-  function handleChange(event: any) {
+  function handleChange(event: any): void {
     event.preventDefault();
+    console.log(typeof(event));
     setTrigger({...trigger, [event.target.name]: event.target.value});
   }
 
-  const token = useSelector((state: any) => state.credReducer.token);
+  const token = useSelector((state: any):void => state.credReducer.token);
 
-  function handleSubmit(){
-
+  function handleSubmit():void{
     axios.post(apiBasePath + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,

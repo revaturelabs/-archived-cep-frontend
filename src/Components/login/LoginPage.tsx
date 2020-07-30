@@ -1,10 +1,10 @@
-import React from "react";
-import { Grid, makeStyles, Paper, CssBaseline } from "@material-ui/core";
+import React, { ReactElement } from "react";
+import { Grid, makeStyles, Paper, CssBaseline, StyleRules } from "@material-ui/core";
 import Login from "./Login";
 import pic from "../../assets/GmapsRevature.png";
 
 //used solely for styling
-const useStyles = makeStyles((theme) => ({
+const useStyles:Function = makeStyles((theme):StyleRules => ({
   root: {
     height: "100vh",
   },
@@ -21,8 +21,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Renders the login page and its components
-export default function LoginPage() {
-  const styles = useStyles();
+export default function LoginPage():ReactElement {
+  interface styleINF {
+    root: string,
+    image: string
+  }
+
+  const styles: styleINF = useStyles();
 
   return (
     <Grid container component="main" className={styles.root}>

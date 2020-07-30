@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "../App.css";
 import { Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ import {
 //Error Page Components
 import { Forbbiden, NotFound } from "./Common/ErrorPages";
 
-function App() {
+function App():ReactElement{
   //Conditionally render the drawer if logged in
   const token = useSelector((state: any) => state.credReducer.token);
   const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);

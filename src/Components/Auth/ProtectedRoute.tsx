@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -6,13 +6,14 @@ import { useSelector } from "react-redux";
 //In addition to checking whether or not your admin or client preventing redirection to pages of the other's
 
 //{component: Component, ...rest}
-export const AdminProtectedRoute = (component: any, ...rest: any ) => {
+//This method has not been called
+export const AdminProtectedRoute:React.FC = (component: any, ...rest: any ):ReactElement => {
 
-    const {Component} = component;
+    const {Component}:any = component;
 
     //Get login status and role from redux storage
-    const loggedIn = useSelector((state: any) => state.credReducer.isLoggedIn)
-    const role = useSelector((state: any) => state.credReducer.role)
+    const loggedIn:Boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+    const role:String = useSelector((state: any) => state.credReducer.role);
 
     //Return a route
     return (
@@ -35,13 +36,12 @@ export const AdminProtectedRoute = (component: any, ...rest: any ) => {
 };
 
 //Same as the code above but protects the client routes
-export const ClientProtectedRoute = (component: any, ...rest: any ) => {
+export const ClientProtectedRoute:React.FC = (component: any, ...rest: any ):ReactElement => {
 
-    const {Component} = component;
-    
+    const {Component}:any = component;    
     //Get login status and role from redux storage
-    const loggedIn = useSelector((state: any) => state.credReducer.isLoggedIn)
-    const role = useSelector((state: any) => state.credReducer.role)
+    const loggedIn:Boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+    const role:String = useSelector((state: any) => state.credReducer.role);
 
     //Return a route
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement, SyntheticEvent } from "react";
 import {
   Grid,
   Typography,
@@ -7,13 +7,14 @@ import {
   CardContent,
   CardHeader,
   Button,
+  StyleRules,
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 import apiBasePath from "../../apiBasePath";
 
 //used solely for styling
-const useStyles = makeStyles(() => ({
+const useStyles: Function = makeStyles((): StyleRules => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -47,10 +48,22 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+console.log(typeof (useStyles));
+
 //Display individual requests
-export default function AdminItem(props: any) {
-  const token = useSelector((state: any) => state.credReducer.token);
-  const styles = useStyles();
+export default function AdminItem(props: any): ReactElement {
+
+  interface styleINF {
+    root: string,
+    left: string,
+    right: string,
+    middle: string,
+    rightButton: string,
+    spacing: string
+  }
+
+  const token: String = useSelector((state: any) => state.credReducer.token);
+  const styles: styleINF = useStyles();
 
   //Userstate
   const [userData, setUserData] = useState({
@@ -72,7 +85,7 @@ export default function AdminItem(props: any) {
   const [cardVisi, setCardVisi] = useState(true);
 
   //Simply return the button component for conditional rendering
-  const ButtonComplete = () => {
+  const ButtonComplete: React.FC = (): ReactElement => {
     return (
       <Button
         className={styles.rightButton}
@@ -84,7 +97,7 @@ export default function AdminItem(props: any) {
       </Button>
     );
   };
-  const ButtonDelete = () => {
+  const ButtonDelete: React.FC = (): ReactElement => {
     return (
       <Button
         className={styles.rightButton}
@@ -97,7 +110,7 @@ export default function AdminItem(props: any) {
     );
   };
 
-  const CardInfo = () => {
+  const CardInfo: React.FC = (): ReactElement => {
     return (
       <Card className={styles.spacing}>
         <CardHeader style={{ backgroundColor: statusColor }}></CardHeader>
@@ -127,18 +140,19 @@ export default function AdminItem(props: any) {
     );
   };
 
-  function changeUserData(data: any) {
+  // function changeUserData(data:Object):void {
+  function changeUserData(data: any): void {
     setUserData(data);
   }
   //On first render check if the status is complete and render the correct color and buttons
-  useEffect(() => {
+  useEffect((): void => {
+    console.log(typeof (status));
     if (status === "Done") {
       setStatusColor("#72A4C2");
       setButtonCompleteVisi(false);
     }
-    var axios = require("axios");
-
-    var config = {
+    const axios = require("axios");
+    const config = {
       method: "get",
       url: `${apiBasePath}/users/user/?id=${props.data.userId}`,
       headers: {
@@ -165,15 +179,18 @@ export default function AdminItem(props: any) {
 
   //handle complete button to change to the color, status,
   //and call a function to persist the complete status of the request
-  const handleToComplete = () => {
+  // const handleToComplete:Function = (event:Event):void => {
+  function handleToComplete(event: SyntheticEvent): void {
     setStatus("Done");
     setStatusColor("#72A4C2");
     setButtonCompleteVisi(false);
     updateToComplete();
   };
 
+  console.log(typeof (handleToComplete));
+
   //Persists Complete of request to database
-  const updateToComplete = () => {
+  const updateToComplete: Function = (): void => {
     //Get JWT
 
     //axios call
@@ -192,7 +209,8 @@ export default function AdminItem(props: any) {
   };
 
   //Handle onClick delete
-  const handleDelete = () => {
+  // const handleDelete:Function = (event:Event):void => {
+  function handleDelete(event: SyntheticEvent): void {
     Axios.delete(
       `${apiBasePath}/users/admin/request/delete/${props.data.requestId}`,
       {
@@ -209,6 +227,8 @@ export default function AdminItem(props: any) {
       })
       .catch((err) => console.log("Failure"));
   };
+
+  console.log(typeof (handleDelete));
 
   //These props need to change to match the data that is given
   //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request

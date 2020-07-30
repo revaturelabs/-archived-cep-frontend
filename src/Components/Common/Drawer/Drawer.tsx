@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, ReactElement } from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
@@ -30,21 +30,33 @@ import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
 
-export default function MiniDrawer(props: any) {
-  const classes = useStyles();
+export default function MiniDrawer(props: any): ReactElement {
+  interface useStylesINF {
+    root: string,
+    appBar: string,
+    appBarShift: string,
+    menuButton: string,
+    hide: string,
+    drawer: string,
+    drawerOpen: string,
+    drawerClose: string,
+    toolbar: string,
+    content: string
+  }
+  const classes: useStylesINF = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = ():void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = ():void => {
     setOpen(false);
   };
 
-  function logOut() {
+  function logOut(): void {
     dispatch(dispatchLoggedOut());
     //window.location.reload();
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   dispatchToken,
@@ -7,12 +7,13 @@ import {
 } from "../../redux/actions/userAction";
 import JWTD from "jwt-decode";
 import Axios from "axios";
-import { makeStyles, Button, Typography, TextField } from "@material-ui/core";
+import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
 import apiBasePath from "../../apiBasePath";
+import { AnyAction } from "redux";
 
 //Used for styling Material UI
-const useStyles = makeStyles((theme) => ({
+const useStyles: Function = makeStyles((theme): StyleRules => ({
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -29,10 +30,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Used render the login component
-export default function Login(props: any) {
-  const styles = useStyles();
-  const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);
-  const dispatch = useDispatch();
+export default function Login(props: any): ReactElement {
+
+  interface styleINF {
+    paper: string,
+    form: string,
+    submit: string
+  }
+
+  const styles: styleINF = useStyles();
+
+  const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+  const dispatch: any = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
     email: "",
@@ -40,17 +49,20 @@ export default function Login(props: any) {
   });
 
   //Change the state of email and password
-  function handleChange(event: any) {
+  function handleChange(event: any): void {
+    
     setCredentials({
       ...userCredentials,
       [event.target.name]: event.target.value,
     });
   }
 
-  function getUser(token: any) {
-    // Getting user object from Caliber by decoding jwt
+  function getUser(token: any): void {
+    // Getting user object from Caliber by decoding jw
     const {sub} = JWTD(token);
-    const email = sub;
+    //const sub: any = JWTD(token).sub;
+    const email: string = sub;
+    
     Axios.get(apiBasePath + "/users/email/", {
       params: {
         email: email,
@@ -65,18 +77,20 @@ export default function Login(props: any) {
       .catch((err) => console.log("error username:" + err));
   }
 
-  function handleSubmit(event: any) {
+  function handleSubmit(event: SyntheticEvent): void {
     //Requesting for the token to authenticate user
     event.preventDefault();
-    var myHeaders = new Headers();
+    const myHeaders: any = new Headers();
+
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+
+    const raw: string = JSON.stringify({
       email: userCredentials.email,
       password: userCredentials.password,
     });
 
-    var requestOptions: any = {
+    const requestOptions: Object = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -86,7 +100,6 @@ export default function Login(props: any) {
     fetch(apiBasePath + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        //console.log(result);
         dispatch(dispatchToken(result.token));
         getUser(result.token);
         dispatch(dispatchLoggedIn());
@@ -94,7 +107,7 @@ export default function Login(props: any) {
       .catch((error) => console.log("error", error));
   }
 
-  function conditionalRender() {
+  function conditionalRender(): ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
     if (isLoggedIn) {

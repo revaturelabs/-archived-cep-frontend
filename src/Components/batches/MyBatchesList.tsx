@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement} from "react";
 
 import {
   Grid,
@@ -39,7 +39,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MyBatchesList(props: any) {
+interface batchINF {
+  name: string,
+  startDate: string,
+  endDate: string,
+  location: string,
+  skill: string,
+  currentWeek: string
+}
+
+interface propsINF {
+  batch: batchINF,
+  handleClick
+}
+
+export default function MyBatchesList(props: propsINF) :ReactElement{
   const styles = useStyles();
   const [statusColor, setStatusColor] = useState("#F26925");
   let title = `${props.batch.name} 
