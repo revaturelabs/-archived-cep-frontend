@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
 //import {withStyles} from "@material-ui/core/styles";
-import {Button, makeStyles} from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,11 +29,13 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-export default function RequestForm(){
+export default function RequestForm(props) {
+
+  /* >>>>>> addon*/ const userId = useSelector((state: any) => state.credReducer.userObject.userId);
 
   const [trigger, setTrigger] = useState({
-    batchId: null,
-    userId: null,
+    batchId: props.batchId, //Changed by Michael Worrell
+    userId: userId, //Changed by Michael Worrell
     startTime: new Date,
     endTime: new Date,
     isAllDay: null,
@@ -45,14 +47,14 @@ export default function RequestForm(){
 
   function handleChange(event: any) {
     event.preventDefault();
-    setTrigger({...trigger, [event.target.name]: event.target.value});
+    setTrigger({ ...trigger, [event.target.name]: event.target.value });
   }
 
   const token = useSelector((state: any) => state.credReducer.token);
 
-  function handleSubmit(){
+  function handleSubmit() {
 
-    axios.post(apiBasePath + "/interventions",{
+    axios.post(apiBasePath + "/interventions", {
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),
@@ -61,17 +63,17 @@ export default function RequestForm(){
       status: trigger.status,
       requestType: trigger.requestType,
       description: trigger.description
-    },{
+    }, {
       headers: {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then(function(response){
-      alert(response.data);
-    })
-    .catch(function(error){
-      console.log(error);
-    });
+      .then(function (response) {
+        alert(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -80,99 +82,99 @@ export default function RequestForm(){
       <h1>Request Intervention</h1>
       <form>
         <h4>Requested Start and End Time</h4>
-          <TextField
-            // id="outlined-simple-start-adornment"
-            variant="filled"
-            //label="Start Time"
-            onChange={handleChange}
-            type="datetime-local"
-            name="startTime"
-          />
-          <TextField
-            id="outlined-simple-start-adornment"
-            variant="filled"
-            // label="End Time"
-            onChange={handleChange}
-            type="datetime-local"
-            name="endTime"
-          />
-          <br/>
-          <TextField
-            // id="outlined-simple-start-adornment"
-            variant="filled"
-            label="Batch ID"
-            onChange={handleChange}
-            type="text"
-            name="batchId"
-            fullWidth={true}
-          />
-          <br/>
-          <TextField
-            // id="outlined-simple-start-adornment"
-            variant="filled"
-            label="User ID"
-            onChange={handleChange}
-            type="number"
-            name="userId"
-            fullWidth={true}
-          />
-          <br/>
-          <FormControl style={{textAlign:"left"}} fullWidth={true} variant="filled">
+        <TextField
+          // id="outlined-simple-start-adornment"
+          variant="filled"
+          //label="Start Time"
+          onChange={handleChange}
+          type="datetime-local"
+          name="startTime"
+        />
+        <TextField
+          id="outlined-simple-start-adornment"
+          variant="filled"
+          // label="End Time"
+          onChange={handleChange}
+          type="datetime-local"
+          name="endTime"
+        />
+        <br />
+        <TextField
+          // id="outlined-simple-start-adornment"
+          variant="filled"
+          label={props.batchId ? props.batchId : "Batch ID"} //Changed by Michael Worrell
+          onChange={handleChange}
+          type="text"
+          name="batchId"
+          fullWidth={true}
+        />
+        <br />
+        <TextField
+          // id="outlined-simple-start-adornment"
+          variant="filled"
+          label={trigger.userId ? trigger.userId : "User ID"} //Changed by Michael Worrell
+          onChange={handleChange}
+          type="number"
+          name="userId"
+          fullWidth={true}
+        />
+        <br />
+        <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
           <InputLabel >isAllDay</InputLabel>
-            <Select
+          <Select
             name="isAllDay"
             onChange={handleChange}>
-         {/*    <MenuItem value="">
+            {/*    <MenuItem value="">
               <em>None</em>
             </MenuItem> */}
             {/* Check later ~~~~~~~~~~` */}
             <MenuItem value="true">Yes</MenuItem>
             <MenuItem value="false">No</MenuItem>
-              </Select>
-          </FormControl>
-          <br/>
-          <FormControl fullWidth={true} style={{textAlign:"left"}} variant="filled">
-            <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
-            <Select
-              labelId="demo-controlled-open-select-label"
-              id="demo-controlled-open-select"
-              name="status"
-              onChange={handleChange}
-            >
+          </Select>
+        </FormControl>
+        <br />
+        <FormControl fullWidth={true} style={{ textAlign: "left" }} variant="filled">
+          <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            name="status"
+            onChange={handleChange}
+          >
             {/* <MenuItem value=""><em>None</em></MenuItem> */}
             <MenuItem value="Pending">Pending</MenuItem>
             {/* <MenuItem value="Done">Done</MenuItem> */}
-            </Select>
-          </FormControl>
-          <br/>
-          <FormControl style={{textAlign:"left"}} fullWidth={true} variant="filled">
-            <InputLabel>Request Type</InputLabel>
-            <Select
-              name="requestType"
-              onChange={handleChange}
-            >
-      {/*       <MenuItem value=""><em>None</em></MenuItem> */}
+          </Select>
+        </FormControl>
+        <br />
+        <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
+          <InputLabel>Request Type</InputLabel>
+          <Select
+            name="requestType"
+            onChange={handleChange}
+          >
+            {/*       <MenuItem value=""><em>None</em></MenuItem> */}
             <MenuItem value="Intervention">Intervention</MenuItem>
             <MenuItem value="Talent">Talent</MenuItem>
             <MenuItem value="Help">Help</MenuItem>
-            </Select>
-          </FormControl>
-          <br/>
-          <TextField
-            id="outlined-simple-start-adornment"
-            variant="filled"
-            label="Description"
-            onChange={handleChange}
-            name="description"
-            fullWidth={true} />
+          </Select>
+        </FormControl>
+        <br />
+        <TextField
+          id="outlined-simple-start-adornment"
+          variant="filled"
+          label="Description"
+          onChange={handleChange}
+          name="description"
+          fullWidth={true} />
       </form>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
+        Submit
       </Button>
     </div>
   )
-  
+
 
 }

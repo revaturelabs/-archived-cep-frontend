@@ -49,7 +49,7 @@ function BatchPage() {
         </Grid>
         <Grid item sm={9}>
           <Progress batches={batches}/>
-          <SimpleModal />
+          <SimpleModal/>
           <br />
           <AssociateList batch={batchToShow} />
         </Grid>
