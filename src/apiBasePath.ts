@@ -4,7 +4,7 @@
  * LocalHost path: http://localhost:8081
  */
 
-const apiBasePath:String = 'http://localhost:8081';
+const apiBasePath:String = 'http://localhost:9015/cep-engagement-service';
 
 
 export default apiBasePath;
