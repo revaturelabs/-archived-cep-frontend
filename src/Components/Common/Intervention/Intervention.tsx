@@ -102,7 +102,7 @@ export default function RequestForm(props) {
         <TextField
           // id="outlined-simple-start-adornment"
           variant="filled"
-          label={props.batchId ? props.batchId : "Batch ID"} //Changed by Michael Worrell
+          label={props.batchId ? props.batchId : "Batch ID"} //Changed by Michael W
           onChange={handleChange}
           type="text"
           name="batchId"
