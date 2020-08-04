@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
+import { useSelector } from 'react-redux';
 
 /**
  * Modal doesn't work in TS, so we use JS.
@@ -38,6 +39,7 @@ export default function SimpleModal() {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
+   /* >>>>>> addon*/ const batch = useSelector((state) => state.batchReducer);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -49,7 +51,7 @@ export default function SimpleModal() {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {/* <SimpleModal /> */}
-      <RequestForm/>
+      <RequestForm batchId ={batch.batchId} batch={batch}/> {/* changed by Michael Worrell */}
     </div>
   );
 
