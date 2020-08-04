@@ -63,8 +63,6 @@ export default function RequestForm(props): ReactElement {
     bStart = new Date(bStart.getTime() + bStart.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
     let bEnd: Date = new Date(props.batch.endDate);
     bEnd = new Date(bEnd.getTime() + bEnd.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
-    console.log(bStart);
-    console.log(bEnd);
     if ((start > bStart) && (end < bEnd)) {
       return true;
     } else {
