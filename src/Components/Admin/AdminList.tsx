@@ -2,7 +2,6 @@ import React, { useState, useEffect, ReactElement } from "react";
 import AdminItem from "./AdminItem";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import apiBasePath from "../../apiBasePath";
 
 //Show a list of requests
 export default function AdminList():ReactElement {
@@ -17,7 +16,7 @@ export default function AdminList():ReactElement {
   useEffect(():void => {
     axios
       .get(
-        apiBasePath + "/interventions",
+        process.env.REACT_APP_ZUUL_ROUTE + "/interventions",
         {
           headers: {
             Authorization: `Bearer ${token}`,

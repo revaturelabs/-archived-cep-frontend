@@ -41,7 +41,8 @@ function App():ReactElement{
         <div className="App">
           <Route path="/my_batches" component={MyBatches} />
           <Route path="/admin" component={AdminPage} />
-          <Route path="/intervention" component={RequestForm} />
+          {/* Commented out because this route is no longer */}
+          {/* <Route path="/intervention" component={RequestForm} />  */}
           <Route path="/getinterventions" component={GetInterventions} />
           <Route path="/associates" component={BatchPage} />
         </div>

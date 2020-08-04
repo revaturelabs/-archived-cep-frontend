@@ -134,8 +134,9 @@ export default function MiniDrawer(props: any): ReactElement {
             </ListItemIcon>
             <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
           </ListItem>
-
-          <ListItem>
+          
+          {/* This is commented out because this page is unnecessary */}
+          {/* <ListItem>
             <ListItemIcon>
               <Link to="/intervention">
                 <ListIcon style={{ color: "#474C55" }} />
@@ -144,7 +145,7 @@ export default function MiniDrawer(props: any): ReactElement {
             <ListItemText style={{ color: "#474C55" }}>
               Make Request
             </ListItemText>
-          </ListItem>
+          </ListItem> */}
 
           <ListItem>
             <ListItemIcon>
