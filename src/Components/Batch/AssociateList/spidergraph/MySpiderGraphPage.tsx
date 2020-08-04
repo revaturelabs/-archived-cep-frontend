@@ -3,7 +3,6 @@ import MySpiderGraph from "./MySpiderGraph";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import apiBasePath from "../../../../apiBasePath";
 // import { createLogger } from "redux-logger";
 // import { red } from "@material-ui/core/colors";
 
@@ -75,7 +74,7 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
     };
 
     // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
-    const requestUrl = `${apiBasePath}/graph/associate/${batchId}/${associateEmail}`;
+    const requestUrl = `${process.env.REACT_APP_ZUUL_ROUTE}/graph/associate/${batchId}/${associateEmail}`;
     console.log(requestUrl);
 
     // let temp = [];

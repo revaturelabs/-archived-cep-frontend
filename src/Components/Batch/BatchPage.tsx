@@ -8,7 +8,6 @@ import AssociateList from './AssociateList/AssociateList';
 import { useSelector } from 'react-redux';
 import Progress from './BatchProgress/progress'
 import { Card, CardContent, CardHeader } from '@material-ui/core';
-import apiBasePath from '../../apiBasePath';
 
 interface batchINF
 {
@@ -24,7 +23,7 @@ function BatchPage() {
 
   //TODO: Get request for batch information and setBatch
   useEffect(() => {
-    Axios.get(apiBasePath + "/UB/batchesbyuser", {
+    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/UB/batchesbyuser", {
       params: {
         userId: userId,
       },
