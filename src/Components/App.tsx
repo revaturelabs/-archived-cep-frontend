@@ -34,8 +34,8 @@ function App():ReactElement{
       {/* {token ? <Drawer /> : null} */}
       {isLoggedIn ? <Drawer /> : null}
       <Switch>
-        {/* <Route path="/" component={LoginPage} exact /> */}
-        <Route path="/" component={ResetPassword} exact />
+        <Route path="/" component={LoginPage} exact />
+        <Route path="/reset" component={ResetPassword} exact />
         <Route path="/403" component={Forbbiden} exact />
         <Route path="/404" component={NotFound} exact />
         <div className="App">
