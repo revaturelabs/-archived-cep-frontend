@@ -8,8 +8,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import apiBasePath from '../../../apiBasePath';
 import { StaticRouter } from 'react-router-dom';
+import apiBasePath from '../../../apiBasePath';
 
 const useStyles: Function = makeStyles((theme: any): StyleRules => ({
   container: {
