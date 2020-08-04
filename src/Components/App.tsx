@@ -11,6 +11,7 @@ import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import BatchPage from "./Batch/BatchPage";
+import ResetPassword from "./login/ResetPassword"
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
@@ -33,7 +34,8 @@ function App():ReactElement{
       {/* {token ? <Drawer /> : null} */}
       {isLoggedIn ? <Drawer /> : null}
       <Switch>
-        <Route path="/" component={LoginPage} exact />
+        {/* <Route path="/" component={LoginPage} exact /> */}
+        <Route path="/" component={ResetPassword} exact />
         <Route path="/403" component={Forbbiden} exact />
         <Route path="/404" component={NotFound} exact />
         <div className="App">
