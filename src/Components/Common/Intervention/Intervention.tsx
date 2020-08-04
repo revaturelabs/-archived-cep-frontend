@@ -9,7 +9,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import apiBasePath from '../../../apiBasePath';
 import { StaticRouter } from 'react-router-dom';
 
 const useStyles: Function = makeStyles((theme: any):StyleRules => ({
@@ -51,7 +50,7 @@ export default function RequestForm(): ReactElement{
 
   const token = useSelector((state: any):void => state.credReducer.token);
   function handleSubmit():void{
-    axios.post(process.env.REACT_APP_BASEPATH + "/interventions",{
+    axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/interventions",{
       batchId: trigger.batchId,
       userId: trigger.userId,
       startTime: new Date(trigger.startTime).toUTCString(),

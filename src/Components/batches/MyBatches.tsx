@@ -5,7 +5,6 @@ import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles, Grid } from "@material-ui/core";
 import { dispatchLink } from "../../redux/actions/redirectAction";
-import apiBasePath from "../../apiBasePath";
 
 export default function MyBatches(): ReactElement {
   const [batches, setBatches] = useState([]);
@@ -22,7 +21,7 @@ export default function MyBatches(): ReactElement {
 
   //Get information about batches mapped to the client
   useEffect((): void => {
-    Axios.get(process.env.REACT_APP_BASEPATH + "/UB/batchesbyuser", {
+    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/UB/batchesbyuser", {
       params: {
         userId: userId,
       },

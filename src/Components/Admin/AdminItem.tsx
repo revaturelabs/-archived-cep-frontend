@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-import apiBasePath from "../../apiBasePath";
 
 //used solely for styling
 const useStyles: Function = makeStyles((): StyleRules => ({
@@ -154,7 +153,7 @@ export default function AdminItem(props: any): ReactElement {
     const axios = require("axios");
     const config = {
       method: "get",
-      url: `${process.env.REACT_APP_BASEPATH}/users/user/?id=${props.data.userId}`,
+      url: `${process.env.REACT_APP_ZUUL_ROUTE}/users/user/?id=${props.data.userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -196,7 +195,7 @@ export default function AdminItem(props: any): ReactElement {
     //axios call
     Axios({
       method: "put",
-      url: `${process.env.REACT_APP_BASEPATH}/users/admin/request/update/${props.data.requestId}`,
+      url: `${process.env.REACT_APP_ZUUL_ROUTE}/users/admin/request/update/${props.data.requestId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -212,7 +211,7 @@ export default function AdminItem(props: any): ReactElement {
   // const handleDelete:Function = (event:Event):void => {
   function handleDelete(event: SyntheticEvent): void {
     Axios.delete(
-      `${process.env.REACT_APP_BASEPATH}/users/admin/request/delete/${props.data.requestId}`,
+      `${process.env.REACT_APP_ZUUL_ROUTE}/users/admin/request/delete/${props.data.requestId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
