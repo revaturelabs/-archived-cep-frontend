@@ -1,6 +1,7 @@
 import React, { useState, ReactElement, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  dispatchRole,
   dispatchToken,
   dispatchUserObject,
   dispatchLoggedIn,
@@ -73,6 +74,8 @@ export default function Login(props: any): ReactElement {
     })
       .then((result) => {
         dispatch(dispatchUserObject(result.data));
+        dispatch(dispatchRole(result.data.role));
+        console.log(result.data.role);
       })
       .catch((err) => console.log("error username:" + err));
   }
@@ -100,6 +103,7 @@ export default function Login(props: any): ReactElement {
     fetch(apiBasePath + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result)
         dispatch(dispatchToken(result.token));
         getUser(result.token);
         dispatch(dispatchLoggedIn());

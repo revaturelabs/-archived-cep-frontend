@@ -24,7 +24,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
@@ -47,6 +47,7 @@ export default function MiniDrawer(props: any): ReactElement {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const role: String = useSelector((state: any) => state.credReducer.role);
 
   const handleDrawerOpen = ():void => {
     setOpen(true);
@@ -59,6 +60,26 @@ export default function MiniDrawer(props: any): ReactElement {
   function logOut(): void {
     dispatch(dispatchLoggedOut());
     //window.location.reload();
+  }
+
+  function loadAdmin():any {
+    if (role=="ADMIN")
+    {
+      return <React.Fragment>
+        <ListItem>
+            <ListItemIcon>
+              <Link to="/admin">
+                <ViewListIcon style={{ color: "#474C55" }} />
+              </Link>
+            </ListItemIcon>
+            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
+          </ListItem>
+          </React.Fragment>
+    }
+    else
+    {
+      return null;
+    }  
   }
 
   return (
@@ -146,14 +167,7 @@ export default function MiniDrawer(props: any): ReactElement {
             </ListItemText>
           </ListItem>
 
-          <ListItem>
-            <ListItemIcon>
-              <Link to="/admin">
-                <ViewListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
-          </ListItem>
+          {loadAdmin()}
 
           <ListItem>
             <ListItemIcon>
