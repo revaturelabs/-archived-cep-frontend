@@ -71,6 +71,10 @@ export default function RequestForm(props): ReactElement {
   }
 
   function handleSubmit(): void {
+    if ( !trigger.isAllDay || !trigger.requestType || !trigger.description ) {
+      alert("Field Missing");
+      return;
+    }
     let sTime: Date = new Date(trigger.startTime); //Creating a Date variable to hold the intervention start date
     let eTime: Date = new Date(trigger.endTime); //Creating a Date variable to hold the intervention end date
     if(isWithinRange(sTime, eTime)){ //If this intervention date is within the batch's timeframe, add it
@@ -80,7 +84,7 @@ export default function RequestForm(props): ReactElement {
         startTime: new Date(trigger.startTime).toUTCString(),
         endTime: new Date(trigger.endTime).toUTCString(),
         isAllDay: trigger.isAllDay,
-        status: trigger.status,
+        status: "Pending", //didn't need this to point to anything since it has only one valid value
         requestType: trigger.requestType,
         description: trigger.description
       }, {
@@ -157,7 +161,7 @@ export default function RequestForm(props): ReactElement {
           </Select>
         </FormControl>
         <br />
-        <FormControl fullWidth={true} style={{ textAlign: "left" }} variant="filled">
+        {/* <FormControl fullWidth={true} style={{ textAlign: "left" }} variant="filled">
           <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
           <Select
             labelId="demo-controlled-open-select-label"
@@ -165,12 +169,12 @@ export default function RequestForm(props): ReactElement {
             name="status"
             onChange={handleChange}
           >
-            {/* <MenuItem value=""><em>None</em></MenuItem> */}
+            <MenuItem value=""><em>None</em></MenuItem>
             <MenuItem value="Pending">Pending</MenuItem>
-            {/* <MenuItem value="Done">Done</MenuItem> */}
+            <MenuItem value="Done">Done</MenuItem>
           </Select>
         </FormControl>
-        <br />
+        <br /> */}
         <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
           <InputLabel>Request Type</InputLabel>
           <Select
