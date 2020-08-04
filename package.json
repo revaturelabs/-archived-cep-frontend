@@ -19,6 +19,7 @@
     "axios": "^0.19.2",
     "chai": "^4.2.0",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",

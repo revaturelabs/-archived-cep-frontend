@@ -52,27 +52,51 @@ export default function RequestForm(props): ReactElement {
 
   const token = useSelector((state: any): void => state.credReducer.token);
 
+  /**
+   * This function will compare the interventions start and end date to
+   * see if it is in range of the batches start and end time.
+   * @param start the start date of the intervention
+   * @param end the end date of the intervention
+   */
+  function isWithinRange(start: Date, end: Date): boolean {
+    let bStart: Date = new Date(props.batch.startDate);
+    bStart = new Date(bStart.getTime() + bStart.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
+    let bEnd: Date = new Date(props.batch.endDate);
+    bEnd = new Date(bEnd.getTime() + bEnd.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
+    if ((start > bStart) && (end < bEnd)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function handleSubmit(): void {
-    axios.post(apiBasePath + "/interventions", {
-      batchId: trigger.batchId,
-      userId: trigger.userId,
-      startTime: new Date(trigger.startTime).toUTCString(),
-      endTime: new Date(trigger.endTime).toUTCString(),
-      isAllDay: trigger.isAllDay,
-      status: trigger.status,
-      requestType: trigger.requestType,
-      description: trigger.description
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-      .then(function (response) {
-        alert(response.data);
+    let sTime: Date = new Date(trigger.startTime); //Creating a Date variable to hold the intervention start date
+    let eTime: Date = new Date(trigger.endTime); //Creating a Date variable to hold the intervention end date
+    if(isWithinRange(sTime, eTime)){ //If this intervention date is within the batch's timeframe, add it
+      axios.post(apiBasePath + "/interventions", {
+        batchId: trigger.batchId,
+        userId: trigger.userId,
+        startTime: new Date(trigger.startTime).toUTCString(),
+        endTime: new Date(trigger.endTime).toUTCString(),
+        isAllDay: trigger.isAllDay,
+        status: trigger.status,
+        requestType: trigger.requestType,
+        description: trigger.description
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          alert(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      alert("Invalid Start/End Date");
+    }
   }
 
   return (
@@ -98,7 +122,8 @@ export default function RequestForm(props): ReactElement {
           name="endTime"
         />
         <br />
-        <TextField
+        {/* Commented out because these fields are abstracted */}
+        {/* <TextField
           // id="outlined-simple-start-adornment"
           variant="filled"
           label={props.batchId ? props.batchId : "Batch ID"} //Changed by Michael W
@@ -117,7 +142,7 @@ export default function RequestForm(props): ReactElement {
           name="userId"
           fullWidth={true}
         />
-        <br />
+        <br /> */}
         <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
           <InputLabel >isAllDay</InputLabel>
           <Select

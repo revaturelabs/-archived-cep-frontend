@@ -51,7 +51,7 @@ export default function SimpleModal() {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       {/* <SimpleModal /> */}
-      <RequestForm batchId ={batch.batchId}/> {/* changed by Michael Worrell */}
+      <RequestForm batchId ={batch.batchId} batch={batch}/> {/* changed by Michael Worrell */}
     </div>
   );
 

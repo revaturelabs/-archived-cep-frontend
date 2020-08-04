@@ -52,7 +52,8 @@ export default function MyBatches(): ReactElement {
       <Grid container direction="row" spacing={3}>
         {batches.map((batch: any) => {
           return (
-            <Grid item xs={3}>
+            //added key to Grid to remove error - Michael Worrell
+            <Grid item xs={3} key={batch.batchId + 1}> 
               <MyBatchesList
                 key={batch.batchId}
                 batch={batch}
