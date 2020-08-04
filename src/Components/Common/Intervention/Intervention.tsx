@@ -9,7 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { StaticRouter } from 'react-router-dom';
-import apiBasePath from '../../../apiBasePath';
 
 const useStyles: Function = makeStyles((theme: any): StyleRules => ({
   container: {
@@ -78,7 +77,7 @@ export default function RequestForm(props): ReactElement {
     let sTime: Date = new Date(trigger.startTime); //Creating a Date variable to hold the intervention start date
     let eTime: Date = new Date(trigger.endTime); //Creating a Date variable to hold the intervention end date
     if(isWithinRange(sTime, eTime)){ //If this intervention date is within the batch's timeframe, add it
-      axios.post(apiBasePath + "/interventions", {
+      axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/interventions", {
         batchId: trigger.batchId,
         userId: trigger.userId,
         startTime: new Date(trigger.startTime).toUTCString(),
