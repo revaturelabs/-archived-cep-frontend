@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Login from "../Components/login/Login";
-import store from "../redux/store/index.js";
+import store from "../redux/store/index.ts";
 import { Provider } from "react-redux";
 
 Enzyme.configure({ adapter: new Adapter() });

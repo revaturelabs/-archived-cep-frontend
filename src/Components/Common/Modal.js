@@ -10,6 +10,10 @@ import {useSelector} from "react-redux";
  * 
  */
 
+let conditionalRole = {
+  ROLE_ADMIN:"ADMIN",
+  ROLE_CLIENT:"CLIENT"
+}
 
 function getModalStyle() {
   const top = 60
@@ -55,7 +59,7 @@ export default function SimpleModal() {
     </div>
   );
 
-  if(role === "ADMIN"){
+  if(role === conditionalRole.ROLE_ADMIN){
     return null
   }else {
     return (

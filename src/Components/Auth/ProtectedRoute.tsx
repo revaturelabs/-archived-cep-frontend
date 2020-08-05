@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import conditionalRole from "../Common/Drawer/roleEnum";
 
 //This prevents the redirection to a certain page if you're not logged in
 //In addition to checking whether or not your admin or client preventing redirection to pages of the other's
@@ -21,7 +22,7 @@ export const AdminProtectedRoute:React.FC = (component: any, ...rest: any ):Reac
             //If there is a JWT then the user is atleast logged in
             if (loggedIn) {
                 //checks if the user is a admin and allows them to continue to the webpage else redirect them to a 403 page
-                if(role === 'ADMIN')
+                if(role === conditionalRole.ROLE_ADMIN)
                     return <Component {...props} />;
                 else 
                     return (<Redirect to={{pathname: '/403', state: { from: props.location }}} />);

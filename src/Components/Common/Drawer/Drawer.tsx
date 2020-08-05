@@ -26,6 +26,7 @@ import "./Drawer.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
+import conditionalRole from "./roleEnum";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -63,7 +64,7 @@ export default function MiniDrawer(props: any): ReactElement {
   }
 
   function loadAdmin():any {
-    if (role=="ADMIN")
+    if (role==conditionalRole.ROLE_ADMIN)
     {
       return <React.Fragment>
         <ListItem>
@@ -83,7 +84,7 @@ export default function MiniDrawer(props: any): ReactElement {
   }
 
   function loadMakeRequest():any {
-    if(role!="ADMIN")
+    if(role!=conditionalRole.ROLE_ADMIN)
     {
       return <React.Fragment>
         <ListItem>
