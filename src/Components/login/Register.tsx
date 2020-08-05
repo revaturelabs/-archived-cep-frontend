@@ -9,7 +9,6 @@ import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
-import apiBasePath from "../../apiBasePath";
 import { AnyAction } from "redux";
 
 //Used for styling Material UI

@@ -1,7 +1,6 @@
 import React, { useState, ReactElement, SyntheticEvent } from "react";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
-import apiBasePath from "../../apiBasePath";
 
 const useStyles: Function = makeStyles((theme): StyleRules => ({
 
