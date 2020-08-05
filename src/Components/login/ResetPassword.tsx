@@ -40,6 +40,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
       }
 
       async function handleSubmit(event: SyntheticEvent) {
+        event.preventDefault();
         setPassword({
             ...userPassword,
             message: ""
@@ -66,7 +67,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     function Render(): ReactElement {
         return(
     <div>
-        <div className={styles.form} >
+        <form className={styles.form}  noValidate>
         <TextField
               variant="outlined"
               margin="normal"
@@ -86,7 +87,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
               required
               fullWidth
               name="rePassword"
-              label="Enter new Password Again"
+              label="Comfirm Password"
               type="password"
               autoComplete="current-password"
               onChange={handleChange}
@@ -103,7 +104,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
              Reset Password
             </Button>
                 <p className={styles.warning}>{userPassword.message}</p>
-            </div> 
+            </form> 
         </div>
         )
     }
