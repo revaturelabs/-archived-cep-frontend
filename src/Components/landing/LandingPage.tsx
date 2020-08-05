@@ -30,7 +30,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
 }));
 
 //Renders the login page and its components
-export default function LoginPage(): ReactElement {
+export default function LandingPage(): ReactElement {
   interface styleINF {
     root: string,
     image: string,

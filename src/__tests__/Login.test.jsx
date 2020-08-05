@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Login from "../Components/login/Login";
+import Login from "../Components/landing/Login";
 import store from "../redux/store/index.js";
 import { Provider } from "react-redux";
 

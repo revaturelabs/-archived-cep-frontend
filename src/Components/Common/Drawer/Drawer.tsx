@@ -21,6 +21,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import SchoolIcon from "@material-ui/icons/School";
 import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 import { Link } from "react-router-dom";
@@ -150,6 +151,15 @@ export default function MiniDrawer(props: any): ReactElement {
             <ListItemIcon>
               <Link to="/admin">
                 <ViewListIcon style={{ color: "#474C55" }} />
+              </Link>
+            </ListItemIcon>
+            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/acceptuser">
+                <GroupAddIcon style={{ color: "#474C55" }} />
               </Link>
             </ListItemIcon>
             <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
