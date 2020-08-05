@@ -179,7 +179,7 @@ export default function MiniDrawer(props: any): ReactElement {
             <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
           </ListItem>
 
-          {/* {loadMakeRequest()} */}
+          {loadMakeRequest()}
           {loadAdmin()}
 
           <ListItem>
