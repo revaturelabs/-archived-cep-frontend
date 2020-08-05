@@ -82,6 +82,29 @@ export default function MiniDrawer(props: any): ReactElement {
     }  
   }
 
+  function loadMakeRequest():any {
+    if(role!="ADMIN")
+    {
+      return <React.Fragment>
+        <ListItem>
+          <ListItemIcon>
+            <Link to="/intervention">
+              <ListIcon style={{ color: "#474C55" }} />
+            </Link>
+          </ListItemIcon>
+          <ListItemText style={{ color: "#474C55" }}>
+            Make Request
+          </ListItemText>
+        </ListItem>
+
+      </React.Fragment>
+    }
+    else
+    {
+      return null;
+    }
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -156,17 +179,7 @@ export default function MiniDrawer(props: any): ReactElement {
             <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
           </ListItem>
 
-          <ListItem>
-            <ListItemIcon>
-              <Link to="/intervention">
-                <ListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>
-              Make Request
-            </ListItemText>
-          </ListItem>
-
+          {loadMakeRequest()}
           {loadAdmin()}
 
           <ListItem>
