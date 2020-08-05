@@ -38,6 +38,7 @@ export default function SimpleModal() {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const role = useSelector((state) => state.credReducer.role);
 
    /* >>>>>> addon*/ const batch = useSelector((state) => state.batchReducer);
   const handleOpen = () => {
@@ -55,24 +56,28 @@ export default function SimpleModal() {
     </div>
   );
 
-  return (
-    <div>
-   {/*    <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button> */}
-      <br />
-      <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
-       Make a Request
-      </Button>
-      {/* Was originally Modal */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {/* <RequestForm  /> */}{body}
-      </Modal>
-    </div>
-  );
+  if(role === "ADMIN"){
+    return null
+  }else {
+    return (
+      <div>
+    {/*    <button type="button" onClick={handleOpen}>
+          Open Modal
+        </button> */}
+        <br />
+        <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
+        Make a Request
+        </Button>
+        {/* Was originally Modal */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {/* <RequestForm  /> */}{body}
+        </Modal>
+      </div>
+    );
+  }
 }
