@@ -49,7 +49,7 @@ export const ClientProtectedRoute:React.FC = (component: any, ...rest: any ):Rea
         <Route {...rest} render={props => {
             //checks if the user is a client and allows them to continue to the webpage else redirect them to a 403 page
             if (loggedIn) {
-                if(role === 'CLIENT')
+                if(role === conditionalRole.ROLE_CLIENT)
                     return <Component {...props} />;
                 else 
                     return (<Redirect to={{pathname: '/403', state: { from: props.location }}} />);
