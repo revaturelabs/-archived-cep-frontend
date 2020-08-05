@@ -45,17 +45,11 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
             ...userPassword,
             message: ""
           });
-        if(!userPassword.newPassword|| !userPassword.rePassword){
-            setPassword({
-                ...userPassword,
-                  message: "None of input field can be empty"
-              });
-              return;
-        }
+    
         if(userPassword.newPassword !== userPassword.rePassword){
             setPassword({
                 ...userPassword,
-                  message: "The password not match"
+                  message: "Two password not match"
               });
               return;
         }
@@ -67,7 +61,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     function Render(): ReactElement {
         return(
     <div>
-        <form className={styles.form}  noValidate>
+        <form className={styles.form}  onSubmit={handleSubmit}>
         <TextField
               variant="outlined"
               margin="normal"
@@ -87,7 +81,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
               required
               fullWidth
               name="rePassword"
-              label="Comfirm Password"
+              label="Confirm Password"
               type="password"
               autoComplete="current-password"
               onChange={handleChange}
@@ -98,7 +92,6 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
               fullWidth
               variant="contained"
               color="primary"
-              onClick={handleSubmit}
               style={{ backgroundColor: "#F26925" }}
             >
              Reset Password
