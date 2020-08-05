@@ -9,7 +9,6 @@ import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
-import apiBasePath from "../../apiBasePath";
 import { AnyAction } from "redux";
 
 //Used for styling Material UI
@@ -63,7 +62,7 @@ export default function Login(props: any): ReactElement {
     //const sub: any = JWTD(token).sub;
     const email: string = sub;
     
-    Axios.get(apiBasePath + "/users/email/", {
+    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email/", {
       params: {
         email: email,
       },
@@ -97,7 +96,7 @@ export default function Login(props: any): ReactElement {
       redirect: "follow",
     };
 
-    fetch(apiBasePath + "/authenticate", requestOptions)
+    fetch(process.env.REACT_APP_ZUUL_ROUTE + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         dispatch(dispatchToken(result.token));
@@ -140,6 +139,7 @@ export default function Login(props: any): ReactElement {
               onChange={handleChange}
               value={userCredentials.email}
             />
+            {process.env.REACT_APP_ZUUL_ROUTE}
             <TextField
               variant="outlined"
               margin="normal"

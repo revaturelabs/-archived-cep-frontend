@@ -12,7 +12,6 @@ import {
 import Axios from "axios";
 import ConfirmModal from "./confirmModal";
 import { useSelector } from "react-redux";
-import apiBasePath from "../../apiBasePath";
 
 //used solely for styling
 const useStyles: Function = makeStyles((): StyleRules => ({

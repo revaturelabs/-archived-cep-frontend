@@ -2,7 +2,6 @@ import React, { useState, useEffect, ReactElement } from "react";
 import AccUserItem from "./AccUserItem";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import apiBasePath from "../../apiBasePath";
 
 //Show a list of requests
 export default function AccUserList():ReactElement {
