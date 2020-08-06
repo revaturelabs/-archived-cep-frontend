@@ -163,7 +163,7 @@ export default function MiniDrawer(props: any): ReactElement {
                 <GroupAddIcon style={{ color: "#474C55" }} />
               </Link>
             </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
+            <ListItemText style={{ color: "#474C55" }}>Account Verification</ListItemText>
           </ListItem>
 
           <ListItem>
