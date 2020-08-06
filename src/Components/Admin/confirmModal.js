@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: "50%",
-        height: "50%",
+        height: "contain",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
         borderColor: "#f26925",
         height: "7%",
         width: "10%",
-        fontSize: "medium"
+        fontSize: "medium",
+        marginTop: "5%" 
     },
     cancelBtn: {
         position: 'absolute',
@@ -57,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
         borderColor: "grey",
         height: "7%",
         width: "10%",
-        fontSize: "medium"
+        fontSize: "medium",
+        marginTop: "5%"
     }
 }));
 
@@ -69,6 +71,8 @@ export default function ConfirmModal(props) {
     const [chosen, setChosen] = React.useState(null);
     const [desc, setDesc] = React.useState("");
     const [message, setMessage] = React.useState("");
+
+    const token = useSelector(state => state.credReducer.token);
 
     //Shows modal
     const handleOpen = () => {
@@ -83,16 +87,18 @@ export default function ConfirmModal(props) {
     //Handles confirm button. If resolve button is null or resolve button is denied and no description given, will show message and not do anything.
     //Modifies parent with react hook props.hideCard()
     const handleConfirmClose = () => {
-        const token = useSelector(state => state.credReducer.token);
+        console.log("inside confirmation function");
+        console.log(chosen);
+        console.log()
         if (chosen == null) {
             setMessage("Must resolve account or cancel")
-        } else if (chosen === "deny" && !message) {
+        } else if (chosen === "deny" && message == "") {
             setMessage("Must write deny message")
         } else if (chosen === "deny") {
             props.hideCard();
             setOpen(false);
-            axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny", {
-                id: props.userInfo.id
+            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id="+props.userInfo.userId, {
+                message
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -104,11 +110,11 @@ export default function ConfirmModal(props) {
                 .catch(function (error) {
                     console.log(error);
                 });
-        } else if (chosen === "Confirm") {
+        } else if (chosen === "confirm") {
             props.hideCard();
             setOpen(false);
-            axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/approve", {
-                id: props.userInfo.id
+            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/approve?id="+props.userInfo.userId, {
+                
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -164,6 +170,7 @@ export default function ConfirmModal(props) {
                         </FormControl>
                     </div>
                     <div>
+                        {chosen ==="deny" ? 
                         <TextField
                             id="filled-multiline-static"
                             multiline
@@ -173,7 +180,10 @@ export default function ConfirmModal(props) {
                             onChange={handleDesc}
                             variant="outlined"
                             fullWidth
+                            margin="normal"
                         />
+                        : ""
+                    }
                     </div>
                     <div >
                         <h5 style={{ color: "red" }}>{message}</h5>
