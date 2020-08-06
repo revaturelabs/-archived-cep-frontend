@@ -29,11 +29,12 @@ function App():ReactElement{
   //Conditionally render the drawer if logged in
   const token = useSelector((state: any) => state.credReducer.token);
   const isLoggedIn = useSelector((state: any) => state.credReducer.isLoggedIn);
+  const isReset: boolean = useSelector((state: any) => state.credReducer.isReset);
 
   return ( 
     <div>
       {/* {token ? <Drawer /> : null} */}
-      {isLoggedIn ? <Drawer /> : null}
+      {isLoggedIn && !isReset ? <Drawer /> : null}
       <Switch>
         <Route path="/" component={LandingPage} exact />
         <Route path="/reset" component={ResetPassword} exact />

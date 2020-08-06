@@ -2,6 +2,7 @@ import React, { useState, ReactElement, SyntheticEvent } from "react";
 import axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import { dispatchIsReset } from "../../redux/actions/userAction";
 
 const useStyles: Function = makeStyles((theme): StyleRules => ({
 
@@ -20,14 +21,17 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   }
 }));
 
-export default function LoginPage(): ReactElement {
+export default function ResetPage(props: any): ReactElement {
   interface styleINF {
     form: string
     warning: string
   }
+
   const styles: styleINF = useStyles();
 
   const user = useSelector((state: any) => state.credReducer.userObject);
+
+  const dispatch: any = useDispatch();
 
   const token = useSelector((state: any) => state.credReducer.token);
 
@@ -59,9 +63,13 @@ export default function LoginPage(): ReactElement {
       return;
     }
 
+    console.log(props.oldPassword);
+    console.log(userPassword.newPassword);
+    console.log(userPassword.rePassword);
+    console.log(user.email);
     /**Connect to backend in here */
     axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/users/resetpassword", {
-      oldPassword: user.password,
+      oldPassword: props.oldPassword,
       newPassword: userPassword.newPassword,
       confirmedPassword: userPassword.rePassword,
       email: user.email
@@ -70,13 +78,14 @@ export default function LoginPage(): ReactElement {
         Authorization: `Bearer ${token}`,
       }
     })
-      .then(function (response) {
-        alert(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+    .then(function (response) {
+      dispatch(dispatchIsReset(false));
+      alert(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
   }
 
   function Render(): ReactElement {

@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         height: "7%",
         width: "10%",
         fontSize: "medium",
-        marginTop: "5%" 
+        marginTop: "5%"
     },
     cancelBtn: {
         position: 'absolute',
@@ -89,16 +89,31 @@ export default function ConfirmModal(props) {
     const handleConfirmClose = () => {
         console.log("inside confirmation function");
         console.log(chosen);
-        console.log()
         if (chosen == null) {
             setMessage("Must resolve account or cancel")
-        } else if (chosen === "deny" && message == "") {
+        } else if (chosen === "deny" && !desc) {
             setMessage("Must write deny message")
         } else if (chosen === "deny") {
             props.hideCard();
             setOpen(false);
-            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id="+props.userInfo.userId, {
-                message
+            console.log(desc);
+            /* axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id="+props.userInfo.userId, desc, {
+                headers: {
+                    "Content-Type": "text/plain",
+                    Authorization: `Bearer ${token}`,
+                }
+            }) */
+            /* axios({
+                method: 'GET',
+                url: process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId,
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                data: {denyMessage: desc},
+            }) */
+            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId, {
+                denyMessage: desc
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -113,8 +128,8 @@ export default function ConfirmModal(props) {
         } else if (chosen === "confirm") {
             props.hideCard();
             setOpen(false);
-            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/approve?id="+props.userInfo.userId, {
-                
+            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/approve?id=" + props.userInfo.userId, {
+
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -170,20 +185,20 @@ export default function ConfirmModal(props) {
                         </FormControl>
                     </div>
                     <div>
-                        {chosen ==="deny" ? 
-                        <TextField
-                            id="filled-multiline-static"
-                            multiline
-                            rows={4}
-                            placeholder="Deny explanation"
-                            value={desc}
-                            onChange={handleDesc}
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                        />
-                        : ""
-                    }
+                        {chosen === "deny" ?
+                            <TextField
+                                id="filled-multiline-static"
+                                multiline
+                                rows={4}
+                                placeholder="Deny explanation"
+                                value={desc}
+                                onChange={handleDesc}
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                            : ""
+                        }
                     </div>
                     <div >
                         <h5 style={{ color: "red" }}>{message}</h5>
