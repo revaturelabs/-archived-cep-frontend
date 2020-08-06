@@ -21,7 +21,11 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   }
 }));
 
-export default function ResetPage(props: any): ReactElement {
+interface props {
+  oldPassword: string
+}
+
+export default function ResetPage({oldPassword}: props): ReactElement {
   interface styleINF {
     form: string
     warning: string
@@ -63,13 +67,10 @@ export default function ResetPage(props: any): ReactElement {
       return;
     }
 
-    console.log(props.oldPassword);
-    console.log(userPassword.newPassword);
-    console.log(userPassword.rePassword);
-    console.log(user.email);
     /**Connect to backend in here */
+    console.log(oldPassword);
     axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/users/resetpassword", {
-      oldPassword: props.oldPassword,
+      oldPassword: oldPassword,
       newPassword: userPassword.newPassword,
       confirmedPassword: userPassword.rePassword,
       email: user.email
