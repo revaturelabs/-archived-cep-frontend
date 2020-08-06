@@ -62,13 +62,12 @@ export default function ResetPage({oldPassword}: props): ReactElement {
     if (userPassword.newPassword !== userPassword.rePassword) {
       setPassword({
         ...userPassword,
-        message: "Two password not match"
+        message: "The provided passwords do not match."
       });
       return;
     }
 
     /**Connect to backend in here */
-    console.log(oldPassword);
     axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/users/resetpassword", {
       oldPassword: oldPassword,
       newPassword: userPassword.newPassword,
