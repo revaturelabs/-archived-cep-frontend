@@ -27,8 +27,6 @@ function getModalStyle() {
     };
 }
 
-const token = useSelector(state => state.credReducer.token);
-
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
@@ -85,6 +83,7 @@ export default function ConfirmModal(props) {
     //Handles confirm button. If resolve button is null or resolve button is denied and no description given, will show message and not do anything.
     //Modifies parent with react hook props.hideCard()
     const handleConfirmClose = () => {
+        const token = useSelector(state => state.credReducer.token);
         if (chosen == null) {
             setMessage("Must resolve account or cancel")
         } else if (chosen === "deny" && !message) {

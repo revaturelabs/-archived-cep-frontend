@@ -34,7 +34,10 @@ export default function AccUserList():ReactElement {
         }
       ] */
       let x = [];
-      Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/all", { } )
+      Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }, })
         .then((result) => {
           x = result.data;
           changeRealData(x);
