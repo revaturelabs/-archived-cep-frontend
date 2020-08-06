@@ -1,6 +1,8 @@
 import React, { useState, ReactElement, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  dispatchUserID,
+  dispatchRole,
   dispatchToken,
   dispatchUserObject,
   dispatchLoggedIn,
@@ -72,6 +74,9 @@ export default function Login(props: any): ReactElement {
     })
       .then((result) => {
         dispatch(dispatchUserObject(result.data));
+        dispatch(dispatchRole(result.data.role));
+        dispatch(dispatchUserID(result.data.userId));
+        console.log(result.data.userId);
       })
       .catch((err) => console.log("error username:" + err));
   }
@@ -99,6 +104,7 @@ export default function Login(props: any): ReactElement {
     fetch(process.env.REACT_APP_ZUUL_ROUTE + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result)
         dispatch(dispatchToken(result.token));
         getUser(result.token);
         dispatch(dispatchLoggedIn());

@@ -25,8 +25,9 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
+import conditionalRole from "./roleEnum";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -48,6 +49,7 @@ export default function MiniDrawer(props: any): ReactElement {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const role: String = useSelector((state: any) => state.credReducer.role);
 
   const handleDrawerOpen = ():void => {
     setOpen(true);
@@ -60,6 +62,49 @@ export default function MiniDrawer(props: any): ReactElement {
   function logOut(): void {
     dispatch(dispatchLoggedOut());
     //window.location.reload();
+  }
+
+  function loadAdmin():any {
+    if (role==conditionalRole.ROLE_ADMIN)
+    {
+      return <React.Fragment>
+        <ListItem>
+            <ListItemIcon>
+              <Link to="/admin">
+                <ViewListIcon style={{ color: "#474C55" }} />
+              </Link>
+            </ListItemIcon>
+            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
+          </ListItem>
+          </React.Fragment>
+    }
+    else
+    {
+      return null;
+    }  
+  }
+
+  function loadMakeRequest():any {
+    if(role!=conditionalRole.ROLE_ADMIN)
+    {
+      return <React.Fragment>
+        <ListItem>
+          <ListItemIcon>
+            <Link to="/intervention">
+              <ListIcon style={{ color: "#474C55" }} />
+            </Link>
+          </ListItemIcon>
+          <ListItemText style={{ color: "#474C55" }}>
+            Make Request
+          </ListItemText>
+        </ListItem>
+
+      </React.Fragment>
+    }
+    else
+    {
+      return null;
+    }
   }
 
   return (
@@ -135,27 +180,9 @@ export default function MiniDrawer(props: any): ReactElement {
             </ListItemIcon>
             <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
           </ListItem>
-          
-          {/* This is commented out because this page is unnecessary */}
-          {/* <ListItem>
-            <ListItemIcon>
-              <Link to="/intervention">
-                <ListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>
-              Make Request
-            </ListItemText>
-          </ListItem> */}
 
-          <ListItem>
-            <ListItemIcon>
-              <Link to="/admin">
-                <ViewListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
-          </ListItem>
+          {loadMakeRequest()}
+          {loadAdmin()}
 
           <ListItem>
             <ListItemIcon>
