@@ -4,12 +4,17 @@ import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
 import { useSelector } from 'react-redux';
+import conditionalRole from './Drawer/roleEnum';
 
 /**
  * Modal doesn't work in TS, so we use JS.
  * 
  */
 
+/* let conditionalRole = {
+  ROLE_ADMIN:"ADMIN",
+  ROLE_CLIENT:"CLIENT"
+} */
 
 function getModalStyle() {
   const top = 60
@@ -38,6 +43,7 @@ export default function SimpleModal() {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const role = useSelector((state) => state.credReducer.role);
 
    /* >>>>>> addon*/ const batch = useSelector((state) => state.batchReducer);
   const handleOpen = () => {
@@ -55,24 +61,28 @@ export default function SimpleModal() {
     </div>
   );
 
-  return (
-    <div>
-   {/*    <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button> */}
-      <br />
-      <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
-       Make a Request
-      </Button>
-      {/* Was originally Modal */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {/* <RequestForm  /> */}{body}
-      </Modal>
-    </div>
-  );
+  if(role === conditionalRole.ROLE_ADMIN){
+    return null
+  }else {
+    return (
+      <div>
+    {/*    <button type="button" onClick={handleOpen}>
+          Open Modal
+        </button> */}
+        <br />
+        <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
+        Make a Request
+        </Button>
+        {/* Was originally Modal */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          {/* <RequestForm  /> */}{body}
+        </Modal>
+      </div>
+    );
+  }
 }
