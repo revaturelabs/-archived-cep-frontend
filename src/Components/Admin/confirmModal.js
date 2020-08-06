@@ -8,6 +8,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 /**
  * Modal doesn't work in TS, so we use JS.
  * 
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: "50%",
-        height: "50%",
+        height: "contain",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -39,23 +41,25 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         left: '3%',
         bottom: '5%',
-        backgroundColor: "#f26925", 
+        backgroundColor: "#f26925",
         color: "#fff",
         borderColor: "#f26925",
         height: "7%",
         width: "10%",
-        fontSize: "medium"
+        fontSize: "medium",
+        marginTop: "5%"
     },
     cancelBtn: {
         position: 'absolute',
         right: '3%',
         bottom: '5%',
-        backgroundColor: "grey", 
+        backgroundColor: "grey",
         color: "#fff",
         borderColor: "grey",
         height: "7%",
         width: "10%",
-        fontSize: "medium"
+        fontSize: "medium",
+        marginTop: "5%"
     }
 }));
 
@@ -66,7 +70,9 @@ export default function ConfirmModal(props) {
     const [open, setOpen] = React.useState(false);
     const [chosen, setChosen] = React.useState(null);
     const [desc, setDesc] = React.useState("");
-    const [message,setMessage] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
+    const token = useSelector(state => state.credReducer.token);
 
     //Shows modal
     const handleOpen = () => {
@@ -81,14 +87,61 @@ export default function ConfirmModal(props) {
     //Handles confirm button. If resolve button is null or resolve button is denied and no description given, will show message and not do anything.
     //Modifies parent with react hook props.hideCard()
     const handleConfirmClose = () => {
-        if(chosen==null){
+        console.log("inside confirmation function");
+        console.log(chosen);
+        if (chosen == null) {
             setMessage("Must resolve account or cancel")
-        }else if(chosen==="deny" && message){
+        } else if (chosen === "deny" && !desc) {
             setMessage("Must write deny message")
-        }else{
+        } else if (chosen === "deny") {
             props.hideCard();
             setOpen(false);
-        }        
+            console.log(desc);
+            /* axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id="+props.userInfo.userId, desc, {
+                headers: {
+                    "Content-Type": "text/plain",
+                    Authorization: `Bearer ${token}`,
+                }
+            }) */
+            /* axios({
+                method: 'GET',
+                url: process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId,
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                data: {denyMessage: desc},
+            }) */
+            axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId, {
+                denyMessage: desc
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+                .then(function (response) {
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else if (chosen === "confirm") {
+            props.hideCard();
+            setOpen(false);
+            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/approve?id=" + props.userInfo.userId, {
+
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+                .then(function (response) {
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     };
 
     //Sets the denied description
@@ -132,19 +185,23 @@ export default function ConfirmModal(props) {
                         </FormControl>
                     </div>
                     <div>
-                        <TextField
-                            id="filled-multiline-static"
-                            multiline
-                            rows={4}
-                            placeholder="Deny explanation"
-                            value={desc}
-                            onChange={handleDesc}
-                            variant="outlined"
-                            fullWidth
-                        />
+                        {chosen === "deny" ?
+                            <TextField
+                                id="filled-multiline-static"
+                                multiline
+                                rows={4}
+                                placeholder="Deny explanation"
+                                value={desc}
+                                onChange={handleDesc}
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                            : ""
+                        }
                     </div>
                     <div >
-                        <h5 style={{color:"red"}}>{message}</h5>
+                        <h5 style={{ color: "red" }}>{message}</h5>
                     </div>
                     <button type="button" variant="contained" className={classes.confirmBtn} onClick={handleConfirmClose}>
                         confirm

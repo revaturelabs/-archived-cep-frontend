@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import AccUserItem from "./AccUserItem";
-import axios from "axios";
+import Axios from "axios";
 import { useSelector } from "react-redux";
 
 //Show a list of requests
@@ -15,7 +15,7 @@ export default function AccUserList():ReactElement {
   //Make an axios call to display the list of requests
   useEffect(():void => {
       //switch hard coded data with get request
-      let x =[
+      /* let x =[
         {
             "userId": 1,
             "firstName": "John",
@@ -32,8 +32,17 @@ export default function AccUserList():ReactElement {
             "company": "TEXACO",
             "phone": "123-456-7890"
         }
-      ]
-      changeRealData(x);
+      ] */
+      let x = [];
+      Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }, })
+        .then((result) => {
+          x = result.data;
+          changeRealData(x);
+        })
+        .catch((err) => console.log("error: " + err));
   }, []);
 
   //Render the list of accounts
