@@ -1,3 +1,4 @@
+// Written by Michael Worrell
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -7,8 +8,10 @@ import { Provider } from 'react-redux';
 import store from '../redux/store/index';
 import { render } from "@testing-library/react";
 import Radar from "react-d3-radar";
+import * as axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import { withoutHooks } from 'jest-react-hooks-shallow';
 
-// Written by Michael Worrell
 Enzyme.configure({ adapter: new Adapter() });
 
 const scores = [
@@ -33,3 +36,30 @@ test('does the spidergraph get the props', () => {
     const props = wrapper.find(Radar).prop('data');
     expect(props).toEqual({ "sets": [{ "key": "me", "label": "My Scores", "values": { "AWS": 50.35925947825114, "C#": 60.48832778930664, "Docker": 50.73086957931518, "Hibernate": 45.14079812367757, "Hive": 47.818763224283856, "JS": 68.40554072062174, "Java": 39.89302557309468, "NoSQL": 56.1440157254537, "Quarkus": 48.559701951344806, "React": 46.925523122151695, "Spring": 34.84263242085775, "Spring Boot": 52.687697410583496, "Spring Cloud": 52.91025918324788, "TypeScript": 46.58357172012329 } }], "variables": [{ "key": "AWS", "label": "AWS" }, { "key": "TypeScript", "label": "TypeScript" }, { "key": "Hive", "label": "Hive" }, { "key": "Java", "label": "Java" }, { "key": "Quarkus", "label": "Quarkus" }, { "key": "Spring Cloud", "label": "Spring Cloud" }, { "key": "Spring", "label": "Spring" }, { "key": "C#", "label": "C#" }, { "key": "React", "label": "React" }, { "key": "JS", "label": "JS" }, { "key": "Docker", "label": "Docker" }, { "key": "Hibernate", "label": "Hibernate" }, { "key": "Spring Boot", "label": "Spring Boot" }, { "key": "NoSQL", "label": "NoSQL" }] });
 });
+
+const batchId = "TR-1001";
+const associateEmail = "mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com";
+const wrapper2 = mount(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+
+test('does the spidergraphpage gets props', () => {
+    const graph = wrapper2.find(MySpiderGraph);
+    expect(graph).not.toBe(null);
+});
+
+test('returns data when myspidergrpah is called', done => {
+    withoutHooks(() => {
+        var mock = new MockAdapter(axios);
+        const data = {response: true};
+        mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
+        
+        MySpiderGraphPage(batchId, associateEmail).then(response => {
+            expect(response).toEqual(data);
+            done();
+        })
+        //console.log(what);
+        // wrap3.then(response => {
+        //     expect(response).toEqual(scores);
+        //     done();
+        // })
+    })
+})

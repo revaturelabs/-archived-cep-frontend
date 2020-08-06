@@ -5,5 +5,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import enableHooks from 'jest-react-hooks-shallow';
 
 configure({ adapter: new Adapter() });
+
+//pass an instance to jest to 'enableHooks()'
+enableHooks(jest,{dontMockByDefault: true});
