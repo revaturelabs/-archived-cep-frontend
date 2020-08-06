@@ -5,12 +5,14 @@ import { useSelector } from "react-redux";
 
 //Page Components
 import MyBatches from "./batches/MyBatches";
-import LoginPage from "./login/LoginPage";
+import LandingPage from "./landing/LandingPage";
 import AdminPage from "./Admin/AdminPage";
 import Drawer from "./Common/Drawer/Drawer";
 import RequestForm from "./Common/Intervention/Intervention";
 import GetInterventions from "./Common/Intervention/GetInterventions";
 import BatchPage from "./Batch/BatchPage";
+import AccUserPage from "./Admin/AccUserPage";
+import ResetPassword from "./landing/ResetPassword";
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
@@ -33,14 +35,15 @@ function App():ReactElement{
       {/* {token ? <Drawer /> : null} */}
       {isLoggedIn ? <Drawer /> : null}
       <Switch>
-        <Route path="/" component={LoginPage} exact />
+        <Route path="/" component={LandingPage} exact />
+        <Route path="/reset" component={ResetPassword} exact />
         <Route path="/403" component={Forbbiden} exact />
         <Route path="/404" component={NotFound} exact />
         <div className="App">
           <Route path="/my_batches" component={MyBatches} />
           <Route path="/admin" component={AdminPage} />
-          {/* Commented out because this route is no longer */}
-          {/* <Route path="/intervention" component={RequestForm} />  */}
+          <Route path="/acceptuser" component={AccUserPage} />
+          <Route path="/intervention" component={RequestForm} />
           <Route path="/getinterventions" component={GetInterventions} />
           <Route path="/associates" component={BatchPage} />
         </div>
