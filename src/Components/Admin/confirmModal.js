@@ -112,7 +112,7 @@ export default function ConfirmModal(props) {
                 },
                 data: {denyMessage: desc},
             }) */
-            axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId, {
+            axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId, {
                 denyMessage: desc
             }, {
                 headers: {
