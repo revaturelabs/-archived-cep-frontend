@@ -5,6 +5,9 @@ import React, { useState } from "react";
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [allRequests, getAllRequests] = useState([]);
+
+
 
     const header = () => {
         const dateFormat = "MMMM yyyy"; return (
@@ -51,16 +54,54 @@ export default function Calendar() {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                 days.push(
+                /* Mock event data, we'll pull our own once functionality is done */
+                const eventItem = [{
+                    batchId: 1,
+                    userId: "Adem",
+                    startTime: 3,
+                    endTime: 4,
+                    isAllDay: 5,
+                    status: "Pending",
+                    requestType: 7,
+                    description: 8
+
+                },{
+                    batchId: 1,
+                    userId: "Yusef",
+                    startTime: 3,
+                    endTime: 4,
+                    isAllDay: 5,
+                    status: "Second",
+                    requestType: 7,
+                    description: 8
+
+                },{
+                    batchId: 1,
+                    userId: "David",
+                    startTime: 3,
+                    endTime: 4,
+                    isAllDay: 5,
+                    status: "Thrid",
+                    requestType: 7,
+                    description: 8
+
+                }]
+                days.push(
+                    /* a div cell begin pushed into the calendar to display the events */
                     <div
                         className={`column cell ${!isSameMonth(day, monthStart)
                             ? "disabled" : isSameDay(day, selectedDate)
                                 ? "selected" : ""}`}
                         key={day}
+
                         onClick={() => onDateClick(parse("", "", cloneDay))}
+                        style={{overflowY: "auto"}}
                     >
                         <span className="number">{formattedDate}</span>
-                        <span className="bg">{formattedDate}</span>
+                        {/* One line div, on click it'll parse though the events and display them */}
+                        <div onClick ={() => ShowEvents(eventItem)}>{"You have " + eventItem.length}</div>
+                        {/* This was used to set the rows of each event */}
+                        {/* <SetEventRow eventItems ={eventItem}></SetEventRow> */}
                     </div>
                 );
                 day = addDays(day, 1);
@@ -72,14 +113,31 @@ export default function Calendar() {
         }
         return <div className="body">{rows}</div>;
     }
+    /* Testing to push the events into a modal */
+    const ShowEvents = (e) =>{
+        
+        
+    }
+    /* Gets the events and map them to their own event elemtn */
+    const SetEventRow = (props) =>{
+        return(
+            <React.Fragment>
+                {(props.eventItems.map((event)=>
+                <Event eventItem = {event}></Event>
+                ))}
+
+            </React.Fragment>
+        )
+    }
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
     };
     const prevMonth = () => {
         setCurrentDate(subMonths(currentDate, 1));
     };
-    const onDateClick = day => {
+    const onDateClick = (day) => {
         setSelectedDate(day);
+
     }
     return (
         <div className="calendar">

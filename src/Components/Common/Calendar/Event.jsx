@@ -1,14 +1,17 @@
 import React from 'react';
-function Event() {
+function Event(props) {
+/*     batchId: 1,
+    userId: 2,
+    startTime: 3,
+    endTime: 4,
+    isAllDay: 5,
+    status: "Pending",
+    requestType: 7,
+    description: 8 */
     return (
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-
+        <div style={{backgroundColor:"Yellow", fontSize: "15px"}} onClick={() => alert(props.eventItem.status)}>
+    {props.eventItem.userId}
+    </div>
 
     )
 }

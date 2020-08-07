@@ -101,7 +101,6 @@ top: .75em;
 right: .75em;
 font-weight: 700;
 }.calendar .body .cell:hover .number, .calendar .body .selected .number   {
-visibility:hidden;
 }.calendar .body .disabled {
 color: lightgray;
 pointer-events: none;
