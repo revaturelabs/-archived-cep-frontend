@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import RequestForm from "./Intervention/Intervention";
 import {Button} from "@material-ui/core";
 import { useSelector } from 'react-redux';
-import conditionalRole from './Drawer/roleEnum';
+import conditionalRole from '../../redux/actions/roleTypes';
 
 /**
  * Modal doesn't work in TS, so we use JS.

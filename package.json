@@ -19,6 +19,7 @@
     "axios": "^0.19.2",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
+    "enzyme-to-json": "^3.5.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
@@ -31,6 +32,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "sinon": "^9.0.2",
     "typescript": "^3.9.7"
   },
@@ -56,10 +58,14 @@
     ]
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.18.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jest-mock-axios": "^4.2.1",
+    "jest-react-hooks-shallow": "^1.4.1",
     "react-d3-radar": "^1.0.0-rc6",
     "react-test-renderer": "^16.13.1",
+    "redux-mock-store": "^1.5.4",
     "source-map-loader": "^1.0.1",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7"
