@@ -1,21 +1,57 @@
-import { format, startOfWeek, addDays, startOfMonth, endOfMonth, isSameDay, addMonths, subMonths, isSameMonth, endOfWeek, parse } from "date-fns";
+import {
+    format, startOfWeek, addDays, startOfMonth, endOfMonth, isSameDay,
+    addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears
+} from "date-fns";
 import "./Cal.css";
 import Event from "./Event";
 import React, { useState } from "react";
+import Modal from "../Modal";
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [allRequests, getAllRequests] = useState([]);
 
+    /* Mock event data, we'll pull our own once functionality is done */
+    const all = [{
+        batchId: 1,
+        userId: "Adem",
+        startTime: new Date('8 Aug 2020 00:00:00 PDT').toUTCString(),
+        endTime: 4,
+        isAllDay: 5,
+        status: "Pending",
+        requestType: 7,
+        description: 8
 
+    }, {
+        batchId: 1,
+        userId: "Yusef",
+        startTime: new Date('7 Aug 2020 00:00:00 PDT').toUTCString(),
+        endTime: 4,
+        isAllDay: 5,
+        status: "Second",
+        requestType: 7,
+        description: 8
+
+    }, {
+        batchId: 1,
+        userId: "David",
+        startTime: new Date('6 Aug 2020 00:00:00 PDT').toUTCString(),
+        endTime: 4,
+        isAllDay: 5,
+        status: "Thrid",
+        requestType: 7,
+        description: 8
+
+    }]
 
     const header = () => {
-        const dateFormat = "MMMM yyyy"; return (
+        const dateFormat = "MMMM yyyy";
+        return (
             <div className="header row flex-middle">
                 <div className="column col-start">
                     <div className="icon" onClick={prevMonth}>
                         chevron_left
-         </div>
+                    </div>
                 </div>
                 <div className="column col-center">
                     <span>{format(currentDate, dateFormat)}</span>
@@ -23,7 +59,20 @@ export default function Calendar() {
                 <div className="column col-end">
                     <div className="icon" onClick={nextMonth}>
                         chevron_right
-         </div>
+                    </div>
+                </div>
+                <div className="column col-start">
+                    <div className="icon" onClick={prevYear}>
+                        P
+                    </div>
+                </div>
+                <div className="column col-center">
+                    <span>{format(currentDate, dateFormat)}</span>
+                </div>
+                <div className="column col-end">
+                    <div className="icon" onClick={nextYear}>
+                        N
+                    </div>
                 </div>
             </div>
         );
@@ -54,38 +103,8 @@ export default function Calendar() {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                /* Mock event data, we'll pull our own once functionality is done */
-                const eventItem = [{
-                    batchId: 1,
-                    userId: "Adem",
-                    startTime: 3,
-                    endTime: 4,
-                    isAllDay: 5,
-                    status: "Pending",
-                    requestType: 7,
-                    description: 8
-
-                },{
-                    batchId: 1,
-                    userId: "Yusef",
-                    startTime: 3,
-                    endTime: 4,
-                    isAllDay: 5,
-                    status: "Second",
-                    requestType: 7,
-                    description: 8
-
-                },{
-                    batchId: 1,
-                    userId: "David",
-                    startTime: 3,
-                    endTime: 4,
-                    isAllDay: 5,
-                    status: "Thrid",
-                    requestType: 7,
-                    description: 8
-
-                }]
+                /* Filters out any day that's not the cloneDay's current day */
+                let properDays = all.filter(event => event.startTime.includes(cloneDay.toUTCString().slice(0, 17)))
                 days.push(
                     /* a div cell begin pushed into the calendar to display the events */
                     <div
@@ -94,14 +113,16 @@ export default function Calendar() {
                                 ? "selected" : ""}`}
                         key={day}
 
+
                         onClick={() => onDateClick(parse("", "", cloneDay))}
-                        style={{overflowY: "auto"}}
+                        style={{ overflowY: "auto" }}
                     >
                         <span className="number">{formattedDate}</span>
-                        {/* One line div, on click it'll parse though the events and display them */}
-                        <div onClick ={() => ShowEvents(eventItem)}>{"You have " + eventItem.length}</div>
-                        {/* This was used to set the rows of each event */}
-                        {/* <SetEventRow eventItems ={eventItem}></SetEventRow> */}
+                        <br/>
+                        {/* The div for the modal to use for its onclick */}
+                        {properDays.length > 0 &&
+                            <div /* onClick={ModalEvent(properDays)} */ style= {{backgroundColor: "Black"}}>Events {properDays.length}</div>
+                        }
                     </div>
                 );
                 day = addDays(day, 1);
@@ -113,19 +134,15 @@ export default function Calendar() {
         }
         return <div className="body">{rows}</div>;
     }
-    /* Testing to push the events into a modal */
-    const ShowEvents = (e) =>{
-        
-        
-    }
-    /* Gets the events and map them to their own event elemtn */
-    const SetEventRow = (props) =>{
-        return(
+    /**
+     * On click of the Div bring up the modal and display the events
+     * events is an array of requests
+     * @param {any} events 
+     */
+    const ModalEvent = (events) => {
+        return (
             <React.Fragment>
-                {(props.eventItems.map((event)=>
-                <Event eventItem = {event}></Event>
-                ))}
-
+                {alert("You clicked")}
             </React.Fragment>
         )
     }
@@ -134,6 +151,12 @@ export default function Calendar() {
     };
     const prevMonth = () => {
         setCurrentDate(subMonths(currentDate, 1));
+    };
+    const nextYear = () => {
+        setCurrentDate(addYears(currentDate, 1));
+    };
+    const prevYear = () => {
+        setCurrentDate(subYears(currentDate, 1));
     };
     const onDateClick = (day) => {
         setSelectedDate(day);
