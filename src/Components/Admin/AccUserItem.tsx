@@ -49,7 +49,22 @@ const useStyles: Function = makeStyles((): StyleRules => ({
 }));
 
 //Display individual account 
-export default function AccUserItem(props: any): ReactElement {
+
+interface dataObject {
+    firstName: string,
+    lastName: string,
+    email: string,
+    company: string,
+    phone: string
+}
+
+interface props {
+    data: dataObject
+}
+
+export default function AccUserItem({data}: props): ReactElement {
+
+
     interface styleINF {
         root: string,
         left: string,
@@ -73,16 +88,16 @@ export default function AccUserItem(props: any): ReactElement {
                     <Grid container spacing={3}>
                         <Grid item xs={3} className={styles.left}>
                             <Typography variant="h4">
-                                {props.data.firstName} {props.data.lastName}
+                                {data.firstName} {data.lastName}
                             </Typography>
-                            <Typography variant="h6">{props.data.email}</Typography>
-                            <Typography variant="h6">{props.data.phone}</Typography>
+                            <Typography variant="h6">{data.email}</Typography>
+                            <Typography variant="h6">{data.phone}</Typography>
                         </Grid>
                         <Grid item xs={6} className={styles.middle}>
-                            <Typography variant="h4">{props.data.company}</Typography>
+                            <Typography variant="h4">{data.company}</Typography>
                         </Grid>
                         <Grid item xs={3} className={styles.right}>
-                            <ConfirmModal userInfo={props.data} hideCard={callback}/>
+                            <ConfirmModal userInfo={data} hideCard={callback}/>
                         </Grid>
                     </Grid>
                 </CardContent>
