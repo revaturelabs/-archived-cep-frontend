@@ -12,10 +12,6 @@ describe("Home Component", ()=>{
     it('should contain 15 div elements',()=> {
         const wrapper = mount(<Provider store={store}><Router><Drawer/></Router></Provider>);
         const divider= wrapper.find('div');
-<<<<<<< HEAD
-        expect(divider.length).toBe(15);
-=======
         expect(divider.length).toBe(11);
->>>>>>> MichaelJest
     }) 
 })    
