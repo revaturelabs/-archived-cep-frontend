@@ -54,7 +54,7 @@ export default function CalModal(props) {
     const body = (
         <div style={modalStyle} className={classes.paper}>
         {props.Events.map((event) =>
-            <Event eventItem={event} />
+            <Event key={event} eventItem={event} />
         )}
         </div>
     );

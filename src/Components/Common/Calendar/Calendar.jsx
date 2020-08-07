@@ -3,55 +3,34 @@ import {
     addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears
 } from "date-fns";
 import "./Cal.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CalModal from "./Calmodal";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const token = useSelector((state) => state.credReducer.token);
     const [allRequests, getAllRequests] = useState([]);
 
-    /* Mock event data, we'll pull our own once functionality is done */
-    const all = [{
-        batchId: 1,
-        userId: "Adem",
-        startTime: new Date('8 Aug 2020 00:00:00 PDT').toUTCString(),
-        endTime: 4,
-        isAllDay: 5,
-        status: "Pending",
-        requestType: 7,
-        description: 8
-
-    }, {
-        batchId: 1,
-        userId: "Yusef",
-        startTime: new Date('7 Aug 2020 00:00:00 PDT').toUTCString(),
-        endTime: 4,
-        isAllDay: 5,
-        status: "Second",
-        requestType: 7,
-        description: 8
-
-    }, {
-        batchId: 1,
-        userId: "Broski",
-        startTime: new Date('7 Aug 2020 00:00:00 PDT').toUTCString(),
-        endTime: 4,
-        isAllDay: 5,
-        status: "Second",
-        requestType: 7,
-        description: 8
-
-    }, {
-        batchId: 1,
-        userId: "David",
-        startTime: new Date('6 Aug 2020 00:00:00 PDT').toUTCString(),
-        endTime: 4,
-        isAllDay: 5,
-        status: "Thrid",
-        requestType: 7,
-        description: 8
-
-    }]
+    useEffect(() => {
+        axios
+          .get(
+            process.env.REACT_APP_ZUUL_ROUTE + "/interventions",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+          //  .then(res=>res.json())
+          .then((response) => {
+            //Console.log used to check the fields to set up the adminItem for later
+            getAllRequests(response.data);
+          })
+          .catch((err) => console.log());
+      }, []);
 
     const header = () => {
         const dateFormat = "MMMM yyyy";
@@ -113,7 +92,7 @@ export default function Calendar() {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
                 /* Filters out any day that's not the cloneDay's current day */
-                let properDays = all.filter(event => event.startTime.includes(cloneDay.toUTCString().slice(0, 17)))
+                let properDays = allRequests.filter(event => event.startTime.includes(cloneDay.toISOString().slice(0, 10)))
                 days.push(
                     /* a div cell begin pushed into the calendar to display the events */
                     <div
@@ -149,7 +128,6 @@ export default function Calendar() {
      * @param {any} events 
      */
     const ModalEvent = (events) => {
-        console.log(events)
         return (
             <React.Fragment>
             </React.Fragment>
