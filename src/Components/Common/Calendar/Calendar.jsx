@@ -8,6 +8,10 @@ import CalModal from "./Calmodal";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
+/**
+ * Authors Armondo, Miki
+ * Displays the intervents that is avaliable to the Admin
+ */
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -24,14 +28,12 @@ export default function Calendar() {
               },
             },
           )
-          //  .then(res=>res.json())
           .then((response) => {
-            //Console.log used to check the fields to set up the adminItem for later
             getAllRequests(response.data);
           })
           .catch((err) => console.log());
       }, []);
-
+/* Display the header that allows for moving Month and Year */
     const header = () => {
         const dateFormat = "MMMM yyyy";
         return (
@@ -65,6 +67,7 @@ export default function Calendar() {
             </div>
         );
     };
+    /* Getting the days  */
     const days = () => {
         const dateFormat = "ddd";
         const days = [];
@@ -77,7 +80,9 @@ export default function Calendar() {
         }
         return <div className="days row">{days}</div>;
     };
+    /* Making the cells */
     const cells = () => {
+        /* this is a long winded way to get the data we needed */
         const monthStart = startOfMonth(currentDate);
         const monthEnd = endOfMonth(monthStart);
         const startDate = startOfWeek(monthStart);
@@ -91,10 +96,11 @@ export default function Calendar() {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                /* Filters out any day that's not the cloneDay's current day */
+                /* Filters out any day that's not the cloneDay's current day 
+                    by slicing off what isn't needed and checking with the startTime*/
                 let properDays = allRequests.filter(event => event.startTime.includes(cloneDay.toISOString().slice(0, 10)))
+                /* a div cell begin pushed into the calendar to display the events */
                 days.push(
-                    /* a div cell begin pushed into the calendar to display the events */
                     <div
                         className={`column cell ${!isSameMonth(day, monthStart)
                             ? "disabled" : isSameDay(day, selectedDate)
@@ -107,8 +113,9 @@ export default function Calendar() {
                     >
                         <span className="number">{formattedDate}</span>
                         <br/>
-                        {/* The div for the modal to use for its onclick */}
+                        {/*If there is one or more events display the Modal */}
                         {properDays.length > 0 &&
+                        /* Loading in the array of events */
                             <CalModal Events={properDays} />
                         }
                     </div>
@@ -121,17 +128,6 @@ export default function Calendar() {
             days = [];
         }
         return <div className="body">{rows}</div>;
-    }
-    /**
-     * On click of the Div bring up the modal and display the events
-     * events is an array of requests
-     * @param {any} events 
-     */
-    const ModalEvent = (events) => {
-        return (
-            <React.Fragment>
-            </React.Fragment>
-        )
     }
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));

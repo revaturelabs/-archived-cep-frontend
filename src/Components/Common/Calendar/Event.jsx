@@ -1,20 +1,32 @@
-import React , {useState}from 'react';
+import React, { useState, useEffect} from 'react';
 import moment from 'moment';
 import "./event.css";
 function Event(props) {
-    /*     batchId: 1,
-        userId: 2,
-        startTime: 3,
-        endTime: 4,
-        isAllDay: 5,
-        status: "Pending",
-        requestType: 7,
-        description: 8 */
-        const [displayBlock, setDisplay] = useState(false);
+    const [displayBlock, setDisplay] = useState(false);
+    const [colorCoding, setColorCoding] = useState("");
+    useEffect(()=>{
+        setColor(props.eventItem.requestType);
+    })
+    const setColor = (coding) =>{
+        switch(coding){
+            case "Intervention":
+                    setColorCoding("Green")
+                break;
+            case "Talent":
+                setColorCoding("Blue")
+                break;
+            case "Help":
+                setColorCoding("Yellow")
+                break;
+            default:
+                
+        }
+    }
+
     return (
-        <div style={{ backgroundColor: "Yellow", fontSize: 15 }} >
-            <button onClick={() => setDisplay(!displayBlock)} class="accordion">{"UserId: " + props.eventItem.userId + " BatchID " + props.eventItem.batchId }</button>
-            <div class="panel" style={{display: displayBlock ? "block":"none"}}>
+        <div  >
+            <button style={{ backgroundColor: colorCoding, fontSize: 15 }} onClick={() => setDisplay(!displayBlock)} class="accordion">{"UserId: " + props.eventItem.userId + " BatchID " + props.eventItem.batchId}</button>
+            <div class="panel" style={{ display: displayBlock ? "block" : "none" }}>
                 <p>Start: {moment(props.eventItem.startTime).format("hh:mm a")}</p>
                 <p>End: {moment(props.eventItem.endTime).format("hh:mm a")}</p>
                 <p>AllDay: {props.eventItem.isAllDay.toString()}</p>
@@ -23,5 +35,6 @@ function Event(props) {
         </div>
 
     )
+
 }
 export default Event;
