@@ -12,6 +12,10 @@ describe("Home Component", ()=>{
     it('should contain 15 div elements',()=> {
         const wrapper = mount(<Provider store={store}><Router><Drawer/></Router></Provider>);
         const divider= wrapper.find('div');
+<<<<<<< HEAD
         expect(divider.length).toBe(11);
+=======
+        expect(divider.length).toBe(15);
+>>>>>>> parent of f4e3642... merge stuff
     }) 
 })    
