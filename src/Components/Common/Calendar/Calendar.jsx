@@ -3,9 +3,8 @@ import {
     addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears
 } from "date-fns";
 import "./Cal.css";
-import Event from "./Event";
 import React, { useState } from "react";
-import Modal from "../Modal";
+import CalModal from "./Calmodal";
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -25,6 +24,16 @@ export default function Calendar() {
     }, {
         batchId: 1,
         userId: "Yusef",
+        startTime: new Date('7 Aug 2020 00:00:00 PDT').toUTCString(),
+        endTime: 4,
+        isAllDay: 5,
+        status: "Second",
+        requestType: 7,
+        description: 8
+
+    }, {
+        batchId: 1,
+        userId: "Broski",
         startTime: new Date('7 Aug 2020 00:00:00 PDT').toUTCString(),
         endTime: 4,
         isAllDay: 5,
@@ -121,7 +130,7 @@ export default function Calendar() {
                         <br/>
                         {/* The div for the modal to use for its onclick */}
                         {properDays.length > 0 &&
-                            <div /* onClick={ModalEvent(properDays)} */ style= {{backgroundColor: "Black"}}>Events {properDays.length}</div>
+                            <CalModal Events={properDays} />
                         }
                     </div>
                 );
@@ -140,9 +149,9 @@ export default function Calendar() {
      * @param {any} events 
      */
     const ModalEvent = (events) => {
+        console.log(events)
         return (
             <React.Fragment>
-                {alert("You clicked")}
             </React.Fragment>
         )
     }

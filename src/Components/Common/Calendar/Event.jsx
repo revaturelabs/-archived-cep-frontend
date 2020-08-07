@@ -9,8 +9,8 @@ function Event(props) {
     requestType: 7,
     description: 8 */
     return (
-        <div style={{backgroundColor:"Yellow", fontSize: "15px"}} onClick={() => alert(props.eventItem.status)}>
-    {props.eventItem.userId}
+        <div style={{backgroundColor:"Yellow", fontSize: 15 }} onClick={() => alert(props.eventItem.description)}>
+    User: {props.eventItem.userId} :: Batch: {props.eventItem.batchId} :: Start: {props.eventItem.startTime} :: End: {props.eventItem.endTime} :: AllDay: {props.eventItem.isAllDay} :: Type: {props.eventItem.requestType}
     </div>
 
     )
