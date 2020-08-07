@@ -47,7 +47,7 @@ export default function Login(props: any): ReactElement {
   const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
   const isReset: boolean = useSelector((state: any) => state.credReducer.isReset);
   const dispatch: any = useDispatch();
-  const role: String = "ADMIN";
+  const role: String = useSelector((state: any) => state.credReducer.role);
 
   const [userCredentials, setCredentials] = useState({
     email: "",
@@ -56,7 +56,7 @@ export default function Login(props: any): ReactElement {
 
   //Change the state of email and password
   function handleChange(event: any): void {
-    
+
     setCredentials({
       ...userCredentials,
       [event.target.name]: event.target.value,
@@ -65,10 +65,10 @@ export default function Login(props: any): ReactElement {
 
   function getUser(token: any): void {
     // Getting user object from Caliber by decoding jw
-    const {sub} = JWTD(token);
+    const { sub } = JWTD(token);
     //const sub: any = JWTD(token).sub;
     const email: string = sub;
-    
+
     Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email/", {
       params: {
         email: email,
@@ -127,7 +127,7 @@ export default function Login(props: any): ReactElement {
       return (
         <ResetPage oldPassword={userCredentials.password} />
       )
-    } else if (role=="MUD") {
+    } else if (isLoggedIn && role == "CLIENT") {
       return (
         <div
           className={styles.paper}
@@ -137,22 +137,11 @@ export default function Login(props: any): ReactElement {
           <h2>Please select from the options on the left</h2>
         </div>
       );
-    }  else if (isLoggedIn) {
+    } else if (isLoggedIn && role == "ADMIN") {
       return (<React.Fragment>
-<p>asdlfkjasdf</p>
-
-<p>asdlfkjasdf</p>
-
-<p>asdlfkjasdf</p>
-
-<p>asdlfkjasdf</p>
-
-<Calendar></Calendar>
-
-
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <Calendar></Calendar>
       </React.Fragment>
-          
-        
       );
     } else {
       return (
