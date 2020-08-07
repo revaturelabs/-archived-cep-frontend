@@ -14,6 +14,10 @@ import thunk from 'redux-thunk';
 import store from '../redux/store/index';
 import toJson from 'enzyme-to-json';
 import { Container } from "@material-ui/core";
+import { createStore, compose, applyMiddleware } from "redux";
+import batchReducer from '../redux/reducers/batchReducer';
+import credReducer from '../redux/reducers/credReducer';
+import mainReducer from '../redux/reducers';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -44,56 +48,35 @@ test('does the spidergraph get the props', () => {
 
 const batchId = "TR-1001";
 const associateEmail = "mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com";
-const wrapper2 = mount(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+
+const initialState = {
+    batchReducer: {
+        associateAssignments: [{
+            associate: {
+                email: 'mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com',
+                firstName: 'Ben',
+                lastName: 'Talham',
+            }
+        }]
+    },
+    credReducer: {
+        token: "minority"
+    }
+}
+const mockStore = createStore(
+    mainReducer,
+    initialState,
+)
+
+const wrapper2 = shallow(<Provider store={mockStore}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
 
 test('does the spidergraphpage gets props', () => {
     const graph = wrapper2.find(MySpiderGraph);
     expect(graph).not.toBe(null);
 });
 
-// jest.mock("react-redux", () => ({
-//     ...jest.requireActual("react-redux"),
-//     useSelector: jest.fn()
-// }));
+test('returns data when myspidergraphpage is called', () => {
+    const props = wrapper2.getElement();
 
-test('SpiderGraphPage return', () => {
-    const wrap = mount(<MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage>);
-    //expect(wrapper2.text()).toBe('Data still loading... ');
-
-    console.log("Instance: " + wrap.type());
+    console.log("Props: " + props);
 })
-
-<<<<<<< HEAD:src/__tests__/MySpiderGraph.test.js
-// test('returns data when myspidergraphpage is called', done => {
-//     withHooks(() => {
-//         // const store = mockStore({ startup: { complete: false } });
-//         // const wrapper3 = shallow(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
-
-
-//         var mock = new MockAdapter(axios);
-//         const data = { response: true };
-//         mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
-//         /* MySpiderGraphPage({ batchId, associateEmail }).then(response => {
-//             expect(response).toEqual(data);
-//             done();
-//         }) */
-//     })
-// })
-=======
-/* test('returns data when myspidergraphpage is called', done => {
-    withHooks(() => {
-        // const store = mockStore({ startup: { complete: false } });
-        // const wrapper3 = shallow(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
-
-
-        var mock = new MockAdapter(axios);
-        const data = { response: true };
-        mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
-
-        MySpiderGraphPage({ batchId, associateEmail }).then(response => {
-            expect(response).toEqual(data);
-            done();
-        })
-    })
-}) */
->>>>>>> MichaelJest:src/__tests__/MySpiderGraph.test.jsx

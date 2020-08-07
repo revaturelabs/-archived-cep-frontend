@@ -53,7 +53,7 @@ describe('testing associate list', () => {
     })
 
     it('props', () => {
-        const props = wrapper.find('div');
+        const props = wrapper.html();
         expect(props).toBeTruthy();
     })
 })
