@@ -1,10 +1,11 @@
 import { format, startOfWeek, addDays, startOfMonth, endOfMonth, isSameDay, addMonths, subMonths, isSameMonth, endOfWeek, parse } from "date-fns";
 import "./Cal.css";
+import Event from "./Event";
 import React, { useState } from "react";
-export default function Calendar () {
+export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
-    
+
     const header = () => {
         const dateFormat = "MMMM yyyy"; return (
             <div className="header row flex-middle">
@@ -23,7 +24,8 @@ export default function Calendar () {
                 </div>
             </div>
         );
-    }; const days = () => {
+    };
+    const days = () => {
         const dateFormat = "ddd";
         const days = [];
         let startDate = startOfWeek(currentDate); for (let i = 0; i < 7; i++) {
@@ -34,31 +36,36 @@ export default function Calendar () {
             );
         }
         return <div className="days row">{days}</div>;
-    }; const cells = () => {
+    };
+    const cells = () => {
         const monthStart = startOfMonth(currentDate);
         const monthEnd = endOfMonth(monthStart);
         const startDate = startOfWeek(monthStart);
         const endDate = endOfWeek(monthEnd);
         const dateFormat = "d";
-        const rows = []; let days = [];
+        const rows = [];
+        let days = [];
         let day = startDate;
-        let formattedDate = ""; while (day <= endDate) {
+        let formattedDate = "";
+        while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
-                const cloneDay = day; days.push(
+                const cloneDay = day;
+                 days.push(
                     <div
                         className={`column cell ${!isSameMonth(day, monthStart)
                             ? "disabled" : isSameDay(day, selectedDate)
                                 ? "selected" : ""}`}
                         key={day}
-                        onClick={() => onDateClick(parse("","",cloneDay))}
+                        onClick={() => onDateClick(parse("", "", cloneDay))}
                     >
                         <span className="number">{formattedDate}</span>
                         <span className="bg">{formattedDate}</span>
                     </div>
                 );
                 day = addDays(day, 1);
-            } rows.push(
+            }
+            rows.push(
                 <div className="row" key={day}> {days} </div>
             );
             days = [];
@@ -67,9 +74,11 @@ export default function Calendar () {
     }
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
-    }; const prevMonth = () => {
+    };
+    const prevMonth = () => {
         setCurrentDate(subMonths(currentDate, 1));
-    }; const onDateClick = day => {
+    };
+    const onDateClick = day => {
         setSelectedDate(day);
     }
     return (

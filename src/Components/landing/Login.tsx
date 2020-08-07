@@ -14,7 +14,7 @@ import { makeStyles, Button, Typography, TextField, StyleRules } from "@material
 import { getRoles } from "@testing-library/react";
 import { AnyAction } from "redux";
 import ResetPage from "./ResetPassword";
-import Calendar from "../Common/Calendar";
+import Calendar from "../Common/Calendar/Calendar";
 
 //Used for styling Material UI
 const useStyles: Function = makeStyles((theme): StyleRules => ({
