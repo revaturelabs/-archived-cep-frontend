@@ -27,7 +27,7 @@ import "./Drawer.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dispatchLoggedOut } from "../../../redux/actions/userAction";
-import conditionalRole from "./roleEnum";
+import conditionalRole from "../../../redux/actions/roleTypes";
 
 //To add a link to your page, add a <ListItem>, <ListItemIcon> and <ListItemText>
 //under <Drawer><List>
@@ -76,6 +76,14 @@ export default function MiniDrawer(props: any): ReactElement {
             </ListItemIcon>
             <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
           </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <Link to="/acceptuser">
+                <GroupAddIcon style={{ color: "#474C55" }} />
+              </Link>
+            </ListItemIcon>
+            <ListItemText style={{ color: "#474C55" }}>Account Verification</ListItemText>
+          </ListItem>
           </React.Fragment>
     }
     else
@@ -84,8 +92,8 @@ export default function MiniDrawer(props: any): ReactElement {
     }  
   }
 
-  function loadMakeRequest():any {
-    if(role!=conditionalRole.ROLE_ADMIN)
+  function loadClient():any {
+    if(role==conditionalRole.ROLE_CLIENT)
     {
       return <React.Fragment>
         <ListItem>
@@ -181,17 +189,10 @@ export default function MiniDrawer(props: any): ReactElement {
             <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
           </ListItem>
 
-          {loadMakeRequest()}
+          {loadClient()}
           {loadAdmin()}
 
-          <ListItem>
-            <ListItemIcon>
-              <Link to="/acceptuser">
-                <GroupAddIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Account Verification</ListItemText>
-          </ListItem>
+          
 
           <ListItem>
             <ListItemIcon>
