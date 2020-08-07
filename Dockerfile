@@ -1,4 +1,8 @@
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
-WORKDIR /usr/share/nginx/html
-COPY ./build .
+FROM node:10
+WORKDIR /usr/src/app
+COPY package*.json ./
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+RUN npm install
+COPY . .
+EXPOSE 80
+CMD ["npm", "start"]
