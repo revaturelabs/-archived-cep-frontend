@@ -56,14 +56,14 @@ jest.mock("react-redux", () => ({
     useSelector: jest.fn()
 }));
 
-// test('SpiderGraphPage return', () => {
-//     expect(wrapper2.text()).toBe('Data still loading... ');
+test('SpiderGraphPage return', () => {
+    const wrap = mount(<MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage>);
+    //expect(wrapper2.text()).toBe('Data still loading... ');
 
-//     wrapper2.mount();
-//     console.log("Instance: " + wrapper2.prop('requestUrl'));
-// })
+    console.log("Instance: " + wrap.type());
+})
 
-test('returns data when myspidergraphpage is called', done => {
+/* test('returns data when myspidergraphpage is called', done => {
     withHooks(() => {
         // const store = mockStore({ startup: { complete: false } });
         // const wrapper3 = shallow(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
@@ -73,10 +73,9 @@ test('returns data when myspidergraphpage is called', done => {
         const data = { response: true };
         mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
 
-        console.log('Spider Graph Comp: ' + wrapper2.debug())
-        /* MySpiderGraphPage({ batchId, associateEmail }).then(response => {
+        MySpiderGraphPage({ batchId, associateEmail }).then(response => {
             expect(response).toEqual(data);
             done();
-        }) */
+        })
     })
-})
+}) */
