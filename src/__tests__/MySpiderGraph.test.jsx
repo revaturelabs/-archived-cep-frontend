@@ -1,6 +1,6 @@
 // Written by Michael Worrell
 import React from "react";
-import Enzyme, { shallow, mount } from "enzyme";
+import Enzyme, { shallow, mount, render } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MySpiderGraph from "../Components/Batch/AssociateList/spidergraph/MySpiderGraph";
 import MySpiderGraphPage from "../Components/Batch/AssociateList/spidergraph/MySpiderGraphPage";
@@ -8,14 +8,16 @@ import { Provider } from 'react-redux';
 import Radar from "react-d3-radar";
 import * as axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { withoutHooks } from 'jest-react-hooks-shallow';
+import { withHooks, withoutHooks } from 'jest-react-hooks-shallow';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import store from '../redux/store/index';
+import toJson from 'enzyme-to-json';
+import { Container } from "@material-ui/core";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const mockStore = configureMockStore([thunk]);
+// const mockStore = configureMockStore([thunk]);
 
 const scores = [
     { traineeId: "restOfBatch", assessmentType: "AWS", score: 50.35925947825114, week: 1, weight: 100 },
@@ -54,20 +56,27 @@ jest.mock("react-redux", () => ({
     useSelector: jest.fn()
 }));
 
-test('returns data when myspidergrpah is called', done => {
-    withoutHooks(() => {
-        const store = mockStore({ startup: { complete: false } });
-        const wrapper3 = mount(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+// test('SpiderGraphPage return', () => {
+//     expect(wrapper2.text()).toBe('Data still loading... ');
+
+//     wrapper2.mount();
+//     console.log("Instance: " + wrapper2.prop('requestUrl'));
+// })
+
+test('returns data when myspidergraphpage is called', done => {
+    withHooks(() => {
+        // const store = mockStore({ startup: { complete: false } });
+        // const wrapper3 = shallow(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
 
 
         var mock = new MockAdapter(axios);
         const data = { response: true };
         mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
 
-
-        wrapper3.then(response => {
+        console.log('Spider Graph Comp: ' + wrapper2.debug())
+        /* MySpiderGraphPage({ batchId, associateEmail }).then(response => {
             expect(response).toEqual(data);
             done();
-        })
+        }) */
     })
 })
