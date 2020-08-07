@@ -2,7 +2,6 @@ import React, { useState, useEffect, ReactElement } from "react";
 import AccUserItem from "./AccUserItem";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-import { useEventCallback } from "@material-ui/core";
 
 //Show a list of requests
 export default function AccUserList():ReactElement {
@@ -45,23 +44,13 @@ export default function AccUserList():ReactElement {
         })
         .catch((err) => console.log("error: " + err));
   }, []);
-  if (realData.length == 0)
-  {
-    return <React.Fragment>
-      <h1>No New Users</h1>
-    </React.Fragment>
-  }
-  else
-  {
-    return (
+
+  //Render the list of accounts
+  return (
     <div>
       {realData.map((data: any) => {
         return <AccUserItem data={data} key={data.userId}/>;
       })}
     </div>
   );
-
-  }
-  //Render the list of accounts
-  
 }

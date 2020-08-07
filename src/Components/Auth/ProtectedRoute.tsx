@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import conditionalRole from "../../redux/actions/roleTypes";
+import conditionalRole from "../Common/Drawer/roleEnum";
 
 //This prevents the redirection to a certain page if you're not logged in
 //In addition to checking whether or not your admin or client preventing redirection to pages of the other's
