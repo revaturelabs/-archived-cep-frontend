@@ -56,13 +56,14 @@ test('does the spidergraphpage gets props', () => {
 //     useSelector: jest.fn()
 // }));
 
-// test('SpiderGraphPage return', () => {
-//     expect(wrapper2.text()).toBe('Data still loading... ');
+test('SpiderGraphPage return', () => {
+    const wrap = mount(<MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage>);
+    //expect(wrapper2.text()).toBe('Data still loading... ');
 
-//     wrapper2.mount();
-//     console.log("Instance: " + wrapper2.prop('requestUrl'));
-// })
+    console.log("Instance: " + wrap.type());
+})
 
+<<<<<<< HEAD:src/__tests__/MySpiderGraph.test.js
 // test('returns data when myspidergraphpage is called', done => {
 //     withHooks(() => {
 //         // const store = mockStore({ startup: { complete: false } });
@@ -78,3 +79,21 @@ test('does the spidergraphpage gets props', () => {
 //         }) */
 //     })
 // })
+=======
+/* test('returns data when myspidergraphpage is called', done => {
+    withHooks(() => {
+        // const store = mockStore({ startup: { complete: false } });
+        // const wrapper3 = shallow(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+
+
+        var mock = new MockAdapter(axios);
+        const data = { response: true };
+        mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
+
+        MySpiderGraphPage({ batchId, associateEmail }).then(response => {
+            expect(response).toEqual(data);
+            done();
+        })
+    })
+}) */
+>>>>>>> MichaelJest:src/__tests__/MySpiderGraph.test.jsx

@@ -15,6 +15,7 @@ type props = {
 function AssociateListItem(props: any) {
 
   const {batch, associate} = props;
+  
   return (
     <Grid item sm={6}>
       <Card>
