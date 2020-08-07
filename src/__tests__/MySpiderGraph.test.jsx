@@ -5,14 +5,17 @@ import Adapter from "enzyme-adapter-react-16";
 import MySpiderGraph from "../Components/Batch/AssociateList/spidergraph/MySpiderGraph";
 import MySpiderGraphPage from "../Components/Batch/AssociateList/spidergraph/MySpiderGraphPage";
 import { Provider } from 'react-redux';
-import store from '../redux/store/index';
-import { render } from "@testing-library/react";
 import Radar from "react-d3-radar";
 import * as axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { withoutHooks } from 'jest-react-hooks-shallow';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import store from '../redux/store/index';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const mockStore = configureMockStore([thunk]);
 
 const scores = [
     { traineeId: "restOfBatch", assessmentType: "AWS", score: 50.35925947825114, week: 1, weight: 100 },
@@ -46,20 +49,25 @@ test('does the spidergraphpage gets props', () => {
     expect(graph).not.toBe(null);
 });
 
+jest.mock("react-redux", () => ({
+    ...jest.requireActual("react-redux"),
+    useSelector: jest.fn()
+}));
+
 test('returns data when myspidergrpah is called', done => {
     withoutHooks(() => {
+        const store = mockStore({ startup: { complete: false } });
+        const wrapper3 = mount(<Provider store={store}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+
+
         var mock = new MockAdapter(axios);
-        const data = {response: true};
+        const data = { response: true };
         mock.onGet('http://localhost:9015/graph/associate/TR-1001/mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com').reply(200, data);
-        
-        MySpiderGraphPage(batchId, associateEmail).then(response => {
+
+
+        wrapper3.then(response => {
             expect(response).toEqual(data);
             done();
         })
-        //console.log(what);
-        // wrap3.then(response => {
-        //     expect(response).toEqual(scores);
-        //     done();
-        // })
     })
 })
