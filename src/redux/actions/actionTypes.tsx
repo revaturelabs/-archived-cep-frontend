@@ -8,3 +8,4 @@ export const ADD_LINK: string = "STORE_LINK";
 export const ADD_USER_OBJECT: string = "ADD_USER_OBJECT";
 export const LOGGED_IN: string = "LOGGED_IN";
 export const LOGGED_OUT: string = "LOGGED_OUT";
+export const IS_RESET: string = "IS_RESET";

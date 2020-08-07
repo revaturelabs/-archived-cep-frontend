@@ -104,10 +104,28 @@ const [userInformation, setInformation] = useState({
       body: raw,
       redirect: "follow",
     };
+
     /**Connect backend in here 
     const test= await fetch(apiBasePath + "/users/add", requestOptions);
     console.log(await test.status);
     */
+
+    Axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/add", {
+      firstName: userInformation.firstName,
+      lastName: userInformation.lastName,
+      email: userInformation.email,
+      status: "pending",
+      password: "password",
+      role: "CLIENT",
+      company: userInformation.company,
+      phone: userInformation.phone
+    },
+    )
+      .then((result) => {
+        alert(result.data);
+      })
+      .catch((err) => console.log("error: " + err));
+
   }
 function registerRender(): ReactElement {
       return (

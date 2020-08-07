@@ -1,15 +1,19 @@
 import React, { useState, ReactElement, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  dispatchRole,
+  dispatchUserID,
   dispatchToken,
   dispatchUserObject,
   dispatchLoggedIn,
+  dispatchIsReset,
 } from "../../redux/actions/userAction";
 import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
 import { getRoles } from "@testing-library/react";
 import { AnyAction } from "redux";
+import ResetPage from "./ResetPassword";
 
 //Used for styling Material UI
 const useStyles: Function = makeStyles((theme): StyleRules => ({
@@ -40,6 +44,7 @@ export default function Login(props: any): ReactElement {
   const styles: styleINF = useStyles();
 
   const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
+  const isReset: boolean = useSelector((state: any) => state.credReducer.isReset);
   const dispatch: any = useDispatch();
 
   const [userCredentials, setCredentials] = useState({
@@ -72,6 +77,11 @@ export default function Login(props: any): ReactElement {
     })
       .then((result) => {
         dispatch(dispatchUserObject(result.data));
+        dispatch(dispatchRole(result.data.role));
+        dispatch(dispatchUserID(result.data.userId));
+        dispatch(dispatchIsReset(result.data.resetPassword));
+        console.log(isReset);
+        console.log(result.data.resetPassword);
       })
       .catch((err) => console.log("error username:" + err));
   }
@@ -109,7 +119,13 @@ export default function Login(props: any): ReactElement {
   function conditionalRender(): ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
-    if (isLoggedIn) {
+    if (isReset) {
+      console.log("In IsReset Rendering Function");
+      console.log(isReset);
+      return (
+        <ResetPage oldPassword={userCredentials.password} />
+      )
+    } else if (isLoggedIn) {
       return (
         <div
           className={styles.paper}
