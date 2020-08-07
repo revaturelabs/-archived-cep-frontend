@@ -4,5 +4,5 @@ COPY package*.json ./
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 RUN npm install
 COPY . .
-EXPOSE 80
+EXPOSE 3000
 CMD ["npm", "start"]
