@@ -2,7 +2,6 @@ import React, { useState, useEffect, ReactElement } from "react";
 import AccUserItem from "./AccUserItem";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-
 import { Grid } from "@material-ui/core";
 
 import { useEventCallback } from "@material-ui/core";
@@ -28,7 +27,6 @@ export default function AccUserList(): ReactElement {
       })
       .catch((err) => console.log("error: " + err));
   }, []);
-
 
   function conditionalRender(): ReactElement {
     if (realData.length == 0) {

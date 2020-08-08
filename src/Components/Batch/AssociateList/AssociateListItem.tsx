@@ -5,7 +5,6 @@ import { Card, CardHeader, CardContent, Grid } from '@material-ui/core';
 function AssociateListItem(props: any) {
 
   const {batch, associate} = props;
-  
   return (
     <Grid item sm={6}>
       <Card>
