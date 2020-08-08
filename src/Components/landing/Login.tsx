@@ -39,18 +39,16 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   },
 }));
 
+interface styleINF {
+  paper: string,
+  form: string,
+  input: string,
+  submit: string
+}
 //Used render the login component
 export default function Login(props: any): ReactElement {
 
-  interface styleINF {
-    paper: string,
-    form: string,
-    input: string,
-    submit: string
-  }
-
   const styles: styleINF = useStyles();
-
   const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
   const isReset: boolean = useSelector((state: any) => state.credReducer.isReset);
   const dispatch: any = useDispatch();
@@ -59,6 +57,7 @@ export default function Login(props: any): ReactElement {
   const [userCredentials, setCredentials] = useState({
     email: "",
     password: "",
+    message: ""
   });
 
   //Change the state of email and password
@@ -89,8 +88,6 @@ export default function Login(props: any): ReactElement {
         dispatch(dispatchRole(result.data.role));
         dispatch(dispatchUserID(result.data.userId));
         dispatch(dispatchIsReset(result.data.resetPassword));
-        console.log(isReset);
-        console.log(result.data.resetPassword);
       })
       .catch((err) => console.log("error username:" + err));
   }
@@ -122,7 +119,13 @@ export default function Login(props: any): ReactElement {
         getUser(result.token);
         dispatch(dispatchLoggedIn());
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        console.log("error", error);
+          setCredentials({
+            ...userCredentials,
+            message: "Invalid login information"
+          })
+      });
   }
 
   function conditionalRender(): ReactElement {
@@ -188,6 +191,7 @@ export default function Login(props: any): ReactElement {
               Log In
             </Button>
           </form>
+          <h3>{userCredentials.message}</h3>
         </div>
       );
     }
