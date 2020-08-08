@@ -114,9 +114,9 @@ const [userInformation, setInformation] = useState({
       firstName: userInformation.firstName,
       lastName: userInformation.lastName,
       email: userInformation.email,
-      status: "pending",
-      password: "password",
-      role: "CLIENT",
+      //status: "pending",
+      //password: "password",
+      //role: "ROLE_CLIENT",
       company: userInformation.company,
       phone: userInformation.phone
     },
