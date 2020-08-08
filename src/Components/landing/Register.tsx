@@ -64,11 +64,6 @@ export default function Register(props: any): ReactElement {
   async function handleSubmit(event: SyntheticEvent) {
     //Requesting for the token to authenticate user
     event.preventDefault();
-    console.log(userInformation.firstName)
-    console.log(userInformation.lastName)
-    console.log(userInformation.company)
-    console.log(userInformation.phone)
-    console.log(userInformation.email)
 
     if (!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email) {
       setInformation({
@@ -116,10 +111,29 @@ export default function Register(props: any): ReactElement {
       phone: userInformation.phone
     },
     )
-      .then((result) => {
-        alert(result.data);
+      .then(() => {
+        userInformation.firstName = "";
+        userInformation.lastName = "";
+        userInformation.email = "";
+        userInformation.company = "";
+        userInformation.phone = "";
+        setInformation({
+          ...userInformation,
+          message: "Your account request has been submitted successfully!",
+        });
+
       })
-      .catch((err) => console.log("error: " + err));
+      .catch((error) => {
+        console.log("error: ", error);
+
+        if (error.response.status == 400) {
+          setInformation({
+            ...userInformation,
+            message: "The email entered may already be in use",
+          });
+        }
+
+      });
 
   }
   function registerRender(): ReactElement {
@@ -130,7 +144,7 @@ export default function Register(props: any): ReactElement {
         </Typography>
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
-            required            
+            required
             id="firstName"
             name="firstName"
             placeholder="First Name"
@@ -152,7 +166,7 @@ export default function Register(props: any): ReactElement {
             type="email"
             id="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="foobar@gmail.com"
             onChange={handleChange}
             className={styles.input}
             value={userInformation.email}
@@ -166,13 +180,12 @@ export default function Register(props: any): ReactElement {
             className={styles.input}
             value={userInformation.company}
           />
-
           <input
             required
             id="phone"
             name="phone"
             type="tel"
-            placeholder="555-555-5555"
+            placeholder="9998887777"
             pattern="[0-9]{10}"
             onChange={handleChange}
             className={styles.input}
@@ -188,7 +201,7 @@ export default function Register(props: any): ReactElement {
             Create New User
             </Button>
         </form>
-        <p>{userInformation.message}</p>
+        <h3>{userInformation.message}</h3>
       </div>
     );
   }

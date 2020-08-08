@@ -102,7 +102,7 @@ export default function Login(props: any): ReactElement {
 
 
     const raw: string = JSON.stringify({
-      email: userCredentials.email,
+      email: userCredentials.email.toLowerCase(),
       password: userCredentials.password,
     });
 
