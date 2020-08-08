@@ -25,17 +25,18 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     color: "#F26925",
     backgroundColor: "transparent",
     borderColor: "transparent",
-    alignSelf: "center"
+    alignSelf: "center",
+    cursor: "pointer"
   }
 }));
 
+interface styleINF {
+  root: string,
+  image: string,
+  toggleBtn: string
+}
 //Renders the login page and its components
 export default function LandingPage(): ReactElement {
-  interface styleINF {
-    root: string,
-    image: string,
-    toggleBtn: string
-  }
 
   const [filter, setFilter] = React.useState(true);
   const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);

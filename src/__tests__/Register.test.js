@@ -42,7 +42,7 @@ describe("register comp test", () => {
         lastName: "est",
         company: "tester",
         phone: "t-e-s-t",
-        message: "it's a test"
+        message: "it's a test",
     }
 
     let wrapper;
@@ -88,7 +88,8 @@ describe("reset password test", () => {
     const userPassword = {
         newPassword: "test",
         rePassword: "test",
-        message: "t"
+        message: "t",
+        handleSubmit: jest.fn(),
     }
 
     let wrapper;
@@ -100,7 +101,7 @@ describe("reset password test", () => {
         process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' })
     })
 
-    wrapper = mount(<Provider store ={mockStore}><ResetPage oldPassword={"oldPass"}></ResetPage></Provider>);
+    wrapper = shallow(<Provider store ={mockStore}><ResetPage oldPassword={"oldPass"} {...userPassword}></ResetPage></Provider>);
 
     test("ResetPass Page html", () => {
         const html = wrapper.html();
@@ -111,6 +112,7 @@ describe("reset password test", () => {
     test("ResetPass Page new and old pass compare", () => {
         wrapper.find('button').simulate('click');
 
-        expect(setPassword).toHaveBeenCalledWith(1);
+        expect(userPassword.handleSubmit).toHaveBeenCalledTimes(1);
+        expect(userPassword.handleSubmit).toBeCalledWith({newPassword: userPassword.newPassword, rePassword: userPassword.rePassword, message: userPassword.message})
     })
 })

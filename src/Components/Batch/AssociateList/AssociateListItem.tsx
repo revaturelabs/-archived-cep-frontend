@@ -2,16 +2,6 @@ import React from 'react';
 import Spider from './spidergraph/MySpiderGraphPage'
 import { Card, CardHeader, CardContent, Grid } from '@material-ui/core';
 
-interface associateINF
-{
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-type props = {
-  batch: object;
-  associate: associateINF;
-}
 function AssociateListItem(props: any) {
 
   const {batch, associate} = props;
