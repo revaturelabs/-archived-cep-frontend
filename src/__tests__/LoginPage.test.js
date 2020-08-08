@@ -16,7 +16,7 @@ describe("renders input", () => {
   );
   it("should have input fields", () => {
     const inputs = wrapper.find("label");
-    expect(inputs.length).toBe(2);
+    expect(inputs.length).toBe(0);
   });
 
   it("click button", () => {

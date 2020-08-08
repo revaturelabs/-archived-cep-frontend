@@ -139,4 +139,10 @@ describe("intervention comp test", () => {
 
         //console.log("This: " + wrapper.find('InputLabel'))
     })
+
+    test("intervention prop test", () => {
+        const prop = wrapper.html();
+
+        expect(prop).toBeTruthy();
+    })
 })
