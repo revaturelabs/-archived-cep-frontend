@@ -9,7 +9,7 @@ export default function MySpiderGraph(props: any): ReactElement {
         label: string,
         key: string
       }
-      let tempObj: tempINF = {label: obj.assesmentType, key: obj.assessmentType};
+      let tempObj: tempINF = {label: obj.assessmentType, key: obj.assessmentType};
      
     //  tempObj.key = obj.assessmentType;
     //  tempObj.label = obj.assessmentType;

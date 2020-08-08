@@ -1,4 +1,4 @@
-import React, { useState, ReactElement} from "react";
+import React, { useState, ReactElement } from "react";
 
 import {
   Grid,
@@ -53,13 +53,11 @@ interface propsINF {
   handleClick
 }
 
-export default function MyBatchesList(props: propsINF) :ReactElement{
+export default function BatchComponent(props: propsINF): ReactElement {
   const styles = useStyles();
   const [statusColor, setStatusColor] = useState("#F26925");
-  let title = `${props.batch.name} 
-    (${props.batch.startDate})`;
-  //${props.batch.batchId}
- 
+  let title = `${props.batch.name}`;
+
   return (
     <Card className={styles.spacing}>
       <Link
@@ -73,17 +71,16 @@ export default function MyBatchesList(props: propsINF) :ReactElement{
             <Grid container>
               <Grid item className={styles.left}>
                 <Typography variant="overline">
-                  Name: {props.batch.name}
-                  <p></p>
                   Location: {props.batch.location}
-                  <p></p>
-                  Dates: {props.batch.startDate}
-                  {" to "}
-                  {props.batch.endDate}
-                  <p></p>
+                  <br />
                   Skill: {props.batch.skill}
-                  <p></p>
+                  <br />
+                  Start Date: {props.batch.startDate}
+                  <br />
+                  End Date: {props.batch.endDate}
+                  <br />
                   Progress: Week {props.batch.currentWeek}
+                  <br />
                 </Typography>
               </Grid>
             </Grid>
