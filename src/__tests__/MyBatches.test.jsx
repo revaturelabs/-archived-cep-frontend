@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MyBatches from "../Components/batches/MyBatches";
-import MyBatchesList from "../Components/batches/MyBatchesList";
+import BatchComponent from "../Components/batches/BatchComponent";
 import { Provider } from 'react-redux';
 import store from '../redux/store/index';
 
@@ -30,7 +30,7 @@ describe("MyBatches Component", () => {
  
   it('click batch', () => {
     const mockCallBack = jest.fn();
-    const wrapper2 = shallow((<MyBatchesList key={id} batch={batch} handleClick={mockCallBack} />));
+    const wrapper2 = shallow((<BatchComponent key={id} batch={batch} handleClick={mockCallBack} />));
     const submitButton = wrapper2.find('Link');
     expect(submitButton.length).toBe(1);
     submitButton.simulate('click');
