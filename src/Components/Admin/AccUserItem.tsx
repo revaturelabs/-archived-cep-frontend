@@ -48,22 +48,7 @@ const useStyles: Function = makeStyles((): StyleRules => ({
 }));
 
 //Display individual account 
-
-interface dataObject {
-    firstName: string,
-    lastName: string,
-    email: string,
-    company: string,
-    phone: string
-}
-
-interface props {
-    data: dataObject
-}
-
-export default function AccUserItem({data}: props): ReactElement {
-
-
+export default function AccUserItem(props: any): ReactElement {
     interface styleINF {
         root: string,
         card: string,
