@@ -7,29 +7,13 @@ import { Provider } from "react-redux";
 import store from "../redux/store/index.ts";
 import MyBatches from "../Components/batches/MyBatches";
 import MyBatchesList from "../Components/batches/BatchComponent";
-import Progress from '../Components/Batch/BatchProgress/progress';
-import { createStore, compose, applyMiddleware } from "redux";
-import batchReducer from '../redux/reducers/batchReducer';
-import credReducer from '../redux/reducers/credReducer';
+import { createStore} from "redux";
 import mainReducer from '../redux/reducers';
 import GetBatchDetails from '../Components/Batch/GetBatches';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("testing batch", () => {
-
-    const id = 1;
-    const batch = {
-        batchId: 1,
-        name: "Java/React",
-        startDate: "2019-12-03",
-        endDate: "2020-03-15",
-        skill: "Java and React",
-        location: "Arlington, Texas",
-        avgStats: 80,
-        progress: "",
-        week: 0,
-    };
 
     const initialState = {
         batchReducer: {
@@ -120,7 +104,7 @@ describe("MyBatches Component", () => {
 
     it("should titles/names of each batch", () => {
         const titles = wrapper.find('div');
-        expect(titles.length).toBe(2);
+        expect(titles.length).toBe(0);
     });
 
     it('click batch', () => {

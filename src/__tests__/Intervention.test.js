@@ -2,14 +2,9 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Admin from "../Components/Admin/AdminList";
 import store from "../redux/store/index.ts";
 import { Provider } from "react-redux";
-import AssociateList from '../Components/Batch/AssociateList/AssociateList';
-import { ExpansionPanelActions } from '@material-ui/core';
-import { createStore, compose, applyMiddleware } from "redux";
-import batchReducer from '../redux/reducers/batchReducer';
-import credReducer from '../redux/reducers/credReducer';
+import { createStore} from "redux";
 import mainReducer from '../redux/reducers';
 import GetInterventions from '../Components/Common/Intervention/GetInterventions';
 import RequestForm from '../Components/Common/Intervention/Intervention';
@@ -51,7 +46,7 @@ describe("get intervention test", () => {
         };
     });
 
-    const axios = require('axios');
+    //const axios = require('axios');
 
     beforeEach(() => {
         wrapper = mount(<Provider store={store}><GetInterventions/></Provider>);

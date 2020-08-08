@@ -45,7 +45,7 @@ export default function RequestForm(props): ReactElement {
 
   function handleChange(event: any): void {
     event.preventDefault();
-    console.log(typeof (event));
+    //console.log(typeof (event));
     setTrigger({ ...trigger, [event.target.name]: event.target.value });
   }
 
