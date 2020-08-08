@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import MyBatchesList from "./MyBatchesList";
+import BatchComponent from "./BatchComponent";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -53,7 +53,7 @@ export default function MyBatches(): ReactElement {
           return (
             //added key to Grid to remove error - Michael Worrell
             <Grid item xs={3} key={batch.batchId + 1}> 
-              <MyBatchesList
+              <BatchComponent
                 key={batch.batchId}
                 batch={batch}
                 handleClick={checkBatch}
@@ -61,13 +61,6 @@ export default function MyBatches(): ReactElement {
             </Grid>
           );
         })}
-        {/* </Grid>
-        <Grid item xs>
-         <MyBatchesList
-            key={batches[1].id}
-            batch={batches[1]}
-            handleClick={checkBatch}
-      />*/}
       </Grid>
     </div>
   );
