@@ -68,7 +68,7 @@ describe("get intervention test", () => {
 
     test("axios", ()=> {
         wrapper.find('button').props().onClick();
-        console.log("wrapper: " + wrapper.html())
+        //console.log("wrapper: " + wrapper.html())
     })
 })
 
@@ -133,7 +133,7 @@ describe("intervention comp test", () => {
     test("intervention info test", () => {
         wrapper.find('button').props().onClick();
         
-        console.log('OOF: ' + wrapper.html());
+        //console.log('OOF: ' + wrapper.html());
 
         //expect(setTrigger).toHaveBeenCalledWith(1);
 
