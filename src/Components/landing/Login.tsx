@@ -119,12 +119,10 @@ export default function Login(props: any): ReactElement {
       })
       .catch((error) => {
         console.log("error", error);
-        if (error.message === "Invalid token specified") {
           setCredentials({
             ...userCredentials,
             message: "Invalid login information"
           })
-        }
       });
   }
 
