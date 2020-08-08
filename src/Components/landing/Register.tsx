@@ -112,9 +112,6 @@ export default function Register(props: any): ReactElement {
       firstName: userInformation.firstName,
       lastName: userInformation.lastName,
       email: userInformation.email.toLowerCase(),
-      status: "pending",
-      password: "password",
-      role: "CLIENT",
       company: userInformation.company,
       phone: userInformation.phone
     },
