@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button } from "@material-ui/core";
-import { useSelector } from 'react-redux';
 import Event from './Event';
 
 /**
