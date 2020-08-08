@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 export default function Calendar() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const token = useSelector((state) => state.credReducer.token);
+    const token = useSelector((state: any) => state.credReducer.token);
     const [allRequests, getAllRequests] = useState([]);
 
     useEffect(() => {
@@ -69,9 +69,10 @@ export default function Calendar() {
     };
     /* Getting the days  */
     const days = () => {
-        const dateFormat = "ddd";
-        const days = [];
-        let startDate = startOfWeek(currentDate); for (let i = 0; i < 7; i++) {
+        const dateFormat: string = "ddd";
+        const days: Array<any> = [];
+        let startDate: Date  = startOfWeek(currentDate);
+         for (let i = 0; i < 7; i++) {
             days.push(
                 <div className="column col-center" key={i}>
                     {format(addDays(startDate, i), dateFormat)}
@@ -83,29 +84,29 @@ export default function Calendar() {
     /* Making the cells */
     const cells = () => {
         /* this is a long winded way to get the data we needed */
-        const monthStart = startOfMonth(currentDate);
-        const monthEnd = endOfMonth(monthStart);
-        const startDate = startOfWeek(monthStart);
-        const endDate = endOfWeek(monthEnd);
-        const dateFormat = "d";
-        const rows = [];
-        let days = [];
-        let day = startDate;
-        let formattedDate = "";
+        const monthStart: Date = startOfMonth(currentDate);
+        const monthEnd: Date = endOfMonth(monthStart);
+        const startDate: Date = startOfWeek(monthStart);
+        const endDate: Date = endOfWeek(monthEnd);
+        const dateFormat: string = "d";
+        const rows: Array<any> = [];
+        let days: Array<any> = [];
+        let day: Date = startDate;
+        let formattedDate: string = "";
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
                 /* Filters out any day that's not the cloneDay's current day 
                     by slicing off what isn't needed and checking with the startTime*/
-                let properDays = allRequests.filter(event => event.startTime.includes(cloneDay.toISOString().slice(0, 10)))
+                let properDays: any = allRequests.filter((event: any) => event.startTime.includes(cloneDay.toISOString().slice(0, 10)))
                 /* a div cell begin pushed into the calendar to display the events */
                 days.push(
                     <div
                         className={`column cell ${!isSameMonth(day, monthStart)
                             ? "disabled" : isSameDay(day, selectedDate)
                                 ? "selected" : ""}`}
-                        key={day}
+                        key={day.toDateString()}
 
 
                         onClick={() => onDateClick(parse("", "", cloneDay))}
@@ -123,7 +124,7 @@ export default function Calendar() {
                 day = addDays(day, 1);
             }
             rows.push(
-                <div className="row" key={day}> {days} </div>
+                <div className="row" key={day.toDateString()}> {days} </div>
             );
             days = [];
         }
@@ -141,7 +142,7 @@ export default function Calendar() {
     const prevYear = () => {
         setCurrentDate(subYears(currentDate, 1));
     };
-    const onDateClick = (day) => {
+    const onDateClick = (day: Date) => {
         setSelectedDate(day);
 
     }
