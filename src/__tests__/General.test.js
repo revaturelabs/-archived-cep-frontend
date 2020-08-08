@@ -6,6 +6,8 @@ import { createStore} from "redux";
 import mainReducer from '../redux/reducers';
 import App from "../Components/App";
 
+Enzyme.configure({ adapter: new Adapter() });
+
 describe("App.tsx test", () => {
     const initialState = {
         credReducer: {

@@ -5,9 +5,7 @@ import { Provider } from "react-redux";
 import store from "../redux/store/index.ts";
 import BlankPage from '../Components/Common/BlankPage';
 import {Forbbiden, NotFound} from '../Components/Common/ErrorPages';
-import SimpleModal from '../Components/Common/Modal';
 import GetInterventions from '../Components/Common/Intervention/GetInterventions';
-import RequestForm from '../Components/Common/Intervention/Intervention';
 
 Enzyme.configure({ adapter: new Adapter() });
 
