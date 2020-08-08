@@ -47,7 +47,7 @@ const useStyles: Function = makeStyles((): StyleRules => ({
   },
 }));
 
-console.log(typeof (useStyles));
+//console.log(typeof (useStyles));
 
 //Display individual requests
 export default function AdminItem(props: any): ReactElement {
@@ -161,7 +161,7 @@ export default function AdminItem(props: any): ReactElement {
 
     axios(config)
       .then(function (response: any) {
-        console.log(JSON.stringify(response.data));
+        //console.log(JSON.stringify(response.data));
         changeUserData(response.data);
       })
       .catch(function (error: any) {

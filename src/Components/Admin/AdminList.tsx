@@ -26,7 +26,7 @@ export default function AdminList():ReactElement {
       //  .then(res=>res.json())
       .then((response) => {
         //Console.log used to check the fields to set up the adminItem for later
-        console.log(response.data);
+        //console.log(response.data);
         changeRealData(response.data);
       })
       .catch((err) => console.log());
