@@ -76,7 +76,7 @@ export default function Login(props: any): ReactElement {
     
     Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email/", {
       params: {
-        email: email,
+        email: email.toLowerCase(),
       },
       headers: {
         Authorization: `Bearer ${token}`,

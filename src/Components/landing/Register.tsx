@@ -84,16 +84,6 @@ export default function Register(props: any): ReactElement {
       });
     }
 
-    // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // if (!re.test(String(userInformation.email).toLowerCase())) {
-    //   setInformation({
-    //     ...userInformation,
-    //     message: "This is invalide email format",
-    //   });
-    //   return;
-    // }
-
-
     const myHeaders: any = new Headers();
     myHeaders.append("Content-Type", "application/json");
     const raw: string = JSON.stringify({
@@ -121,7 +111,7 @@ export default function Register(props: any): ReactElement {
     Axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/add", {
       firstName: userInformation.firstName,
       lastName: userInformation.lastName,
-      email: userInformation.email,
+      email: userInformation.email.toLowerCase(),
       status: "pending",
       password: "password",
       role: "CLIENT",
