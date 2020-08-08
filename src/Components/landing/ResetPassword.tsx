@@ -14,9 +14,8 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     width: "50%",
     minHeight: "100px",
     margin: 'auto',
-    marginTop: "10%",
   },
-  warning: {
+  text: {
     textAlign: "center"
   }
 }));
@@ -25,11 +24,12 @@ interface props {
   oldPassword: string
 }
 
-export default function ResetPage({oldPassword}: props): ReactElement {
-  interface styleINF {
-    form: string
-    warning: string
-  }
+interface styleINF {
+  form: string
+  text: string
+}
+
+export default function ResetPage({ oldPassword }: props): ReactElement {
 
   const styles: styleINF = useStyles();
 
@@ -78,19 +78,20 @@ export default function ResetPage({oldPassword}: props): ReactElement {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then(function (response) {
-      dispatch(dispatchIsReset(false));
-      alert(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
+      .then(function (response) {
+        dispatch(dispatchIsReset(false));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   function Render(): ReactElement {
     return (
       <div>
+        <h2 className={styles.text}>Welcome to your new account!</h2>
+        <h2 className={styles.text}>Please create a custom password to continue</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -126,7 +127,7 @@ export default function ResetPage({oldPassword}: props): ReactElement {
           >
             Reset Password
             </Button>
-          <p className={styles.warning}>{userPassword.message}</p>
+          <p className={styles.text}>{userPassword.message}</p>
         </form>
       </div>
     )

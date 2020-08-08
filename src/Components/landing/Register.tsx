@@ -23,8 +23,15 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     width: "100%",
     marginTop: theme.spacing(1),
   },
+  input: {
+    width: "100%",
+    padding: "15px 15px",
+    marginBottom: "15px",
+    fontSize: "18px"
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#F26925"
   },
 }));
 
@@ -33,16 +40,17 @@ export default function Register(props: any): ReactElement {
   interface styleINF {
     paper: string,
     form: string,
-    submit: string
+    submit: string,
+    input: string
   }
   const styles: styleINF = useStyles();
-const [userInformation, setInformation] = useState({
+  const [userInformation, setInformation] = useState({
     email: "",
-    firstName:"",
-    lastName:"",
-    company:"",
-    phone:"",
-    message:""
+    firstName: "",
+    lastName: "",
+    company: "",
+    phone: "",
+    message: ""
   });
 
   function handleChange(event: any): void {
@@ -55,35 +63,35 @@ const [userInformation, setInformation] = useState({
 
   async function handleSubmit(event: SyntheticEvent) {
     //Requesting for the token to authenticate user
-    event.preventDefault(); 
+    event.preventDefault();
     console.log(userInformation.firstName)
     console.log(userInformation.lastName)
     console.log(userInformation.company)
     console.log(userInformation.phone)
     console.log(userInformation.email)
 
-    if(!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email ) {
+    if (!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email) {
       setInformation({
         ...userInformation,
-          message: "Please fill in all information",
+        message: "Please fill in all information",
       });
       return;
     }
-    else{
+    else {
       setInformation({
         ...userInformation,
-          message: "",
+        message: "",
       });
     }
 
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(String(userInformation.email).toLowerCase())){
-      setInformation({
-        ...userInformation,
-          message: "This is invalide email format",
-      });
-      return;
-    }
+    // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // if (!re.test(String(userInformation.email).toLowerCase())) {
+    //   setInformation({
+    //     ...userInformation,
+    //     message: "This is invalide email format",
+    //   });
+    //   return;
+    // }
 
 
     const myHeaders: any = new Headers();
@@ -127,92 +135,76 @@ const [userInformation, setInformation] = useState({
       .catch((err) => console.log("error: " + err));
 
   }
-function registerRender(): ReactElement {
-      return (
-        <div className={styles.paper}>
-          <Typography component="h1" variant="h5">
+  function registerRender(): ReactElement {
+    return (
+      <div className={styles.paper}>
+        <Typography component="h1" variant="h5">
+          Apply for a new account here!
+        </Typography>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input
+            required            
+            id="firstName"
+            name="firstName"
+            placeholder="First Name"
+            className={styles.input}
+            onChange={handleChange}
+            value={userInformation.firstName}
+          />
+          <input
+            required
+            id="lastName"
+            name="lastName"
+            placeholder="Last Name"
+            onChange={handleChange}
+            className={styles.input}
+            value={userInformation.lastName}
+          />
+          <input
+            required
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+            onChange={handleChange}
+            className={styles.input}
+            value={userInformation.email}
+          />
+          <input
+            required
+            id="company"
+            name="company"
+            placeholder="Company"
+            onChange={handleChange}
+            className={styles.input}
+            value={userInformation.company}
+          />
+
+          <input
+            required
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="555-555-5555"
+            pattern="[0-9]{10}"
+            onChange={handleChange}
+            className={styles.input}
+            value={userInformation.phone}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={styles.submit}
+          >
             Create New User
-          </Typography>
-          <form className={styles.form} noValidate onSubmit={handleSubmit}>
-           <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="firstName"
-              label="First Name"
-              name="firstName"
-              autoComplete="firstName"
-              autoFocus
-              onChange={handleChange}
-              value={userInformation.firstName}
-            />
-              <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lastName"
-              autoFocus
-              onChange={handleChange}
-              value={userInformation.lastName}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={handleChange}
-              value={userInformation.email}
-            />
-              <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="company"
-              label="Company"
-              id="company"
-              autoComplete="company"
-              onChange={handleChange}
-              value={userInformation.company}
-            />
-
-          <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="phone"
-              label="Phone Number"
-              id="phone"
-              autoComplete="phone"
-              onChange={handleChange}
-              value={userInformation.phone}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={styles.submit}
-              style={{ backgroundColor: "#F26925" }}
-            >
-              Create New User
             </Button>
-          </form>
-          <p>{userInformation.message}</p>
-        </div>
-      );
- }
+        </form>
+        <p>{userInformation.message}</p>
+      </div>
+    );
+  }
 
-return <div>{registerRender()}</div>;
+  return <div>{registerRender()}</div>;
 }

@@ -27,6 +27,12 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     width: "100%",
     marginTop: theme.spacing(1),
   },
+  input: {
+    width: "100%",
+    padding: "15px 15px",
+    marginBottom: "15px",
+    fontSize: "18px"
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -38,6 +44,7 @@ export default function Login(props: any): ReactElement {
   interface styleINF {
     paper: string,
     form: string,
+    input: string,
     submit: string
   }
 
@@ -141,31 +148,24 @@ export default function Login(props: any): ReactElement {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          <form className={styles.form} noValidate onSubmit={handleSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <input
               required
-              fullWidth
               id="email"
-              label="Email Address"
+              type="email"
+              placeholder="Email"
               name="email"
-              autoComplete="email"
-              autoFocus
               onChange={handleChange}
+              className={styles.input}
               value={userCredentials.email}
             />
-            {process.env.REACT_APP_ZUUL_ROUTE}
-            <TextField
-              variant="outlined"
-              margin="normal"
+            <input
               required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
               id="password"
-              autoComplete="current-password"
+              type="password"
+              placeholder="Password"
+              name="password"
+              className={styles.input}
               onChange={handleChange}
               value={userCredentials.password}
             />
