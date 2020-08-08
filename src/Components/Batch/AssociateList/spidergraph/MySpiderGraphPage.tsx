@@ -58,7 +58,6 @@ function averageDuplicates(res: any): any {
       aveRes[i].score = aveRes[i].score / counters[aveRes[i].assessmentType];
     }
   }
-  console.log(aveRes)
   return aveRes;
 }
 
@@ -75,7 +74,6 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
 
     // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
     const requestUrl = `${process.env.REACT_APP_ZUUL_ROUTE}/graph/associate/${batchId}/${associateEmail}`;
-    console.log(requestUrl);
 
     // let temp = [];
 
@@ -84,9 +82,6 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
       headers: headers,
       url: requestUrl,
     }).then((res) => {
-      console.log("inside axios");
-      console.log(res.data);
-
       setScores(res.data);
       // setScores([{'hello':"world"}, {'hello':"goodbye"}, {'hello':"hi"}, {'hello':"telephone"}, {'hello':"africa"}, {'hello':"there"}])
     });

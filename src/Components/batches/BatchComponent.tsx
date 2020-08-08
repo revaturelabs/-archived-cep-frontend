@@ -8,30 +8,16 @@ import {
   CardContent,
   CardHeader,
   Button,
+  StyleRules,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  left: {
+const useStyles = makeStyles((): StyleRules => ({
+  card: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "flex-start",
-  },
-  right: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  rightButton: {
-    marginTop: "5px",
-    marginBottom: "5px",
   },
   spacing: {
     marginTop: "15px",
@@ -69,7 +55,7 @@ export default function BatchComponent(props: propsINF): ReactElement {
         <Button>
           <CardContent>
             <Grid container>
-              <Grid item className={styles.left}>
+              <Grid item className={styles.card}>
                 <Typography variant="overline">
                   Location: {props.batch.location}
                   <br />

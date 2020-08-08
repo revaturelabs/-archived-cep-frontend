@@ -29,13 +29,13 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   }
 }));
 
+interface styleINF {
+  root: string,
+  image: string,
+  toggleBtn: string
+}
 //Renders the login page and its components
 export default function LandingPage(): ReactElement {
-  interface styleINF {
-    root: string,
-    image: string,
-    toggleBtn: string
-  }
 
   const [filter, setFilter] = React.useState(true);
   const isLoggedIn: boolean = useSelector((state: any) => state.credReducer.isLoggedIn);
