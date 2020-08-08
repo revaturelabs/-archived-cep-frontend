@@ -1,15 +1,6 @@
 import React, { useState, ReactElement, SyntheticEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  dispatchToken,
-  dispatchUserObject,
-  dispatchLoggedIn,
-} from "../../redux/actions/userAction";
-import JWTD from "jwt-decode";
 import Axios from "axios";
 import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
-import { getRoles } from "@testing-library/react";
-import { AnyAction } from "redux";
 
 //Used for styling Material UI
 const useStyles: Function = makeStyles((theme): StyleRules => ({
@@ -32,17 +23,18 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: "#F26925"
-  },
+  }
 }));
+
+interface styleINF {
+  paper: string,
+  form: string,
+  submit: string,
+  input: string
+}
 
 export default function Register(props: any): ReactElement {
 
-  interface styleINF {
-    paper: string,
-    form: string,
-    submit: string,
-    input: string
-  }
   const styles: styleINF = useStyles();
   const [userInformation, setInformation] = useState({
     email: "",
@@ -60,10 +52,13 @@ export default function Register(props: any): ReactElement {
     });
   }
 
-
-  async function handleSubmit(event: SyntheticEvent) {
+  function handleSubmit(event: SyntheticEvent) {
     //Requesting for the token to authenticate user
     event.preventDefault();
+    setInformation({
+      ...userInformation,
+      message: "Submitting Request",
+    });
 
     if (!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email) {
       setInformation({
@@ -129,13 +124,14 @@ export default function Register(props: any): ReactElement {
         if (error.response.status == 400) {
           setInformation({
             ...userInformation,
-            message: "The email entered may already be in use",
+            message: "The email you entered may already be in use",
           });
         }
 
       });
 
   }
+
   function registerRender(): ReactElement {
     return (
       <div className={styles.paper}>

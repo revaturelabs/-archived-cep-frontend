@@ -6,7 +6,6 @@ import {
     Card,
     CardContent,
     CardHeader,
-    Button,
     StyleRules,
 } from "@material-ui/core";
 import Axios from "axios";
@@ -20,7 +19,7 @@ const useStyles: Function = makeStyles((): StyleRules => ({
         flexDirection: "column",
         justifyContent: "space-between",
     },
-    left: {
+    card: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -52,7 +51,7 @@ const useStyles: Function = makeStyles((): StyleRules => ({
 export default function AccUserItem(props: any): ReactElement {
     interface styleINF {
         root: string,
-        left: string,
+        card: string,
         right: string,
         middle: string,
         rightButton: string,
@@ -65,33 +64,30 @@ export default function AccUserItem(props: any): ReactElement {
 
     const [cardVisi, setCardVisi] = useState(true);
 
-    const CardInfo: React.FC = (): ReactElement => {
+    function UserCard(): ReactElement {
+        let title = `${props.data.firstName} ${props.data.lastName}`;
         return (
             <Card className={styles.spacing}>
-                <CardHeader style={{ backgroundColor: "#F26925" }}></CardHeader>
+                <CardHeader style={{ backgroundColor: "#F26925" }} title={title}></CardHeader>
                 <CardContent>
-                    <Grid container spacing={3}>
-                        <Grid item xs={3} className={styles.left}>
-                            <Typography variant="h4">
-                                {props.data.firstName} {props.data.lastName}
-                            </Typography>
-                            <Typography variant="h6">{props.data.email}</Typography>
-                            <Typography variant="h6">{props.data.phone}</Typography>
-                        </Grid>
-                        <Grid item xs={6} className={styles.middle}>
-                            <Typography variant="h4">{props.data.company}</Typography>
-                        </Grid>
-                        <Grid item xs={3} className={styles.right}>
-                            <ConfirmModal userInfo={props.data} hideCard={callback}/>
-                        </Grid>
-                    </Grid>
+                    Company: {props.data.company}
+                    <br />
+                    <br />
+                    Email: {props.data.email}
+                    <br />
+                    <br />
+                    Phone: {props.data.phone}
+                    <br />
+                    <br />
+                    <ConfirmModal userInfo={props.data} hideCard={callback} />
+
                 </CardContent>
             </Card>
         );
     };
 
     //React hook that changes visibility through child confirmModal
-    const callback = ()=>{
+    const callback = () => {
         setCardVisi(false);
     }
 
@@ -100,5 +96,5 @@ export default function AccUserItem(props: any): ReactElement {
         // console.log(props.data);
     }, []);
 
-    return <div>{cardVisi ? <CardInfo /> : null}</div>;
+    return <div>{cardVisi ? <UserCard /> : null}</div>;
 }
