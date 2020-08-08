@@ -25,7 +25,8 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     color: "#F26925",
     backgroundColor: "transparent",
     borderColor: "transparent",
-    alignSelf: "center"
+    alignSelf: "center",
+    cursor: "pointer"
   }
 }));
 

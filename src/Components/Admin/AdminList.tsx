@@ -34,7 +34,7 @@ export default function AdminList():ReactElement {
 
   function conditionalRender(): ReactElement {
     if (realData.length == 0) {
-      return <h2>You don't have any scheduled interventions at the moment..</h2>
+      return <h2>You don't have any scheduled interventions at the moment.</h2>
     } else {
       return (
         <div>

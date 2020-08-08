@@ -23,7 +23,7 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: "#F26925"
-  },
+  }
 }));
 
 interface styleINF {
@@ -55,6 +55,10 @@ export default function Register(props: any): ReactElement {
   function handleSubmit(event: SyntheticEvent) {
     //Requesting for the token to authenticate user
     event.preventDefault();
+    setInformation({
+      ...userInformation,
+      message: "Submitting Request",
+    });
 
     if (!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email) {
       setInformation({

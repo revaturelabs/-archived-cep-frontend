@@ -48,7 +48,7 @@ export default function MyBatches(): ReactElement {
 
   function conditionRender(): ReactElement {
     if (batches.length == 0) {
-      return <h2>You don't have any preferred batches :/</h2>
+      return <h2>You don't have any preferred batches.</h2>
     } else {
       return (
         <div style={{ padding: "5em" }}>

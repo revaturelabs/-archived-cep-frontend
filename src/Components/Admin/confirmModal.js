@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
         borderStyle: "none",
         fontSize: "medium",
-        marginRight: "15px"
+        marginRight: "15px",
+        cursor: "pointer"
     },
     cancelBtn: {
         padding: "5px 15px",
@@ -51,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
         borderStyle: "none",
         fontSize: "medium",
-        marginRight: "15px"
+        marginRight: "15px",
+        cursor: "pointer"
     }
 }));
 

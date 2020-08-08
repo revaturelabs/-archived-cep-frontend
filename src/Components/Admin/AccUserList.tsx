@@ -30,7 +30,7 @@ export default function AccUserList(): ReactElement {
 
   function conditionalRender(): ReactElement {
     if (realData.length == 0) {
-      return <h2>No new account request at this time...</h2>
+      return <h2>No new account request at this time.</h2>
     }
     else {
       return (
