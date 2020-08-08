@@ -75,7 +75,7 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
 
     // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
     const requestUrl = `${process.env.REACT_APP_ZUUL_ROUTE}/graph/associate/${batchId}/${associateEmail}`;
-    console.log(requestUrl);
+    console.log("url: " + requestUrl);
 
     // let temp = [];
 

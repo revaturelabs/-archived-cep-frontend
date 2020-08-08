@@ -12,7 +12,7 @@ import { withHooks, withoutHooks } from 'jest-react-hooks-shallow';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import store from '../redux/store/index';
-import toJson from 'enzyme-to-json';
+import toJson, { mountToJson } from 'enzyme-to-json';
 import { Container } from "@material-ui/core";
 import { createStore, compose, applyMiddleware } from "redux";
 import batchReducer from '../redux/reducers/batchReducer';
@@ -39,12 +39,6 @@ const scores = [
     { traineeId: "restOfBatch", assessmentType: "Spring Boot", score: 52.687697410583496, week: 7, weight: 100 },
     { traineeId: "restOfBatch", assessmentType: "NoSQL", score: 56.1440157254537, week: 7, weight: 100 }
 ]
-const wrapper = mount(<Provider store={store}><MySpiderGraph scores={scores} /></Provider>);
-
-test('does the spidergraph get the props', () => {
-    const props = wrapper.find(Radar).prop('data');
-    expect(props).toEqual({ "sets": [{ "key": "me", "label": "My Scores", "values": { "AWS": 50.35925947825114, "C#": 60.48832778930664, "Docker": 50.73086957931518, "Hibernate": 45.14079812367757, "Hive": 47.818763224283856, "JS": 68.40554072062174, "Java": 39.89302557309468, "NoSQL": 56.1440157254537, "Quarkus": 48.559701951344806, "React": 46.925523122151695, "Spring": 34.84263242085775, "Spring Boot": 52.687697410583496, "Spring Cloud": 52.91025918324788, "TypeScript": 46.58357172012329 } }], "variables": [{ "key": "AWS", "label": "AWS" }, { "key": "TypeScript", "label": "TypeScript" }, { "key": "Hive", "label": "Hive" }, { "key": "Java", "label": "Java" }, { "key": "Quarkus", "label": "Quarkus" }, { "key": "Spring Cloud", "label": "Spring Cloud" }, { "key": "Spring", "label": "Spring" }, { "key": "C#", "label": "C#" }, { "key": "React", "label": "React" }, { "key": "JS", "label": "JS" }, { "key": "Docker", "label": "Docker" }, { "key": "Hibernate", "label": "Hibernate" }, { "key": "Spring Boot", "label": "Spring Boot" }, { "key": "NoSQL", "label": "NoSQL" }] });
-});
 
 const batchId = "TR-1001";
 const associateEmail = "mock11.associatee298a9c4-9e50-49c5-986d-b834b9843a2c@mock.com";
@@ -68,15 +62,23 @@ const mockStore = createStore(
     initialState,
 )
 
-const wrapper2 = shallow(<Provider store={mockStore}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+describe('my spider graph tests', () => {
+    const wrapper = mount(<Provider store={store}><MySpiderGraph scores={scores} /></Provider>);
 
-test('does the spidergraphpage gets props', () => {
-    const graph = wrapper2.find(MySpiderGraph);
-    expect(graph).not.toBe(null);
-});
-
-test('returns data when myspidergraphpage is called', () => {
-    const props = wrapper2.getElement();
-
-    console.log("Props: " + props);
+    test('does the spidergraph get the props', () => {
+        const props = wrapper.find(Radar).prop('data');
+        expect(props).toEqual({ "sets": [{ "key": "me", "label": "My Scores", "values": { "AWS": 50.35925947825114, "C#": 60.48832778930664, "Docker": 50.73086957931518, "Hibernate": 45.14079812367757, "Hive": 47.818763224283856, "JS": 68.40554072062174, "Java": 39.89302557309468, "NoSQL": 56.1440157254537, "Quarkus": 48.559701951344806, "React": 46.925523122151695, "Spring": 34.84263242085775, "Spring Boot": 52.687697410583496, "Spring Cloud": 52.91025918324788, "TypeScript": 46.58357172012329 } }], "variables": [{ "key": "AWS", "label": "AWS" }, { "key": "TypeScript", "label": "TypeScript" }, { "key": "Hive", "label": "Hive" }, { "key": "Java", "label": "Java" }, { "key": "Quarkus", "label": "Quarkus" }, { "key": "Spring Cloud", "label": "Spring Cloud" }, { "key": "Spring", "label": "Spring" }, { "key": "C#", "label": "C#" }, { "key": "React", "label": "React" }, { "key": "JS", "label": "JS" }, { "key": "Docker", "label": "Docker" }, { "key": "Hibernate", "label": "Hibernate" }, { "key": "Spring Boot", "label": "Spring Boot" }, { "key": "NoSQL", "label": "NoSQL" }] });
+    });
 })
+
+describe('spider graph page tests', () => {
+    beforeEach(() => {
+        process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' })
+    })
+    test('does the spidergraphpage gets props', () => {
+        const wrapper2 = shallow(<Provider store={mockStore}><MySpiderGraphPage batchId={batchId} associateEmail={associateEmail}></MySpiderGraphPage></Provider>);
+        const graph = wrapper2.find(MySpiderGraph);
+        expect(graph).not.toBe(null);
+    });
+})
+
