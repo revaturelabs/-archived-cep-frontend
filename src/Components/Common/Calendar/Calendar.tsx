@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react";
 import CalModal from "./Calmodal";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { makeStyles, Button, Typography, TextField, StyleRules } from "@material-ui/core";
+
 
 /**
  * Authors Armondo, Miki

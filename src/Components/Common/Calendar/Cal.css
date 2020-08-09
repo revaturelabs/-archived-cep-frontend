@@ -100,7 +100,6 @@ line-height: 1;
 top: .75em;
 right: .75em;
 font-weight: 700;
-}.calendar .body .cell:hover .number, .calendar .body .selected .number   {
 }.calendar .body .disabled {
 color: lightgray;
 pointer-events: none;
