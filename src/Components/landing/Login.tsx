@@ -132,8 +132,8 @@ export default function Login(props: any): ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
     if (isReset) {
-      console.log("In IsReset Rendering Function");
-      console.log(isReset);
+      //console.log("In IsReset Rendering Function");
+      //console.log(isReset);
       return (
         <ResetPage oldPassword={userCredentials.password} />
       )
