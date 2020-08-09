@@ -36,14 +36,21 @@ export default function RequestForm(props): ReactElement {
   //Lines 37 to 46 is used to give a default intervention start and end date
   let startD: string;
   let endD: string;
+  let propSD: Date;
+  let propED: Date;
 
-  let propSD: Date = new Date(props.batch.startDate);
+  if (props.batch) {
+    propSD = new Date(props.batch.startDate);
+    propED = new Date(props.batch.endDate);
+  } else {
+    propSD = new Date();
+    propED = new Date();
+    propED.setDate(propED.getDate() + 1);
+  }
   propSD = new Date(propSD.getTime() + propSD.getTimezoneOffset() * 60000);
-  let propED: Date = new Date(props.batch.endDate);
   propED = new Date(propED.getTime() + propSD.getTimezoneOffset() * 60000);
-
-  startD  = propSD.getFullYear() + "-" + ((propSD.getMonth() < 10) ? ("0" + (propSD.getMonth()+1)) : (propSD.getMonth())) + "-" + ((checkWeekend(propSD, true) < 10) ? ("0" + checkWeekend(propSD, true)) : (checkWeekend(propSD, true))) + "T08:00";
-  endD =  propED.getFullYear() + "-" + ((propED.getMonth() < 10) ? ("0" + (propED.getMonth()+1)) : (propED.getMonth())) + "-" + ((checkWeekend(propED, false) < 10) ? ("0" + checkWeekend(propED, false)) : (checkWeekend(propED, false))) + "T16:00";
+  startD = propSD.getFullYear() + "-" + ((propSD.getMonth() < 10) ? ("0" + (propSD.getMonth() + 1)) : (propSD.getMonth())) + "-" + ((checkWeekend(propSD, true) < 10) ? ("0" + checkWeekend(propSD, true)) : (checkWeekend(propSD, true))) + "T08:00";
+  endD = propED.getFullYear() + "-" + ((propED.getMonth() < 10) ? ("0" + (propED.getMonth() + 1)) : (propED.getMonth())) + "-" + ((checkWeekend(propED, ((props.batch) ? false : true)) < 10) ? ("0" + checkWeekend(propED, ((props.batch) ? false : true))) : checkWeekend(propED, ((props.batch) ? false : true))) + "T16:00";
 
   const [trigger, setTrigger] = useState({
     batchId: props.batchId, //Changed by Michael Worrell
@@ -63,9 +70,9 @@ export default function RequestForm(props): ReactElement {
    * @param isForward is a bool that decides whether to offset the day in the forward or backward direction
    * @return is a number that represents the day of the month. It may or may not be offset to factor in weekends
    */
-  function checkWeekend(day: Date, isForward: boolean): number{
-    if(isForward) {
-      if((day.getDay() + 1) == 6) {
+  function checkWeekend(day: Date, isForward: boolean): number {
+    if (isForward) {
+      if ((day.getDay() + 1) == 6) {
         return (day.getDate() + 3);
       } else if ((day.getDay() + 1) == 0) {
         return (day.getDate() + 2)
@@ -73,7 +80,7 @@ export default function RequestForm(props): ReactElement {
         return day.getDate() + 1;
       }
     } else {
-      if((day.getDay() - 1) == 6) {
+      if ((day.getDay() - 1) == 6) {
         return (day.getDate() - 2);
       } else if ((day.getDay() - 1) == 0) {
         return (day.getDate() - 3)
@@ -110,16 +117,15 @@ export default function RequestForm(props): ReactElement {
   }
 
   function handleSubmit(): void {
-    if ( !trigger.isAllDay || !trigger.requestType || !trigger.description ) {
+    if (!trigger.isAllDay || !trigger.requestType || !trigger.description) {
       alert("Field Missing");
       return;
     }
     let sTime: Date = new Date(trigger.startTime); //Creating a Date variable to hold the intervention start date
     console.log(sTime.getDay());
     let eTime: Date = new Date(trigger.endTime); //Creating a Date variable to hold the intervention end date
-    if((sTime.getDay() != 6 && sTime.getDay() != 0) && (eTime.getDay() != 6 && eTime.getDay() != 0))
-    {
-      if(isWithinRange(sTime, eTime)){ //If this intervention date is within the batch's timeframe, add it
+    if ((sTime.getDay() != 6 && sTime.getDay() != 0) && (eTime.getDay() != 6 && eTime.getDay() != 0)) {
+      if (isWithinRange(sTime, eTime)) { //If this intervention date is within the batch's timeframe, add it
         axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/interventions", {
           batchId: trigger.batchId,
           userId: trigger.userId,
@@ -161,7 +167,7 @@ export default function RequestForm(props): ReactElement {
           onChange={handleChange}
           type="datetime-local"
           name="startTime"
-          defaultValue ={startD}
+          defaultValue={startD}
         />
         <TextField
           id="outlined-simple-start-adornment"
@@ -170,7 +176,7 @@ export default function RequestForm(props): ReactElement {
           onChange={handleChange}
           type="datetime-local"
           name="endTime"
-          defaultValue = {endD}
+          defaultValue={endD}
         />
         <br />
         {/* Commented out because these fields are abstracted */}
