@@ -141,10 +141,10 @@ export default function RequestForm(props): ReactElement {
             console.log(error);
           });
       } else {
-        alert("Invalid Start/End Date");
+        alert("Start/End Date is out of range for this batch");
       }
     } else {
-      alert("Choose a weekday");
+      alert("Choose a weekday for Start/End Date");
     }
   }
 
