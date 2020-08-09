@@ -105,14 +105,18 @@ export default function RequestForm(props): ReactElement {
    * @param end the end date of the intervention
    */
   function isWithinRange(start: Date, end: Date): boolean {
-    let bStart: Date = new Date(props.batch.startDate);
-    bStart = new Date(bStart.getTime() + bStart.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
-    let bEnd: Date = new Date(props.batch.endDate);
-    bEnd = new Date(bEnd.getTime() + bEnd.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
-    if ((start > bStart) && (end < bEnd)) {
-      return true;
+    if (props.batch){
+      let bStart: Date = new Date(props.batch.startDate);
+      bStart = new Date(bStart.getTime() + bStart.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
+      let bEnd: Date = new Date(props.batch.endDate);
+      bEnd = new Date(bEnd.getTime() + bEnd.getTimezoneOffset() * 60000); //This is to fix the one day offset for the Date 
+      if ((start > bStart) && (end < bEnd)) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      return true;
     }
   }
 
