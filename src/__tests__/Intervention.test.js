@@ -1,6 +1,10 @@
 //Michael Worrell
 import React from 'react';
+<<<<<<< HEAD
 import Enzyme, {mount} from "enzyme";
+=======
+import Enzyme, { mount } from "enzyme";
+>>>>>>> 116498c8b26687feeb17af333ed56b75da3dbc28
 import Adapter from "enzyme-adapter-react-16";
 import store from "../redux/store/index.ts";
 import { Provider } from "react-redux";

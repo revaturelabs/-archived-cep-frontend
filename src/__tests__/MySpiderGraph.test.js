@@ -1,22 +1,13 @@
 // Written by Michael Worrell
 import React from "react";
-import Enzyme, { shallow, mount, render } from "enzyme";
+import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MySpiderGraph from "../Components/Batch/AssociateList/spidergraph/MySpiderGraph";
 import MySpiderGraphPage from "../Components/Batch/AssociateList/spidergraph/MySpiderGraphPage";
 import { Provider } from 'react-redux';
 import Radar from "react-d3-radar";
-import * as axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { withHooks, withoutHooks } from 'jest-react-hooks-shallow';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import store from '../redux/store/index';
-import toJson, { mountToJson } from 'enzyme-to-json';
-import { Container } from "@material-ui/core";
-import { createStore, compose, applyMiddleware } from "redux";
-import batchReducer from '../redux/reducers/batchReducer';
-import credReducer from '../redux/reducers/credReducer';
+import { createStore } from "redux";
 import mainReducer from '../redux/reducers';
 
 Enzyme.configure({ adapter: new Adapter() });
