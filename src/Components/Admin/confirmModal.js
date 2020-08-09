@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 /**
  * Modal doesn't work in TS, so we use JS.
  * 

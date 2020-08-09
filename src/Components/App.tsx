@@ -13,6 +13,7 @@ import GetInterventions from "./Common/Intervention/GetInterventions";
 import BatchPage from "./Batch/BatchPage";
 import AccUserPage from "./Admin/AccUserPage";
 import ResetPassword from "./landing/ResetPassword";
+import ProfilePage from "./Profile/ProfilePage"
 //For Testing
 import BlankPage from "./Common/BlankPage";
 
@@ -47,6 +48,7 @@ function App():ReactElement{
           <Route path="/intervention" component={RequestForm} />
           <Route path="/getinterventions" component={GetInterventions} />
           <Route path="/associates" component={BatchPage} />
+          <Route path="/profile" component={ProfilePage} />
         </div>
       </Switch>
     </div>
