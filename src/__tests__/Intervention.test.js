@@ -1,6 +1,6 @@
 //Michael Worrell
 import React from 'react';
-import Enzyme, { mount } from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import store from "../redux/store/index.ts";
 import { Provider } from "react-redux";
@@ -123,7 +123,7 @@ describe("intervention comp test", () => {
         process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' })
     })
 
-    wrapper = mount(<Provider store ={mockStore}><RequestForm batchId={batch.batchId}></RequestForm></Provider>)
+    wrapper = mount(<Provider store ={mockStore}><RequestForm batchId={batch.batchId} batch={batch}></RequestForm></Provider>)
 
     test("intervention info test", () => {
         wrapper.find('button').props().onClick();

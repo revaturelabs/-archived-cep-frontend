@@ -145,7 +145,7 @@ export default function AdminItem(props: any): ReactElement {
   }
   //On first render check if the status is complete and render the correct color and buttons
   useEffect((): void => {
-    console.log(typeof (status));
+    //console.log(typeof (status));
     if (status === "Done") {
       setStatusColor("#72A4C2");
       setButtonCompleteVisi(false);
