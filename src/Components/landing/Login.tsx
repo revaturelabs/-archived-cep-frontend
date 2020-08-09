@@ -137,7 +137,7 @@ export default function Login(props: any): ReactElement {
       return (
         <ResetPage oldPassword={userCredentials.password} />
       )
-    } else if (isLoggedIn && role == "CLIENT") {
+    } else if (isLoggedIn && role == "ROLE_CLIENT") {
       return (
         <div
           className={styles.paper}
@@ -147,7 +147,7 @@ export default function Login(props: any): ReactElement {
           <h2>Please select from the options on the left</h2>
         </div>
       );
-    } else if (isLoggedIn && role == "ADMIN") {
+    } else if (isLoggedIn && role == "ROLE_ADMIN") {
       return (<React.Fragment>
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <Calendar></Calendar>
