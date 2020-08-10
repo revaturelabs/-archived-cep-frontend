@@ -172,7 +172,7 @@ export default function ProfileList(): ReactElement {
              }
         }
         else{
-            data= {
+             data= {
                 'batchDeadline':endDate,   
                 'associateCount':associateCount,
                 'neededCategories':clientSkills
@@ -211,7 +211,7 @@ export default function ProfileList(): ReactElement {
                         name="endTime"
                         value={endDate}
                     />
-                    <p>Put early date or current date if dont want to set dealine</p>
+                    <p>Put early date or current date if dont want to set deadline</p>
                 </Grid>
                 <br></br>
                 <input type="number" className="AmountIn" onChange={handleAmount} value={associateCount}></input>
