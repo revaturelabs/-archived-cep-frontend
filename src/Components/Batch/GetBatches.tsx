@@ -11,35 +11,31 @@ type props = {
   batches: object[]
 }
 
-export default function GetBatchDetails({batches}: props) {
+export default function GetBatchDetails({ batches }: props) {
 
 
   const dispatch = useDispatch();
 
   return (
-    <>
-      {/* <Button variant="contained" color="primary" onClick={handleSubmit}>
-        Display
-      </Button> */}
-
+    <React.Fragment>
       {batches.map((detail: any) => {
         const handleClick = () => {
           dispatch(selectBatch(detail));
         }
 
-        return(
+        return (
           <div key={detail.batchId}>
             <Button variant='outlined' onClick={handleClick}>
-            <table>
-              <tbody>
-                <tr style={{fontSize:'13px'}}><td>Batch ID: {detail.batchId}</td></tr>
-              </tbody>
-            </table>
+              <table>
+                <tbody>
+                  <tr style={{ fontSize: '13px' }}><td>Batch ID: {detail.batchId}</td></tr>
+                </tbody>
+              </table>
             </Button>
             <br />
           </div>
         )
       })}
-    </>
+    </ React.Fragment>
   );
 }

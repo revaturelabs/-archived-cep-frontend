@@ -1,9 +1,9 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import MyBatchesList from "./MyBatchesList";
+import BatchComponent from "./BatchComponent";
 import { selectBatch } from "../../redux/actions/batchAction";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { dispatchLink } from "../../redux/actions/redirectAction";
 
 export default function MyBatches(): ReactElement {
@@ -32,7 +32,7 @@ export default function MyBatches(): ReactElement {
       .then((result) => {
         setBatches(result.data);
       })
-      .catch((err) => console.log("error batches:" + err));
+      .catch((err) => console.log("error batches:", err));
   }, []);
 
   //On first render dispatch the current url
@@ -46,29 +46,31 @@ export default function MyBatches(): ReactElement {
     dispatch(selectBatch(batch));
   }
 
-  return (
-    <div style={{ padding: "5em" }}>
-      <Grid container direction="row" spacing={3}>
-        {batches.map((batch: any) => {
-          return (
-            //added key to Grid to remove error - Michael Worrell
-            <Grid item xs={3} key={batch.batchId + 1}> 
-              <MyBatchesList
-                key={batch.batchId}
-                batch={batch}
-                handleClick={checkBatch}
-              />
-            </Grid>
-          );
-        })}
-        {/* </Grid>
-        <Grid item xs>
-         <MyBatchesList
-            key={batches[1].id}
-            batch={batches[1]}
-            handleClick={checkBatch}
-      />*/}
-      </Grid>
-    </div>
-  );
+  function conditionRender(): ReactElement {
+    if (batches.length == 0) {
+      return <h2>You don't have any preferred batches.</h2>
+    } else {
+      return (
+        <div style={{ padding: "5em" }}>
+          <Grid container direction="row" spacing={3}>
+            {batches.map((batch: any) => {
+              return (
+                //added key to Grid to remove error - Michael Worrell
+                <Grid item xs={3} key={batch.batchId + 1}> 
+                  <BatchComponent
+                    key={batch.batchId}
+                    batch={batch}
+                    handleClick={checkBatch}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </div>
+      );
+    }
+  }
+
+  return conditionRender();
+  
 }

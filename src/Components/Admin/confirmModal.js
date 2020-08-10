@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import axios from "axios";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 /**
  * Modal doesn't work in TS, so we use JS.
  * 
@@ -33,33 +33,27 @@ const useStyles = makeStyles((theme) => ({
         width: "50%",
         height: "contain",
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
+        borderStyle: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
     confirmBtn: {
-        position: 'absolute',
-        left: '3%',
-        bottom: '5%',
+        padding: "5px 15px",
         backgroundColor: "#f26925",
         color: "#fff",
-        borderColor: "#f26925",
-        height: "7%",
-        width: "10%",
+        borderStyle: "none",
         fontSize: "medium",
-        marginTop: "5%"
+        marginRight: "15px",
+        cursor: "pointer"
     },
     cancelBtn: {
-        position: 'absolute',
-        right: '3%',
-        bottom: '5%',
+        padding: "5px 15px",
         backgroundColor: "grey",
         color: "#fff",
-        borderColor: "grey",
-        height: "7%",
-        width: "10%",
+        borderStyle: "none",
         fontSize: "medium",
-        marginTop: "5%"
+        marginRight: "15px",
+        cursor: "pointer"
     }
 }));
 
@@ -87,8 +81,6 @@ export default function ConfirmModal(props) {
     //Handles confirm button. If resolve button is null or resolve button is denied and no description given, will show message and not do anything.
     //Modifies parent with react hook props.hideCard()
     const handleConfirmClose = () => {
-        console.log("inside confirmation function");
-        console.log(chosen);
         if (chosen == null) {
             setMessage("Must resolve account or cancel")
         } else if (chosen === "deny" && !desc) {
@@ -96,22 +88,6 @@ export default function ConfirmModal(props) {
         } else if (chosen === "deny") {
             props.hideCard();
             setOpen(false);
-            console.log(desc);
-            /* axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id="+props.userInfo.userId, desc, {
-                headers: {
-                    "Content-Type": "text/plain",
-                    Authorization: `Bearer ${token}`,
-                }
-            }) */
-            /* axios({
-                method: 'GET',
-                url: process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId,
-                headers: {
-                    'Content-type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                data: {denyMessage: desc},
-            }) */
             axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/deny?id=" + props.userInfo.userId, {
                 denyMessage: desc
             }, {
@@ -119,12 +95,9 @@ export default function ConfirmModal(props) {
                     Authorization: `Bearer ${token}`,
                 }
             })
-                .then(function (response) {
-                    alert(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            .catch(function (error) {
+                console.log(error);
+            });
         } else if (chosen === "confirm") {
             props.hideCard();
             setOpen(false);
@@ -135,12 +108,9 @@ export default function ConfirmModal(props) {
                     Authorization: `Bearer ${token}`,
                 }
             })
-                .then(function (response) {
-                    alert(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            .catch(function (error) {
+                console.log(error);
+            });
         }
     };
 
@@ -160,7 +130,6 @@ export default function ConfirmModal(props) {
 
     return (
         <div>
-            <br />
             <Button variant="contained" style={{ backgroundColor: "#f26925", color: "#fff" }} onClick={handleOpen}>
                 Resolve
             </Button>
@@ -172,9 +141,9 @@ export default function ConfirmModal(props) {
             >
                 <div style={modalStyle} className={classes.paper}>
                     {/* <SimpleModal /> */}
-                    <h1>{props.userInfo.firstName} {props.userInfo.lastName}</h1>
-                    <h3>{props.userInfo.email}</h3>
-                    <h3>{props.userInfo.company}</h3>
+                    <h4>{props.userInfo.firstName} {props.userInfo.lastName}</h4>
+                    <h4>{props.userInfo.company}</h4>
+                    <h4>{props.userInfo.email}</h4>
                     <div>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Options: </FormLabel>
