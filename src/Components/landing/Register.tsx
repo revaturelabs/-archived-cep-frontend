@@ -55,10 +55,6 @@ export default function Register(props: any): ReactElement {
   function handleSubmit(event: SyntheticEvent) {
     //Requesting for the token to authenticate user
     event.preventDefault();
-    setInformation({
-      ...userInformation,
-      message: "Submitting Request",
-    });
 
     if (!userInformation.firstName || !userInformation.lastName || !userInformation.company || !userInformation.phone || !userInformation.email) {
       setInformation({
@@ -70,7 +66,7 @@ export default function Register(props: any): ReactElement {
     else {
       setInformation({
         ...userInformation,
-        message: "",
+        message: "Submitting Request...",
       });
     }
 
@@ -92,11 +88,6 @@ export default function Register(props: any): ReactElement {
       body: raw,
       redirect: "follow",
     };
-
-    /**Connect backend in here 
-    const test= await fetch(apiBasePath + "/users/add", requestOptions);
-    console.log(await test.status);
-    */
 
     Axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/pending/add", {
       firstName: userInformation.firstName,

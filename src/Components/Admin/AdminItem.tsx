@@ -47,8 +47,6 @@ const useStyles: Function = makeStyles((): StyleRules => ({
   },
 }));
 
-//console.log(typeof (useStyles));
-
 //Display individual requests
 export default function AdminItem(props: any): ReactElement {
 
@@ -145,7 +143,6 @@ export default function AdminItem(props: any): ReactElement {
   }
   //On first render check if the status is complete and render the correct color and buttons
   useEffect((): void => {
-    //console.log(typeof (status));
     if (status === "Done") {
       setStatusColor("#72A4C2");
       setButtonCompleteVisi(false);
@@ -161,19 +158,11 @@ export default function AdminItem(props: any): ReactElement {
 
     axios(config)
       .then(function (response: any) {
-        //console.log(JSON.stringify(response.data));
         changeUserData(response.data);
       })
       .catch(function (error: any) {
         console.log(error);
       });
-
-    // Axios.get(`http://localhost:8080/users/user/?id=${props.data.userId}`)
-    // .then((response)=>{
-    //     console.log(response.data);
-    //     changeUserData(response.data);
-    // })
-    // .catch((err) => console.log());
   }, []);
 
   //handle complete button to change to the color, status,
@@ -185,8 +174,6 @@ export default function AdminItem(props: any): ReactElement {
     setButtonCompleteVisi(false);
     updateToComplete();
   };
-
-  console.log(typeof (handleToComplete));
 
   //Persists Complete of request to database
   const updateToComplete: Function = (): void => {
@@ -226,8 +213,6 @@ export default function AdminItem(props: any): ReactElement {
       })
       .catch((err) => console.log("Failure"));
   };
-
-  console.log(typeof (handleDelete));
 
   //These props need to change to match the data that is given
   //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request

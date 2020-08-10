@@ -20,7 +20,7 @@ export default function GetInterventions(): ReactElement {
         console.log(error);
       });
   }
-  //console.log(details);
+
   return (
     <>
       <br />

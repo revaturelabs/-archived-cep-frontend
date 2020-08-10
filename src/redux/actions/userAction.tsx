@@ -1,7 +1,6 @@
 import { STORE_CREDENTIALS, ADD_USERID, ADD_ROLE, ADD_USER_OBJECT, LOGGED_IN, LOGGED_OUT, IS_RESET } from './actionTypes';
 
 export const dispatchToken = (token: string) => {
-    //console.log("You stored the token: ", token);
     return {
         type: STORE_CREDENTIALS,
         payload: token
