@@ -53,6 +53,7 @@ export default function ProfileList(): ReactElement {
         moveBtn: string
     }
     const token: String = useSelector((state: any) => state.credReducer.token);
+    const userId = useSelector((state: any) => state.credReducer.userId);
     const [clientSkills, setClientSkills] = useState([]);
     const [allSkills, setAllSkills] = useState([]);
     const [endDate, setEndDate] = useState(new Date);
@@ -65,59 +66,33 @@ export default function ProfileList(): ReactElement {
             aData = aData.filter(val => val.categoryId !== element.categoryId)
         });
         
-        setAllSkills(aData);
+     setAllSkills(aData);
     }
 
     //Make an axios call to display the list of requests
     useEffect((): void => {
         /* Request to get list of skills and skills associated with user */
-        let x = [
-            {
-                "categoryId": 1,
-                "skillCategory": "Java",
-                "active": true
+         Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/category/allCategories", {
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-            {
-                "categoryId": 2,
-                "skillCategory": "JavaScript",
-                "active": true
-            },
-            {
-                "categoryId": 3,
-                "skillCategory": "TypeScript",
-                "active": true
-            },
-            {
-                "categoryId": 4,
-                "skillCategory": "HTML",
-                "active": true
-            },
-            {
-                "categoryId": 5,
-                "skillCategory": "CSS",
-                "active": true
-            }];
+          })
+            .then((result) => {
+                Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  })
+                  .then((clientResult) => {
+                      console.log(result.data);
+                      console.log(clientResult.data.neededCategories);
+                      changeSkills(clientResult.data.neededCategories, result.data);
+                  })
+            })
+            .catch((err) => console.log("error batch:" + err));
 
-        let y = [
-            {
-                "categoryId": 1,
-                "skillCategory": "Java",
-                "active": true
-            },
-            {
-                "categoryId": 2,
-                "skillCategory": "JavaScript",
-                "active": true
-            }]
-
-        changeSkills(y, x);
+        
     }, []);
-    /* <div>
-               Use this but for 
-         {realData.map((data: any) => {
-           return <AccUserItem data={data} key={data.userId}/>;
-         })}
-           </div> */
 
     function handleDate(event: any): void {
         event.preventDefault();
@@ -161,7 +136,24 @@ export default function ProfileList(): ReactElement {
         });
         setClientSkills(cData);
     }
-
+    function sendRequest(event) {
+        console.log(endDate)
+        console.log(associateCount)
+        console.log(clientSkills)
+       let data= {
+            'batchDeadline':null,     
+            'associateCount':30,
+            'neededCategories':clientSkills
+         }
+    Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+        })
+        .then((result) => {
+            console.log(result);
+        })
+    }
     return (
         <Grid container component="main" className={styles.root}>
             <CssBaseline />
@@ -197,7 +189,7 @@ export default function ProfileList(): ReactElement {
                     })}
                 </div>
             </Grid>
-            <button className={styles.confirmBtn}>Confirm</button>
+            <button className={styles.confirmBtn} onClick={sendRequest}>Confirm</button>
         </Grid>
 
 
