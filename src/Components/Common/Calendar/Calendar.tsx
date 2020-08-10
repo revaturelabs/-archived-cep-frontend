@@ -35,11 +35,6 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         fontFeatureSettings: "liga",
         cursor: "pointer",
         transition: ".15s ease-out",
-        // transform: "scale(1.75)",
-        // // transition: ".25s ease-out",
-        // color: "dodgerblue",
-        // marginLeft: "1em",
-        // marginRight: "1em",
     },
     days: {
         textTransform: "uppercase",
