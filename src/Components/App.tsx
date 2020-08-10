@@ -33,7 +33,6 @@ function App():ReactElement{
 
   return ( 
     <div>
-      {/* {token ? <Drawer /> : null} */}
       {isLoggedIn && !isReset ? <Drawer /> : null}
       <Switch>
         <Route path="/" component={LandingPage} exact />
