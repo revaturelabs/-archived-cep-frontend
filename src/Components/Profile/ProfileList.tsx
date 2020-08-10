@@ -141,8 +141,8 @@ export default function ProfileList(): ReactElement {
         console.log(associateCount)
         console.log(clientSkills)
        let data= {
-            'batchDeadline':null,     
-            'associateCount':30,
+            'batchDeadline':endDate,     
+            'associateCount':associateCount,
             'neededCategories':clientSkills
          }
     Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
