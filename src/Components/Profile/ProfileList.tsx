@@ -58,6 +58,7 @@ export default function ProfileList(): ReactElement {
     const [allSkills, setAllSkills] = useState([]);
     const [endDate, setEndDate] = useState(new Date);
     const [associateCount, setAssociateCount] = useState(0);
+    const [message, setMessage] = useState("");
     const styles: styleINF = useStyles();
 
     function changeSkills(cData: any, aData: any): void {
@@ -84,9 +85,9 @@ export default function ProfileList(): ReactElement {
                     },
                   })
                   .then((clientResult) => {
-                      console.log(result.data);
-                      console.log(clientResult.data.neededCategories);
-                      changeSkills(clientResult.data.neededCategories, result.data);
+                    setEndDate(clientResult.data.batchDeadline)
+                    setAssociateCount(clientResult.data.associateCount)
+                    changeSkills(clientResult.data.neededCategories, result.data);
                   })
             })
             .catch((err) => console.log("error batch:" + err));
@@ -137,12 +138,20 @@ export default function ProfileList(): ReactElement {
         setClientSkills(cData);
     }
     function sendRequest(event) {
-        console.log(endDate)
-        console.log(associateCount)
-        console.log(clientSkills)
+        setMessage("")
+        if(associateCount<=0){
+            setMessage("The associate can't be 0")
+            return;
+        }
+        var todayDate = new Date(); //Today Date   
+        var deadline= new Date(endDate); 
+        if(todayDate > deadline){
+            setMessage("Deadline can't be today or early than Today")
+            return;  
+        }
        let data= {
-            'batchDeadline':null,     
-            'associateCount':30,
+            'batchDeadline':endDate,     
+            'associateCount':associateCount,
             'neededCategories':clientSkills
          }
     Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
@@ -151,7 +160,7 @@ export default function ProfileList(): ReactElement {
         }
         })
         .then((result) => {
-            console.log(result);
+            setMessage(result.data)
         })
     }
     return (
@@ -176,6 +185,7 @@ export default function ProfileList(): ReactElement {
                         onChange={handleDate}
                         type="datetime-local"
                         name="endTime"
+                        value={endDate}
                     />
                 </Grid>
                 <br></br>
@@ -189,6 +199,9 @@ export default function ProfileList(): ReactElement {
                     })}
                 </div>
             </Grid>
+            <div style={{ width: "100%" }}>
+                <h3 style={{ color: "red", textAlign: "center" }}>{message}</h3>
+            </div>
             <button className={styles.confirmBtn} onClick={sendRequest}>Confirm</button>
         </Grid>
 
