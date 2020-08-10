@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 export default function ClientList():ReactElement {
   const token:String = useSelector((state: any) => state.credReducer.token);
   const [realData, setRealData] = useState([]);
+  const userId = useSelector((state: any) => state.credReducer.userId);
 
   function changeRealData(data: any):void {
     setRealData(data);
@@ -14,9 +15,9 @@ export default function ClientList():ReactElement {
 
   //Make an axios call to display the list of requests
   useEffect(():void => {
-    /* axios
+    axios
       .get(
-        process.env.REACT_APP_ZUUL_ROUTE + "/interventions",
+        process.env.REACT_APP_ZUUL_ROUTE + "/requestInterventionById?userId=" + userId,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -25,11 +26,9 @@ export default function ClientList():ReactElement {
       )
       //  .then(res=>res.json())
       .then((response) => {
-        //Console.log used to check the fields to set up the adminItem for later
-        //console.log(response.data);
         changeRealData(response.data);
       })
-      .catch((err) => console.log()); */
+      .catch((err) => console.log());
   }, []);
 
   function conditionalRender(): ReactElement {
@@ -39,6 +38,7 @@ export default function ClientList():ReactElement {
       return (
         <div>
           {realData.map((data: any) => {
+            console.log(data)
             return <ClientItem data={data} key={data.requestId} />;
           })}
         </div>

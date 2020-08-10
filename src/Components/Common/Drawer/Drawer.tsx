@@ -23,6 +23,7 @@ import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CreateIcon from '@material-ui/icons/Create';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 import { Link } from "react-router-dom";
@@ -89,7 +90,7 @@ export default function MiniDrawer(props: any): ReactElement {
         <ListItem>
           <ListItemIcon>
             <Link to="/intervention">
-              <ListIcon style={{ color: "#474C55" }} />
+              <CreateIcon style={{ color: "#474C55" }} />
             </Link>
           </ListItemIcon>
           <ListItemText style={{ color: "#474C55" }}>

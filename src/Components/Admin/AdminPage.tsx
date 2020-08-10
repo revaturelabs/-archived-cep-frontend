@@ -22,8 +22,7 @@ export default function AdminPage():ReactElement{
         dispatch(dispatchLink('/admin'));
     }, [])
 
-    if(role===conditionalRole.ROLE_ADMIN){
-        
+    if(role===conditionalRole.ROLE_ADMIN){ 
         return(
             <div>
                 <Container>
@@ -35,7 +34,7 @@ export default function AdminPage():ReactElement{
         return(
             <div>
                 <Container>
-                    {/* <ClientList/> */}
+                    <ClientList/>
                 </Container>
             </div>
         )

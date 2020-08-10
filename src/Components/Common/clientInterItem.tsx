@@ -59,32 +59,39 @@ export default function AccUserItem(props: any): ReactElement {
 
     const token: String = useSelector((state: any) => state.credReducer.token);
     const styles: styleINF = useStyles();
-
+    let t: number = props.data.startTime.toString().indexOf("T");
+    let date: string = props.data.startTime.slice(0, t);
+    console.log(date)
+    console.log(props.data)
     function ClientItem(): ReactElement {
-        let title = `${props.data.firstName} ${props.data.lastName}`;
         return (
             <Card className={styles.spacing}>
-            <CardHeader style={{ backgroundColor: "#F26925" }}></CardHeader>
-            <CardContent>
-                <Grid container spacing={3}>
-                    <Grid item xs={3} className={styles.right}>
-                        {/* <Typography variant="overline">{userData.company}</Typography>
+                <CardHeader style={{ backgroundColor: "#F26925" }}></CardHeader>
+                <CardContent>
+                    <Grid container spacing={3}>
+                        <Grid item xs={3} className={styles.right}>
+                            {/* <Typography variant="overline">{userData.company}</Typography>
                         <Typography variant="h4">
                             {userData.firstName} {userData.lastName}
                         </Typography>
                         <Typography variant="h6">{userData.email}</Typography>
                         <Typography variant="h6">{userData.phone}</Typography>
                         <Typography variant="h6">{props.data.requestType}</Typography> */}
-                    </Grid>
-                    <Grid item xs={6} className={styles.middle}>
-                        {/* <Typography variant="h4">{props.data.batchId}</Typography>
+                            <Typography variant="h4">{props.data.requestType}</Typography>
+                            <Typography variant="h6">{date}</Typography>
+                        </Grid>
+                        <Grid item xs={6} className={styles.middle}>
+                            {/* <Typography variant="h4">{props.data.batchId}</Typography>
                         <Typography variant="body2">{props.data.description}</Typography> */}
+                            <Typography variant="h4">{props.data.batchId}</Typography>
+                            <Typography variant="h6">{props.data.description}</Typography>
+                        </Grid>
+                        <Grid item xs={3} className={styles.right}>
+                            {/* <Typography variant="body2">{props.data.startTime}</Typography> */}
+                            <Typography variant="h4">{props.data.status}</Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3} className={styles.right}>
-                        {/* <Typography variant="body2">{props.data.startTime}</Typography> */}
-                    </Grid>
-                </Grid>
-            </CardContent>
+                </CardContent>
             </Card >
         );
     };
