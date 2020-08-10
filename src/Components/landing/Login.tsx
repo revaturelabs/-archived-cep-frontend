@@ -112,6 +112,11 @@ export default function Login(props: any): ReactElement {
       redirect: "follow",
     };
 
+    setCredentials({
+      ...userCredentials,
+      message: "Logging in..."
+    })
+
     fetch(process.env.REACT_APP_ZUUL_ROUTE + "/authenticate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -132,8 +137,6 @@ export default function Login(props: any): ReactElement {
     //Conditionally render login or welcome page based on whether 
     // user is logged in. Get "isLoggedIn" from redux store
     if (isReset) {
-      //console.log("In IsReset Rendering Function");
-      //console.log(isReset);
       return (
         <ResetPage oldPassword={userCredentials.password} />
       )
@@ -141,7 +144,7 @@ export default function Login(props: any): ReactElement {
       return (
         <div
           className={styles.paper}
-          style={{ /* textAlignVertical: "center", */ textAlign: "center" }}
+          style={{ textAlign: "center" }}
         >
           <h1>Welcome To Revature's Client Engagement Portal</h1>
           <h2>Please select from the options on the left</h2>

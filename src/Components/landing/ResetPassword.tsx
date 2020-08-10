@@ -56,7 +56,7 @@ export default function ResetPage({ oldPassword }: props): ReactElement {
     event.preventDefault();
     setPassword({
       ...userPassword,
-      message: ""
+      message: "Changing password..."
     });
 
     if (userPassword.newPassword !== userPassword.rePassword) {

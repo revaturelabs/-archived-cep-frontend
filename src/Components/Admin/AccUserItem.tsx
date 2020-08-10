@@ -93,7 +93,6 @@ export default function AccUserItem(props: any): ReactElement {
 
     //Possibly use for checking if signed in and setting token
     useEffect((): void => {
-        // console.log(props.data);
     }, []);
 
     return <div>{cardVisi ? <UserCard /> : null}</div>;
