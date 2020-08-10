@@ -1,6 +1,6 @@
 import {
     format, startOfWeek, addDays, startOfMonth, endOfMonth, isSameDay,
-    addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears
+    addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears, isWednesday
 } from "date-fns";
 // import "./Cal.css";
 import React, { useState, useEffect } from "react";
@@ -20,7 +20,6 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         margin: "0 auto",
     },
     header: {
-        textTransform: "uppercase",
         fontWeight: 700,
         fontSize: "115%",
         padding: "1.5em 0",
@@ -28,13 +27,9 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     },
     icon: {
         display: "inline-block",
-        verticalAlign: "middle",
+        margin: "auto",
         textAlign: "center",
-        direction: "ltr",
-        textRendering: "optimizeLegibility",
-        fontFeatureSettings: "liga",
         cursor: "pointer",
-        transition: ".15s ease-out",
     },
     days: {
         textTransform: "uppercase",
@@ -104,6 +99,10 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         flexGrow: 0,
         flexBasis: "calc(100%/7)",
         width: "calc(100%/7)",
+    },
+    centerAlign: {
+        margin: "auto",
+        textAlign: "center"
     }
 
 
@@ -122,6 +121,7 @@ interface styleINF {
     disabled: string,
     bg: string,
     column: string,
+    centerAlign: string
 }
 /**
  * Authors Armondo, Miki
@@ -155,32 +155,24 @@ export default function Calendar() {
         const monthFormat = "MMMM";
         const yearFormat = "yyyy"
         return (
-            <div className={`${styles.header} ${styles.row} flex-middle`}>
-                <div className={`${styles.column} col-start`}>
-                    <div className={styles.icon} onClick={prevMonth}>
-                        &#60;
-                    </div>
+            <div className={`${styles.header} ${styles.row}`}>
+                <div className={`${styles.column} ${styles.icon}`} onClick={prevMonth}>
+                    <span>&#60;</span>
                 </div>
-                <div className={`${styles.column} col-center`}>
+                <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, monthFormat)}</span>
                 </div>
-                <div className={`${styles.column} col-end`}>
-                    <div className={styles.icon} onClick={nextMonth}>
-                        <span>&#62;</span>
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={nextMonth}>
+                    <span>&#62;</span>
                 </div>
-                <div className={`${styles.column} col-start`}>
-                    <div className={styles.icon} onClick={prevYear}>
-                        Prev Year
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={prevYear}>
+                    <span>&#60;</span>
                 </div>
-                <div className={`${styles.column} col-center`}>
+                <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, yearFormat)}</span>
                 </div>
-                <div className={`${styles.column} col-end`}>
-                    <div className={styles.icon} onClick={nextYear}>
-                        Next Year
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={nextYear}>
+                    <span>&#62;</span>
                 </div>
             </div>
         );
@@ -189,11 +181,12 @@ export default function Calendar() {
     const days = () => {
         const dateFormat: string = "ddd";
         const days: Array<any> = [];
-        let startDate: Date = startOfWeek(currentDate);
+        const nameOfDays: Array<string> = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        // let startDate: Date = startOfWeek(currentDate);
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div className={`${styles.column} col-center`} key={i}>
-                    {format(addDays(startDate, i), dateFormat)}
+                <div className={`${styles.column} ${styles.centerAlign}`} key={i}>
+                    {nameOfDays[i]}
                 </div>
             );
         }
@@ -225,7 +218,6 @@ export default function Calendar() {
                             ? `${styles.disabled}` : isSameDay(day, selectedDate)
                                 ? `${styles.selected}` : ""}`}
                         key={day.toDateString()}
-
 
                         onClick={() => onDateClick(parse("", "", cloneDay))}
                         style={{ overflowY: "auto" }}
@@ -265,13 +257,10 @@ export default function Calendar() {
 
     }
     return (
-        <div>
-
+        <div className={styles.calendar}>
             <div>{header()}</div>
-            <div className={styles.calendar}>
-                <div>{days()}</div>
-                <div>{cells()}</div>
-            </div>
+            <div>{days()}</div>
+            <div>{cells()}</div>
         </div>
     );
 }; 
