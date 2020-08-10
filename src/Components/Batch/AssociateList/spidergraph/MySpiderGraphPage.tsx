@@ -3,8 +3,6 @@ import MySpiderGraph from "./MySpiderGraph";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 import { useSelector } from "react-redux";
-// import { createLogger } from "redux-logger";
-// import { red } from "@material-ui/core/colors";
 
 function averageDuplicates(res: any): any {
 
@@ -72,10 +70,7 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
       Authorization: `Bearer ${token}`,
     };
 
-    // const requestUrl = `http://34.82.182.44:80/mock/evaluation/grades/reports/${batchId}/spider/${associateEmail}`
     const requestUrl = `${process.env.REACT_APP_ZUUL_ROUTE}/graph/associate/${batchId}/${associateEmail}`;
-
-    // let temp = [];
 
     axios({
       method: "get",
@@ -83,7 +78,6 @@ export default function MySpiderGraphPage({ batchId, associateEmail }) {
       url: requestUrl,
     }).then((res) => {
       setScores(res.data);
-      // setScores([{'hello':"world"}, {'hello':"goodbye"}, {'hello':"hi"}, {'hello':"telephone"}, {'hello':"africa"}, {'hello':"there"}])
     });
   }, [associateEmail, batchId]);
 
