@@ -24,6 +24,23 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         borderWidth: "1px",
         borderStyle: "solid",
         borderColor: "black"
+    },
+    confirmBtn: {
+        backgroundColor: "#f26925",
+        color: "#fff",
+        width: "100%",
+        height: "30px",
+        borderColor: "#f26925",
+        fontSize: "large",
+        marginTop: "5%"
+    },
+    moveBtn: {
+        backgroundColor: "#fff",
+        color: "#f26925",
+        marginLeft: "10px",
+        borderColor: "#f26925",
+        fontSize: "large",
+        marginTop: "3%"
     }
 }));
 //Show a list of requests
@@ -31,7 +48,9 @@ export default function ProfileList(): ReactElement {
     interface styleINF {
         root: string,
         toggleBtn: string,
-        scrollArea: string
+        scrollArea: string,
+        confirmBtn: string,
+        moveBtn: string
     }
     const token: String = useSelector((state: any) => state.credReducer.token);
     const [clientSkills, setClientSkills] = useState([]);
@@ -42,6 +61,10 @@ export default function ProfileList(): ReactElement {
 
     function changeSkills(cData: any, aData: any): void {
         setClientSkills(cData);
+        cData.forEach(element => {
+            aData = aData.filter(val => val.categoryId !== element.categoryId)
+        });
+        
         setAllSkills(aData);
     }
 
@@ -103,19 +126,54 @@ export default function ProfileList(): ReactElement {
 
     function handleAmount(event: any): void {
         event.preventDefault();
-        setAssociateCount(event.target.value);
+        if (event.target.value>=0)
+            setAssociateCount(event.target.value);
+    }
+
+    function addClient(event) {
+        let cObj = JSON.parse(event.target.value);
+        let temp: any = [...clientSkills];
+        temp.push({
+            "categoryId": cObj.categoryId,
+            "skillCategory": cObj.skillCategory,
+            "active": cObj.active
+        });
+        setClientSkills(temp);
+        let aData: any = [...allSkills];
+        temp.forEach(element => {
+            aData = aData.filter(val => val.categoryId !== element.categoryId)
+        });
+        setAllSkills(aData);
+    }
+
+    function subClient(event) {
+        let cObj = JSON.parse(event.target.value);
+        let temp: any = [...allSkills];
+        temp.push({
+            "categoryId": cObj.categoryId,
+            "skillCategory": cObj.skillCategory,
+            "active": cObj.active
+        });
+        setAllSkills(temp);
+        let cData: any = [...clientSkills];
+        temp.forEach(element => {
+            cData = cData.filter(val => val.categoryId !== element.categoryId)
+        });
+        setClientSkills(cData);
     }
 
     return (
         <Grid container component="main" className={styles.root}>
             <CssBaseline />
             <Grid item xs={false} sm={8} md={5} component={Paper} elevation={5} square>
-                    <div className={styles.scrollArea} style={{ height: "100%" }}>
-                        <h3>Skills Available</h3>
-                        {allSkills.map((data: any) => {
-                            return <div>{data.skillCategory}</div>;
-                        })}
-                    </div>
+                <div className={styles.scrollArea} style={{ height: "100%" }}>
+                    <h3>Skills Available</h3>
+                    {allSkills.map((data: any) => {
+                        return (<div>{data.skillCategory}
+                            <button className={styles.moveBtn} value={JSON.stringify(data)} onClick={addClient}>+</button>
+                        </div>);
+                    })}
+                </div>
             </Grid>
             <Grid item xs={false} sm={false} md={7} component={Paper} elevation={2} square>
                 <Grid item>
@@ -133,10 +191,13 @@ export default function ProfileList(): ReactElement {
                 <h3>Skill Chosen</h3>
                 <div className={styles.scrollArea}>
                     {clientSkills.map((data: any) => {
-                        return <div>{data.skillCategory}</div>;
+                        return <div>{data.skillCategory}
+                            <button className={styles.moveBtn} value={JSON.stringify(data)} onClick={subClient}>-</button>
+                        </div>;
                     })}
                 </div>
             </Grid>
+            <button className={styles.confirmBtn}>Confirm</button>
         </Grid>
 
 
