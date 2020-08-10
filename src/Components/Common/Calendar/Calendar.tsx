@@ -1,6 +1,6 @@
 import {
     format, startOfWeek, addDays, startOfMonth, endOfMonth, isSameDay,
-    addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears, isWednesday
+    addMonths, subMonths, isSameMonth, endOfWeek, parse, addYears, subYears
 } from "date-fns";
 // import "./Cal.css";
 import React, { useState, useEffect } from "react";
