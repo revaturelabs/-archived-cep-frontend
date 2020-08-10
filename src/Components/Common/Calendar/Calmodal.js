@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: "50%",
+        height: "contain",
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
+        borderStyle: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
@@ -50,17 +51,9 @@ export default function CalModal(props) {
         setOpen(false);
     };
 
-    const body = (
-        <div style={modalStyle} className={classes.paper}>
-        {props.Events.map((event) =>
-            <Event key={event} eventItem={event} />
-        )}
-        </div>
-    );
 
     return (
         <div>
-            <br />
             <Button variant="contained" style={{ backgroundColor: "#f26925", color: "#fff", fontSize: 10 }} onClick={handleOpen}>
                 Events: {props.Events.length}
             </Button>
@@ -70,8 +63,10 @@ export default function CalModal(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <div>
-                {body}
+                <div style={modalStyle} className={classes.paper}>
+                    {props.Events.map((event) =>
+                        <Event key={event} eventItem={event} />
+                    )}
                 </div>
             </Modal>
         </div>

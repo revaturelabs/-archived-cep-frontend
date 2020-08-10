@@ -13,11 +13,11 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     calendar: {
         display: "block",
         position: "relative",
-        width: "90%",
+        width: "auto",
         background: "white",
         border: "1px solid lightgray",
         height: "auto",
-        margin: "0 auto",
+        margin: "100px auto",
     },
     header: {
         fontWeight: 700,
@@ -39,8 +39,6 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         padding: ".75em 0",
         borderBottom: " 1px solid lightgray",
     },
-    body: {
-    },
     cell: {
         position: "relative",
         height: "6em",
@@ -54,9 +52,8 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         // borderRight: "none",
     },
     selected: {
-        borderLeft: "10px solid transparent",
-        borderImage: "linear-gradient(45deg, #1affa0 0%,#cff153 40%)",
-        borderImageSlice: 1,
+        borderBottom: "10px solid #f26925",
+        // backgroundColor: "#eeeeee",
     },
     row: {
         margin: 0,
@@ -113,7 +110,6 @@ interface styleINF {
     header: string,
     icon: string,
     days: string,
-    body: string,
     cell: string,
     selected: string,
     row: string,
@@ -146,6 +142,7 @@ export default function Calendar() {
                 },
             )
             .then((response) => {
+                console.log("all intvs", response.data)
                 getAllRequests(response.data);
             })
             .catch((err) => console.log());
@@ -157,22 +154,22 @@ export default function Calendar() {
         return (
             <div className={`${styles.header} ${styles.row}`}>
                 <div className={`${styles.column} ${styles.icon}`} onClick={prevMonth}>
-                    <span>&#60;</span>
+                    <span className="chevron">&#60;</span>
                 </div>
                 <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, monthFormat)}</span>
                 </div>
                 <div className={`${styles.column} ${styles.icon}`} onClick={nextMonth}>
-                    <span>&#62;</span>
+                    <span className="chevron">&#62;</span>
                 </div>
                 <div className={`${styles.column} ${styles.icon}`} onClick={prevYear}>
-                    <span>&#60;</span>
+                    <span className="chevron">&#60;</span>
                 </div>
                 <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, yearFormat)}</span>
                 </div>
                 <div className={`${styles.column} ${styles.icon}`} onClick={nextYear}>
-                    <span>&#62;</span>
+                    <span className="chevron">&#62;</span>
                 </div>
             </div>
         );
@@ -238,7 +235,7 @@ export default function Calendar() {
             );
             days = [];
         }
-        return <div className={styles.body}>{rows}</div>;
+        return <div>{rows}</div>;
     }
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
@@ -258,6 +255,8 @@ export default function Calendar() {
     }
     return (
         <div className={styles.calendar}>
+            <h2 className={styles.centerAlign}>Intervention Calendar</h2>
+            <br />
             <div>{header()}</div>
             <div>{days()}</div>
             <div>{cells()}</div>

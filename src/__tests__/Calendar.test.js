@@ -32,14 +32,14 @@ describe("test calendar", () => {
     const setDetails = jest.fn();
 
     it("click buttons", () => {
-        const currentYear = wrapper.find(".icon");
-        expect(currentYear.at(0).text()).toBe("chevron_left");
+        const currentYear = wrapper.find(".chevron");
+        expect(currentYear.at(0).text()).toBe("<");
         currentYear.at(0).simulate('click');
-        expect(currentYear.at(1).text()).toBe("chevron_right");
+        expect(currentYear.at(1).text()).toBe(">");
         currentYear.at(1).simulate('click');
-        expect(currentYear.at(2).text()).toBe("P");
+        expect(currentYear.at(2).text()).toBe("<");
         currentYear.at(2).simulate('click');
-        expect(currentYear.at(3).text()).toBe("N");
+        expect(currentYear.at(3).text()).toBe(">");
         currentYear.at(3).simulate('click');
         const dayCell = wrapper.find(".cell");
         expect(dayCell.at(15).text()).toBe("10");
