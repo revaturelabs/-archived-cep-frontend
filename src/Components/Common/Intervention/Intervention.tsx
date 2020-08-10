@@ -1,6 +1,5 @@
 import React, { useState, ReactElement, SyntheticEvent, ChangeEvent } from 'react';
 import TextField from "@material-ui/core/TextField";
-//import {withStyles} from "@material-ui/core/styles";
 import { Button, makeStyles, StyleRules } from "@material-ui/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,7 +30,8 @@ const useStyles: Function = makeStyles((theme: any): StyleRules => ({
 
 export default function RequestForm(props): ReactElement {
 
-  /* >>>>>> addon*/ const userId = useSelector((state: any) => state.credReducer.userObject.userId);
+  //Getting current signed-in users id to assign it by default for intervention
+  const userId = useSelector((state: any) => state.credReducer.userObject.userId);
 
   //Lines 37 to 46 is used to give a default intervention start and end date
   let startD: string;
@@ -60,9 +60,9 @@ export default function RequestForm(props): ReactElement {
     isAllDay: null,
     status: null,
     requestType: null,
-    description: null
+    description: null,
+    message: ""
   });
-  //const styles = useStyles();
 
   /**
    * This function will check to see if the current day lands on a weekend and will offset it accordingly
@@ -92,7 +92,6 @@ export default function RequestForm(props): ReactElement {
 
   function handleChange(event: any): void {
     event.preventDefault();
-    //console.log(typeof (event));
     setTrigger({ ...trigger, [event.target.name]: event.target.value });
   }
 
@@ -122,14 +121,20 @@ export default function RequestForm(props): ReactElement {
 
   function handleSubmit(): void {
     if (!trigger.isAllDay || !trigger.requestType || !trigger.description) {
-      alert("Field Missing");
+      setTrigger({
+        ...trigger,
+        message: "Field Missing",
+      })
       return;
     }
     let sTime: Date = new Date(trigger.startTime); //Creating a Date variable to hold the intervention start date
-    console.log(sTime.getDay());
     let eTime: Date = new Date(trigger.endTime); //Creating a Date variable to hold the intervention end date
     if ((sTime.getDay() != 6 && sTime.getDay() != 0) && (eTime.getDay() != 6 && eTime.getDay() != 0)) {
       if (isWithinRange(sTime, eTime)) { //If this intervention date is within the batch's timeframe, add it
+      setTrigger({
+        ...trigger,
+        message: "Creating Request..."
+      })
         axios.post(process.env.REACT_APP_ZUUL_ROUTE + "/interventions", {
           batchId: trigger.batchId,
           userId: trigger.userId,
@@ -145,16 +150,25 @@ export default function RequestForm(props): ReactElement {
           }
         })
           .then(function (response) {
-            alert(response.data);
+            setTrigger({
+              ...trigger,
+              message: response.data
+            })
           })
           .catch(function (error) {
             console.log(error);
           });
       } else {
-        alert("Start/End Date is out of range for this batch");
+        setTrigger({
+          ...trigger,
+          message: "Start/End Date is out of range for this batch"
+        })
       }
     } else {
-      alert("Choose a weekday for Start/End Date");
+      setTrigger({
+        ...trigger,
+        message: "Choose a weekday for Start/End Date"
+      })
     }
   }
 
@@ -182,63 +196,23 @@ export default function RequestForm(props): ReactElement {
           name="endTime"
           defaultValue={endD}
         />
-        <br />
-        {/* Commented out because these fields are abstracted */}
-        {/* <TextField
-          // id="outlined-simple-start-adornment"
-          variant="filled"
-          label={props.batchId ? props.batchId : "Batch ID"} //Changed by Michael W
-          onChange={handleChange}
-          type="text"
-          name="batchId"
-          fullWidth={true}
-        />
-        <br />
-        <TextField
-          // id="outlined-simple-start-adornment"
-          variant="filled"
-          label={trigger.userId ? trigger.userId : "User ID"} //Changed by Michael Worrell
-          onChange={handleChange}
-          type="number"
-          name="userId"
-          fullWidth={true}
-        />
-        <br /> */}
+        <br /> 
         <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
           <InputLabel >isAllDay</InputLabel>
           <Select
             name="isAllDay"
             onChange={handleChange}>
-            {/*    <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
-            {/* Check later ~~~~~~~~~~` */}
             <MenuItem value="true">Yes</MenuItem>
             <MenuItem value="false">No</MenuItem>
           </Select>
         </FormControl>
         <br />
-        {/* <FormControl fullWidth={true} style={{ textAlign: "left" }} variant="filled">
-          <InputLabel id="demo-controlled-open-select-label">Status</InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            name="status"
-            onChange={handleChange}
-          >
-            <MenuItem value=""><em>None</em></MenuItem>
-            <MenuItem value="Pending">Pending</MenuItem>
-            <MenuItem value="Done">Done</MenuItem>
-          </Select>
-        </FormControl>
-        <br /> */}
         <FormControl style={{ textAlign: "left" }} fullWidth={true} variant="filled">
           <InputLabel>Request Type</InputLabel>
           <Select
             name="requestType"
             onChange={handleChange}
           >
-            {/*       <MenuItem value=""><em>None</em></MenuItem> */}
             <MenuItem value="Intervention">Intervention</MenuItem>
             <MenuItem value="Talent">Talent</MenuItem>
             <MenuItem value="Help">Help</MenuItem>
@@ -258,6 +232,7 @@ export default function RequestForm(props): ReactElement {
       <Button variant="contained" color="primary" onClick={handleSubmit}>
         Submit
       </Button>
+      <h3>{trigger.message}</h3>
     </div>
   )
 

@@ -11,11 +11,6 @@ import conditionalRole from '../../redux/actions/roleTypes';
  * 
  */
 
-/* let conditionalRole = {
-  ROLE_ADMIN:"ADMIN",
-  ROLE_CLIENT:"CLIENT"
-} */
-
 function getModalStyle() {
   const top = 60
   const left = 60
@@ -56,7 +51,6 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      {/* <SimpleModal /> */}
       <RequestForm batchId ={batch.batchId} batch={batch}/> {/* changed by Michael Worrell */}
     </div>
   );
@@ -66,9 +60,6 @@ export default function SimpleModal() {
   }else {
     return (
       <div>
-    {/*    <button type="button" onClick={handleOpen}>
-          Open Modal
-        </button> */}
         <br />
         <Button variant="contained" style={{backgroundColor:"#f26925", color:"#fff"}} onClick={handleOpen}>
         Make a Request
@@ -80,7 +71,7 @@ export default function SimpleModal() {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          {/* <RequestForm  /> */}{body}
+         {body}
         </Modal>
       </div>
     );
