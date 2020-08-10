@@ -60,7 +60,11 @@ export default function ProfileList(): ReactElement {
     const [associateCount, setAssociateCount] = useState(0);
     const [message, setMessage] = useState("");
     const styles: styleINF = useStyles();
-
+    /**
+     * Remove element from All skill list which already existing in skill list chosen by user
+     * @param cData The skill list is chosen by user
+     * @param aData List show all skill
+     */
     function changeSkills(cData: any, aData: any): void {
         setClientSkills(cData);
         cData.forEach(element => {
@@ -70,6 +74,9 @@ export default function ProfileList(): ReactElement {
      setAllSkills(aData);
     }
 
+    /**
+     * Connect to backend get skill list chosen by user and 
+     */
     //Make an axios call to display the list of requests
     useEffect((): void => {
         /* Request to get list of skills and skills associated with user */
@@ -106,6 +113,10 @@ export default function ProfileList(): ReactElement {
             setAssociateCount(event.target.value);
     }
 
+    /**
+     * Move object from All skill list to list which choose by user when user add new skill
+     * @param event get object which select by user
+     */
     function addClient(event) {
         let cObj = JSON.parse(event.target.value);
         let temp: any = [...clientSkills];
@@ -121,7 +132,10 @@ export default function ProfileList(): ReactElement {
         });
         setAllSkills(aData);
     }
-
+    /**
+     * Move object from user list to All list which choose by user when user dont want a skill
+     * @param event get object which select by user
+     */
     function subClient(event) {
         let cObj = JSON.parse(event.target.value);
         let temp: any = [...allSkills];
@@ -137,23 +151,33 @@ export default function ProfileList(): ReactElement {
         });
         setClientSkills(cData);
     }
+    /**
+     * Update user profile
+     * @param event Did nothing
+     */
     function sendRequest(event) {
         setMessage("")
-        if(associateCount<=0){
-            setMessage("The associate can't be 0")
+        let data= {}
+        if(associateCount<0){
+            setMessage("The associate can't less thank 0")
             return;
         }
         var todayDate = new Date(); //Today Date   
         var deadline= new Date(endDate); 
-        if(todayDate > deadline){
-            setMessage("Deadline can't be today or early than Today")
-            return;  
+        if(todayDate >= deadline){
+             data= {
+                'batchDeadline':null,   
+                'associateCount':associateCount,
+                'neededCategories':clientSkills
+             }
         }
-       let data= {
-            'batchDeadline':endDate,     
-            'associateCount':associateCount,
-            'neededCategories':clientSkills
-         }
+        else{
+            data= {
+                'batchDeadline':endDate,   
+                'associateCount':associateCount,
+                'neededCategories':clientSkills
+             }
+        }
     Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -187,9 +211,11 @@ export default function ProfileList(): ReactElement {
                         name="endTime"
                         value={endDate}
                     />
+                    <p>Put early date or current date if dont want to set dealine</p>
                 </Grid>
                 <br></br>
                 <input type="number" className="AmountIn" onChange={handleAmount} value={associateCount}></input>
+                <p>Put 0 if you want unlimit associate</p>
                 <h3>Skill Chosen</h3>
                 <div className={styles.scrollArea}>
                     {clientSkills.map((data: any) => {
