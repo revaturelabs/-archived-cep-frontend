@@ -11,52 +11,26 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
+import moment from 'moment';
 
 //used solely for styling
 const useStyles: Function = makeStyles((): StyleRules => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  left: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-  right: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  middle: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rightButton: {
-    marginTop: "5px",
-    marginBottom: "5px",
-  },
   spacing: {
     marginTop: "15px",
     marginBottom: "15px",
+    height: "100%"
   },
+  button: {
+    margin: "0 5px"
+  }
 }));
 
 //Display individual requests
 export default function AdminItem(props: any): ReactElement {
 
   interface styleINF {
-    root: string,
-    left: string,
-    right: string,
-    middle: string,
-    rightButton: string,
-    spacing: string
+    spacing: string,
+    button: string
   }
 
   const token: String = useSelector((state: any) => state.credReducer.token);
@@ -85,24 +59,24 @@ export default function AdminItem(props: any): ReactElement {
   const ButtonComplete: React.FC = (): ReactElement => {
     return (
       <Button
-        className={styles.rightButton}
         variant="outlined"
         color="primary"
         onClick={handleToComplete}
+        className={styles.button}
       >
-        Completed
+        Mark as complete
       </Button>
     );
   };
   const ButtonDelete: React.FC = (): ReactElement => {
     return (
       <Button
-        className={styles.rightButton}
         variant="outlined"
         color="secondary"
         onClick={handleDelete}
+        className={styles.button}
       >
-        Delete
+        Cancel/Delete
       </Button>
     );
   };
@@ -110,28 +84,19 @@ export default function AdminItem(props: any): ReactElement {
   const CardInfo: React.FC = (): ReactElement => {
     return (
       <Card className={styles.spacing}>
-        <CardHeader style={{ backgroundColor: statusColor }}></CardHeader>
+        <CardHeader style={{ backgroundColor: statusColor }} title={userData.company}></CardHeader>
         <CardContent>
-          <Grid container spacing={3}>
-            <Grid item xs={3} className={styles.left}>
-              <Typography variant="overline">{userData.company}</Typography>
-              <Typography variant="h4">
-                {userData.firstName} {userData.lastName}
-              </Typography>
-              <Typography variant="h6">{userData.email}</Typography>
-              <Typography variant="h6">{userData.phone}</Typography>
-              <Typography variant="h6">{props.data.requestType}</Typography>
-            </Grid>
-            <Grid item xs={6} className={styles.middle}>
-              <Typography variant="h4">{props.data.batchId}</Typography>
-              <Typography variant="body2">{props.data.description}</Typography>
-            </Grid>
-            <Grid item xs={3} className={styles.right}>
-              <Typography variant="body2">{props.data.startTime}</Typography>
-              {buttonDeleteVisi ? <ButtonDelete /> : null}
-              {buttonCompleteVisi ? <ButtonComplete /> : null}
-            </Grid>
-          </Grid>
+          <p>Made By: {userData.firstName} {userData.lastName}</p>
+          <p>Email: {userData.email}</p>
+          <p>For: {props.data.requestType}</p>
+          <p>{(props.data.batchId) ? "Batch: " + props.data.batchId : "No Batch Specified"}</p>
+          <p>Description: {props.data.description}</p>
+          
+          <p>Date: {moment(props.data.startTime).format("MM/DD/YYYY hh:mm a")}</p>
+
+          {buttonCompleteVisi ? <ButtonComplete /> : null}
+          {buttonDeleteVisi ? <ButtonDelete /> : null}
+
         </CardContent>
       </Card>
     );
@@ -205,7 +170,7 @@ export default function AdminItem(props: any): ReactElement {
         },
       },
     )
-      .then((response) => {
+      .then(() => {
         /*After delete we reload the webpage so it can show "real time" that the request has been deleted
             May want to just hide the card to not lose potential filtering and sorting options later on*/
         //window.location.reload();
@@ -216,5 +181,5 @@ export default function AdminItem(props: any): ReactElement {
 
   //These props need to change to match the data that is given
   //Change "requestType" to "technology" and "endTime" to "date" if you want to mock test with the ideal/test look of the request
-  return <div>{cardVisi ? <CardInfo /> : null}</div>;
+  return <React.Fragment>{cardVisi ? <CardInfo /> : null}</React.Fragment>;
 }

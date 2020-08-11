@@ -38,7 +38,11 @@ export default function Event(props: any): ReactElement {
     console.log("event item", props.eventItem);
     return (
         <div>
-            <button onClick={() => setDisplay(!displayBlock)} className={`accordion ${styles.header}`}>{"UserId: " + props.eventItem.userId + " BatchID " + props.eventItem.batchId}</button>
+            <button 
+            onClick={() => setDisplay(!displayBlock)} 
+            className={`accordion ${styles.header}`}>
+                {"User ID: " + props.eventItem.userId} {(props.eventItem.batchId) ? "Batch ID: " + props.eventItem.batchId : ""}
+            </button>
             <div className={styles.body} style={{ display: displayBlock ? "block" : "none" }}>
                 <p>Start: {moment(props.eventItem.startTime).format("hh:mm a")}</p>
                 <p>End: {moment(props.eventItem.endTime).format("hh:mm a")}</p>

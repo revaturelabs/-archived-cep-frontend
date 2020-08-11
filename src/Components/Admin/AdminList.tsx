@@ -2,18 +2,20 @@ import React, { useState, useEffect, ReactElement } from "react";
 import AdminItem from "./AdminItem";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Grid } from "@material-ui/core";
+
 
 //Show a list of requests
-export default function AdminList():ReactElement {
-  const token:String = useSelector((state: any) => state.credReducer.token);
+export default function AdminList(): ReactElement {
+  const token: String = useSelector((state: any) => state.credReducer.token);
   const [realData, setRealData] = useState([]);
 
-  function changeRealData(data: any):void {
+  function changeRealData(data: any): void {
     setRealData(data);
   }
 
   //Make an axios call to display the list of requests
-  useEffect(():void => {
+  useEffect((): void => {
     axios
       .get(
         process.env.REACT_APP_ZUUL_ROUTE + "/interventions",
@@ -35,10 +37,14 @@ export default function AdminList():ReactElement {
       return <h2>You don't have any scheduled interventions at the moment.</h2>
     } else {
       return (
-        <div>
-          {realData.map((data: any) => {
-            return <AdminItem data={data} key={data.requestId} />;
-          })}
+        <div style={{ padding: "5em" }}>
+          <Grid container direction="row" spacing={3}>
+            {realData.map((data: any, index: number) =>
+              <Grid item xs={6} key={index} style={{minHeight: "410px"}}>
+                <AdminItem data={data} key={data.requestId} />
+              </Grid>
+            )}
+          </Grid>
         </div>
       );
     }

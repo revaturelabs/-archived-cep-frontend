@@ -173,10 +173,10 @@ export default function ConfirmModal(props) {
                         <h5 style={{ color: "red" }}>{message}</h5>
                     </div>
                     <button type="button" variant="contained" className={classes.confirmBtn} onClick={handleConfirmClose}>
-                        confirm
+                        Confirm
                     </button>
                     <button type="button" variant="contained" className={classes.cancelBtn} onClick={handleClose}>
-                        cancel
+                        Cancel
                     </button>
                 </div>
             </Modal>
