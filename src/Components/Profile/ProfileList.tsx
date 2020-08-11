@@ -211,11 +211,11 @@ export default function ProfileList(): ReactElement {
                         variant="filled"
                         // label="End Time"
                         onChange={handleDate}
-                        type="datetime-local"
+                        type="date"
                         name="endTime"
                         value={endDate}
                     />
-                    <p>Put early date or current date if dont want to set deadline</p>
+                    <p>Use today's date or earlier to set no preference for the batch's deadline.</p>
                 </Grid>
                 <br></br>
                 <input type="number" className="AmountIn" onChange={handleAmount} value={associateCount}></input>
