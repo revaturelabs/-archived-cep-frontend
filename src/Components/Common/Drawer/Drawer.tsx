@@ -116,7 +116,6 @@ export default function MiniDrawer(props: any): ReactElement {
           </ListItemIcon>
           <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
         </ListItem>
-
       </React.Fragment>
     }
     else {

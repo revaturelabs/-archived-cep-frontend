@@ -58,8 +58,14 @@ export default function ProfileList(): ReactElement {
     const [allSkills, setAllSkills] = useState([]);
     const [endDate, setEndDate] = useState(new Date);
     const [associateCount, setAssociateCount] = useState(0);
-    const styles: styleINF = useStyles();
 
+    const [message, setMessage] = useState("");
+    const styles: styleINF = useStyles();
+    /**
+     * Remove element from All skill list which already existing in skill list chosen by user
+     * @param cData The skill list is chosen by user
+     * @param aData List show all skill
+     */
     function changeSkills(cData: any, aData: any): void {
         setClientSkills(cData);
         cData.forEach(element => {
@@ -69,6 +75,9 @@ export default function ProfileList(): ReactElement {
      setAllSkills(aData);
     }
 
+    /**
+     * Connect to backend get skill list chosen by user and 
+     */
     //Make an axios call to display the list of requests
     useEffect((): void => {
         /* Request to get list of skills and skills associated with user */
@@ -84,9 +93,9 @@ export default function ProfileList(): ReactElement {
                     },
                   })
                   .then((clientResult) => {
-                      console.log(result.data);
-                      console.log(clientResult.data.neededCategories);
-                      changeSkills(clientResult.data.neededCategories, result.data);
+                    setEndDate(clientResult.data.batchDeadline)
+                    setAssociateCount(clientResult.data.associateCount)
+                    changeSkills(clientResult.data.neededCategories, result.data);
                   })
             })
             .catch((err) => console.log("error batch:" + err));
@@ -105,6 +114,10 @@ export default function ProfileList(): ReactElement {
             setAssociateCount(event.target.value);
     }
 
+    /**
+     * Move object from All skill list to list which choose by user when user add new skill
+     * @param event get object which select by user
+     */
     function addClient(event) {
         let cObj = JSON.parse(event.target.value);
         let temp: any = [...clientSkills];
@@ -121,6 +134,10 @@ export default function ProfileList(): ReactElement {
         setAllSkills(aData);
     }
 
+    /**
+     * Move object from user list to All list which choose by user when user dont want a skill
+     * @param event get object which select by user
+     */
     function subClient(event) {
         let cObj = JSON.parse(event.target.value);
         let temp: any = [...allSkills];
@@ -136,22 +153,42 @@ export default function ProfileList(): ReactElement {
         });
         setClientSkills(cData);
     }
+
+    /**
+     * Update user profile
+     * @param event Did nothing
+     */
     function sendRequest(event) {
-        console.log(endDate)
-        console.log(associateCount)
-        console.log(clientSkills)
-       let data= {
-            'batchDeadline':endDate,     
-            'associateCount':associateCount,
-            'neededCategories':clientSkills
-         }
+        setMessage("")
+        let data= {}
+        if(associateCount<0){
+            setMessage("The associate can't less thank 0")
+            return;
+        }
+        var todayDate = new Date(); //Today Date   
+        var deadline= new Date(endDate); 
+        if(todayDate >= deadline){
+             data= {
+                'batchDeadline':null,   
+                'associateCount':associateCount,
+                'neededCategories':clientSkills
+             }
+        }
+        else{
+             data= {
+                'batchDeadline':endDate,   
+                'associateCount':associateCount,
+                'neededCategories':clientSkills
+             }
+        }
+
     Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
         })
         .then((result) => {
-            console.log(result);
+            setMessage(result.data)
         })
     }
     return (
@@ -176,10 +213,13 @@ export default function ProfileList(): ReactElement {
                         onChange={handleDate}
                         type="datetime-local"
                         name="endTime"
+                        value={endDate}
                     />
+                    <p>Put early date or current date if dont want to set deadline</p>
                 </Grid>
                 <br></br>
                 <input type="number" className="AmountIn" onChange={handleAmount} value={associateCount}></input>
+                <p>Put 0 if you want unlimit associate</p>
                 <h3>Skill Chosen</h3>
                 <div className={styles.scrollArea}>
                     {clientSkills.map((data: any) => {
@@ -189,6 +229,11 @@ export default function ProfileList(): ReactElement {
                     })}
                 </div>
             </Grid>
+
+            <div style={{ width: "100%" }}>
+                <h3 style={{ color: "red", textAlign: "center" }}>{message}</h3>
+            </div>
+
             <button className={styles.confirmBtn} onClick={sendRequest}>Confirm</button>
         </Grid>
 
