@@ -8,7 +8,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { StaticRouter } from 'react-router-dom';
-import { DatePicker } from '@material-ui/pickers';
 import { getByAltText } from '@testing-library/react';
 
 const useStyles: Function = makeStyles((theme: any): StyleRules => ({

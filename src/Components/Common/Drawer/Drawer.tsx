@@ -22,6 +22,8 @@ import SchoolIcon from "@material-ui/icons/School";
 import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CreateIcon from '@material-ui/icons/Create';
 import { useStyles } from "./DrawerStyle";
 import "./Drawer.css";
 import { Link } from "react-router-dom";
@@ -51,11 +53,11 @@ export default function MiniDrawer(props: any): ReactElement {
   const dispatch = useDispatch();
   const role: String = useSelector((state: any) => state.credReducer.role);
 
-  const handleDrawerOpen = ():void => {
+  const handleDrawerOpen = (): void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = ():void => {
+  const handleDrawerClose = (): void => {
     setOpen(false);
   };
 
@@ -64,53 +66,59 @@ export default function MiniDrawer(props: any): ReactElement {
     //window.location.reload();
   }
 
-  function loadAdmin():any {
-    if (role==conditionalRole.ROLE_ADMIN)
-    {
+  function loadAdmin(): any {
+    if (role == conditionalRole.ROLE_ADMIN) {
       return <React.Fragment>
         <ListItem>
-            <ListItemIcon>
-              <Link to="/admin">
-                <ViewListIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Admin</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Link to="/acceptuser">
-                <GroupAddIcon style={{ color: "#474C55" }} />
-              </Link>
-            </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>Account Verification</ListItemText>
-          </ListItem>
-          </React.Fragment>
+          <ListItemIcon>
+            <Link to="/acceptuser">
+              <GroupAddIcon style={{ color: "#474C55" }} />
+            </Link>
+          </ListItemIcon>
+          <ListItemText style={{ color: "#474C55" }}>Account Verification</ListItemText>
+        </ListItem>
+      </React.Fragment>
     }
-    else
-    {
+    else {
       return null;
-    }  
+    }
   }
 
-  function loadClient():any {
-    if(role==conditionalRole.ROLE_CLIENT)
-    {
+  function loadClient(): any {
+    if (role == conditionalRole.ROLE_CLIENT) {
       return <React.Fragment>
         <ListItem>
           <ListItemIcon>
             <Link to="/intervention">
-              <ListIcon style={{ color: "#474C55" }} />
+              <CreateIcon style={{ color: "#474C55" }} />
             </Link>
           </ListItemIcon>
           <ListItemText style={{ color: "#474C55" }}>
             Make Request
           </ListItemText>
         </ListItem>
-
+        <ListItem>
+          <ListItemIcon>
+            <Link to="/profile">
+              <AccountCircleIcon style={{ color: "#474C55" }} />
+            </Link>
+          </ListItemIcon>
+          <ListItemText style={{ color: "#474C55" }}>
+            Profile
+          </ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Link to="/my_batches">
+              {/* TODO: Make it a nice icon */}
+              <SchoolIcon style={{ color: "#474C55" }} />
+            </Link>
+          </ListItemIcon>
+          <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
+        </ListItem>
       </React.Fragment>
     }
-    else
-    {
+    else {
       return null;
     }
   }
@@ -164,8 +172,8 @@ export default function MiniDrawer(props: any): ReactElement {
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
-              <ChevronLeftIcon />
-            )}
+                <ChevronLeftIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -178,21 +186,19 @@ export default function MiniDrawer(props: any): ReactElement {
             </ListItemIcon>
             <ListItemText style={{ color: "#474C55" }}>Home</ListItemText>
           </ListItem>
-
           <ListItem>
             <ListItemIcon>
-              <Link to="/my_batches">
-                {/* TODO: Make it a nice icon */}
-                <SchoolIcon style={{ color: "#474C55" }} />
+              <Link to="/admin">
+                <ViewListIcon style={{ color: "#474C55" }} />
               </Link>
             </ListItemIcon>
-            <ListItemText style={{ color: "#474C55" }}>My Batches</ListItemText>
+            <ListItemText style={{ color: "#474C55" }}>View Requests</ListItemText>
           </ListItem>
 
           {loadClient()}
           {loadAdmin()}
 
-          
+
 
           <ListItem>
             <ListItemIcon>
