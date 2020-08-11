@@ -61,8 +61,6 @@ export default function AccUserItem(props: any): ReactElement {
     const styles: styleINF = useStyles();
     let t: number = props.data.startTime.toString().indexOf("T");
     let date: string = props.data.startTime.slice(0, t);
-    console.log(date)
-    console.log(props.data)
     function ClientItem(): ReactElement {
         return (
             <Card className={styles.spacing}>
