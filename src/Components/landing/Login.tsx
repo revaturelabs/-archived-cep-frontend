@@ -99,6 +99,7 @@ export default function Login(props: any): ReactElement {
     const myHeaders: any = new Headers();
 
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", `${window.location.protocol}//${window.location.host}`)
 
 
     const raw: string = JSON.stringify({
