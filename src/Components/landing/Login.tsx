@@ -160,6 +160,7 @@ export default function Login(props: any): ReactElement {
     } else {
       return (
         <div className={styles.paper}>
+          <h1>Client Engagement Portal</h1>
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
