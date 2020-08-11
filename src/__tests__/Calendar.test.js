@@ -4,32 +4,27 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import store from "../redux/store/index.ts";
 import { Provider } from "react-redux";
-import { createStore} from "redux";
-import mainReducer from '../redux/reducers';
-import GetInterventions from '../Components/Common/Intervention/GetInterventions';
-import RequestForm from '../Components/Common/Intervention/Intervention';
 import Calendar from '../Components/Common/Calendar/Calendar';
-import { ExpansionPanelActions } from '@material-ui/core';
-import CalModal from '../Components/Common/Calendar/Calmodal';
+// import CalModal from '../Components/Common/Calendar/Calmodal';
 import Event from '../Components/Common/Calendar/Event';
 
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("test calendar", () => {
-    const details = [{
-        batchId: 1,
-        name: "test",
-        startTime: "2020-10-08",
-        endTime: "2016-04-01",
-        isAllDay: true,
-        status: "Pending",
-        requestType: "Intervention",
-        description: "testing"
-    }];
+    // const details = [{
+    //     batchId: 1,
+    //     name: "test",
+    //     startTime: "2020-10-08",
+    //     endTime: "2016-04-01",
+    //     isAllDay: true,
+    //     status: "Pending",
+    //     requestType: "Intervention",
+    //     description: "testing"
+    // }];
 
     let wrapper;
-    const setDetails = jest.fn();
+    // const setDetails = jest.fn();
 
     it("click buttons", () => {
         const currentYear = wrapper.find(".chevron");
@@ -51,29 +46,29 @@ describe("test calendar", () => {
         process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' });
     })
 })
-describe("test calModal", () => {
-    const details = [{
-        batchId: 1,
-        name: "test",
-        startTime: "2020-10-08",
-        endTime: "2016-04-01",
-        isAllDay: true,
-        status: "Pending",
-        requestType: "Intervention",
-        description: "testing"
-    }];
+// describe("test calModal", () => {
+//     const details = [{
+//         batchId: 1,
+//         name: "test",
+//         startTime: "2020-10-08",
+//         endTime: "2016-04-01",
+//         isAllDay: true,
+//         status: "Pending",
+//         requestType: "Intervention",
+//         description: "testing"
+//     }];
 
-    let wrapper;
+//     let wrapper;
 
-    it("click event", () => {
+//     it("click event", () => {
 
-      });
+//       });
 
-      beforeEach(() => {
-        wrapper = mount(<Provider store={store}><CalModal Events={details}/></Provider>);
-        process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' });
-    })
-})
+//       beforeEach(() => {
+//         wrapper = mount(<Provider store={store}><CalModal Events={details}/></Provider>);
+//         process.env = Object.assign(process.env, { REACT_APP_ZUUL_ROUTE: 'http://localhost:9015' });
+//     })
+// })
 describe("test event component", () => {
     let details = [{
         batchId: 1,

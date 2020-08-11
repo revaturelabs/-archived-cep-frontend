@@ -211,7 +211,7 @@ export default function Calendar() {
                 /* a div cell begin pushed into the calendar to display the events */
                 days.push(
                     <div
-                        className={`${styles.column} ${styles.cell} ${!isSameMonth(day, monthStart)
+                        className={`${styles.column} ${styles.cell} ${"cell" /* This class name exists only for testing purposes, for Jest/Enzyme to find the component, since MaterialUI fails to identify the classname from styles.cell*/} ${!isSameMonth(day, monthStart)
                             ? `${styles.disabled}` : isSameDay(day, selectedDate)
                                 ? `${styles.selected}` : ""}`}
                         key={day.toDateString()}
