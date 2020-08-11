@@ -58,6 +58,7 @@ export default function ProfileList(): ReactElement {
     const [allSkills, setAllSkills] = useState([]);
     const [endDate, setEndDate] = useState(new Date);
     const [associateCount, setAssociateCount] = useState(0);
+
     const [message, setMessage] = useState("");
     const styles: styleINF = useStyles();
     /**
@@ -132,6 +133,7 @@ export default function ProfileList(): ReactElement {
         });
         setAllSkills(aData);
     }
+
     /**
      * Move object from user list to All list which choose by user when user dont want a skill
      * @param event get object which select by user
@@ -151,6 +153,7 @@ export default function ProfileList(): ReactElement {
         });
         setClientSkills(cData);
     }
+
     /**
      * Update user profile
      * @param event Did nothing
@@ -178,6 +181,7 @@ export default function ProfileList(): ReactElement {
                 'neededCategories':clientSkills
              }
         }
+
     Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -225,9 +229,11 @@ export default function ProfileList(): ReactElement {
                     })}
                 </div>
             </Grid>
+
             <div style={{ width: "100%" }}>
                 <h3 style={{ color: "red", textAlign: "center" }}>{message}</h3>
             </div>
+
             <button className={styles.confirmBtn} onClick={sendRequest}>Confirm</button>
         </Grid>
 
