@@ -13,14 +13,13 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     calendar: {
         display: "block",
         position: "relative",
-        width: "90%",
+        width: "auto",
         background: "white",
         border: "1px solid lightgray",
         height: "auto",
-        margin: "0 auto",
+        margin: "100px auto",
     },
     header: {
-        textTransform: "uppercase",
         fontWeight: 700,
         fontSize: "115%",
         padding: "1.5em 0",
@@ -28,13 +27,9 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
     },
     icon: {
         display: "inline-block",
-        verticalAlign: "middle",
+        margin: "auto",
         textAlign: "center",
-        direction: "ltr",
-        textRendering: "optimizeLegibility",
-        fontFeatureSettings: "liga",
         cursor: "pointer",
-        transition: ".15s ease-out",
     },
     days: {
         textTransform: "uppercase",
@@ -43,8 +38,6 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         fontSize: "70%",
         padding: ".75em 0",
         borderBottom: " 1px solid lightgray",
-    },
-    body: {
     },
     cell: {
         position: "relative",
@@ -59,9 +52,8 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         // borderRight: "none",
     },
     selected: {
-        borderLeft: "10px solid transparent",
-        borderImage: "linear-gradient(45deg, #1affa0 0%,#cff153 40%)",
-        borderImageSlice: 1,
+        borderBottom: "10px solid #f26925",
+        // backgroundColor: "#eeeeee",
     },
     row: {
         margin: 0,
@@ -104,6 +96,10 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         flexGrow: 0,
         flexBasis: "calc(100%/7)",
         width: "calc(100%/7)",
+    },
+    centerAlign: {
+        margin: "auto",
+        textAlign: "center"
     }
 
 
@@ -114,7 +110,6 @@ interface styleINF {
     header: string,
     icon: string,
     days: string,
-    body: string,
     cell: string,
     selected: string,
     row: string,
@@ -122,6 +117,7 @@ interface styleINF {
     disabled: string,
     bg: string,
     column: string,
+    centerAlign: string
 }
 /**
  * Authors Armondo, Miki
@@ -146,6 +142,7 @@ export default function Calendar() {
                 },
             )
             .then((response) => {
+                console.log("all intvs", response.data)
                 getAllRequests(response.data);
             })
             .catch((err) => console.log());
@@ -155,32 +152,24 @@ export default function Calendar() {
         const monthFormat = "MMMM";
         const yearFormat = "yyyy"
         return (
-            <div className={`${styles.header} ${styles.row} flex-middle`}>
-                <div className={`${styles.column} col-start`}>
-                    <div className={styles.icon} onClick={prevMonth}>
-                        &#60;
-                    </div>
+            <div className={`${styles.header} ${styles.row}`}>
+                <div className={`${styles.column} ${styles.icon}`} onClick={prevMonth}>
+                    <span className="chevron">&#60;</span>
                 </div>
-                <div className={`${styles.column} col-center`}>
+                <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, monthFormat)}</span>
                 </div>
-                <div className={`${styles.column} col-end`}>
-                    <div className={styles.icon} onClick={nextMonth}>
-                        <span>&#62;</span>
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={nextMonth}>
+                    <span className="chevron">&#62;</span>
                 </div>
-                <div className={`${styles.column} col-start`}>
-                    <div className={styles.icon} onClick={prevYear}>
-                        Prev Year
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={prevYear}>
+                    <span className="chevron">&#60;</span>
                 </div>
-                <div className={`${styles.column} col-center`}>
+                <div className={`${styles.column} ${styles.centerAlign}`}>
                     <span>{format(currentDate, yearFormat)}</span>
                 </div>
-                <div className={`${styles.column} col-end`}>
-                    <div className={styles.icon} onClick={nextYear}>
-                        Next Year
-                    </div>
+                <div className={`${styles.column} ${styles.icon}`} onClick={nextYear}>
+                    <span className="chevron">&#62;</span>
                 </div>
             </div>
         );
@@ -189,11 +178,12 @@ export default function Calendar() {
     const days = () => {
         const dateFormat: string = "ddd";
         const days: Array<any> = [];
-        let startDate: Date = startOfWeek(currentDate);
+        const nameOfDays: Array<string> = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        // let startDate: Date = startOfWeek(currentDate);
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div className={`${styles.column} col-center`} key={i}>
-                    {format(addDays(startDate, i), dateFormat)}
+                <div className={`${styles.column} ${styles.centerAlign}`} key={i}>
+                    {nameOfDays[i]}
                 </div>
             );
         }
@@ -221,11 +211,10 @@ export default function Calendar() {
                 /* a div cell begin pushed into the calendar to display the events */
                 days.push(
                     <div
-                        className={`${styles.column} ${styles.cell} ${!isSameMonth(day, monthStart)
+                        className={`${styles.column} ${styles.cell} ${"cell" /* This class name exists only for testing purposes, for Jest/Enzyme to find the component, since MaterialUI fails to identify the classname from styles.cell*/} ${!isSameMonth(day, monthStart)
                             ? `${styles.disabled}` : isSameDay(day, selectedDate)
                                 ? `${styles.selected}` : ""}`}
                         key={day.toDateString()}
-
 
                         onClick={() => onDateClick(parse("", "", cloneDay))}
                         style={{ overflowY: "auto" }}
@@ -246,7 +235,7 @@ export default function Calendar() {
             );
             days = [];
         }
-        return <div className={styles.body}>{rows}</div>;
+        return <div>{rows}</div>;
     }
     const nextMonth = () => {
         setCurrentDate(addMonths(currentDate, 1));
@@ -265,13 +254,12 @@ export default function Calendar() {
 
     }
     return (
-        <div>
-
+        <div className={styles.calendar}>
+            <h2 className={styles.centerAlign}>Intervention Calendar</h2>
+            <br />
             <div>{header()}</div>
-            <div className={styles.calendar}>
-                <div>{days()}</div>
-                <div>{cells()}</div>
-            </div>
+            <div>{days()}</div>
+            <div>{cells()}</div>
         </div>
     );
 }; 

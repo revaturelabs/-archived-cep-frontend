@@ -153,7 +153,6 @@ export default function Login(props: any): ReactElement {
       );
     } else if (isLoggedIn && role == conditionalRole.ROLE_ADMIN) {
       return (<React.Fragment>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <Calendar></Calendar>
       </React.Fragment>
       );
