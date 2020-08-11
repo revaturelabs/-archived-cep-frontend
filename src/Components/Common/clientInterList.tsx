@@ -38,7 +38,6 @@ export default function ClientList():ReactElement {
       return (
         <div>
           {realData.map((data: any) => {
-            console.log(data)
             return <ClientItem data={data} key={data.requestId} />;
           })}
         </div>
