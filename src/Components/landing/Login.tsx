@@ -76,7 +76,7 @@ export default function Login(props: any): ReactElement {
     //const sub: any = JWTD(token).sub;
     const email: string = sub;
 
-    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email/", {
+    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email", {
       params: {
         email: email.toLowerCase(),
       },
