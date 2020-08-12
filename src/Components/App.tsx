@@ -42,7 +42,7 @@ function App():ReactElement{
         <Route path="/404" component={NotFound} exact />
         <div className="App">
           <Route path="/my_batches" component={MyBatches} />
-          <Route path="/admin" component={AdminPage} />
+          <Route path="/requests" component={AdminPage} />
           <Route path="/acceptuser" component={AccUserPage} />
           <Route path="/intervention" component={RequestForm} />
           <Route path="/getinterventions" component={GetInterventions} />
