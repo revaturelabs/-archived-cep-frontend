@@ -81,9 +81,9 @@ export default function Login(props: any): ReactElement {
         email: email.toLowerCase(),
       },
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
         "Access-Control-Allow-Origin": `${window.location.protocol}//${window.location.host}`,
-        withCredentials: true
+        "withCredentials": true
       },
     })
       .then((result) => {
