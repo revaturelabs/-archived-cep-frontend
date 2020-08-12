@@ -188,7 +188,7 @@ export default function MiniDrawer(props: any): ReactElement {
           </ListItem>
           <ListItem>
             <ListItemIcon>
-              <Link to="/admin">
+              <Link to="/requests">
                 <ViewListIcon style={{ color: "#474C55" }} />
               </Link>
             </ListItemIcon>
