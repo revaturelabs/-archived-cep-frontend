@@ -19,28 +19,59 @@ const useStyles: Function = makeStyles((theme): StyleRules => ({
         alignSelf: "center"
     },
     scrollArea: {
-        height: '500px',
+        height: "450px",
         overflowY: 'scroll',
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "black"
     },
     confirmBtn: {
         backgroundColor: "#f26925",
         color: "#fff",
-        width: "100%",
-        height: "30px",
-        borderColor: "#f26925",
+        cursor: "pointer",
+        padding: "10px 15px",
+        borderStyle: "none",
         fontSize: "large",
-        marginTop: "5%"
+        margin: "15px auto"
     },
     moveBtn: {
-        backgroundColor: "#fff",
-        color: "#f26925",
-        marginLeft: "10px",
+        backgroundColor: "#f26925",
+        borderRadius: "5px",
+        display: "block",
+        width: "120px",
+        padding: "10px 5px",
+        color: "#ffffff",
         borderColor: "#f26925",
-        fontSize: "large",
-        marginTop: "3%"
+        fontSize: "12px",
+        margin: "5px auto"
+    },
+    row: {
+        margin: 0,
+        padding: 0,
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        width: "100%",
+        borderBottom: "1px solid lightgray",
+        // borderBottom: "none",
+    },
+    inline: {
+        margin: "5px 10px",
+        float: "left"
+    },
+    label: {
+        marginTop: "10px",
+        marginBottom: "5px",
+        display: "block",
+        fontSize: "18px",
+        width: "fit-content"
+    },
+    header: {
+        width: "100%",
+        paddingBottom: "10px",
+        backgroundColor: "#eeeeee",
+    },
+    input: {
+        width: "260px",
+        fontSize: "18px",
+        textAlign: "center"
     }
 }));
 //Show a list of requests
@@ -50,7 +81,12 @@ export default function ProfileList(): ReactElement {
         toggleBtn: string,
         scrollArea: string,
         confirmBtn: string,
-        moveBtn: string
+        moveBtn: string,
+        row: string,
+        inline: string,
+        label: string,
+        header: string,
+        input: string
     }
     const token: String = useSelector((state: any) => state.credReducer.token);
     const userId = useSelector((state: any) => state.credReducer.userId);
@@ -71,8 +107,8 @@ export default function ProfileList(): ReactElement {
         cData.forEach(element => {
             aData = aData.filter(val => val.categoryId !== element.categoryId)
         });
-        
-     setAllSkills(aData);
+
+        setAllSkills(aData);
     }
 
     /**
@@ -81,26 +117,26 @@ export default function ProfileList(): ReactElement {
     //Make an axios call to display the list of requests
     useEffect((): void => {
         /* Request to get list of skills and skills associated with user */
-         Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/category/allCategories", {
+        Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/category/allCategories", {
             headers: {
-              Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
-          })
+        })
             .then((result) => {
-                Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, {
+                Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/" + userId, {
                     headers: {
-                      Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
                     },
-                  })
-                  .then((clientResult) => {
-                    setEndDate(clientResult.data.batchDeadline)
-                    setAssociateCount(clientResult.data.associateCount)
-                    changeSkills(clientResult.data.neededCategories, result.data);
-                  })
+                })
+                    .then((clientResult) => {
+                        setEndDate(clientResult.data.batchDeadline)
+                        setAssociateCount(clientResult.data.associateCount)
+                        changeSkills(clientResult.data.neededCategories, result.data);
+                    })
             })
             .catch((err) => console.log("error batch:" + err));
 
-        
+
     }, []);
 
     function handleDate(event: any): void {
@@ -110,7 +146,7 @@ export default function ProfileList(): ReactElement {
 
     function handleAmount(event: any): void {
         event.preventDefault();
-        if (event.target.value>=0)
+        if (event.target.value >= 0)
             setAssociateCount(event.target.value);
     }
 
@@ -159,82 +195,83 @@ export default function ProfileList(): ReactElement {
      * @param event Did nothing
      */
     function sendRequest(event) {
-        setMessage("")
-        let data= {}
-        if(associateCount<0){
+        setMessage("Setting Preferences...")
+        let data = {}
+        if (associateCount < 0) {
             setMessage("The associate can't less thank 0")
             return;
         }
         var todayDate = new Date(); //Today Date   
-        var deadline= new Date(endDate); 
-        if(todayDate >= deadline){
-             data= {
-                'batchDeadline':null,   
-                'associateCount':associateCount,
-                'neededCategories':clientSkills
-             }
+        var deadline = new Date(endDate);
+        if (todayDate >= deadline) {
+            data = {
+                'batchDeadline': null,
+                'associateCount': associateCount,
+                'neededCategories': clientSkills
+            }
         }
-        else{
-             data= {
-                'batchDeadline':endDate,   
-                'associateCount':associateCount,
-                'neededCategories':clientSkills
-             }
+        else {
+            data = {
+                'batchDeadline': endDate,
+                'associateCount': associateCount,
+                'neededCategories': clientSkills
+            }
         }
 
-    Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/"+userId, data, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
+        Axios.put(process.env.REACT_APP_ZUUL_ROUTE + "/users/profile/" + userId, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
         })
-        .then((result) => {
-            setMessage(result.data)
-        })
+            .then((result) => {
+                setMessage(result.data)
+            })
     }
+
     return (
         <Grid container component="main" className={styles.root}>
             <CssBaseline />
-            <Grid item xs={false} sm={8} md={5} component={Paper} elevation={5} square>
-                <div className={styles.scrollArea} style={{ height: "100%" }}>
-                    <h3>Skills Available</h3>
-                    {allSkills.map((data: any) => {
-                        return (<div>{data.skillCategory}
-                            <button className={styles.moveBtn} value={JSON.stringify(data)} onClick={addClient}>+</button>
-                        </div>);
-                    })}
-                </div>
-            </Grid>
-            <Grid item xs={false} sm={false} md={7} component={Paper} elevation={2} square>
-                <Grid item>
+            <div className={styles.header}>
+                <div style={{ width: "fit-content", margin: "auto" }}>
+                    <label htmlFor="endTime" className={styles.label}>Preferred Batch End Date</label>
                     <TextField
                         id="outlined-simple-start-adornment"
                         variant="filled"
-                        // label="End Time"
                         onChange={handleDate}
                         type="date"
                         name="endTime"
                         value={endDate}
                     />
-                    <p>Use today's date or earlier to set no preference for the batch's deadline.</p>
-                </Grid>
-                <br></br>
-                <input type="number" className="AmountIn" onChange={handleAmount} value={associateCount}></input>
-                <p>Put 0 if you want unlimit associate</p>
-                <h3>Skill Chosen</h3>
-                <div className={styles.scrollArea}>
-                    {clientSkills.map((data: any) => {
-                        return <div>{data.skillCategory}
-                            <button className={styles.moveBtn} value={JSON.stringify(data)} onClick={subClient}>-</button>
-                        </div>;
-                    })}
+                    <label htmlFor="batchSize" className={styles.label}>Preferred Batch Size</label>
+                    <input type="number" className={styles.input} onChange={handleAmount} value={associateCount} name="batchSize"></input>
                 </div>
-            </Grid>
 
-            <div style={{ width: "100%" }}>
-                <h3 style={{ color: "red", textAlign: "center" }}>{message}</h3>
+            </div>
+            <div className={styles.row}>
+                <Grid item xs={false} sm={8} md={3} component={Paper} square>
+                    <h3>Skills Available</h3>
+                    <div className={styles.scrollArea}>
+                        {allSkills.map((data: any) =>
+                            <button className={styles.moveBtn} value={JSON.stringify(data)} onClick={addClient}>+ {data.skillCategory}</button>
+                        )}
+                    </div>
+                </Grid>
+
+                <Grid item xs={false} sm={false} md={9} component={Paper} square>
+                    <h3>Skill Chosen</h3>
+                    <div className={styles.scrollArea}>
+                        {clientSkills.map((data: any) =>
+                            <button className={`${styles.moveBtn} ${styles.inline}`} style={{ backgroundColor: "#b9b9ba", borderColor: "#b9b9ba" }} value={JSON.stringify(data)} onClick={subClient}>{data.skillCategory}</button>
+                        )}
+                    </div>
+                </Grid>
+
+            </div>
+            <div style={{ margin: "auto" }}>
+                <h3 style={{ color: "black", textAlign: "center" }}>{message}</h3>
+                <button className={styles.confirmBtn} onClick={sendRequest}>Confirm Changes</button>
             </div>
 
-            <button className={styles.confirmBtn} onClick={sendRequest}>Confirm</button>
         </Grid>
 
 

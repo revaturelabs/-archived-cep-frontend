@@ -76,12 +76,14 @@ export default function Login(props: any): ReactElement {
     //const sub: any = JWTD(token).sub;
     const email: string = sub;
 
-    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email/", {
+    Axios.get(process.env.REACT_APP_ZUUL_ROUTE + "/users/email", {
       params: {
         email: email.toLowerCase(),
       },
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
+        "Access-Control-Allow-Origin": `${window.location.protocol}//${window.location.host}`,
+        "withCredentials": true
       },
     })
       .then((result) => {
@@ -99,6 +101,7 @@ export default function Login(props: any): ReactElement {
     const myHeaders: any = new Headers();
 
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", `${window.location.protocol}//${window.location.host}`)
 
 
     const raw: string = JSON.stringify({

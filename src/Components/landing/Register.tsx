@@ -72,6 +72,7 @@ export default function Register(props: any): ReactElement {
 
     const myHeaders: any = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", `${window.location.protocol}//${window.location.host}`)
     const raw: string = JSON.stringify({
       firstName: userInformation.firstName,
       lastName: userInformation.lastName,
@@ -95,6 +96,11 @@ export default function Register(props: any): ReactElement {
       email: userInformation.email.toLowerCase(),
       company: userInformation.company,
       phone: userInformation.phone
+    },
+    {
+      headers: {
+        "Access-Control-Allow-Origin": `${window.location.protocol}//${window.location.host}`,
+      },
     },
     )
       .then(() => {

@@ -36,13 +36,11 @@ export default function AccUserList(): ReactElement {
       return (
         <div style={{ padding: "5em" }}>
           <Grid container direction="row" spacing={3}>
-            {realData.map((data: any, index: number) => {
-              return (
-                <Grid item xs={3} key={index}>
-                  <AccUserItem data={data} key={data.userId} />
-                </Grid>
-              );
-            })}
+            {realData.map((data: any, index: number) =>
+              <Grid item xs={3} key={index}>
+                <AccUserItem data={data} key={data.userId} />
+              </Grid>
+            )}
           </Grid>
         </div>
 
