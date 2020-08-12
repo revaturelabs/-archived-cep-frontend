@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Grid, makeStyles, Paper, CssBaseline, StyleRules } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Login from "./Login";
-import pic from "../../assets/GmapsRevature.png";
+import pic from "../../assets/handshake.jpeg";
 import Register from "./Register";
 
 //used solely for styling
