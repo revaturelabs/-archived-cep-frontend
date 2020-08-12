@@ -82,6 +82,7 @@ export default function Login(props: any): ReactElement {
       },
       headers: {
         Authorization: `Bearer ${token}`,
+        "Access-Control-Allow-Origin": `${window.location.protocol}//${window.location.host}`,
       },
     })
       .then((result) => {
