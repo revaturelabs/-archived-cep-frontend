@@ -238,7 +238,7 @@ export default function ProfileList(): ReactElement {
                         id="outlined-simple-start-adornment"
                         variant="filled"
                         onChange={handleDate}
-                        type="datetime-local"
+                        type="date"
                         name="endTime"
                         value={endDate}
                     />
